@@ -6,7 +6,7 @@ Ce document définit les rôles des différents agents IA susceptibles d’inter
 
 Il doit permettre de coordonner les interventions de Codex, Antigravity, ChatGPT ou d’autres agents spécialisés sans perdre la cohérence globale du projet.
 
-Le principe général est simple :
+Principe général :
 
 > Chaque agent doit avoir une mission limitée, explicite et vérifiable.
 
@@ -23,7 +23,8 @@ Le projet repose sur une organisation en agents spécialisés :
 - Agent 4 — Didacticien FLE/FOU ;
 - Agent 5 — Testeur critique ;
 - Agent 6 — Documentaliste ;
-- Agent 7 — Relecteur de cohérence globale.
+- Agent 7 — Relecteur de cohérence globale ;
+- Agent 8 — Contrôleur de cohérence narrative.
 
 Ces rôles peuvent être joués par différents outils, mais il faut toujours préciser le rôle demandé avant chaque intervention.
 
@@ -61,8 +62,6 @@ Le chef d’orchestre ne doit pas :
 - laisser les agents modifier le projet sans documentation.
 
 ### Format de réponse attendu
-
-Le chef d’orchestre doit répondre selon la structure suivante :
 
 1. État actuel.
 2. Objectif immédiat.
@@ -107,10 +106,10 @@ Codex doit :
 Codex ne doit pas :
 
 - ajouter un backend sans demande explicite ;
-- ajouter des animations ;
+- ajouter des animations décoratives ou spectaculaires ;
 - utiliser un moteur de jeu lourd ;
 - créer une architecture trop abstraite ;
-- modifier les objectifs pédagogiques ;
+- modifier les objectifs pédagogiques sans validation ;
 - inventer une identité graphique définitive ;
 - introduire des bibliothèques inutiles ;
 - coder des énigmes arbitraires ;
@@ -154,7 +153,7 @@ Antigravity doit :
 Antigravity ne doit pas :
 
 - figer trop tôt l’identité graphique finale ;
-- ajouter des animations ;
+- ajouter des animations décoratives inutiles ;
 - surcharger l’interface ;
 - casser le moteur de scénario ;
 - modifier les règles du jeu sans justification ;
@@ -366,7 +365,7 @@ Le relecteur doit vérifier :
 
 - cohérence avec le cahier des charges ;
 - respect des contraintes 2D statique ;
-- absence d’animations ;
+- usage sobre des micro-animations ;
 - intégration des objectifs FLE ;
 - cohérence ludique ;
 - sobriété technique ;
@@ -391,7 +390,75 @@ Le relecteur peut produire :
 - recommandations de correction ;
 - validation ou réserve sur une version.
 
-## 11. Règle de mobilisation des agents
+## 11. Agent 8 — Contrôleur de cohérence narrative
+
+### Mission
+
+Le contrôleur de cohérence narrative vérifie que les scénarios tiennent debout comme enquêtes.
+
+Sa mission n’est pas de coder, d’embellir l’interface ou d’ajouter des fonctionnalités, mais de contrôler la logique interne de l’histoire, des preuves, des lieux, des personnages et des documents.
+
+Il doit intervenir systématiquement après une modification narrative importante et avant l’ajout de fonctionnalités qui s’appuient sur le scénario, comme l’inventaire, les indices ou l’accusation finale.
+
+### Responsabilités
+
+Le contrôleur de cohérence narrative doit vérifier :
+
+- la chronologie des événements ;
+- la présence des personnages dans les lieux ;
+- la distinction entre personnage présent, personnage lié, personnage mentionné et personnage impliqué ;
+- la localisation des documents ;
+- la vraisemblance des témoignages ;
+- la cohérence des traces techniques ;
+- la cohérence des objets ;
+- la force réelle des contradictions ;
+- la relation entre preuves, fausses pistes et solution finale ;
+- le niveau d’information donné au joueur ;
+- la progression de la révélation ;
+- l’absence d’indices qui accusent trop directement un personnage ;
+- l’absence de preuves insuffisamment motivées.
+
+### Ce qu’il ne doit pas faire
+
+Le contrôleur de cohérence narrative ne doit pas :
+
+- produire une refonte complète si une correction locale suffit ;
+- ajouter des personnages, lieux ou objets sans nécessité ;
+- transformer le scénario en texte linéaire ;
+- simplifier excessivement l’enquête ;
+- corriger le code technique sans demande ;
+- remplacer le scénariste ou le chef d’orchestre ;
+- confondre cohérence narrative et confort UX.
+
+### Livrables attendus
+
+Le contrôleur de cohérence narrative peut produire :
+
+- audit narratif ;
+- liste d’incohérences ;
+- carte chronologique ;
+- carte des présences ;
+- carte des preuves ;
+- recommandations de correction minimale ;
+- validation narrative provisoire d’une version ;
+- notes à intégrer dans `docs/narrative-coherence-audit-*.md`.
+
+### Questions de contrôle permanentes
+
+À chaque audit, il doit poser notamment les questions suivantes :
+
+1. Qui est où, et à quel moment ?
+2. Un personnage apparaît-il physiquement dans deux lieux à la fois ?
+3. Un document est-il placé dans un lieu crédible ?
+4. Un témoignage est-il rattaché au bon personnage ou au bon lieu d’entretien ?
+5. Une trace technique prouve-t-elle trop, trop peu, ou exactement ce qu’il faut ?
+6. La contradiction à résoudre est-elle claire sans être artificielle ?
+7. Le joueur peut-il déduire la solution à partir des preuves disponibles ?
+8. Les fausses pistes sont-elles justes ?
+9. La solution finale découle-t-elle des documents, et non d’une révélation extérieure ?
+10. Les objets utiles ou inutiles sont-ils plausibles dans leur lieu ?
+
+## 12. Règle de mobilisation des agents
 
 Avant de mobiliser un agent, il faut répondre à trois questions :
 
@@ -399,43 +466,47 @@ Avant de mobiliser un agent, il faut répondre à trois questions :
 2. Quel agent est le plus compétent pour ce problème ?
 3. Quel livrable vérifiable est attendu ?
 
-Exemple :
+Exemples :
 
 - problème : le moteur ne charge pas les scénarios ;
 - agent : Codex ;
 - livrable : correction du code + test.
 
-Autre exemple :
-
 - problème : l’interface est confuse ;
 - agent : Antigravity ;
 - livrable : rapport UX + propositions de correction.
 
-## 12. Ordre de priorité des agents
+- problème : la contradiction de l’enquête n’est pas claire ;
+- agent : Contrôleur de cohérence narrative ;
+- livrable : audit narratif + correction minimale recommandée.
+
+## 13. Ordre de priorité des agents
 
 Dans la phase actuelle du projet, l’ordre de priorité est :
 
 1. Chef d’orchestre ;
 2. Documentaliste ;
-3. Codex ;
-4. Antigravity ;
-5. Scénariste ;
-6. Didacticien ;
-7. Testeur critique ;
-8. Relecteur global.
+3. Contrôleur de cohérence narrative ;
+4. Codex ;
+5. Antigravity ;
+6. Scénariste ;
+7. Didacticien ;
+8. Testeur critique ;
+9. Relecteur global.
 
 Quand le prototype sera jouable, l’ordre changera :
 
 1. Testeur critique ;
-2. Chef d’orchestre ;
-3. Codex ;
-4. Antigravity ;
-5. Didacticien ;
-6. Scénariste ;
-7. Documentaliste ;
-8. Relecteur global.
+2. Contrôleur de cohérence narrative ;
+3. Chef d’orchestre ;
+4. Codex ;
+5. Antigravity ;
+6. Didacticien ;
+7. Scénariste ;
+8. Documentaliste ;
+9. Relecteur global.
 
-## 13. Prompts courts réutilisables
+## 14. Prompts courts réutilisables
 
 ### Chef d’orchestre
 
@@ -443,3 +514,79 @@ Quand le prototype sera jouable, l’ordre changera :
 Agis comme chef d’orchestre du projet `enquete-fle`.
 Lis ou prends en compte les documents du dossier `docs/agent-context`.
 Fais l’état du projet, identifie la priorité immédiate et donne-moi le prompt exact à transmettre à l’agent adapté.
+```
+
+### Codex
+
+```text
+Agis comme architecte technique du projet `enquete-fle`.
+Lis d’abord les documents du dossier `docs/agent-context`.
+Respecte les contraintes : React, Vite, TypeScript, Tailwind, jeu 2D principalement statique, pas de backend.
+Travaille uniquement sur la tâche demandée.
+Documente les fichiers modifiés.
+```
+
+### Antigravity
+
+```text
+Agis comme agent UX et espace graphique du projet `enquete-fle`.
+Lis d’abord les documents du dossier `docs/agent-context`.
+Améliore la lisibilité et l’organisation visuelle sans figer l’identité graphique finale.
+Les micro-animations sont autorisées seulement si elles sont fonctionnelles et discrètes.
+Documente tes choix.
+```
+
+### Scénariste
+
+```text
+Agis comme scénariste-enquête du projet `enquete-fle`.
+Crée une intrigue jouable, déductive et cohérente.
+Les objectifs FLE doivent être intégrés à l’enquête sans apparaître comme des exercices scolaires.
+```
+
+### Didacticien
+
+```text
+Agis comme didacticien FLE/FOU.
+Vérifie que les objectifs pédagogiques B1/B2 sont intégrés à l’enquête sans nuire au défi ludique.
+```
+
+### Testeur critique
+
+```text
+Agis comme testeur critique.
+Joue mentalement le parcours.
+Repère les blocages, confusions, objets inutiles, énigmes trop scolaires et problèmes de difficulté.
+Ne propose pas de refonte inutile.
+```
+
+### Documentaliste
+
+```text
+Agis comme documentaliste du projet.
+Mets à jour l’état du projet, les prochaines actions et le journal des décisions.
+Ne modifie pas la vision du projet.
+```
+
+### Contrôleur de cohérence narrative
+
+```text
+Agis comme contrôleur de cohérence narrative du projet `enquete-fle`.
+Lis les documents du dossier `docs/agent-context`, puis examine en priorité le scénario concerné.
+Ne modifie pas le code dans un premier temps.
+Produis d’abord un audit narratif.
+Vérifie la chronologie, les présences, les documents, les témoignages, les traces techniques, les objets, les contradictions, les fausses pistes et la solution finale.
+Pour chaque incohérence, indique la gravité, le problème, pourquoi c’est gênant et la correction minimale recommandée.
+```
+
+## 15. Principe final
+
+Les agents doivent accélérer le projet, non le disperser.
+
+Le chef d’orchestre doit toujours ramener le travail à cette question :
+
+> Quelle est la prochaine action utile, limitée et vérifiable ?
+
+Le contrôleur de cohérence narrative doit toujours ramener le scénario à cette autre question :
+
+> Est-ce que l’histoire peut réellement être déduite à partir des lieux, des personnages, des documents et des preuves disponibles ?
