@@ -4,19 +4,17 @@
 
 Ce document indique les prochaines actions concrètes du projet `enquete-fle`.
 
-Il doit permettre à François, au chef d’orchestre et aux agents IA de savoir quoi faire sans devoir tout redéfinir à chaque session.
-
-La règle est simple :
-
-> Une prochaine action doit être limitée, claire, vérifiable et utile.
+Une prochaine action doit rester limitée, claire, vérifiable et utile.
 
 ## 2. État actuel
 
-Version actuelle : V0.0 — cadrage documentaire.
+Version actuelle : V0.1 — squelette technique initial.
 
 Le dépôt GitHub existe.
 
-Le dossier documentaire `docs/agent-context/` est en cours de constitution.
+Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
+
+L’application React/Vite/TypeScript minimale existe, avec Tailwind CSS, une page d’accueil, un écran de briefing pour “Le dossier disparu” et une première séparation entre composants, données, types et futur moteur.
 
 ## 3. Actions déjà réalisées
 
@@ -24,143 +22,78 @@ Le dossier documentaire `docs/agent-context/` est en cours de constitution.
 
 Statut : fait.
 
-Dépôt :
-
-`https://github.com/franzbib/enquete-fle`
-
 ### Action 2 — Créer le dossier documentaire
 
 Statut : fait.
 
-Dossier :
-
-`docs/agent-context/`
-
-### Action 3 — Créer le document de l’agent chef d’orchestre
+### Action 3 — Créer les documents de contexte agent
 
 Statut : fait.
 
-Fichier :
+Fichiers :
 
-`00_AGENT_CHEF_ORCHESTRE.md`
+- `00_AGENT_CHEF_ORCHESTRE.md`
+- `01_ETAT_DU_PROJET.md`
+- `02_VISION_PROJET.md`
+- `03_CAHIER_DES_CHARGES_GENERAL.md`
+- `04_FEUILLE_DE_ROUTE.md`
+- `05_ESPACE_GRAPHIQUE_PROGRESSIF.md`
+- `06_ROLES_AGENTS.md`
+- `07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
+- `08_PROCHAINES_ACTIONS.md`
+- `09_DECISIONS_LOG.md`
 
-### Action 4 — Créer le document d’état du projet
-
-Statut : fait.
-
-Fichier :
-
-`01_ETAT_DU_PROJET.md`
-
-### Action 5 — Créer le document de vision du projet
-
-Statut : fait.
-
-Fichier :
-
-`02_VISION_PROJET.md`
-
-### Action 6 — Créer le cahier des charges général
+### Action 4 — Créer le squelette technique V0.1
 
 Statut : fait.
 
-Fichier :
+Livrables :
 
-`03_CAHIER_DES_CHARGES_GENERAL.md`
-
-### Action 7 — Créer la feuille de route progressive
-
-Statut : fait.
-
-Fichier :
-
-`04_FEUILLE_DE_ROUTE.md`
-
-### Action 8 — Créer le document sur l’espace graphique progressif
-
-Statut : fait.
-
-Fichier :
-
-`05_ESPACE_GRAPHIQUE_PROGRESSIF.md`
-
-### Action 9 — Créer le document sur les rôles des agents
-
-Statut : fait.
-
-Fichier :
-
-`06_ROLES_AGENTS.md`
-
-### Action 10 — Créer le modèle du premier scénario
-
-Statut : fait.
-
-Fichier :
-
-`07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
+- application React + Vite + TypeScript ;
+- Tailwind CSS configuré ;
+- dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types` ;
+- page d’accueil minimale ;
+- écran de briefing minimal ;
+- document `docs/architecture.md`.
 
 ## 4. Action immédiate
 
-### Action 11 — Créer le journal des décisions
+### Action 5 — Créer le moteur minimal de scénario V0.2
 
 Statut : à faire.
 
-Fichier à créer :
-
-`09_DECISIONS_LOG.md`
+Agent concerné : Codex.
 
 Objectif :
 
-Garder une trace des décisions importantes du projet, afin que les agents IA ne remettent pas sans cesse en question des choix déjà validés.
+Permettre à l’application de charger une enquête depuis un fichier de données et d’afficher ses sections principales.
 
 Contenu attendu :
 
-- décisions validées ;
-- raisons de ces décisions ;
-- conséquences pour le projet ;
-- points à réévaluer plus tard.
+- types TypeScript plus complets pour scénario, lieux, personnages et documents ;
+- données minimales de “Le dossier disparu” ;
+- loader de scénario simple ;
+- affichage sobre des sections principales.
 
-## 5. Action suivante
+À ne pas faire encore :
 
-### Action 12 — Mettre à jour l’état du projet
+- inventaire ;
+- système d’indices ;
+- accusation finale ;
+- deuxième scénario ;
+- animation ;
+- backend.
 
-Statut : à faire après création du journal des décisions.
-
-Fichier à modifier :
-
-`01_ETAT_DU_PROJET.md`
-
-Objectif :
-
-Indiquer que le cadrage documentaire initial est presque complet.
-
-## 6. Action technique suivante
-
-### Action 13 — Demander à Codex de créer le squelette technique
-
-Statut : à faire après finalisation du dossier documentaire.
-
-Agent concerné :
-
-Codex.
-
-Objectif :
-
-Créer une première application React/Vite/TypeScript minimale.
-
-Prompt prévu :
+## 5. Prompt prévu pour la prochaine étape
 
 ```text
 Agis comme architecte technique du projet `enquete-fle`.
 
 Lis d’abord tous les documents du dossier `docs/agent-context`.
 
-Crée le squelette technique du projet.
+Crée la V0.2 : moteur minimal de scénario.
 
 Contraintes :
-- React + Vite + TypeScript
-- Tailwind CSS
 - jeu 2D statique
 - aucune animation
 - pas de backend
@@ -169,23 +102,21 @@ Contraintes :
 - architecture simple, maintenable et progressive
 
 Crée :
-- une application Vite React TypeScript ;
-- Tailwind CSS ;
-- un dossier `src/components` ;
-- un dossier `src/engine` ;
-- un dossier `src/data/scenarios` ;
-- un dossier `src/types` ;
-- une page d’accueil minimale ;
-- un écran de briefing minimal ;
-- un document `docs/architecture.md`.
+- les types minimaux `Scenario`, `Location`, `Character` et `InvestigationDocument` ;
+- un loader de scénario simple ;
+- une donnée minimale pour “Le dossier disparu” ;
+- un affichage sobre des lieux, personnages et documents.
 
-Ne crée pas encore le moteur complet.
 Ne crée pas encore l’inventaire.
-Ne crée pas encore l’identité graphique finale.
+Ne crée pas encore le système d’indices.
+Ne crée pas encore l’accusation finale.
+Ne crée pas de deuxième scénario.
 Ne crée aucune animation.
 
 À la fin, indique :
 - les fichiers créés ;
+- les fichiers modifiés ;
 - les choix techniques faits ;
 - les commandes à lancer ;
 - ce qui reste à faire.
+```

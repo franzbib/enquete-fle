@@ -24,3 +24,33 @@ Raison :
 Conséquence :
 Statut :
 À réévaluer :
+```
+
+## 3. Décisions validées
+
+```text
+Date : 2026-05-07
+Décision : La V0.1 utilise React, Vite, TypeScript et Tailwind CSS.
+Raison : Cette stack répond au cahier des charges et permet un prototype navigateur simple, statique et maintenable.
+Conséquence : Le projet reste sans backend, sans base de données, sans moteur de jeu lourd et sans animation.
+Statut : validé
+À réévaluer : seulement si une contrainte technique majeure apparaît.
+```
+
+```text
+Date : 2026-05-07
+Décision : Les dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types` sont séparés dès la V0.1.
+Raison : Préparer le futur moteur de scénario sans le coder trop tôt.
+Conséquence : Les composants d’interface, les données de scénario et les types partagés ont des responsabilités distinctes.
+Statut : validé
+À réévaluer : lors de la V0.2 si le modèle de scénario exige un ajustement.
+```
+
+```text
+Date : 2026-05-07
+Décision : La V0.1 se limite à l’accueil et au briefing de “Le dossier disparu”.
+Raison : Respecter la feuille de route et éviter de créer prématurément l’inventaire, les indices ou l’accusation finale.
+Conséquence : La prochaine étape technique est le moteur minimal de scénario V0.2.
+Statut : validé
+À réévaluer : non, sauf changement explicite de feuille de route.
+```

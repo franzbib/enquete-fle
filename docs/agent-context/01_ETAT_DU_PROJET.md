@@ -2,13 +2,13 @@
 
 ## Version actuelle
 
-V0.0 — Cadrage documentaire initial terminé.
+V0.1 — Squelette technique initial créé.
 
 Le dépôt GitHub existe.
 
 Le dossier `docs/agent-context/` contient désormais les documents fondamentaux nécessaires au pilotage du projet par agents IA.
 
-Le projet technique n’est pas encore créé.
+Le projet technique minimal existe.
 
 ## Dépôt
 
@@ -118,11 +118,18 @@ Les objets devront pouvoir être obtenus :
 - par combinaison d’indices ;
 - par choix stratégique.
 
-## Ce qui n’est pas encore fait
+## Ce qui est fait techniquement
 
 - Squelette React/Vite/TypeScript.
-- Installation Tailwind.
+- Installation et configuration Tailwind CSS.
 - Structure `/src`.
+- Dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types`.
+- Page d’accueil minimale.
+- Écran de briefing minimal pour “Le dossier disparu”.
+- Documentation technique `docs/architecture.md`.
+
+## Ce qui n’est pas encore fait
+
 - Moteur de scénario.
 - Système d’inventaire.
 - Système d’indices.
@@ -134,27 +141,21 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Passer à la V0.1 : création du squelette technique du projet avec Codex.
-
-La prochaine étape consiste à demander à Codex de créer une application React + Vite + TypeScript minimale, avec Tailwind CSS, sans backend, sans animation, et avec une architecture prête à accueillir le moteur de scénario.
+Passer à la V0.2 : créer un moteur minimal de scénario capable de charger les données d’une enquête et d’afficher ses sections principales.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer le squelette technique du projet.
-
-Codex devra lire tous les documents du dossier :
-
-`docs/agent-context/`
-
-avant de commencer.
+Demander à Codex de créer le moteur minimal de scénario, sans inventaire, sans système d’indices, sans accusation finale et sans deuxième scénario.
 
 ## Dernière action réalisée
 
-Création du fichier :
+Création de la V0.1 technique :
 
-`00_AGENT_CHEF_ORCHESTRE.md`
-
-Ce fichier définit le rôle de l’agent de pilotage global du projet.
+- application React + Vite + TypeScript ;
+- Tailwind CSS ;
+- interface minimale accueil / briefing ;
+- séparation initiale entre composants, données, types et futur moteur ;
+- document `docs/architecture.md`.
 
 ## Risques à surveiller
 
