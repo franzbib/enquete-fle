@@ -90,8 +90,6 @@ Conséquence : La progression est suffisante pour tester le parcours, mais n’e
 Statut : validé
 À réévaluer : quand une sauvegarde locale deviendra utile.
 ```
----
-
 ## Décision 14 — Créer un répertoire séparé de personnages et lieux récurrents
 
 Date : 2026-05-07
@@ -161,3 +159,12 @@ Statut : validée.
 À réévaluer :
 
 Lors de la V0.4 ou V0.5, quand Codex commencera à structurer davantage les objets, personnages, lieux et données de scénario.
+
+```text
+Date : 2026-05-07
+Décision : Les micro-animations fonctionnelles sont autorisées (ex: auto-scroll, clignotement léger, fade-in).
+Raison : Aider l'orientation visuelle de l'apprenant B1/B2 (pour indiquer qu'une action a bien eu lieu ou qu'un contenu a changé).
+Conséquence : La contrainte "sans animation" est réinterprétée : pas d'animation décorative, mais les micro-animations utiles (CSS simples) sont acceptables et intégrées dès la V0.3 finalisée.
+Statut : validé
+À réévaluer : si ces animations s'avèrent trop distrayantes.
+```

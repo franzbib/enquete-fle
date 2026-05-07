@@ -26,7 +26,7 @@ export function ScenarioList({
 
           return (
             <button
-              className={`rounded-md border px-3 py-2 text-left text-sm ${
+              className={`rounded-md border px-3 py-2 text-left text-sm transition-colors duration-200 ${
                 isSelected
                   ? 'border-teal-800 bg-teal-50 text-teal-950'
                   : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50'

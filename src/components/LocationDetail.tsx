@@ -8,12 +8,16 @@ type LocationDetailProps = {
   location: Location;
   documents: InvestigationDocument[];
   characters: Character[];
+  onSelectDocument: (id: string) => void;
+  onSelectCharacter: (id: string) => void;
 };
 
 export function LocationDetail({
   location,
   documents,
   characters,
+  onSelectDocument,
+  onSelectCharacter,
 }: LocationDetailProps) {
   return (
     <article className="rounded-md border border-slate-300 bg-white p-6">
@@ -32,17 +36,25 @@ export function LocationDetail({
         <div>
           <h3 className="font-semibold text-slate-950">Documents liés</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {documents.map((document) => (
-              <li key={document.id}>{document.title}</li>
-            ))}
+            {documents.length > 0 ? documents.map((document) => (
+              <li key={document.id}>
+                <button type="button" onClick={() => onSelectDocument(document.id)} className="text-teal-700 hover:underline text-left">
+                  {document.title}
+                </button>
+              </li>
+            )) : <li className="text-slate-500 italic">Aucun document</li>}
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold text-slate-950">Personnages liés</h3>
+          <h3 className="font-semibold text-slate-950">Personnages présents</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {characters.map((character) => (
-              <li key={character.id}>{character.name}</li>
-            ))}
+            {characters.length > 0 ? characters.map((character) => (
+              <li key={character.id}>
+                <button type="button" onClick={() => onSelectCharacter(character.id)} className="text-teal-700 hover:underline text-left">
+                  {character.name}
+                </button>
+              </li>
+            )) : <li className="text-slate-500 italic">Personne</li>}
           </ul>
         </div>
       </div>

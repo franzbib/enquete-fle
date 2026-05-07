@@ -30,11 +30,16 @@ export function BriefingPage({
         </div>
 
         <div className="mt-8 max-w-3xl rounded-md border border-slate-300 bg-white p-6 shadow-sm">
-          <p className="text-lg leading-8 text-slate-700">{briefing.summary}</p>
-          <p className="mt-4 leading-7 text-slate-700">{briefing.context}</p>
-          <p className="mt-4 rounded-md bg-stone-100 p-4 leading-7 text-slate-700">
-            {briefing.mission}
-          </p>
+          <h2 className="mb-2 text-lg font-bold text-slate-900">Contexte</h2>
+          <p className="text-base leading-7 text-slate-700">{briefing.summary}</p>
+          <p className="mt-2 text-base leading-7 text-slate-700">{briefing.context}</p>
+
+          <h2 className="mb-2 mt-6 text-lg font-bold text-teal-800">Votre objectif</h2>
+          <div className="rounded-md border border-teal-200 bg-teal-50 p-4">
+            <p className="font-medium leading-7 text-teal-900">
+              {briefing.mission}
+            </p>
+          </div>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">

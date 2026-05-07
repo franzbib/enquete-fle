@@ -35,6 +35,7 @@ export function InvestigationPage({
   });
   const [solvedPuzzleIds, setSolvedPuzzleIds] = useState<string[]>([]);
   const [unlockedDocumentIds, setUnlockedDocumentIds] = useState<string[]>([]);
+  const [readDocumentIds, setReadDocumentIds] = useState<string[]>([]);
   const [feedback, setFeedback] = useState(
     'Consultez les documents disponibles, puis résolvez la chronologie.',
   );
@@ -51,6 +52,17 @@ export function InvestigationPage({
     return (puzzle.requiredDocumentIds ?? []).every((documentId) =>
       visibleDocumentIds.includes(documentId),
     );
+  }
+
+  function handleSelect(type: Selection['type'], id: string) {
+    setSelection({ type, id } as Selection);
+    if (type === 'document' && !readDocumentIds.includes(id)) {
+      setReadDocumentIds((prev) => [...prev, id]);
+    }
+    // Auto-scroll vers le détail pour plus de fluidité
+    setTimeout(() => {
+      document.getElementById('detail-view')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   }
 
   function handlePuzzleSubmit(puzzle: Puzzle, answer: string[]) {
@@ -103,6 +115,8 @@ export function InvestigationPage({
           characters={scenario.characters.filter((character) =>
             location.characterIds.includes(character.id),
           )}
+          onSelectDocument={(id) => handleSelect('document', id)}
+          onSelectCharacter={(id) => handleSelect('character', id)}
         />
       );
     }
@@ -120,6 +134,7 @@ export function InvestigationPage({
           locations={scenario.locations.filter((location) =>
             character.relatedLocationIds.includes(location.id),
           )}
+          onSelectLocation={(id) => handleSelect('location', id)}
         />
       );
     }
@@ -140,6 +155,8 @@ export function InvestigationPage({
           characters={scenario.characters.filter((character) =>
             document.relatedCharacterIds.includes(character.id),
           )}
+          onSelectLocation={(id) => handleSelect('location', id)}
+          onSelectCharacter={(id) => handleSelect('character', id)}
         />
       );
     }
@@ -198,6 +215,22 @@ export function InvestigationPage({
           </div>
         </header>
 
+        <div
+          key={visibleDocuments.length + readDocumentIds.length + solvedPuzzleIds.length}
+          className="mt-4 rounded-md border-l-4 border-amber-500 bg-amber-50 p-4 animate-highlight"
+        >
+          <h2 className="text-sm font-bold text-amber-900">Que faire maintenant ?</h2>
+          <p className="mt-1 text-sm text-amber-800">
+            {visibleDocuments.length === 0
+              ? "Commencez par explorer les Lieux ou interroger les Personnages."
+              : readDocumentIds.length < visibleDocuments.length
+                ? "Vous avez de nouveaux documents. Lisez-les attentivement."
+                : solvedPuzzleIds.length < puzzles.length
+                  ? "Vous avez lu tous les documents. Essayez de résoudre une énigme disponible."
+                  : "Félicitations, vous avez terminé cette première enquête !"}
+          </p>
+        </div>
+
         <section className="mt-6 grid gap-4 rounded-md border border-slate-300 bg-white p-4 sm:grid-cols-3">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
@@ -221,6 +254,39 @@ export function InvestigationPage({
           </div>
         </section>
 
+        <section className="mt-6 rounded-md border border-slate-300 bg-white p-4">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+            Tableau d'enquête - Déductions
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {puzzles.map((puzzle) => {
+              const isSelected = selectedId === `puzzle:${puzzle.id}`;
+              const solved = solvedPuzzleIds.includes(puzzle.id);
+              const available = isPuzzleAvailable(puzzle);
+              return (
+                <button
+                  key={puzzle.id}
+                  type="button"
+                  onClick={() => handleSelect('puzzle', puzzle.id)}
+                  className={`rounded-md border px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+                    isSelected
+                      ? 'border-teal-800 bg-teal-50 text-teal-950'
+                      : solved
+                        ? 'border-green-600 bg-green-50 text-green-900'
+                        : available
+                          ? 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'
+                          : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+                  }`}
+                  disabled={!available}
+                  title={!available ? 'Documents manquants' : ''}
+                >
+                  {puzzle.title} {solved ? '✓' : ''}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
         <div className="mt-6 grid gap-6 lg:grid-cols-[20rem_1fr]">
           <aside className="flex flex-col gap-4">
             <ScenarioList
@@ -231,64 +297,10 @@ export function InvestigationPage({
                 title: location.name,
                 meta: location.available ? 'Disponible' : 'Verrouillé',
               }))}
-              onSelect={(id) =>
-                setSelection({
-                  type: 'location',
-                  id: id.replace('location:', ''),
-                })
-              }
-            />
-            <ScenarioList
-              title="Personnages"
-              selectedId={selectedId}
-              items={scenario.characters.map((character) => ({
-                id: `character:${character.id}`,
-                title: character.name,
-                meta: character.role,
-              }))}
-              onSelect={(id) =>
-                setSelection({
-                  type: 'character',
-                  id: id.replace('character:', ''),
-                })
-              }
-            />
-            <ScenarioList
-              title="Documents"
-              selectedId={selectedId}
-              items={visibleDocuments.map((document) => ({
-                id: `document:${document.id}`,
-                title: document.title,
-                meta: document.source,
-              }))}
-              onSelect={(id) =>
-                setSelection({
-                  type: 'document',
-                  id: id.replace('document:', ''),
-                })
-              }
-            />
-            <ScenarioList
-              title="Énigmes"
-              selectedId={selectedId}
-              items={puzzles.map((puzzle) => ({
-                id: `puzzle:${puzzle.id}`,
-                title: puzzle.title,
-                meta: solvedPuzzleIds.includes(puzzle.id)
-                  ? 'Validée'
-                  : isPuzzleAvailable(puzzle)
-                    ? 'Disponible'
-                    : 'Documents manquants',
-              }))}
-              onSelect={(id) =>
-                setSelection({
-                  type: 'puzzle',
-                  id: id.replace('puzzle:', ''),
-                })
-              }
+              onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
             />
           </aside>
-          <section>{detail}</section>
+          <section id="detail-view" key={selectedId} className="scroll-mt-6 animate-fade-in">{detail}</section>
         </div>
       </div>
     </main>

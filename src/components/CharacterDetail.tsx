@@ -3,9 +3,10 @@ import type { Character, Location } from '../types/scenario';
 type CharacterDetailProps = {
   character: Character;
   locations: Location[];
+  onSelectLocation: (id: string) => void;
 };
 
-export function CharacterDetail({ character, locations }: CharacterDetailProps) {
+export function CharacterDetail({ character, locations, onSelectLocation }: CharacterDetailProps) {
   return (
     <article className="rounded-md border border-slate-300 bg-white p-6">
       <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
@@ -25,7 +26,11 @@ export function CharacterDetail({ character, locations }: CharacterDetailProps) 
         <h3 className="font-semibold text-slate-950">Lieux associés</h3>
         <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
           {locations.map((location) => (
-            <li key={location.id}>{location.name}</li>
+            <li key={location.id}>
+              <button type="button" onClick={() => onSelectLocation(location.id)} className="text-teal-700 hover:underline text-left">
+                {location.name}
+              </button>
+            </li>
           ))}
         </ul>
       </div>
