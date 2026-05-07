@@ -2,9 +2,13 @@
 
 ## Version actuelle
 
-V0.0 — Cadrage documentaire initial.
+V0.0 — Cadrage documentaire initial terminé.
 
-Le dépôt GitHub existe, mais le projet technique n’est pas encore créé.
+Le dépôt GitHub existe.
+
+Le dossier `docs/agent-context/` contient désormais les documents fondamentaux nécessaires au pilotage du projet par agents IA.
+
+Le projet technique n’est pas encore créé.
 
 ## Dépôt
 
@@ -69,9 +73,7 @@ Ces documents doivent progressivement être intégrés ou résumés dans le doss
 ## Documents déjà présents dans le dépôt
 
 - `00_AGENT_CHEF_ORCHESTRE.md`
-
-## Documents à créer prochainement
-
+- `01_ETAT_DU_PROJET.md`
 - `02_VISION_PROJET.md`
 - `03_CAHIER_DES_CHARGES_GENERAL.md`
 - `04_FEUILLE_DE_ROUTE.md`
@@ -80,6 +82,18 @@ Ces documents doivent progressivement être intégrés ou résumés dans le doss
 - `07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
 - `08_PROCHAINES_ACTIONS.md`
 - `09_DECISIONS_LOG.md`
+
+## Documents à créer prochainement
+
+Aucun document fondamental supplémentaire n’est nécessaire avant la création du squelette technique.
+
+Des documents complémentaires pourront être ajoutés plus tard :
+
+- documentation d’architecture ;
+- changelog ;
+- liste des problèmes connus ;
+- rapport de tests ;
+- documentation enseignant.
 
 ## Ce qui est validé conceptuellement
 
@@ -120,17 +134,19 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Construire progressivement le dossier documentaire du projet dans GitHub.
+Passer à la V0.1 : création du squelette technique du projet avec Codex.
 
-La priorité immédiate n’est pas encore de coder, mais de donner aux agents IA une base de vérité suffisamment claire pour éviter les dérives.
+La prochaine étape consiste à demander à Codex de créer une application React + Vite + TypeScript minimale, avec Tailwind CSS, sans backend, sans animation, et avec une architecture prête à accueillir le moteur de scénario.
 
 ## Prochaine action recommandée
 
-Créer le fichier :
+Demander à Codex de créer le squelette technique du projet.
 
-`02_VISION_PROJET.md`
+Codex devra lire tous les documents du dossier :
 
-Ce fichier devra résumer la vision générale du jeu, son intention pédagogique, ses limites techniques et sa philosophie ludique.
+`docs/agent-context/`
+
+avant de commencer.
 
 ## Dernière action réalisée
 
