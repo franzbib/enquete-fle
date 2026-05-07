@@ -24,7 +24,7 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Établir les horaires de départ et comprendre l’enjeu du dossier.',
       available: true,
       documentIds: ['planning-secretariat', 'mail-convocation', 'temoignage-chen'],
-      characterIds: ['madame-delorme', 'chen'],
+      presentCharacterIds: ['madame-delorme', 'chen'],
       objectIds: ['badge-visiteur', 'pochette-claire'],
     },
     {
@@ -36,7 +36,7 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Comparer les déplacements et repérer ce qui ne colle pas dans la chronologie.',
       available: true,
       documentIds: ['temoignage-xiaoyu', 'note-manuscrite'],
-      characterIds: ['xiaoyu', 'fahad'],
+      presentCharacterIds: ['xiaoyu', 'fahad'],
     },
     {
       id: 'salle-informatique',
@@ -47,7 +47,8 @@ export const dossierDisparuScenario: Scenario = {
       role: "Vérifier si quelqu'un est resté plus longtemps qu'il ne le dit.",
       available: true,
       documentIds: ['historique-impression', 'temoignage-fahad', 'brouillon-mail'],
-      characterIds: ['monsieur-armand', 'fahad'],
+      presentCharacterIds: ['monsieur-armand'],
+      relatedCharacterIds: ['fahad'],
     },
   ],
   characters: [

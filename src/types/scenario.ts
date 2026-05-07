@@ -27,7 +27,8 @@ export type Location = {
   role: string;
   available: boolean;
   documentIds: string[];
-  characterIds: string[];
+  presentCharacterIds: string[];
+  relatedCharacterIds?: string[];
   objectIds?: string[];
 };
 

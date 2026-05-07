@@ -7,7 +7,8 @@ import type {
 type LocationDetailProps = {
   location: Location;
   documents: InvestigationDocument[];
-  characters: Character[];
+  presentCharacters: Character[];
+  relatedCharacters: Character[];
   onSelectDocument: (id: string) => void;
   onSelectCharacter: (id: string) => void;
 };
@@ -15,7 +16,8 @@ type LocationDetailProps = {
 export function LocationDetail({
   location,
   documents,
-  characters,
+  presentCharacters,
+  relatedCharacters,
   onSelectDocument,
   onSelectCharacter,
 }: LocationDetailProps) {
@@ -48,7 +50,7 @@ export function LocationDetail({
         <div>
           <h3 className="font-semibold text-slate-950">Personnages présents</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {characters.length > 0 ? characters.map((character) => (
+            {presentCharacters.length > 0 ? presentCharacters.map((character) => (
               <li key={character.id}>
                 <button type="button" onClick={() => onSelectCharacter(character.id)} className="text-teal-700 hover:underline text-left">
                   {character.name}
@@ -56,6 +58,20 @@ export function LocationDetail({
               </li>
             )) : <li className="text-slate-500 italic">Personne</li>}
           </ul>
+          {relatedCharacters.length > 0 ? (
+            <div className="mt-4">
+              <h3 className="font-semibold text-slate-950">Personnages en lien</h3>
+              <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
+                {relatedCharacters.map((character) => (
+                  <li key={character.id}>
+                    <button type="button" onClick={() => onSelectCharacter(character.id)} className="text-teal-700 hover:underline text-left">
+                      {character.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </div>
     </article>

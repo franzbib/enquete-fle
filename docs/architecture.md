@@ -70,6 +70,13 @@ Types principaux :
 
 `InventoryObject` et `Hint` restent préparatoires. Ils ne pilotent pas encore une interface complète.
 
+Pour les lieux, la V0.3.1 distingue desormais :
+
+- `presentCharacterIds` : personnages physiquement presents et consultables dans ce lieu ;
+- `relatedCharacterIds` : personnages seulement relies au lieu par une preuve, une trace ou un document.
+
+Cette distinction evite de laisser croire qu'un meme personnage se trouve simultanement dans plusieurs lieux.
+
 ## Progression V0.3
 
 La progression est locale à `InvestigationPage`.

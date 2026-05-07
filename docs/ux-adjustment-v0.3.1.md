@@ -32,6 +32,11 @@ Clarifier l'interface pour guider le joueur plus naturellement dans son enquête
 - Implémenter le système d'inventaire d'objets (V0.4).
 - Les objets pourront s'intégrer dans le `Tableau d'enquête` ou disposer de leur propre bandeau.
 
+## Note de coherence narrative
+- Dans un lieu, `presentCharacterIds` designe uniquement les personnages physiquement consultables a cet endroit.
+- `relatedCharacterIds` designe les personnages seulement lies au lieu par une preuve, une trace ou un document.
+- Un meme personnage ne doit pas etre liste comme present dans plusieurs lieux simultanement. Il peut en revanche rester mentionne dans les documents d'un autre lieu via `relatedCharacterIds`.
+
 ## Commandes pour tester
 ```bash
 npm run dev
