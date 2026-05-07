@@ -90,3 +90,74 @@ Conséquence : La progression est suffisante pour tester le parcours, mais n’e
 Statut : validé
 À réévaluer : quand une sauvegarde locale deviendra utile.
 ```
+---
+
+## Décision 14 — Créer un répertoire séparé de personnages et lieux récurrents
+
+Date : 2026-05-07
+
+Décision :
+
+Le projet devra prévoir un répertoire évolutif de personnages récurrents et de lieux récurrents.
+
+Ces personnages et lieux pourront revenir d’un scénario à l’autre et posséder progressivement une identité narrative et visuelle stable.
+
+Raison :
+
+Le jeu ne doit pas être seulement une succession d’enquêtes isolées. Il doit pouvoir construire un univers reconnaissable, avec certains personnages et certains lieux que les joueurs retrouveront au fil des scénarios.
+
+Cela permettra de renforcer :
+
+- la cohérence de l’univers ;
+- l’attachement aux personnages ;
+- la lisibilité des scénarios ;
+- la continuité narrative ;
+- la future identité graphique du jeu.
+
+Conséquence :
+
+Les personnages récurrents et les lieux récurrents devront être traités séparément des scénarios.
+
+Un scénario pourra donc :
+
+- utiliser un personnage récurrent ;
+- utiliser un lieu récurrent ;
+- ajouter un personnage spécifique ;
+- ajouter un lieu spécifique ;
+- personnaliser certains éléments sans casser le moteur du jeu.
+
+À terme, l’architecture devra prévoir une distinction entre :
+
+- données du moteur ;
+- données des scénarios ;
+- répertoire des personnages récurrents ;
+- répertoire des lieux récurrents ;
+- assets visuels associés.
+
+Exemples de champs à prévoir pour un personnage récurrent :
+
+- `id`
+- `name`
+- `role`
+- `description`
+- `portraitPath`
+- `recurring`
+- `notes`
+
+Exemples de champs à prévoir pour un lieu récurrent :
+
+- `id`
+- `name`
+- `description`
+- `visualPath`
+- `function`
+- `recurring`
+- `notes`
+
+Cette décision ne signifie pas que tous les personnages et lieux devront être récurrents. Les scénarios pourront toujours créer des personnages et lieux spécifiques.
+
+Statut : validée.
+
+À réévaluer :
+
+Lors de la V0.4 ou V0.5, quand Codex commencera à structurer davantage les objets, personnages, lieux et données de scénario.
