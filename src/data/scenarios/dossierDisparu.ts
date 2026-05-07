@@ -82,7 +82,7 @@ export const dossierDisparuScenario: Scenario = {
       profile:
         'Elle a vu plusieurs personnes passer mais ne connaît pas le contenu des dossiers.',
       testimony:
-        "Elle a vu Fahad sortir du secrétariat avec une pochette claire, puis entrer dans la salle informatique.",
+        "Elle a vu Fahad attendre près du secrétariat. Il tenait une pochette ou quelques feuilles, elle ne sait plus très bien. Il avait l'air pressé. Elle n'a pas vu exactement ce qu'il a pris.",
       reliability: 'partial',
       relatedLocationIds: ['couloir'],
     },
@@ -155,7 +155,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Xiaoyu décrit un déplacement observé dans le couloir.',
       content:
-        "Vers 16h30, j'ai vu Fahad sortir du secrétariat avec une pochette claire. Il hésitait, puis il est entré dans la salle informatique.",
+        "J'ai vu Fahad attendre près du secrétariat. Il tenait une pochette ou quelques feuilles, je ne sais plus très bien. Il avait l'air pressé. Je n'ai pas vu exactement ce qu'il a pris.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['xiaoyu', 'fahad'],
@@ -168,7 +168,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Note courte retrouvée près de la porte du secrétariat.',
       content:
-        'Penser à vérifier la pochette claire avant envoi. Il manque peut-être une pièce.',
+        'À vérifier demain matin : dossier Chen ; attestation Fahad ; documents récupérés après 16h30.',
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['chen', 'madame-delorme'],
@@ -178,7 +178,7 @@ export const dossierDisparuScenario: Scenario = {
       title: 'Témoignage de Fahad',
       documentType: 'testimony',
       source: 'Couloir',
-      summary: 'Fahad minimise son passage au secrétariat.',
+      summary: 'Un élément ne correspond pas dans la chronologie.',
       content:
         "Je suis seulement passé au secrétariat. Je suis parti tout de suite après.",
       initiallyAvailable: true,
@@ -193,11 +193,11 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Salle informatique',
       summary: "Trace horaire débloquée après la chronologie.",
       content:
-        '16h48 : session Fahad - impression attestation_scolarite.pdf.',
+        '16h48 — poste 03 — session : Fahad — impression : attestation_scolarite.pdf.',
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'chronologie-initiale',
       relatedLocationIds: ['salle-informatique'],
-      relatedCharacterIds: ['fahad', 'monsieur-armand'],
+      relatedCharacterIds: ['fahad'],
       evidenceIds: ['ev-impression-1648'],
     },
     {
@@ -207,7 +207,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Salle informatique',
       summary: 'Nouvelle piste débloquée après la contradiction.',
       content:
-        "Je crois que j'ai pris une pochette qui n'était pas la mienne. Je vais repasser dès que possible.",
+        "Bonjour Madame Delorme,\n\nJe crois qu'il y a eu une confusion avec les documents récupérés cet après-midi. Je ne suis pas certain d'avoir le bon formulaire avec moi. Je repasse demain matin pour vérifier avec vous.\n\nFahad",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'contradiction-fahad',
       relatedLocationIds: ['salle-informatique'],
@@ -236,8 +236,8 @@ export const dossierDisparuScenario: Scenario = {
     },
     {
       id: 'ev-xiaoyu-1630',
-      label: 'Xiaoyu voit la pochette vers 16h30',
-      text: 'Xiaoyu voit Fahad avec une pochette claire vers 16h30.',
+      label: 'Xiaoyu voit Fahad vers 16h30',
+      text: 'Xiaoyu voit Fahad avec une pochette ou quelques feuilles vers 16h30.',
       documentId: 'temoignage-xiaoyu',
     },
     {
@@ -249,13 +249,13 @@ export const dossierDisparuScenario: Scenario = {
     {
       id: 'ev-impression-1648',
       label: 'Session Fahad active à 16h48',
-      text: 'La session de Fahad imprime une attestation de scolarité à 16h48.',
+      text: 'La session de Fahad imprime attestation_scolarite.pdf au poste 03 à 16h48.',
       documentId: 'historique-impression',
     },
     {
       id: 'ev-brouillon-aveu',
-      label: 'Brouillon de Fahad',
-      text: "Fahad écrit qu'il a peut-être pris une pochette qui n'était pas la sienne.",
+      label: 'Brouillon de mail non envoyé',
+      text: "Fahad signale une possible confusion avec des documents récupérés dans l'après-midi.",
       documentId: 'brouillon-mail',
     },
   ],
@@ -312,7 +312,7 @@ export const dossierDisparuScenario: Scenario = {
           },
           {
             id: 'xiaoyu-voit-pochette',
-            label: 'Xiaoyu voit Fahad sortir avec une pochette claire.',
+            label: 'Xiaoyu voit Fahad avec une pochette ou quelques feuilles.',
           },
         ],
         correctOrder: ['chen-voit-dossier', 'fahad-passe', 'xiaoyu-voit-pochette'],
@@ -342,7 +342,7 @@ export const dossierDisparuScenario: Scenario = {
           {
             id: 'fahad-impression-1648',
             label:
-              "L'historique montre une session Fahad active à 16h48, alors qu'il dit être parti tout de suite après son passage au secrétariat.",
+              "L'historique montre une session Fahad active au poste 03 à 16h48, alors qu'il dit être parti tout de suite après son passage au secrétariat.",
           },
           {
             id: 'delorme-appel',

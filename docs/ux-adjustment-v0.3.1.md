@@ -16,7 +16,8 @@ Clarifier l'interface pour guider le joueur plus naturellement dans son enquête
 2. **Navigation contextuelle** :
    - Les listes statiques de `Documents liés` et `Personnages présents` dans `LocationDetail` ont été remplacées par des boutons interactifs.
    - Cliquer sur un document ou un personnage depuis un lieu met à jour la sélection principale et affiche ses détails.
-   - Des liens de retour vers les `Lieux associés` ont été ajoutés dans `DocumentDetail` et `CharacterDetail` pour faciliter la navigation transversale.
+   - Des liens de retour vers les `Lieux associés` ont été ajoutés dans `DocumentDetail`.
+   - Depuis la V0.3.2, `CharacterDetail` affiche seulement le lieu où le personnage est rencontré, afin de ne pas révéler directement les lieux seulement liés par des preuves.
 3. **Espace de déduction séparé** :
    - Les `Énigmes` ont été extraites du menu latéral.
    - Elles apparaissent désormais dans un bandeau horizontal intitulé `Tableau d'enquête - Déductions`, situé au-dessus de la zone principale d'exploration.

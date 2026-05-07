@@ -83,7 +83,9 @@ Les traces techniques doivent creer une contradiction credible sans accuser trop
 
 Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
 `relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
+Dans la fiche d'un personnage, seuls les lieux ou le personnage est physiquement rencontre sont affiches. Les liens de type `relatedLocationIds` restent internes et doivent etre deduits par les documents, traces techniques ou temoignages, pas reveles directement par l'interface joueur.
 Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`, sans logique d'inventaire tant que la V0.4 n'est pas lancee.
+La coexistence provisoire de `kind: 'locked'` et `available: true` signale seulement une intention narrative de verrouillage. Le vrai verrouillage par objet d'acces est reporte a la V0.4 avec l'inventaire.
 
 ## Progression V0.3
 

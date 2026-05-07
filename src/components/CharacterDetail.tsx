@@ -2,11 +2,15 @@ import type { Character, Location } from '../types/scenario';
 
 type CharacterDetailProps = {
   character: Character;
-  locations: Location[];
+  presentLocations: Location[];
   onSelectLocation: (id: string) => void;
 };
 
-export function CharacterDetail({ character, locations, onSelectLocation }: CharacterDetailProps) {
+export function CharacterDetail({
+  character,
+  presentLocations,
+  onSelectLocation,
+}: CharacterDetailProps) {
   return (
     <article className="rounded-md border border-slate-300 bg-white p-6">
       <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
@@ -23,9 +27,9 @@ export function CharacterDetail({ character, locations, onSelectLocation }: Char
         {character.testimony}
       </blockquote>
       <div className="mt-6">
-        <h3 className="font-semibold text-slate-950">Lieux associés</h3>
+        <h3 className="font-semibold text-slate-950">Rencontré dans</h3>
         <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-          {locations.map((location) => (
+          {presentLocations.map((location) => (
             <li key={location.id}>
               <button type="button" onClick={() => onSelectLocation(location.id)} className="text-teal-700 hover:underline text-left">
                 {location.name}

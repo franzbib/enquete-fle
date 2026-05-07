@@ -131,8 +131,8 @@ export function InvestigationPage({
       return (
         <CharacterDetail
           character={character}
-          locations={scenario.locations.filter((location) =>
-            character.relatedLocationIds.includes(location.id),
+          presentLocations={scenario.locations.filter((location) =>
+            location.presentCharacterIds.includes(character.id),
           )}
           onSelectLocation={(id) => handleSelect('location', id)}
         />
