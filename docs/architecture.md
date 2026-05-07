@@ -77,6 +77,9 @@ Pour les lieux, la V0.3.1 distingue desormais :
 
 Cette distinction evite de laisser croire qu'un meme personnage se trouve simultanement dans plusieurs lieux.
 
+Les temoignages sont rattaches au personnage qui parle ou au lieu ou il est interroge.
+Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
+
 ## Progression V0.3
 
 La progression est locale à `InvestigationPage`.

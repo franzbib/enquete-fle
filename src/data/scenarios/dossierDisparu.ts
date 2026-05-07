@@ -35,7 +35,7 @@ export const dossierDisparuScenario: Scenario = {
         'Un passage entre le secrétariat et la salle informatique. Plusieurs témoins ont vu des allées et venues.',
       role: 'Comparer les déplacements et repérer ce qui ne colle pas dans la chronologie.',
       available: true,
-      documentIds: ['temoignage-xiaoyu', 'note-manuscrite'],
+      documentIds: ['temoignage-xiaoyu', 'note-manuscrite', 'temoignage-fahad'],
       presentCharacterIds: ['xiaoyu', 'fahad'],
     },
     {
@@ -46,7 +46,7 @@ export const dossierDisparuScenario: Scenario = {
         "Une salle utilisée pour imprimer des documents administratifs. En V0.3, elle devient une piste débloquée par la chronologie.",
       role: "Vérifier si quelqu'un est resté plus longtemps qu'il ne le dit.",
       available: true,
-      documentIds: ['historique-impression', 'temoignage-fahad', 'brouillon-mail'],
+      documentIds: ['historique-impression', 'brouillon-mail'],
       presentCharacterIds: ['monsieur-armand'],
       relatedCharacterIds: ['fahad'],
     },
@@ -181,7 +181,7 @@ export const dossierDisparuScenario: Scenario = {
       content:
         "Je suis passé à 16h20. J'ai seulement demandé mon attestation et je suis reparti deux minutes plus tard. Je ne suis pas allé dans la salle informatique.",
       initiallyAvailable: true,
-      relatedLocationIds: ['couloir', 'salle-informatique'],
+      relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['fahad'],
       evidenceIds: ['ev-fahad-claim'],
     },
