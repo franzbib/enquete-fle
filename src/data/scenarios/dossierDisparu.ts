@@ -49,6 +49,7 @@ export const dossierDisparuScenario: Scenario = {
       documentIds: ['historique-impression', 'brouillon-mail'],
       presentCharacterIds: ['monsieur-armand'],
       relatedCharacterIds: ['fahad'],
+      objectIds: ['cle-usb-exercices-b1'],
     },
   ],
   characters: [
@@ -70,7 +71,7 @@ export const dossierDisparuScenario: Scenario = {
       profile:
         'Pressé et un peu confus, il dit être venu chercher une attestation.',
       testimony:
-        "Il affirme être resté seulement deux minutes au secrétariat, puis être parti directement.",
+        "Il affirme être seulement passé au secrétariat, puis être parti tout de suite après.",
       reliability: 'questionable',
       relatedLocationIds: ['couloir', 'salle-informatique'],
     },
@@ -179,7 +180,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Fahad minimise son passage au secrétariat.',
       content:
-        "Je suis passé à 16h20. J'ai seulement demandé mon attestation et je suis reparti deux minutes plus tard. Je ne suis pas allé dans la salle informatique.",
+        "Je suis seulement passé au secrétariat. Je suis parti tout de suite après.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['fahad'],
@@ -192,12 +193,12 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Salle informatique',
       summary: "Trace horaire débloquée après la chronologie.",
       content:
-        '16h42 : impression attestation_fahad.pdf. 16h48 : impression formulaire_candidature_chen.pdf.',
+        '16h48 : session Fahad - impression attestation_scolarite.pdf.',
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'chronologie-initiale',
       relatedLocationIds: ['salle-informatique'],
-      relatedCharacterIds: ['fahad', 'monsieur-armand', 'chen'],
-      evidenceIds: ['ev-impression-1642', 'ev-impression-1648'],
+      relatedCharacterIds: ['fahad', 'monsieur-armand'],
+      evidenceIds: ['ev-impression-1648'],
     },
     {
       id: 'brouillon-mail',
@@ -241,14 +242,14 @@ export const dossierDisparuScenario: Scenario = {
     },
     {
       id: 'ev-fahad-claim',
-      label: 'Fahad dit être parti après deux minutes',
-      text: 'Fahad affirme être reparti vers 16h22 et ne pas être allé en salle informatique.',
+      label: 'Fahad dit être parti tout de suite',
+      text: 'Fahad affirme être parti tout de suite après son passage au secrétariat.',
       documentId: 'temoignage-fahad',
     },
     {
       id: 'ev-impression-1648',
-      label: 'Impression liée à Chen à 16h48',
-      text: 'Un formulaire de candidature de Chen est imprimé à 16h48.',
+      label: 'Session Fahad active à 16h48',
+      text: 'La session de Fahad imprime une attestation de scolarité à 16h48.',
       documentId: 'historique-impression',
     },
     {
@@ -274,6 +275,14 @@ export const dossierDisparuScenario: Scenario = {
       description:
         "Objet préparatoire : la pochette permet de relier les témoignages au dossier disparu.",
       originLocationId: 'secretariat',
+    },
+    {
+      id: 'cle-usb-exercices-b1',
+      name: 'Cle USB "Exercices B1"',
+      objectType: 'ambient',
+      description:
+        "Une cle USB oubliee pres d'un ordinateur. Elle contient des fichiers de cours et quelques exercices de grammaire. Rien ne semble directement lie au dossier disparu.",
+      originLocationId: 'salle-informatique',
     },
   ],
   puzzles: [
@@ -333,7 +342,7 @@ export const dossierDisparuScenario: Scenario = {
           {
             id: 'fahad-impression-1648',
             label:
-              "L'historique montre une impression liée à Chen à 16h48, alors que Fahad dit être reparti vers 16h22.",
+              "L'historique montre une session Fahad active à 16h48, alors qu'il dit être parti tout de suite après son passage au secrétariat.",
           },
           {
             id: 'delorme-appel',
@@ -344,7 +353,7 @@ export const dossierDisparuScenario: Scenario = {
       successFeedback:
         'Contradiction repérée. Une nouvelle piste est débloquée : le brouillon de mail non envoyé.',
       failureFeedback:
-        'Cette réponse ne pointe pas la contradiction principale. Comparez la durée annoncée par Fahad avec l’historique d’impression.',
+        "Cette réponse ne pointe pas la contradiction principale. Comparez le départ immédiat annoncé par Fahad avec l'historique d'impression.",
       unlocksDocumentIds: ['brouillon-mail'],
     },
   ],

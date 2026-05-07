@@ -115,9 +115,6 @@ export function InvestigationPage({
           presentCharacters={scenario.characters.filter((character) =>
             location.presentCharacterIds.includes(character.id),
           )}
-          relatedCharacters={scenario.characters.filter((character) =>
-            (location.relatedCharacterIds ?? []).includes(character.id),
-          )}
           onSelectDocument={(id) => handleSelect('document', id)}
           onSelectCharacter={(id) => handleSelect('character', id)}
         />

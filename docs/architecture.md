@@ -79,6 +79,11 @@ Cette distinction evite de laisser croire qu'un meme personnage se trouve simult
 
 Les temoignages sont rattaches au personnage qui parle ou au lieu ou il est interroge.
 Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
+Les traces techniques doivent creer une contradiction credible sans accuser trop directement un personnage : elles peuvent prouver une presence, une session active ou un horaire incoherent, sans prouver a elles seules la manipulation du dossier disparu.
+
+Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
+`relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
+Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`, sans logique d'inventaire tant que la V0.4 n'est pas lancee.
 
 ## Progression V0.3
 

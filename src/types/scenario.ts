@@ -72,7 +72,7 @@ export type EvidenceText = {
 export type InventoryObject = {
   id: string;
   name: string;
-  objectType: 'access' | 'proof' | 'interaction' | 'linguistic';
+  objectType: 'access' | 'proof' | 'interaction' | 'linguistic' | 'ambient';
   description: string;
   originLocationId?: string;
 };
