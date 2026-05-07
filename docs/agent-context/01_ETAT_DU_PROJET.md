@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.1 — Squelette technique initial créé.
+V0.2 — Moteur minimal de scénario créé.
 
 Le dépôt GitHub existe.
 
@@ -126,11 +126,14 @@ Les objets devront pouvoir être obtenus :
 - Dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types`.
 - Page d’accueil minimale.
 - Écran de briefing minimal pour “Le dossier disparu”.
+- Écran d’enquête minimal.
+- Chargement local du scénario “Le dossier disparu”.
+- Affichage sobre des lieux, personnages et documents.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
-- Moteur de scénario.
+- Moteur de scénario complet.
 - Système d’inventaire.
 - Système d’indices.
 - Énigmes.
@@ -141,21 +144,22 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Passer à la V0.2 : créer un moteur minimal de scénario capable de charger les données d’une enquête et d’afficher ses sections principales.
+Passer à la V0.3 : créer une première enquête minimale plus jouable à partir de la structure de scénario existante.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer le moteur minimal de scénario, sans inventaire, sans système d’indices, sans accusation finale et sans deuxième scénario.
+Demander à Codex d’enrichir “Le dossier disparu” avec une première boucle de déduction minimale, sans inventaire complet, sans système d’indices complet, sans accusation finale enrichie et sans deuxième scénario.
 
 ## Dernière action réalisée
 
-Création de la V0.1 technique :
+Création de la V0.2 technique :
 
-- application React + Vite + TypeScript ;
-- Tailwind CSS ;
-- interface minimale accueil / briefing ;
-- séparation initiale entre composants, données, types et futur moteur ;
-- document `docs/architecture.md`.
+- types `Scenario`, `Location`, `Character`, `InvestigationDocument`, `InventoryObject`, `Puzzle` et `Hint` ;
+- scénario “Le dossier disparu” enrichi dans `src/data/scenarios/dossierDisparu.ts` ;
+- loader minimal dans `src/engine/scenarioLoader.ts` ;
+- interface minimale accueil / briefing / enquête ;
+- affichage des lieux, personnages et documents ;
+- mise à jour de `docs/architecture.md`.
 
 ## Risques à surveiller
 

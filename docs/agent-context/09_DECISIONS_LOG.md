@@ -54,3 +54,21 @@ Conséquence : La prochaine étape technique est le moteur minimal de scénario 
 Statut : validé
 À réévaluer : non, sauf changement explicite de feuille de route.
 ```
+
+```text
+Date : 2026-05-07
+Décision : La V0.2 charge “Le dossier disparu” depuis un fichier de données TypeScript structuré.
+Raison : Garder les scénarios séparés de l’interface et préparer un moteur réutilisable sans ajouter de backend.
+Conséquence : Les lieux, personnages et documents peuvent être modifiés dans les données sans réécrire les composants.
+Statut : validé
+À réévaluer : lors de l’ajout futur de plusieurs scénarios.
+```
+
+```text
+Date : 2026-05-07
+Décision : `InventoryObject`, `Puzzle` et `Hint` existent comme types préparatoires seulement.
+Raison : Préparer les versions suivantes sans créer prématurément l’inventaire, les énigmes jouables ou le système d’indices.
+Conséquence : La V0.2 reste un moteur minimal de consultation, pas encore une enquête complète.
+Statut : validé
+À réévaluer : à partir de la V0.3 pour les énigmes, puis des versions dédiées aux objets et indices.
+```

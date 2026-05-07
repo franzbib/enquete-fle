@@ -8,13 +8,13 @@ Une prochaine action doit rester limitée, claire, vérifiable et utile.
 
 ## 2. État actuel
 
-Version actuelle : V0.1 — squelette technique initial.
+Version actuelle : V0.2 — moteur minimal de scénario.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
-L’application React/Vite/TypeScript minimale existe, avec Tailwind CSS, une page d’accueil, un écran de briefing pour “Le dossier disparu” et une première séparation entre composants, données, types et futur moteur.
+L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing pour “Le dossier disparu” et un écran d’enquête affichant les lieux, personnages et documents du scénario.
 
 ## 3. Actions déjà réalisées
 
@@ -56,9 +56,21 @@ Livrables :
 - écran de briefing minimal ;
 - document `docs/architecture.md`.
 
+### Action 5 — Créer le moteur minimal de scénario V0.2
+
+Statut : fait.
+
+Livrables :
+
+- types `Scenario`, `Location`, `Character`, `InvestigationDocument`, `InventoryObject`, `Puzzle` et `Hint` ;
+- scénario enrichi “Le dossier disparu” ;
+- loader local simple ;
+- affichage des lieux, personnages et documents ;
+- navigation accueil / briefing / enquête.
+
 ## 4. Action immédiate
 
-### Action 5 — Créer le moteur minimal de scénario V0.2
+### Action 6 — Créer la première enquête minimale V0.3
 
 Statut : à faire.
 
@@ -66,20 +78,21 @@ Agent concerné : Codex.
 
 Objectif :
 
-Permettre à l’application de charger une enquête depuis un fichier de données et d’afficher ses sections principales.
+Transformer la structure actuelle en première enquête minimale plus jouable.
 
 Contenu attendu :
 
-- types TypeScript plus complets pour scénario, lieux, personnages et documents ;
-- données minimales de “Le dossier disparu” ;
-- loader de scénario simple ;
-- affichage sobre des sections principales.
+- contenu narratif resserré pour trois lieux principaux ;
+- premiers documents réellement exploitables ;
+- premières contradictions à repérer ;
+- progression simple entre consultation et déduction ;
+- préparation des énigmes sans système avancé.
 
 À ne pas faire encore :
 
-- inventaire ;
-- système d’indices ;
-- accusation finale ;
+- inventaire complet ;
+- système d’indices complet ;
+- accusation finale enrichie ;
 - deuxième scénario ;
 - animation ;
 - backend.
@@ -91,7 +104,7 @@ Agis comme architecte technique du projet `enquete-fle`.
 
 Lis d’abord tous les documents du dossier `docs/agent-context`.
 
-Crée la V0.2 : moteur minimal de scénario.
+Crée la V0.3 : première enquête minimale de “Le dossier disparu”.
 
 Contraintes :
 - jeu 2D statique
@@ -102,14 +115,14 @@ Contraintes :
 - architecture simple, maintenable et progressive
 
 Crée :
-- les types minimaux `Scenario`, `Location`, `Character` et `InvestigationDocument` ;
-- un loader de scénario simple ;
-- une donnée minimale pour “Le dossier disparu” ;
-- un affichage sobre des lieux, personnages et documents.
+- une progression minimale exploitable entre les lieux, documents et personnages déjà affichés ;
+- des contenus plus précis pour permettre une première déduction ;
+- deux énigmes simples comme étapes de raisonnement, sans moteur avancé ;
+- une documentation sobre de l’avancement.
 
-Ne crée pas encore l’inventaire.
-Ne crée pas encore le système d’indices.
-Ne crée pas encore l’accusation finale.
+Ne crée pas encore l’inventaire complet.
+Ne crée pas encore le système d’indices complet.
+Ne crée pas encore l’accusation finale enrichie.
 Ne crée pas de deuxième scénario.
 Ne crée aucune animation.
 
