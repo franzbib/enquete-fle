@@ -32,7 +32,7 @@ Statut :
 Date : 2026-05-07
 Décision : La V0.1 utilise React, Vite, TypeScript et Tailwind CSS.
 Raison : Cette stack répond au cahier des charges et permet un prototype navigateur simple, statique et maintenable.
-Conséquence : Le projet reste sans backend, sans base de données, sans moteur de jeu lourd et sans animation.
+Conséquence : Le projet reste sans backend, sans base de données, sans moteur de jeu lourd et sans animation décorative.
 Statut : validé
 À réévaluer : seulement si une contrainte technique majeure apparaît.
 ```
@@ -90,6 +90,7 @@ Conséquence : La progression est suffisante pour tester le parcours, mais n’e
 Statut : validé
 À réévaluer : quand une sauvegarde locale deviendra utile.
 ```
+
 ## Décision 14 — Créer un répertoire séparé de personnages et lieux récurrents
 
 Date : 2026-05-07
@@ -132,26 +133,6 @@ Un scénario pourra donc :
 - répertoire des lieux récurrents ;
 - assets visuels associés.
 
-Exemples de champs à prévoir pour un personnage récurrent :
-
-- `id`
-- `name`
-- `role`
-- `description`
-- `portraitPath`
-- `recurring`
-- `notes`
-
-Exemples de champs à prévoir pour un lieu récurrent :
-
-- `id`
-- `name`
-- `description`
-- `visualPath`
-- `function`
-- `recurring`
-- `notes`
-
 Cette décision ne signifie pas que tous les personnages et lieux devront être récurrents. Les scénarios pourront toujours créer des personnages et lieux spécifiques.
 
 Statut : validée.
@@ -162,9 +143,53 @@ Lors de la V0.4 ou V0.5, quand Codex commencera à structurer davantage les obje
 
 ```text
 Date : 2026-05-07
-Décision : Les micro-animations fonctionnelles sont autorisées (ex: auto-scroll, clignotement léger, fade-in).
-Raison : Aider l'orientation visuelle de l'apprenant B1/B2 (pour indiquer qu'une action a bien eu lieu ou qu'un contenu a changé).
-Conséquence : La contrainte "sans animation" est réinterprétée : pas d'animation décorative, mais les micro-animations utiles (CSS simples) sont acceptables et intégrées dès la V0.3 finalisée.
+Décision : Les micro-animations fonctionnelles sont autorisées, par exemple auto-scroll, clignotement léger ou fade-in.
+Raison : Aider l’orientation visuelle de l’apprenant B1/B2, notamment pour indiquer qu’une action a bien eu lieu ou qu’un contenu a changé.
+Conséquence : La contrainte “sans animation” est réinterprétée : pas d’animation décorative ou spectaculaire, mais les micro-animations utiles et sobres sont acceptables.
 Statut : validé
-À réévaluer : si ces animations s'avèrent trop distrayantes.
+À réévaluer : si ces animations s’avèrent trop distrayantes.
 ```
+
+## Décision 15 — Créer un agent contrôleur de cohérence narrative
+
+Date : 2026-05-07
+
+Décision :
+
+Le projet doit intégrer un agent spécialisé nommé `Contrôleur de cohérence narrative`.
+
+Cet agent est chargé de vérifier systématiquement la cohérence interne des scénarios, notamment après toute modification narrative importante et avant l’ajout de fonctionnalités qui s’appuient sur le scénario, comme l’inventaire, les indices ou l’accusation finale.
+
+Raison :
+
+Un jeu d’enquête peut rester provisoire graphiquement ou techniquement, mais il ne peut pas reposer sur une intrigue incohérente. Les incohérences narratives involontaires fragilisent immédiatement la jouabilité, la crédibilité des preuves et la motivation du joueur.
+
+Des problèmes déjà rencontrés montrent la nécessité de ce rôle :
+
+- personnage semblant présent dans deux lieux ;
+- témoignage placé dans un lieu peu crédible ;
+- trace technique accusant trop directement ou artificiellement un personnage ;
+- contradiction insuffisamment claire pour le joueur.
+
+Conséquence :
+
+Avant chaque étape importante qui ajoute de la logique d’enquête, le chef d’orchestre pourra demander un audit narratif.
+
+Le contrôleur de cohérence narrative devra vérifier notamment :
+
+- la chronologie des faits ;
+- la présence des personnages dans les lieux ;
+- la distinction entre personnage présent, lié, mentionné ou impliqué ;
+- la localisation des documents ;
+- la vraisemblance des témoignages ;
+- la cohérence des traces techniques ;
+- la fonction des objets ;
+- la force réelle des contradictions ;
+- la justice des fausses pistes ;
+- le lien entre preuves et solution finale.
+
+Statut : validée.
+
+À réévaluer :
+
+Après les premiers tests utilisateurs, pour ajuster la grille d’audit narratif si certains types d’incohérences reviennent régulièrement.
