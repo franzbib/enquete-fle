@@ -8,13 +8,13 @@ Une prochaine action doit rester limitée, claire, vérifiable et utile.
 
 ## 2. État actuel
 
-Version actuelle : V0.2 — moteur minimal de scénario.
+Version actuelle : V0.3 — première boucle d’enquête minimale.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
-L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing pour “Le dossier disparu” et un écran d’enquête affichant les lieux, personnages et documents du scénario.
+L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples et débloquer de nouvelles pistes.
 
 ## 3. Actions déjà réalisées
 
@@ -68,9 +68,22 @@ Livrables :
 - affichage des lieux, personnages et documents ;
 - navigation accueil / briefing / enquête.
 
+### Action 6 — Créer la première enquête minimale V0.3
+
+Statut : fait.
+
+Livrables :
+
+- scénario enrichi avec documents utiles ;
+- deux objets préparatoires ;
+- deux énigmes simples ;
+- progression locale ;
+- feedback sobre ;
+- déblocage de documents.
+
 ## 4. Action immédiate
 
-### Action 6 — Créer la première enquête minimale V0.3
+### Action 7 — Créer l’inventaire minimal V0.4
 
 Statut : à faire.
 
@@ -78,19 +91,18 @@ Agent concerné : Codex.
 
 Objectif :
 
-Transformer la structure actuelle en première enquête minimale plus jouable.
+Rendre les objets préparatoires visibles et utiles sans créer un système complexe.
 
 Contenu attendu :
 
-- contenu narratif resserré pour trois lieux principaux ;
-- premiers documents réellement exploitables ;
-- premières contradictions à repérer ;
-- progression simple entre consultation et déduction ;
-- préparation des énigmes sans système avancé.
+- affichage sobre des objets ;
+- obtention d’un objet ;
+- statut simple trouvé / utilisé ;
+- utilisation d’un objet pour débloquer un document ou une piste ;
+- maintien d’un nombre d’objets limité.
 
 À ne pas faire encore :
 
-- inventaire complet ;
 - système d’indices complet ;
 - accusation finale enrichie ;
 - deuxième scénario ;
@@ -104,7 +116,7 @@ Agis comme architecte technique du projet `enquete-fle`.
 
 Lis d’abord tous les documents du dossier `docs/agent-context`.
 
-Crée la V0.3 : première enquête minimale de “Le dossier disparu”.
+Crée la V0.4 : inventaire minimal et objets utiles.
 
 Contraintes :
 - jeu 2D statique
@@ -115,12 +127,12 @@ Contraintes :
 - architecture simple, maintenable et progressive
 
 Crée :
-- une progression minimale exploitable entre les lieux, documents et personnages déjà affichés ;
-- des contenus plus précis pour permettre une première déduction ;
-- deux énigmes simples comme étapes de raisonnement, sans moteur avancé ;
+- un affichage sobre des objets ;
+- une obtention locale d’objet ;
+- un statut trouvé / utilisé ;
+- une utilisation simple d’objet pour débloquer une piste ;
 - une documentation sobre de l’avancement.
 
-Ne crée pas encore l’inventaire complet.
 Ne crée pas encore le système d’indices complet.
 Ne crée pas encore l’accusation finale enrichie.
 Ne crée pas de deuxième scénario.

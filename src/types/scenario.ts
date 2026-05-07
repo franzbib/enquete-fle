@@ -8,6 +8,7 @@ export type Scenario = {
   locations: Location[];
   characters: Character[];
   documents: InvestigationDocument[];
+  evidence: EvidenceText[];
   inventoryObjects?: InventoryObject[];
   puzzles?: Puzzle[];
 };
@@ -53,8 +54,18 @@ export type InvestigationDocument = {
   source: string;
   summary: string;
   content: string;
+  initiallyAvailable: boolean;
+  unlocksAfterPuzzleId?: string;
   relatedLocationIds: string[];
   relatedCharacterIds: string[];
+  evidenceIds?: string[];
+};
+
+export type EvidenceText = {
+  id: string;
+  label: string;
+  text: string;
+  documentId: string;
 };
 
 export type InventoryObject = {
@@ -70,9 +81,37 @@ export type Puzzle = {
   title: string;
   puzzleType: 'ordering' | 'contradiction' | 'unlock' | 'matching' | 'final-accusation';
   description: string;
+  prompt: string;
   requiredDocumentIds?: string[];
   requiredObjectIds?: string[];
   hintIds?: string[];
+  answer: PuzzleAnswer;
+  successFeedback: string;
+  failureFeedback: string;
+  unlocksDocumentIds?: string[];
+};
+
+export type PuzzleAnswer =
+  | {
+      kind: 'ordered-events';
+      events: PuzzleEvent[];
+      correctOrder: string[];
+    }
+  | {
+      kind: 'single-choice';
+      options: PuzzleOption[];
+      correctOptionId: string;
+    };
+
+export type PuzzleOption = {
+  id: string;
+  label: string;
+  explanation?: string;
+};
+
+export type PuzzleEvent = {
+  id: string;
+  label: string;
 };
 
 export type Hint = {

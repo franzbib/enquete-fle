@@ -72,3 +72,21 @@ Conséquence : La V0.2 reste un moteur minimal de consultation, pas encore une e
 Statut : validé
 À réévaluer : à partir de la V0.3 pour les énigmes, puis des versions dédiées aux objets et indices.
 ```
+
+```text
+Date : 2026-05-07
+Décision : La V0.3 ajoute deux énigmes jouables localement, sans moteur complexe.
+Raison : Créer une première boucle d’enquête testable tout en respectant la progression du projet.
+Conséquence : Le joueur peut valider une chronologie, repérer une contradiction et débloquer deux documents.
+Statut : validé
+À réévaluer : lors de la généralisation éventuelle du moteur d’énigmes.
+```
+
+```text
+Date : 2026-05-07
+Décision : La progression V0.3 reste stockée dans l’état React local.
+Raison : Éviter localStorage, backend, base de données ou architecture prématurée.
+Conséquence : La progression est suffisante pour tester le parcours, mais n’est pas persistée.
+Statut : validé
+À réévaluer : quand une sauvegarde locale deviendra utile.
+```

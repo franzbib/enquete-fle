@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.2 — Moteur minimal de scénario créé.
+V0.3 — Première boucle d’enquête minimale créée.
 
 Le dépôt GitHub existe.
 
@@ -129,36 +129,37 @@ Les objets devront pouvoir être obtenus :
 - Écran d’enquête minimal.
 - Chargement local du scénario “Le dossier disparu”.
 - Affichage sobre des lieux, personnages et documents.
+- Deux énigmes simples : chronologie et contradiction.
+- Feedback local de progression.
+- Déblocage local de documents après réussite.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
-- Système d’inventaire.
+- Système d’inventaire fonctionnel.
 - Système d’indices.
-- Énigmes.
-- Première enquête jouable.
+- Accusation finale.
 - Mode enseignant.
 - Tests.
 - Déploiement.
 
 ## Priorité actuelle
 
-Passer à la V0.3 : créer une première enquête minimale plus jouable à partir de la structure de scénario existante.
+Passer à la V0.4 : créer un inventaire simple et rendre les objets utiles.
 
 ## Prochaine action recommandée
 
-Demander à Codex d’enrichir “Le dossier disparu” avec une première boucle de déduction minimale, sans inventaire complet, sans système d’indices complet, sans accusation finale enrichie et sans deuxième scénario.
+Demander à Codex de créer un inventaire minimal, sans système d’indices complet, sans accusation finale et sans deuxième scénario.
 
 ## Dernière action réalisée
 
-Création de la V0.2 technique :
+Création de la V0.3 technique :
 
-- types `Scenario`, `Location`, `Character`, `InvestigationDocument`, `InventoryObject`, `Puzzle` et `Hint` ;
-- scénario “Le dossier disparu” enrichi dans `src/data/scenarios/dossierDisparu.ts` ;
-- loader minimal dans `src/engine/scenarioLoader.ts` ;
-- interface minimale accueil / briefing / enquête ;
-- affichage des lieux, personnages et documents ;
+- scénario enrichi avec documents courts, objets préparatoires et preuves textuelles ;
+- deux énigmes simples jouables localement ;
+- feedback sobre de réussite ou d’erreur ;
+- déblocage local de documents ;
 - mise à jour de `docs/architecture.md`.
 
 ## Risques à surveiller

@@ -1,10 +1,12 @@
-# Architecture technique — V0.2
+# Architecture technique — V0.3
 
 ## Objectif
 
-La V0.2 ajoute un moteur minimal de scénario au squelette React/Vite/TypeScript.
+La V0.3 transforme l’affichage statique du scénario en première boucle d’enquête minimale.
 
-Le jeu peut maintenant charger une enquête depuis un fichier de données structuré et afficher sobrement ses lieux, personnages et documents. Cette version reste volontairement statique : pas d’inventaire fonctionnel, pas de système d’indices, pas d’énigmes jouables, pas d’accusation finale, pas de backend et aucune animation.
+Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre et débloquer de nouveaux documents.
+
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation, pas d’inventaire complet, pas de système d’indices à trois niveaux, pas d’accusation finale et pas de deuxième scénario.
 
 ## Stack
 
@@ -24,6 +26,7 @@ src/
     HomePage.tsx
     InvestigationPage.tsx
     LocationDetail.tsx
+    PuzzleDetail.tsx
     ScenarioList.tsx
   data/
     scenarios/
@@ -32,32 +35,26 @@ src/
     scenarioLoader.ts
   types/
     scenario.ts
-  App.tsx
-  main.tsx
-  styles.css
 ```
 
 ## Données de scénario
 
-Les données de scénario sont dans :
+Les données sont dans `src/data/scenarios/dossierDisparu.ts`.
 
-`src/data/scenarios/`
+Le scénario contient désormais :
 
-Le fichier `src/data/scenarios/dossierDisparu.ts` contient le scénario “Le dossier disparu” sous forme d’objet TypeScript typé. Il décrit :
+- 3 lieux ;
+- 5 personnages ;
+- 8 documents courts ;
+- 2 objets préparatoires ;
+- 2 énigmes simples ;
+- des éléments de preuve textuels.
 
-- le briefing ;
-- les lieux ;
-- les personnages ;
-- les documents ;
-- quelques objets et énigmes uniquement comme données préparatoires.
-
-Les objets, énigmes et indices ne sont pas encore affichés ni jouables.
+Certains documents sont disponibles dès le départ. D’autres sont débloqués après résolution d’une énigme.
 
 ## Types
 
-Les types partagés sont dans :
-
-`src/types/scenario.ts`
+Les types sont dans `src/types/scenario.ts`.
 
 Types principaux :
 
@@ -65,65 +62,71 @@ Types principaux :
 - `Location`
 - `Character`
 - `InvestigationDocument`
+- `EvidenceText`
 - `InventoryObject`
 - `Puzzle`
+- `PuzzleAnswer`
 - `Hint`
 
-`InventoryObject`, `Puzzle` et `Hint` existent pour préparer les versions suivantes, sans moteur complet associé.
+`InventoryObject` et `Hint` restent préparatoires. Ils ne pilotent pas encore une interface complète.
 
-## Loader
+## Progression V0.3
 
-Le loader minimal est dans :
+La progression est locale à `InvestigationPage`.
 
-`src/engine/scenarioLoader.ts`
+État React utilisé :
 
-Il fournit :
+- énigmes validées ;
+- documents débloqués ;
+- feedback de progression ;
+- sélection courante.
 
-- `loadScenario` ;
-- `getScenarioBriefing` ;
-- `findLocation` ;
-- `findCharacter` ;
-- `findDocument`.
+Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulement deux formes de réponse :
 
-Le loader reste volontairement simple : il charge un scénario local depuis un registre interne et ne fait aucun appel réseau.
+- ordre de trois événements ;
+- choix d’une contradiction parmi trois propositions.
 
-## Interface
+## Énigmes
 
-L’application propose une navigation provisoire :
+### Énigme 1 — Chronologie
 
-- accueil ;
-- briefing ;
-- écran d’enquête.
+Le joueur remet trois événements dans l’ordre.
 
-L’écran d’enquête permet de sélectionner :
+Réussite :
 
-- un lieu ;
-- un personnage ;
-- un document.
+- feedback “Chronologie validée” ;
+- déblocage de l’historique d’impression.
 
-Chaque sélection affiche un panneau de détail sobre. L’interface est fonctionnelle et provisoire, sans identité graphique finale.
+### Énigme 2 — Contradiction
+
+Le joueur compare le témoignage de Fahad avec l’historique d’impression.
+
+Réussite :
+
+- feedback “Contradiction repérée” ;
+- déblocage du brouillon de mail non envoyé.
 
 ## Ajouter plus tard un nouveau scénario
 
-Quand le premier scénario sera stabilisé, un nouveau scénario pourra être ajouté en suivant cette logique :
+Quand le projet autorisera plusieurs enquêtes :
 
 1. Créer un fichier dans `src/data/scenarios/`.
 2. Exporter un objet conforme au type `Scenario`.
-3. Ajouter ce scénario au registre interne de `src/engine/scenarioLoader.ts`.
-4. Ajouter ensuite un choix de scénario dans l’interface, seulement quand le projet autorisera plusieurs enquêtes.
+3. Ajouter le scénario au registre de `src/engine/scenarioLoader.ts`.
+4. Ajouter une sélection de scénario dans l’interface.
 
-La V0.2 ne crée pas de deuxième scénario.
+La V0.3 ne crée pas de deuxième scénario.
 
-## Direction V0.3
+## Direction V0.4
 
-La V0.3 devra transformer cette structure en première enquête minimale plus jouable.
+La V0.4 devra introduire un inventaire simple et des objets fonctionnels.
 
-Travail attendu :
+Objectif recommandé :
 
-- enrichir “Le dossier disparu” avec un contenu minimal mais cohérent ;
-- rendre quelques lieux et documents utiles à une progression ;
-- introduire des énigmes simples mais non scolaires ;
-- préparer une première boucle de déduction ;
-- éviter encore toute identité graphique finale.
+- afficher les objets préparatoires ;
+- permettre d’obtenir un objet ;
+- marquer un objet comme trouvé ou utilisé ;
+- utiliser un objet pour débloquer un lieu ou un document ;
+- garder les objets peu nombreux et utiles à la déduction.
 
-L’inventaire complet, le système d’indices et l’accusation finale restent à traiter dans des versions ultérieures selon la feuille de route.
+L’accusation finale et le système d’indices complet restent à traiter plus tard.
