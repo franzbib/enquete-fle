@@ -100,6 +100,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'xiaoyu',
       name: 'Xiaoyu',
       role: 'Témoin dans le couloir',
+      portraitUrl: '/assets/portraits/yaqiu.png',
       profile:
         'Elle a vu plusieurs personnes passer mais ne connaît pas le contenu des dossiers.',
       directSpeech:
@@ -127,6 +128,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'thi-thai',
       name: 'Thi-Thai',
       role: 'Accueil / inscriptions aux examens',
+      portraitUrl: '/assets/portraits/thitai.png',
       profile:
         "Thi-Thai travaille à l'accueil. Elle répond aux appels, renseigne les étudiants et s'occupe notamment des inscriptions aux examens.",
       directSpeech:
