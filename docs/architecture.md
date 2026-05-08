@@ -103,6 +103,7 @@ Dans la fiche d'un personnage, seuls les lieux ou le personnage est physiquement
 Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`. Ils peuvent etre pris et consultes, mais n'ont pas forcement d'effet de deblocage.
 Depuis la V0.4, `available: false` peut vraiment limiter un lieu. La salle informatique apparait dans la liste, mais reste en acces limite tant que le badge visiteur n'a pas ete utilise depuis la vue de ce lieu.
 Un document situé dans un lieu devient consultable dès que le lieu est accessible, sauf justification narrative explicite. Par exemple, l'historique d'impression ne dépend pas d'une énigme, mais devient disponible dès que la salle informatique est ouverte.
+L’interface joueur ne doit pas afficher automatiquement les métadonnées déductives comme les personnages ou lieux cités. Ces liens peuvent rester dans les données internes, mais le joueur doit les déduire à partir du contenu des documents.
 
 ## Inventaire V0.4
 

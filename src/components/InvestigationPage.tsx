@@ -31,7 +31,7 @@ export function InvestigationPage({
   onBackBriefing,
   onBackHome,
 }: InvestigationPageProps) {
-  const firstLocationId = scenario.locations[0]?.id ?? '';
+  const firstLocationId = scenario.locations.find((l) => l.id === 'accueil')?.id ?? scenario.locations[0]?.id ?? '';
   const [selection, setSelection] = useState<Selection>({
     type: 'location',
     id: firstLocationId,
@@ -54,7 +54,7 @@ export function InvestigationPage({
   >({});
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(false);
   const [feedback, setFeedback] = useState(
-    'Consultez les documents disponibles, puis résolvez la chronologie.',
+    "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
   );
 
   const selectedId = `${selection.type}:${selection.id}`;
