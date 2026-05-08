@@ -56,7 +56,7 @@ export function LocationDetail({
               type="button"
               onClick={() => onUseObject(accessObject.id)}
             >
-              {accessObject.useLabel ?? 'Utiliser l’objet d’accès'}
+              {accessObject.useLabel ?? 'Présenter l’objet d’accès'}
             </button>
           </div>
         )}

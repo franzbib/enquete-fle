@@ -28,6 +28,18 @@ export const dossierDisparuScenario: Scenario = {
       objectIds: ['badge-visiteur'],
     },
     {
+      id: 'accueil',
+      name: 'Accueil',
+      kind: 'optional',
+      description:
+        "L'accueil est un lieu de passage. On y demande des renseignements, on confirme une inscription, on téléphone, on cherche parfois une salle ou une photocopie.",
+      role: "Donner un peu de vie administrative à l'ISPA sans ajouter de preuve décisive.",
+      available: true,
+      documentIds: ['affiche-inscriptions-examens'],
+      presentCharacterIds: ['thi-thai'],
+      objectIds: [],
+    },
+    {
       id: 'couloir',
       name: 'Couloir',
       kind: 'transition',
@@ -107,6 +119,19 @@ export const dossierDisparuScenario: Scenario = {
       relatedLocationIds: ['secretariat'],
     },
     {
+      id: 'thi-thai',
+      name: 'Thi-Thai',
+      role: 'Accueil / inscriptions aux examens',
+      profile:
+        "Thi-Thai travaille à l'accueil. Elle répond aux appels, renseigne les étudiants et s'occupe notamment des inscriptions aux examens.",
+      directSpeech:
+        "Aujourd'hui, j'ai surtout répondu au téléphone et aux questions sur les inscriptions aux examens. Pour le dossier de Chen, je ne peux pas vraiment vous aider : je n'étais pas au secrétariat à ce moment-là. Mais si quelqu'un cherche encore la photocopieuse, elle n'a pas disparu, elle : elle fait juste semblant de travailler.",
+      testimony:
+        "Thi-Thai explique qu'elle s'est surtout occupée de l'accueil, du téléphone et des inscriptions aux examens. Elle précise qu'elle n'était pas au secrétariat au moment du problème et ne donne pas d'information décisive sur le dossier de Chen.",
+      reliability: 'stable',
+      relatedLocationIds: ['accueil'],
+    },
+    {
       id: 'monsieur-armand',
       name: 'Monsieur Armand',
       role: 'Enseignant',
@@ -145,6 +170,18 @@ export const dossierDisparuScenario: Scenario = {
       initiallyAvailable: true,
       relatedLocationIds: ['secretariat'],
       relatedCharacterIds: ['chen'],
+    },
+    {
+      id: 'affiche-inscriptions-examens',
+      title: 'Affiche — Inscriptions aux examens',
+      documentType: 'note',
+      source: 'Accueil',
+      summary: "Affiche administrative sans lien direct avec le dossier disparu.",
+      content:
+        "Les inscriptions aux examens doivent être confirmées à l'accueil avant vendredi. Merci de vérifier l'orthographe de votre nom.",
+      initiallyAvailable: true,
+      relatedLocationIds: ['accueil'],
+      relatedCharacterIds: ['thi-thai'],
     },
     {
       id: 'temoignage-chen',
@@ -282,7 +319,7 @@ export const dossierDisparuScenario: Scenario = {
       initiallyOwned: false,
       unlocksLocationIds: ['salle-informatique'],
       isUseful: true,
-      useLabel: 'Utiliser pour entrer en salle informatique',
+      useLabel: 'Présenter le badge',
       usedLabel: 'Utilisé pour accéder à la salle informatique',
     },
     {

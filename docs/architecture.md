@@ -1,8 +1,8 @@
-# Architecture technique — V0.5
+# Architecture technique — V0.5.2
 
 ## Objectif
 
-La V0.5 ajoute un système d'indices progressifs à la première boucle d'enquête.
+La V0.5 ajoute un système d'indices progressifs à la première boucle d'enquête. La V0.5.2 ajoute un décor vivant contrôlé autour de l'enquête principale.
 
 Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique et demander des indices gradués en cas de blocage.
 
@@ -44,15 +44,17 @@ Les données sont dans `src/data/scenarios/dossierDisparu.ts`.
 
 Le scénario contient désormais :
 
-- 3 lieux ;
-- 5 personnages ;
-- 8 documents courts ;
+- 4 lieux ;
+- 6 personnages ;
+- 9 documents courts ;
 - 3 objets utiles ou contextuels ;
 - 2 énigmes simples ;
 - 3 indices progressifs par énigme ;
 - des éléments de preuve textuels.
 
 Certains documents sont disponibles dès le départ. D’autres sont débloqués après résolution d’une énigme.
+
+La V0.5.2 ajoute `accueil`, un lieu secondaire accessible dès le départ, avec Thi-Thai et une affiche administrative. Ces éléments enrichissent l'univers sans modifier la chronologie, les énigmes, les indices, l'inventaire ou l'accès à la salle informatique.
 
 ## Types
 
@@ -166,6 +168,21 @@ Les indices servent à relire et comparer :
 - formuler une interprétation prudente.
 
 Ils ne doivent pas donner directement toute la réponse, accuser un personnage ou introduire un fait absent des pièces déjà disponibles.
+
+## Décor vivant V0.5.2
+
+Les scénarios peuvent intégrer des éléments de décor vivant : lieux secondaires, personnages secondaires, documents d'ambiance et touches d'humour. Ces éléments doivent ajouter du monde autour de l'enquête, pas une nouvelle enquête dans l'enquête.
+
+Règles :
+
+- rester facultatifs ;
+- ne pas bloquer la progression ;
+- ne pas ressembler à des preuves fortes ;
+- ne pas créer de fausse piste injuste ;
+- ne pas introduire d'objet matériel important non observable ailleurs ;
+- rester compatibles avec le niveau B1/B2.
+
+Dans `Le dossier disparu`, l'accueil et Thi-Thai jouent ce rôle. L'affiche d'inscription aux examens est un document d'ambiance et ne participe à aucune énigme.
 
 ## Énigmes
 

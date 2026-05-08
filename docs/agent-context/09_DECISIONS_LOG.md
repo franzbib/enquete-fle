@@ -269,3 +269,26 @@ Statut : validée.
 
 À réévaluer :
 Si le jeu introduit des objets à usage multiple ou combiné qui ne dépendent pas d'un contexte spatial strict.
+
+## Décision 17 — Décor vivant contrôlé
+
+Date : 2026-05-08
+
+Décision :
+Les scénarios peuvent comporter des éléments de décor vivant : lieux secondaires, personnages secondaires, documents d'ambiance, touches d'humour et interactions non décisives.
+
+Raison :
+L'enquête doit rester claire, mais l'univers ne doit pas donner l'impression que chaque élément existe uniquement pour résoudre l'énigme. Un décor vivant contrôlé renforce l'immersion, la crédibilité de l'ISPA et le plaisir d'exploration.
+
+Conséquence :
+- Ces éléments restent facultatifs.
+- Ils ne doivent pas créer de fausse piste injuste.
+- Ils ne doivent pas ressembler à des preuves fortes s'ils n'en sont pas.
+- Ils ne doivent pas bloquer la progression.
+- Ils ne doivent pas parasiter la chaîne des preuves.
+- Ils doivent rester compatibles avec le niveau B1/B2.
+
+Statut : validée.
+
+À réévaluer :
+Lors des tests utilisateurs, si des éléments d'ambiance sont interprétés comme des preuves importantes ou rendent l'enquête plus confuse.

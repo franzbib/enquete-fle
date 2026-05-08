@@ -204,3 +204,25 @@ Pour chaque utilisation d'un personnage ou lieu récurrent, l'agent doit pouvoir
 - pourquoi ce lieu est utile ici ;
 - ce que son usage apporte au joueur ;
 - ce qui doit rester implicite ou non utilisé.
+
+## 13. Éléments de décor vivant
+
+Un scénario peut utiliser un personnage ou un lieu récurrent pour créer un décor vivant autour de l'enquête principale.
+
+Ces éléments peuvent prendre la forme :
+
+- d'un lieu secondaire ;
+- d'un personnage secondaire ;
+- d'un document d'ambiance ;
+- d'une touche d'humour ;
+- d'une interaction non décisive.
+
+Règle centrale :
+
+> Ajouter du monde autour de l'enquête, pas une nouvelle enquête dans l'enquête.
+
+Ces éléments doivent rester facultatifs. Ils ne doivent pas créer de fausse piste injuste, ressembler à des preuves fortes, bloquer la progression, rendre l'enquête plus confuse ou introduire des objets matériels importants qui ne seraient pas observables ailleurs.
+
+Ils doivent enrichir l'univers, soutenir l'immersion et rester compatibles avec le niveau B1/B2.
+
+Exemple validé : dans `Le dossier disparu`, Thi-Thai peut apparaître à l'accueil pour donner un peu de vie administrative à l'ISPA. Elle ne doit pas devenir témoin essentiel, suspecte ou source d'information décisive sur Fahad, Chen ou la salle informatique.
