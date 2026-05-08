@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-**V0.9.4 — jeu complet, exploitable pédagogiquement, avec direction graphique (portraits, vignettes, icônes) et système d'icônes de statuts d'interface.**
+**V0.10 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes.**
 
 Le dépôt GitHub existe et le prototype est jouable dans le navigateur.
 
@@ -69,6 +69,8 @@ La boucle principale est désormais :
 - Résolution finale prudente, non accusatrice, fondée sur hypothèse + pièces justificatives.
 - Fin heureuse : Delphine aide Chen à remettre le dossier en ordre.
 - Métadonnées déductives masquées dans l’interface joueur : les personnages et lieux cités ne sont pas affichés automatiquement dans les documents.
+- Registre central des scénarios pour préparer l'ajout futur d'autres enquêtes.
+- Modèle de scénario non enregistré pour guider les futures créations.
 
 ## État narratif et pédagogique
 
@@ -135,10 +137,11 @@ Le dossier `docs/agent-context/` contient notamment :
 
 Priorités possibles :
 
-1. Audit visuel humain de la V0.9.4.
-2. V0.7.2 — version simplifiée B1 des textes longs.
-3. V0.8 — mode enseignant minimal, plus tard.
-4. V1.0 — stabilisation du premier scénario complet.
+1. Audit technique et documentaire de la préparation multi-enquêtes V0.10.
+2. Première enquête prototype supplémentaire, seulement après validation du cadre V0.10.
+3. V0.7.2 — version simplifiée B1 des textes longs.
+4. V0.8 — mode enseignant minimal, plus tard.
+5. V1.0 — stabilisation du premier scénario complet.
 
 ## Points à surveiller
 
@@ -152,4 +155,4 @@ Priorités possibles :
 
 ## Dernière mise à jour
 
-Mise à jour documentaire après l'intégration des icônes de statuts UI (V0.9.4).
+Mise à jour documentaire après la préparation multi-enquêtes V0.10.

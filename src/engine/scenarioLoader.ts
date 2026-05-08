@@ -1,4 +1,8 @@
-import { dossierDisparuScenario } from '../data/scenarios/dossierDisparu';
+import {
+  getDefaultScenario,
+  getScenarioById,
+  scenarios,
+} from '../data/scenarios';
 import type {
   Character,
   InvestigationDocument,
@@ -7,18 +11,20 @@ import type {
   ScenarioBriefing,
 } from '../types/scenario';
 
-const scenarios: Record<string, Scenario> = {
-  [dossierDisparuScenario.id]: dossierDisparuScenario,
-};
+export { getDefaultScenario, getScenarioById, scenarios };
 
 export function loadScenario(scenarioId: string): Scenario {
-  const scenario = scenarios[scenarioId];
+  const scenario = getScenarioById(scenarioId);
 
   if (!scenario) {
     throw new Error(`Scenario not found: ${scenarioId}`);
   }
 
   return scenario;
+}
+
+export function loadDefaultScenario(): Scenario {
+  return getDefaultScenario();
 }
 
 export function getScenarioBriefing(scenario: Scenario): ScenarioBriefing {

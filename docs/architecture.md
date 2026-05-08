@@ -1,12 +1,12 @@
-# Architecture technique — V0.9.3
+# Architecture technique — V0.10
 
 ## Objectif
 
-La V0.9.3 conserve la boucle d'enquête complète construite jusqu'à la V0.6, prolonge les supports pédagogiques V0.7/V0.7.1 et ajoute la première intégration graphique structurée : direction artistique, portraits harmonisés, vignettes temporaires de lieux et icônes d'objets.
+La V0.10 conserve la boucle d'enquête complète construite jusqu'à la V0.6, prolonge les supports pédagogiques V0.7/V0.7.1, conserve l'intégration graphique V0.9.x et prépare l'architecture multi-enquêtes.
 
 Le joueur commence à l'Accueil, consulte les lieux, personnages et documents disponibles, utilise un inventaire dynamique, présente le badge visiteur dans la salle informatique fermée, demande des indices gradués en cas de blocage, résout deux énigmes, puis formule une explication finale prudente.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas de deuxième scénario et pas encore de système graphique finalisé.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas encore de deuxième scénario complet et pas encore d'éditeur de scénario.
 
 ## Stack
 
@@ -33,6 +33,8 @@ src/
   data/
     scenarios/
       dossierDisparu.ts
+      index.ts
+      scenarioTemplate.ts
   engine/
     scenarioLoader.ts
   types/
@@ -58,6 +60,23 @@ Le scénario contient désormais :
 Certains documents sont disponibles dès le départ. D’autres sont débloqués après résolution d’une énigme.
 
 La V0.5.2 ajoute `accueil`, un lieu secondaire accessible dès le départ, avec Thi-Thai et une affiche administrative. Ces éléments enrichissent l'univers sans modifier la chronologie, les énigmes, les indices, l'inventaire ou l'accès à la salle informatique.
+
+## Registre multi-enquêtes V0.10
+
+La V0.10 ajoute un registre central des scénarios dans `src/data/scenarios/index.ts`.
+
+Ce registre exporte :
+
+- `scenarios` : liste des scénarios disponibles ;
+- `defaultScenarioId` : identifiant du scénario lancé par défaut ;
+- `getScenarioById(id)` : récupération d'un scénario par identifiant ;
+- `getDefaultScenario()` : récupération du scénario par défaut.
+
+En V0.10, le seul scénario enregistré reste `le-dossier-disparu`. Le fichier `src/data/scenarios/scenarioTemplate.ts` fournit un modèle conforme à `Scenario`, mais il n'est pas enregistré dans le jeu.
+
+`src/engine/scenarioLoader.ts` délègue désormais la récupération au registre central et conserve les utilitaires de recherche utilisés par les composants.
+
+La documentation détaillée est dans `docs/multi-scenario-architecture-v0.10.md`.
 
 ## Types
 
@@ -259,9 +278,10 @@ Les documents associés sont :
 - `docs/visual-audit-v0.9.0.md` ;
 - `docs/visual-guidelines-v0.9.0.md` ;
 - `docs/portrait-system-v0.9.2.md` ;
-- `docs/location-vignettes-and-object-icons-v0.9.3.md`.
+- `docs/location-vignettes-and-object-icons-v0.9.3.md` ;
+- `docs/ui-status-icons-v0.9.4.md`.
 
-Depuis la V0.9.2, `Character.portraitUrl` permet d'afficher un portrait harmonisé dans `CharacterDetail`. Depuis la V0.9.3, `Location.vignetteUrl` affiche une vignette temporaire de lieu dans `LocationDetail`, et `InventoryObject.iconUrl` affiche une icône d'objet dans `LocationDetail` et `InventoryPanel`.
+Depuis la V0.9.2, `Character.portraitUrl` permet d'afficher un portrait harmonisé dans `CharacterDetail`. Depuis la V0.9.3, `Location.vignetteUrl` affiche une vignette temporaire de lieu dans `LocationDetail`, et `InventoryObject.iconUrl` affiche une icône d'objet dans `LocationDetail` et `InventoryPanel`. Depuis la V0.9.4, `src/components/icons/StatusIcons.tsx` fournit des icônes SVG inline pour les statuts d'interface.
 
 ## Ajouter plus tard un nouveau scénario
 
@@ -269,13 +289,14 @@ Quand le projet autorisera plusieurs enquêtes :
 
 1. Créer un fichier dans `src/data/scenarios/`.
 2. Exporter un objet conforme au type `Scenario`.
-3. Ajouter le scénario au registre de `src/engine/scenarioLoader.ts`.
-4. Ajouter une sélection de scénario dans l’interface.
+3. Importer le scénario dans `src/data/scenarios/index.ts`.
+4. Ajouter le scénario à la liste `scenarios`.
+5. Ajouter une sélection de scénario dans l’interface seulement quand plusieurs scénarios réels seront prêts.
 
-La V0.5 ne crée pas de deuxième scénario.
+La V0.10 ne crée pas de deuxième scénario complet.
 
-## Direction V0.9.4
+## Direction après V0.10
 
-La prochaine étape graphique recommandée est la préparation d'icônes de statuts d'interface : fermé, lu, nouveau, validé, utilisé et indice disponible.
+La prochaine étape recommandée est un audit technique du cadre multi-enquêtes, puis la création d'une deuxième enquête prototype si le registre V0.10 est validé.
 
-Le score complet, le deuxième scénario, les visuels définitifs de lieux, le mode enseignant intégré et un éventuel éditeur de scénarios restent à traiter plus tard.
+Le score complet, les visuels définitifs de lieux, le mode enseignant intégré, la sélection visible de scénario et un éventuel éditeur de scénarios restent à traiter plus tard.

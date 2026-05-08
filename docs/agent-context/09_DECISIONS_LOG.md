@@ -361,3 +361,24 @@ Cons�quence :
 Statut : valid�e.
 
 � r��valuer : si le projet n�cessite par la suite un design system plus complexe (ex: biblioth�que d'ic�nes tierce comme lucide-react).
+
+## Décision 27 — Registre multi-enquêtes V0.10
+
+Date : 2026-05-08
+
+Décision :
+La V0.10 introduit un registre central des scénarios dans `src/data/scenarios/index.ts`.
+
+Raison :
+Le projet doit pouvoir accueillir de futures enquêtes sans copier-coller désordonné, sans coder les scénarios dans les composants et sans casser `Le dossier disparu`.
+
+Conséquence :
+- `Le dossier disparu` reste le seul scénario enregistré et le scénario par défaut.
+- `scenarioLoader.ts` délègue la récupération au registre central.
+- `App.tsx` charge le scénario par défaut via `loadDefaultScenario()`.
+- `scenarioTemplate.ts` fournit un modèle conforme à `Scenario`, mais il n'est pas enregistré dans le jeu.
+- Aucune mécanique, narration ou interface visible n'est modifiée.
+
+Statut : validée.
+
+À réévaluer : lors de la création d'une deuxième enquête réelle ou d'une future interface de sélection de scénario.

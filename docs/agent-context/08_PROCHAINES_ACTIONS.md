@@ -10,7 +10,7 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-**Version actuelle : V0.9.3 — jeu complet, exploitable pédagogiquement, avec direction graphique, portraits harmonisés, vignettes temporaires de lieux et icônes d’objets.**
+**Version actuelle : V0.10 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes.**
 
 Le dépôt GitHub existe :
 
@@ -38,7 +38,10 @@ Le jeu contient actuellement :
 - direction artistique initiale ;
 - portraits harmonisés ;
 - vignettes temporaires de lieux ;
-- icônes d’objets.
+- icônes d’objets ;
+- icônes de statuts UI ;
+- registre central des scénarios ;
+- modèle de scénario pour futures enquêtes.
 
 ## 3. Actions réalisées
 
@@ -210,15 +213,41 @@ Livrables :
 - intégration dans `LocationDetail` et `InventoryPanel` ;
 - documentation `docs/location-vignettes-and-object-icons-v0.9.3.md`.
 
+### V0.9.4 — Icônes de statuts d’interface
+
+Statut : fait.
+
+Livrables :
+
+- `src/components/icons/StatusIcons.tsx` avec SVG intégrés ;
+- icônes pour lieux fermés ou ouverts ;
+- icônes pour documents nouveaux ou lus ;
+- icônes pour objets trouvés ou utilisés ;
+- icônes pour énigmes validées et indices disponibles ;
+- documentation `docs/ui-status-icons-v0.9.4.md`.
+
+### V0.10 — Préparation multi-enquêtes
+
+Statut : fait.
+
+Livrables :
+
+- registre central `src/data/scenarios/index.ts` ;
+- fonction de récupération par identifiant ;
+- fonction de récupération du scénario par défaut ;
+- `Le dossier disparu` conservé comme seul scénario enregistré ;
+- modèle `src/data/scenarios/scenarioTemplate.ts` non enregistré ;
+- documentation `docs/multi-scenario-architecture-v0.10.md`.
+
 ## 4. Action immédiate recommandée
 
-### Action 18 — Tester visuellement la V0.9.3
+### Action 21 — Auditer la préparation multi-enquêtes V0.10
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier humainement que les nouvelles images enrichissent le jeu sans surcharger l’interface.
+Vérifier que la préparation multi-enquêtes reste maintenable, que `Le dossier disparu` reste le scénario par défaut, et que le modèle de scénario ne crée pas de deuxième enquête visible.
 
 Commande :
 
@@ -229,51 +258,30 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5173
 
 À vérifier :
 
-- les portraits sont-ils assez grands sans écraser le texte ?
-- les vignettes de lieux sont-elles utiles sans paraître définitives ?
-- les icônes d’objets sont-elles lisibles ?
-- le départ à l’Accueil reste-t-il clair ?
-- l’inventaire reste-t-il lisible ?
-- la salle informatique fermée puis ouverte fonctionne-t-elle toujours ?
-- la résolution finale reste-t-elle claire ?
+- le registre contient-il uniquement les scénarios réels ?
+- `scenarioTemplate` reste-t-il non enregistré ?
+- `loadDefaultScenario()` lance-t-il toujours `Le dossier disparu` ?
+- aucun composant ne dépend-il d'un scénario codé en dur ?
+- la documentation suffit-elle pour créer une deuxième enquête proprement ?
 
-Décision attendue après test :
+Décision attendue après audit :
 
-- si l’interface paraît équilibrée : passer à V0.9.4 ;
-- si un détail gêne : demander une micro-correction graphique ciblée.
-
-## 5. Action graphique suivante possible
-
-### V0.9.4 — Icônes de statuts d’interface
-
-Statut : fait.
-
-Objectif :
-
-Créer ou harmoniser de petites icônes pour les statuts de l’interface.
-
-Livrables :
-
-- `src/components/icons/StatusIcons.tsx` avec SVG intégrés ;
-- icônes pour lieux (fermé, ouvert) ;
-- icônes pour documents (nouveau, lu) ;
-- icônes pour objets (trouvé, utilisé) ;
-- icônes pour énigmes (validée, indice) ;
-- mise à jour de la documentation.
+- si le cadre est clair : créer une deuxième enquête prototype en suivant la procédure V0.10 ;
+- si le cadre reste fragile : demander une micro-correction d'architecture ou de documentation avant toute nouvelle enquête.
 
 ## 5. Action suivante recommandée
 
-### Action 19 — Nettoyage et polissage final avant V1.0
+### Action 22 — Préparer une deuxième enquête prototype
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier humainement la V0.9.4 et ajuster les derniers détails graphiques avant de figer la V1.0.
+Créer une deuxième enquête courte en suivant strictement le cadre V0.10, sans refondre le moteur ni les composants.
 
 ## 6. Action pédagogique suivante possible
 
-### Action 20 — Préparer la V0.7.2 : version simplifiée B1
+### Action 23 — Préparer la V0.7.2 : version simplifiée B1
 
 Statut : à faire.
 

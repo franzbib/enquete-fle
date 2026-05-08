@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { BriefingPage } from './components/BriefingPage';
 import { HomePage } from './components/HomePage';
 import { InvestigationPage } from './components/InvestigationPage';
-import { loadScenario } from './engine/scenarioLoader';
+import { loadDefaultScenario } from './engine/scenarioLoader';
 
 type Screen = 'home' | 'briefing' | 'investigation';
 
-const scenario = loadScenario('le-dossier-disparu');
+const scenario = loadDefaultScenario();
 
 export function App() {
   const [screen, setScreen] = useState<Screen>('home');
