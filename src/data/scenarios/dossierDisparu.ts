@@ -322,6 +322,11 @@ export const dossierDisparuScenario: Scenario = {
         'temoignage-chen',
         'temoignage-xiaoyu',
       ],
+      hints: [
+        'Commencez par repérer les heures et les expressions de temps dans les documents.',
+        'Le planning donne deux repères sûrs : Chen vérifie son dossier avant le passage de Fahad.',
+        "Relisez ensuite l'observation de Xiaoyu : elle se place après le passage de Fahad au secrétariat.",
+      ],
       answer: {
         kind: 'ordered-events',
         events: [
@@ -355,6 +360,11 @@ export const dossierDisparuScenario: Scenario = {
       prompt:
         'Sélectionnez les deux pièces du dossier qui permettent de repérer une contradiction.',
       requiredDocumentIds: ['temoignage-fahad', 'historique-impression'],
+      hints: [
+        'Relisez ce que Fahad dit de son départ.',
+        'Cherchez une trace qui indique une heure précise après son passage au secrétariat.',
+        "Comparez ce que Fahad affirme avec une trace technique de la salle informatique.",
+      ],
       answer: {
         kind: 'case-file-contradiction',
         caseFileItems: [

@@ -1,12 +1,12 @@
-# Architecture technique — V0.4
+# Architecture technique — V0.5
 
 ## Objectif
 
-La V0.4 ajoute un inventaire minimal à la première boucle d’enquête.
+La V0.5 ajoute un système d'indices progressifs à la première boucle d'enquête.
 
-Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
+Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique et demander des indices gradués en cas de blocage.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de système d’indices à trois niveaux, pas d’accusation finale et pas de deuxième scénario.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de score lié aux indices, pas d’accusation finale et pas de deuxième scénario.
 
 ## Stack
 
@@ -49,6 +49,7 @@ Le scénario contient désormais :
 - 8 documents courts ;
 - 3 objets utiles ou contextuels ;
 - 2 énigmes simples ;
+- 3 indices progressifs par énigme ;
 - des éléments de preuve textuels.
 
 Certains documents sont disponibles dès le départ. D’autres sont débloqués après résolution d’une énigme.
@@ -70,6 +71,7 @@ Types principaux :
 - `Hint`
 
 `InventoryObject` pilote désormais un inventaire minimal. `Hint` reste préparatoire.
+Depuis la V0.5, `Puzzle.hints` contient directement les indices progressifs affichés dans chaque énigme. Cette structure simple évite un moteur d'indices séparé tant que le prototype ne gère qu'un scénario.
 
 Pour les lieux, la V0.3.1 distingue desormais :
 
@@ -117,7 +119,7 @@ Les objets V0.4 du scenario prototype sont :
 
 Cette logique n'est pas un inventaire RPG : pas de combinaison, pas de crafting, pas de score, pas d'accusation finale.
 
-## Progression V0.4
+## Progression V0.5
 
 La progression est locale à `InvestigationPage`.
 
@@ -126,6 +128,7 @@ La progression est locale à `InvestigationPage`.
 - énigmes validées ;
 - documents débloqués ;
 - feedback de progression ;
+- nombre d'indices révélés par énigme ;
 - sélection courante.
 
 Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulement deux formes de réponse :
@@ -140,6 +143,29 @@ Depuis la V0.3.3, une énigme peut aussi demander une mise en relation de deux p
 
 Cette mécanique relève du raisonnement d'enquête et prépare un futur dossier de preuves. Elle ne doit pas être confondue avec l'inventaire physique : elle manipule des pièces consultées, pas des objets à obtenir ou utiliser.
 Les feedbacks doivent rester prudents : une contradiction peut montrer une chronologie problématique sans accuser directement un personnage.
+
+## Indices V0.5
+
+Chaque énigme principale peut proposer jusqu'à trois indices dans `Puzzle.hints`.
+
+L'affichage est progressif :
+
+- premier clic : indice 1 ;
+- deuxième clic : indice 2 ;
+- troisième clic : indice 3 ;
+- ensuite : message indiquant que tous les indices sont affichés.
+
+L'état `revealedHintCounts` reste local à `InvestigationPage`. Il n'utilise ni sauvegarde, ni backend, ni score.
+
+Les indices servent à relire et comparer :
+
+- repérer les marqueurs temporels ;
+- revenir aux témoignages ;
+- chercher une trace horaire ;
+- comparer une déclaration et un document technique ;
+- formuler une interprétation prudente.
+
+Ils ne doivent pas donner directement toute la réponse, accuser un personnage ou introduire un fait absent des pièces déjà disponibles.
 
 ## Énigmes
 
@@ -170,16 +196,17 @@ Quand le projet autorisera plusieurs enquêtes :
 3. Ajouter le scénario au registre de `src/engine/scenarioLoader.ts`.
 4. Ajouter une sélection de scénario dans l’interface.
 
-La V0.4 ne crée pas de deuxième scénario.
+La V0.5 ne crée pas de deuxième scénario.
 
-## Direction V0.5
+## Direction V0.6
 
-La V0.5 devra introduire un systeme d'indices simple et progressif.
+La V0.6 devra introduire une accusation finale enrichie.
 
 Objectif recommandé :
 
-- proposer des indices gradués pour les énigmes principales ;
-- garder les indices sobres et utiles ;
-- éviter tout score punitif ou envahissant.
+- vérifier une hypothèse finale ;
+- demander des preuves pertinentes ;
+- garder une interprétation prudente ;
+- éviter une accusation automatique ou trop scolaire.
 
-L’accusation finale reste à traiter plus tard.
+Le mode enseignant, le score complet et le deuxième scénario restent à traiter plus tard.

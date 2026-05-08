@@ -10,13 +10,13 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.4 — inventaire minimal et objets utiles.
+Version actuelle : V0.5 — système d'indices progressifs.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
-L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
+L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique et demander des indices progressifs.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -222,15 +222,26 @@ Livrables réalisés :
 
 ## 6. Action technique suivante
 
-### Action 11 — Préparer la V0.5 : indices gradués
+### Action 11 — Créer la V0.5 : indices gradués
 
-Statut : à faire.
+Statut : fait.
 
 Agent concerné : Codex.
 
 Objectif :
 
 Créer un système d’indices minimal pour éviter les blocages sur les énigmes principales.
+
+Livrables réalisés :
+
+- champ `Puzzle.hints` ;
+- trois indices progressifs pour la chronologie ;
+- trois indices progressifs pour la contradiction ;
+- bouton `Voir un indice` dans le détail d'une énigme ;
+- affichage des indices un par un ;
+- état React local `revealedHintCounts` ;
+- absence de score et de pénalité ;
+- documentation `docs/hints-v0.5.md`.
 
 À ne pas faire encore :
 
@@ -241,7 +252,28 @@ Créer un système d’indices minimal pour éviter les blocages sur les énigme
 - base de données ;
 - mode enseignant complet.
 
-## 7. Prompt prévu pour la V0.5
+## 7. Action technique suivante
+
+### Action 12 — Préparer la V0.6 : accusation finale enrichie
+
+Statut : à faire.
+
+Agent concerné : Codex + scénariste-enquête + contrôleur de cohérence narrative.
+
+Objectif :
+
+Créer une accusation finale minimale mais argumentée, qui demande au joueur de sélectionner une hypothèse et des preuves, sans transformer la fin en QCM scolaire.
+
+À ne pas faire encore :
+
+- score complet ;
+- mode enseignant complet ;
+- deuxième scénario ;
+- backend ;
+- base de données ;
+- identité graphique finale.
+
+## 8. Prompt archivé pour la V0.5
 
 ```text
 Agis comme architecte technique du projet `enquete-fle`.
@@ -306,7 +338,7 @@ Mets à jour sobrement :
 5. ce qui reste à faire pour la V0.6.
 ```
 
-## 8. Actions reportées
+## 9. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
@@ -324,7 +356,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 9. Règle de priorité
+## 10. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -336,7 +368,7 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 6. exploitation enseignante ;
 7. identité graphique.
 
-## 10. Question à poser à chaque reprise
+## 11. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

@@ -238,3 +238,12 @@ Conséquence : L'identifiant de scénario devient `delphine`. Le remplacement ne
 Statut : validé
 À réévaluer : si un futur scénario donne à Delphine un rôle incompatible avec cette première apparition.
 ```
+
+```text
+Date : 2026-05-08
+Décision : La V0.5 introduit des indices progressifs directement dans `Puzzle.hints`.
+Raison : Éviter les blocages sur les énigmes principales sans créer un moteur d'aide complexe, un score ou une sauvegarde.
+Conséquence : Chaque énigme peut afficher jusqu'à trois indices, un par un, avec un état React local `revealedHintCounts`. Les indices ne sont pas pénalisants en V0.5.
+Statut : validé
+À réévaluer : lors du mode enseignant ou si un futur score doit tenir compte des aides consultées.
+```

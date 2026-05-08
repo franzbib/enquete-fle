@@ -45,6 +45,9 @@ export function InvestigationPage({
   );
   const [usedObjectIds, setUsedObjectIds] = useState<string[]>([]);
   const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>([]);
+  const [revealedHintCounts, setRevealedHintCounts] = useState<
+    Record<string, number>
+  >({});
   const [feedback, setFeedback] = useState(
     'Consultez les documents disponibles, puis résolvez la chronologie.',
   );
@@ -137,6 +140,19 @@ export function InvestigationPage({
     }
 
     setFeedback(`${object.name} utilisé.`);
+  }
+
+  function handleRequestHint(puzzle: Puzzle) {
+    const hintCount = puzzle.hints?.length ?? 0;
+
+    if (hintCount === 0) {
+      return;
+    }
+
+    setRevealedHintCounts((currentCounts) => ({
+      ...currentCounts,
+      [puzzle.id]: Math.min((currentCounts[puzzle.id] ?? 0) + 1, hintCount),
+    }));
   }
 
   function handlePuzzleSubmit(puzzle: Puzzle, answer: string[]) {
@@ -276,6 +292,8 @@ export function InvestigationPage({
         )}
         isSolved={solvedPuzzleIds.includes(puzzle.id)}
         isAvailable={isPuzzleAvailable(puzzle)}
+        revealedHintCount={revealedHintCounts[puzzle.id] ?? 0}
+        onRequestHint={handleRequestHint}
         onSubmit={handlePuzzleSubmit}
       />
     );
@@ -283,6 +301,7 @@ export function InvestigationPage({
     inventoryObjects,
     ownedObjectIds,
     puzzles,
+    revealedHintCounts,
     scenario,
     selection,
     solvedPuzzleIds,
@@ -295,7 +314,7 @@ export function InvestigationPage({
       <div className="mx-auto max-w-7xl">
         <header className="border-b border-slate-300 pb-5">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-            Enquête V0.4
+            Enquête V0.5
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>

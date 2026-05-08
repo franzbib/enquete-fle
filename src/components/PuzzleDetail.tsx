@@ -6,6 +6,8 @@ type PuzzleDetailProps = {
   requiredDocuments: InvestigationDocument[];
   isSolved: boolean;
   isAvailable: boolean;
+  revealedHintCount: number;
+  onRequestHint: (puzzle: Puzzle) => void;
   onSubmit: (puzzle: Puzzle, answer: string[]) => void;
 };
 
@@ -14,6 +16,8 @@ export function PuzzleDetail({
   requiredDocuments,
   isSolved,
   isAvailable,
+  revealedHintCount,
+  onRequestHint,
   onSubmit,
 }: PuzzleDetailProps) {
   const [orderedAnswer, setOrderedAnswer] = useState<string[]>([]);
@@ -25,6 +29,9 @@ export function PuzzleDetail({
   const [localFeedback, setLocalFeedback] = useState('');
 
   const answer = puzzle.answer;
+  const hints = puzzle.hints ?? [];
+  const visibleHints = hints.slice(0, revealedHintCount);
+  const hasMoreHints = revealedHintCount < hints.length;
 
   return (
     <article className="rounded-md border border-slate-300 bg-white p-6">
@@ -52,6 +59,49 @@ export function PuzzleDetail({
       <p className="mt-5 rounded-md bg-stone-100 p-4 leading-7 text-slate-800">
         {puzzle.prompt}
       </p>
+
+      {hints.length > 0 ? (
+        <section className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 className="font-semibold text-amber-950">Indices</h3>
+              <p className="mt-1 text-sm leading-6 text-amber-900">
+                Les indices apparaissent progressivement. Ils aident à relire et
+                comparer sans donner toute la réponse.
+              </p>
+            </div>
+            <button
+              className="rounded-md border border-amber-700 bg-white px-3 py-2 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:border-amber-200 disabled:bg-amber-100 disabled:text-amber-700"
+              type="button"
+              disabled={!isAvailable || isSolved || !hasMoreHints}
+              onClick={() => onRequestHint(puzzle)}
+            >
+              {hasMoreHints
+                ? revealedHintCount === 0
+                  ? 'Voir un indice'
+                  : 'Voir un autre indice'
+                : 'Tous les indices sont affichés'}
+            </button>
+          </div>
+
+          {visibleHints.length > 0 ? (
+            <ol className="mt-3 grid gap-2 text-sm leading-6 text-amber-950">
+              {visibleHints.map((hint, index) => (
+                <li key={`${puzzle.id}-hint-${index}`} className="rounded-md bg-white px-3 py-2">
+                  <span className="font-semibold">Indice {index + 1} : </span>
+                  {hint}
+                </li>
+              ))}
+            </ol>
+          ) : null}
+
+          {!hasMoreHints && visibleHints.length > 0 ? (
+            <p className="mt-3 text-sm font-semibold text-amber-900">
+              Tous les indices disponibles sont affichés.
+            </p>
+          ) : null}
+        </section>
+      ) : null}
 
       {answer.kind !== 'case-file-contradiction' ? (
         <div className="mt-5">

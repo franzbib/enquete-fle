@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.4 — Inventaire minimal et objets utiles créés.
+V0.5 — Système d'indices progressifs créé.
 
 Le dépôt GitHub existe.
 
@@ -135,12 +135,12 @@ Les objets devront pouvoir être obtenus :
 - Inventaire minimal avec objets trouvés et utilisés.
 - Objets observables dans les lieux.
 - Badge visiteur utilisable pour débloquer la salle informatique.
+- Indices progressifs pour les deux énigmes principales.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
-- Système d’indices.
 - Accusation finale.
 - Mode enseignant.
 - Tests.
@@ -148,22 +148,22 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Passer à la V0.5 : créer un système d’indices simple et gradué.
+Préparer la V0.6 : créer une accusation finale enrichie, sans score complet ni nouveau scénario.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer un système d’indices minimal, sans accusation finale et sans deuxième scénario.
+Demander à Codex de créer une accusation finale minimale mais argumentée, fondée sur les pièces du dossier et les preuves déjà disponibles.
 
 ## Dernière action réalisée
 
-Création de la V0.4 technique :
+Création de la V0.5 technique :
 
-- inventaire sobre `Objets trouvés` ;
-- objets observables et récupérables dans les lieux ;
-- badge visiteur utilisé pour accéder à la salle informatique ;
-- ticket de bus comme preuve faible ;
-- clé USB d’ambiance sans accusation contre Fahad ;
-- mise à jour de `docs/architecture.md`.
+- champ `Puzzle.hints` ;
+- bouton `Voir un indice` dans chaque énigme ;
+- affichage progressif de trois indices maximum ;
+- suivi local du nombre d'indices révélés par énigme ;
+- aucune pénalité ni score lié aux indices ;
+- documentation `docs/hints-v0.5.md`.
 
 ## Risques à surveiller
 

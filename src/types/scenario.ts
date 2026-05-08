@@ -94,6 +94,7 @@ export type Puzzle = {
   requiredDocumentIds?: string[];
   requiredObjectIds?: string[];
   hintIds?: string[];
+  hints?: string[];
   answer: PuzzleAnswer;
   successFeedback: string;
   failureFeedback: string;
