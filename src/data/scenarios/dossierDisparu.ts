@@ -64,7 +64,7 @@ export const dossierDisparuScenario: Scenario = {
       role: "Utiliser un badge visiteur pour entrer, puis vérifier si quelqu'un est resté plus longtemps qu'il ne le dit.",
       available: false,
       documentIds: ['historique-impression', 'brouillon-mail'],
-      presentCharacterIds: ['monsieur-armand'],
+      presentCharacterIds: ['rodolphe'],
       relatedCharacterIds: ['fahad'],
       objectIds: ['cle-usb-exercices-b1'],
     },
@@ -139,9 +139,10 @@ export const dossierDisparuScenario: Scenario = {
       relatedLocationIds: ['accueil'],
     },
     {
-      id: 'monsieur-armand',
-      name: 'Monsieur Armand',
+      id: 'rodolphe',
+      name: 'M. Rodolphe',
       role: 'Enseignant',
+      portraitUrl: '/assets/portraits/rodolphe.png',
       profile:
         'Il a utilisé la salle informatique pour préparer un cours.',
       directSpeech:
@@ -490,8 +491,8 @@ export const dossierDisparuScenario: Scenario = {
           "Une erreur interne au secrétariat explique à elle seule la disparition du dossier.",
       },
       {
-        id: 'armand-deplace-dossier',
-        label: "M. Armand a déplacé le dossier pour utiliser l'imprimante.",
+        id: 'rodolphe-deplace-dossier',
+        label: "M. Rodolphe a déplacé le dossier pour utiliser l'imprimante.",
       },
       {
         id: 'dossier-inexistant',
