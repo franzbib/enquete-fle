@@ -447,3 +447,25 @@ Consequence :
 Statut : validee.
 
 A reevaluer : apres audit UX, notamment si les apprenants ont besoin d'un libelle plus simple ou d'une suppression de sauvegarde.
+
+## Decision 31 - Deuxieme enquete prototype V0.11
+
+Date : 2026-05-08
+
+Decision :
+La V0.11 ajoute une deuxieme enquete prototype, `Le message efface`, pour tester reellement l'architecture multi-enquetes, sans nouvelle mecanique.
+
+Raison :
+Le registre central des scenarios et la sauvegarde locale par `scenarioId` doivent etre verifies avec plus d'un scenario reel. Une enquete courte permet de tester le cadre sans engager une production narrative trop lourde.
+
+Consequence :
+- `src/data/scenarios/messageEfface.ts` contient la nouvelle enquete.
+- `src/data/scenarios/index.ts` enregistre desormais `le-dossier-disparu` et `le-message-efface`.
+- `le-dossier-disparu` reste le scenario par defaut.
+- La page d'accueil affiche une selection minimale de scenario quand plusieurs enquetes sont disponibles.
+- Les sauvegardes restent separees par cle `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`.
+- La nouvelle enquete reutilise les mecaniques existantes : lieux, documents, inventaire minimal, salle informatique fermee, indices, enigmes et resolution finale prudente.
+
+Statut : validee.
+
+A reevaluer : apres audit V0.11, notamment sur la clarte de la selection de scenario, la separation des sauvegardes et la difficulte de la deuxieme enquete.

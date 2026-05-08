@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-**V0.10.3 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde / chargement explicite à trois slots.**
+**V0.11 — jeu complet, exploitable pédagogiquement, avec deux enquêtes prototypes, sélection de scénario et sauvegarde / chargement explicite à trois slots par scénario.**
 
 Le dépôt GitHub existe et le prototype est jouable dans le navigateur.
 
@@ -36,6 +36,8 @@ Les compétences linguistiques servent à :
 
 Le scénario prototype **Le dossier disparu** est jouable de bout en bout.
 
+La deuxième enquête prototype **Le message effacé** est également jouable. Elle reste courte et sert à tester l'architecture multi-enquêtes avec un contenu différent.
+
 La boucle principale est désormais :
 
 1. accueil ;
@@ -55,7 +57,7 @@ La boucle principale est désormais :
 - Squelette React / Vite / TypeScript.
 - Tailwind CSS configuré.
 - Structure `/src` organisée en composants, types, moteur minimal et scénarios.
-- Chargement local du scénario `Le dossier disparu`.
+- Chargement local des scénarios enregistrés dans le registre central.
 - Navigation accueil / briefing / enquête.
 - Exploration par lieux.
 - Départ de l’enquête à l’Accueil.
@@ -74,6 +76,8 @@ La boucle principale est désormais :
 - Sauvegarde / chargement explicite de progression par scénario avec `localStorage`.
 - Trois slots locaux par scénario.
 - Clé de sauvegarde : `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`.
+- Deuxième scénario enregistré : `Le message effacé`, identifiant `le-message-efface`.
+- Sélection minimale de scénario sur la page d'accueil quand plusieurs enquêtes sont disponibles.
 
 ## État narratif et pédagogique
 
@@ -140,12 +144,11 @@ Le dossier `docs/agent-context/` contient notamment :
 
 Priorités possibles :
 
-1. Audit technique et UX de la sauvegarde explicite V0.10.3.
-2. Audit technique et documentaire de la préparation multi-enquêtes V0.10.
-3. Première enquête prototype supplémentaire, seulement après validation du cadre V0.10.
-4. V0.7.2 — version simplifiée B1 des textes longs.
-5. V0.8 — mode enseignant minimal, plus tard.
-6. V1.0 — stabilisation du premier scénario complet.
+1. Audit technique, UX, narratif et pédagogique de la V0.11.
+2. Vérification de la séparation des sauvegardes entre `le-dossier-disparu` et `le-message-efface`.
+3. V0.7.2 — version simplifiée B1 des textes longs.
+4. V0.8 — mode enseignant minimal, plus tard.
+5. V1.0 — stabilisation du premier scénario complet et du cadre multi-enquêtes.
 
 ## Points à surveiller
 
@@ -159,4 +162,4 @@ Priorités possibles :
 
 ## Dernière mise à jour
 
-Mise à jour documentaire après la sauvegarde / chargement explicite V0.10.3.
+Mise à jour documentaire après l'ajout de la deuxième enquête prototype V0.11.

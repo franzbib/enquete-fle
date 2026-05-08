@@ -1,8 +1,10 @@
 import type { Scenario } from '../../types/scenario';
 import { dossierDisparuScenario } from './dossierDisparu';
+import { messageEffaceScenario } from './messageEfface';
 
 export const scenarios: Scenario[] = [
   dossierDisparuScenario,
+  messageEffaceScenario,
 ];
 
 export const defaultScenarioId = dossierDisparuScenario.id;

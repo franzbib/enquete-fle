@@ -10,13 +10,13 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-**Version actuelle : V0.10.3 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde / chargement explicite à trois slots.**
+**Version actuelle : V0.11 — jeu complet, exploitable pédagogiquement, avec deux enquêtes prototypes, sélection de scénario et sauvegarde / chargement explicite à trois slots par scénario.**
 
 Le dépôt GitHub existe :
 
 `https://github.com/franzbib/enquete-fle`
 
-Le scénario prototype **Le dossier disparu** est jouable de bout en bout.
+Les scénarios prototypes **Le dossier disparu** et **Le message effacé** sont jouables. Le deuxième scénario reste court et sert à tester réellement l'architecture multi-enquêtes.
 
 Le jeu contient actuellement :
 
@@ -42,7 +42,9 @@ Le jeu contient actuellement :
 - icônes de statuts UI ;
 - registre central des scénarios ;
 - modèle de scénario pour futures enquêtes.
-- sauvegarde / chargement explicite de progression par scénario avec trois slots locaux.
+- sauvegarde / chargement explicite de progression par scénario avec trois slots locaux ;
+- sélection minimale de scénario sur la page d'accueil ;
+- deuxième enquête prototype `Le message effacé`.
 
 ## 3. Actions réalisées
 
@@ -254,15 +256,27 @@ Livrables :
 - cle active `enquete-fle:progress:<scenarioId>:slot:<slotNumber>` ;
 - documentation `docs/progress-save-load-v0.10.3.md`.
 
+### V0.11 — Deuxième enquête prototype
+
+Statut : fait.
+
+Livrables :
+
+- scénario `Le message effacé` dans `src/data/scenarios/messageEfface.ts` ;
+- enregistrement dans `src/data/scenarios/index.ts` ;
+- sélection minimale de scénario sur l'accueil ;
+- réutilisation des mécaniques existantes sans nouveau moteur ;
+- documentation `docs/second-scenario-message-efface-v0.11.md`.
+
 ## 4. Action immédiate recommandée
 
-### Action 21 — Auditer la sauvegarde explicite V0.10.3
+### Action 21 — Auditer la V0.11 multi-enquêtes
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier que la progression est bien sauvegardée et restaurée par action explicite du joueur, sans casser la logique locale de l'enquête.
+Vérifier que les deux enquêtes sont accessibles, que `Le dossier disparu` n'est pas cassé, que `Le message effacé` reste court et cohérent, et que les sauvegardes locales restent séparées par scénario.
 
 Commande :
 
@@ -273,37 +287,37 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5173
 
 À vérifier :
 
-- les cles `enquete-fle:progress:le-dossier-disparu:slot:1/2/3` sont-elles creees selon le slot choisi ?
-- la sauvegarde demande-t-elle confirmation avant ecrasement d'un slot occupe ?
-- les slots vides sont-ils visibles mais non chargeables ?
-- les documents lus restent-ils lus apres chargement ?
-- les objets pris restent-ils dans l'inventaire apres chargement ?
-- la salle informatique reste-t-elle ouverte apres chargement si le badge a ete utilise ?
-- les indices, enigmes et panneaux masquables sont-ils restaures ?
-- une sauvegarde invalide est-elle ignorée sans bloquer le jeu ?
+- les deux enquêtes apparaissent-elles sur l'accueil ?
+- `Le dossier disparu` reste-t-il jouable de bout en bout ?
+- `Le message effacé` se lance-t-il correctement ?
+- les lieux, personnages, documents et objets de la deuxième enquête sont-ils lisibles ?
+- les deux énigmes de `Le message effacé` sont-elles jouables ?
+- la résolution finale reste-t-elle prudente et non accusatrice ?
+- les clés `enquete-fle:progress:le-dossier-disparu:slot:1/2/3` et `enquete-fle:progress:le-message-efface:slot:1/2/3` restent-elles séparées ?
+- aucun crash n'apparaît-il si un scénario réutilise des assets existants ?
 
 Décision attendue après audit :
 
-- si la sauvegarde est stable : auditer ensuite la préparation multi-enquêtes V0.10 ;
-- si elle reste fragile : créer une V0.10.3.1 de correction.
+- si la V0.11 est stable : préparer un audit pédagogique ou une correction légère V0.11.1 ;
+- si la sélection ou les sauvegardes sont fragiles : corriger avant toute nouvelle enquête.
 
 ## 5. Action suivante recommandée
 
-### Action 22 — Auditer la préparation multi-enquêtes V0.10
+### Action 22 — Auditer la sauvegarde explicite avec deux scénarios
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier que la préparation multi-enquêtes reste maintenable, que `Le dossier disparu` reste le scénario par défaut, et que le modèle de scénario ne crée pas de deuxième enquête visible.
+Tester en détail les trois slots locaux sur les deux enquêtes et vérifier qu'aucune sauvegarde ne se charge dans le mauvais scénario.
 
-### Action 23 — Préparer une deuxième enquête prototype
+### Action 23 — Préparer une correction légère V0.11.1 si l'audit le demande
 
 Statut : à faire.
 
 Objectif :
 
-Créer une deuxième enquête courte en suivant strictement le cadre V0.10, sans refondre le moteur ni les composants.
+Corriger uniquement les libellés, incohérences ou problèmes d'accès révélés par l'audit V0.11, sans ajouter de nouvelle mécanique.
 
 ## 6. Action pédagogique suivante possible
 
