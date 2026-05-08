@@ -23,7 +23,7 @@ Le joueur doit d'abord reconstituer la chronologie, puis comparer le temoignage 
 - 16h10 : Chen verifie ou depose la pochette claire au secretariat.
 - 16h20 : Fahad passe au secretariat pour demander une attestation.
 - Vers 16h30 : Xiaoyu voit Fahad attendre pres du secretariat avec une pochette ou quelques feuilles.
-- 16h35 : Madame Delorme quitte le bureau pour repondre a un appel.
+- 16h35 : Delphine quitte le bureau pour repondre a un appel.
 - 16h48 : la session Fahad imprime `attestation_scolarite.pdf` en salle informatique.
 - Vers 16h50 : Chen revient au secretariat ; le dossier n'est plus sur le bureau.
 - Apres la contradiction : un brouillon de mail non envoye indique que Fahad pense avoir pris une pochette qui n'etait pas la sienne.
@@ -34,7 +34,7 @@ La chronologie generale fonctionne. Elle cree une progression deductive lisible 
 
 ### Personnages physiquement presents dans les lieux
 
-- Secretariat : Madame Delorme, Chen.
+- Secretariat : Delphine, Chen.
 - Couloir : Xiaoyu, Fahad.
 - Salle informatique : Monsieur Armand.
 
@@ -42,7 +42,7 @@ La chronologie generale fonctionne. Elle cree une progression deductive lisible 
 
 - Fahad est lie a la salle informatique par l'historique d'impression et le brouillon de mail.
 - Chen est liee au secretariat et mentionnee dans plusieurs documents administratifs.
-- Madame Delorme est liee au secretariat et a la note manuscrite.
+- Delphine est liee au secretariat et a la note manuscrite.
 
 La separation entre presence physique et lien narratif est coherente. Fahad n'est plus affiche comme present dans la salle informatique, ce qui evite l'impression de double presence.
 
@@ -71,7 +71,7 @@ La separation entre presence physique et lien narratif est coherente. Fahad n'es
 - Chen : temoignage credible, partiel, centre sur sa derniere vision du dossier.
 - Fahad : temoignage plus credible depuis la reformulation ; il minimise son parcours sans nier explicitement la salle informatique.
 - Xiaoyu : temoignage utile et plausible, mais actuellement tres fort car il voit a la fois la pochette et l'entree en salle informatique.
-- Madame Delorme : temoignage credible, mais son interruption reste peu documentee hors planning.
+- Delphine : temoignage credible, mais son interruption reste peu documentee hors planning.
 - Monsieur Armand : temoin secondaire plausible ; il signale une pochette pres de l'imprimante, ce qui soutient la piste de confusion.
 
 ## Traces techniques
@@ -140,7 +140,7 @@ Cette solution reste compatible avec une enquete non dramatique et nuancee. Elle
 |---|---|---|---|
 | Moyen | Le brouillon de mail est tres proche d'un aveu. | Il risque de transformer la deduction finale en revelation directe, surtout parce que le texte dit deja "j'ai pris une pochette qui n'etait pas la mienne". | Garder le document, mais le rendre legerement moins explicite : "Je crois qu'il y a eu une confusion avec une pochette. Je dois verifier avant d'ecrire au secretariat." |
 | Moyen | Le temoignage de Xiaoyu est tres performant : elle voit Fahad sortir avec une pochette claire puis entrer en salle informatique. | Combine avec l'historique et le brouillon, il reduit la place du doute. Fahad devient rapidement le seul axe d'enquete. | Ajouter une nuance dans le temoignage : "je crois avoir vu" ou "une pochette claire, mais je n'ai pas vu le nom dessus". |
-| Moyen | La note manuscrite mentionne une pochette claire et une piece manquante, mais son auteur et sa fonction restent flous. | Le joueur peut ne pas savoir s'il s'agit d'une preuve, d'une fausse piste ou d'un simple rappel administratif. | Preciser legerement la source ou la fonction : note retrouvee pres du bureau, ecriture non identifiee, ou note de Madame Delorme. |
+| Moyen | La note manuscrite mentionne une pochette claire et une piece manquante, mais son auteur et sa fonction restent flous. | Le joueur peut ne pas savoir s'il s'agit d'une preuve, d'une fausse piste ou d'un simple rappel administratif. | Preciser legerement la source ou la fonction : note retrouvee pres du bureau, ecriture non identifiee, ou note de Delphine. |
 | Moyen | Le document `historique-impression` lie aussi Monsieur Armand, mais la trace visible ne mentionne que Fahad. | Le document pretend etre lie a Armand sans contenu qui l'implique directement. Cela peut affaiblir la coherence des `relatedCharacterIds`. | Soit retirer `monsieur-armand` de `relatedCharacterIds`, soit ajouter une ligne neutre dans l'historique : "16h40 : session Armand - impression supports_cours.pdf". |
 | Mineur | La salle informatique est marquee `kind: 'locked'` mais `available: true`. | Ce n'est pas bloquant en V0.3, mais cela peut creer une ambiguite entre lieu narrativement verrouille et lieu disponible dans le prototype. | Ajouter une note de donnees ou renommer le role : "piste technique disponible dans le prototype". Correction a reporter si l'acces par objet arrive en V0.4. |
 | Mineur | `Cle USB "Exercices B1"` est declaree comme objet d'ambiance, mais elle n'est pas encore visible sans inventaire. | Ce n'est pas incoherent, mais l'objet n'a pas d'effet joueur en V0.3.1. | Ne rien changer avant V0.4. Lors de l'inventaire, afficher clairement le statut "ambiance" ou "sans lien direct". |

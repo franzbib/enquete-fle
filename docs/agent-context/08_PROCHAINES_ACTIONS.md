@@ -132,6 +132,8 @@ Conséquence pour la suite :
 
 Codex devra éviter de coder les personnages, lieux, noms ou visuels en dur dans les composants. Les scénarios devront pouvoir référencer à terme des personnages et lieux récurrents, tout en ajoutant des éléments spécifiques.
 
+La réserve récurrente ne doit pas être utilisée systématiquement. Avant d'intégrer un personnage ou un lieu de cette réserve, l'agent devra vérifier que sa présence sert réellement le scénario, la progression ludique ou l'objectif FLE/FOU.
+
 ## 4. Action immédiate
 
 ### Action 9 — Tester humainement la V0.3 stabilisée UX

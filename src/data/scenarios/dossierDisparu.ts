@@ -24,7 +24,7 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Établir les horaires de départ et comprendre l’enjeu du dossier.',
       available: true,
       documentIds: ['planning-secretariat', 'mail-convocation', 'temoignage-chen'],
-      presentCharacterIds: ['madame-delorme', 'chen'],
+      presentCharacterIds: ['delphine', 'chen'],
       objectIds: ['badge-visiteur'],
     },
     {
@@ -74,9 +74,9 @@ export const dossierDisparuScenario: Scenario = {
       profile:
         'Pressé et un peu confus, il dit être venu chercher une attestation.',
       directSpeech:
-        "Je suis passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors j'ai attendu un peu dans le couloir. Ensuite, j'ai récupéré mon papier et je suis parti tout de suite après.",
+        "Je suis passé au secrétariat vers 16h30 pour demander une attestation. Delphine était occupée, alors j'ai attendu un peu dans le couloir. Ensuite, j'ai récupéré mon papier et je suis parti tout de suite après.",
       testimony:
-        "Il dit être passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors il a attendu un peu dans le couloir. Ensuite, il a récupéré son papier et il est parti tout de suite après.",
+        "Il dit être passé au secrétariat vers 16h30 pour demander une attestation. Delphine était occupée, alors il a attendu un peu dans le couloir. Ensuite, il a récupéré son papier et il est parti tout de suite après.",
       reliability: 'questionable',
       relatedLocationIds: ['couloir', 'salle-informatique'],
     },
@@ -94,15 +94,15 @@ export const dossierDisparuScenario: Scenario = {
       relatedLocationIds: ['couloir'],
     },
     {
-      id: 'madame-delorme',
-      name: 'Madame Delorme',
-      role: 'Secrétaire',
+      id: 'delphine',
+      name: 'Delphine',
+      role: 'Secrétariat / organisation administrative',
       profile:
-        'Professionnelle, elle affirme avoir laissé le dossier sur le bureau avant une interruption.',
+        "Delphine travaille au secrétariat. Elle s'occupe de plus en plus de l'organisation administrative, notamment des emplois du temps et des examens.",
       directSpeech:
-        "J'ai préparé le dossier de Chen, puis j'ai quitté le bureau quelques minutes après 16h30 pour répondre à un appel.",
+        "J'ai eu beaucoup de demandes cet après-midi. Entre les attestations, les inscriptions aux examens et les emplois du temps, plusieurs dossiers sont passés sur le comptoir. Je me souviens de Chen, parce que son dossier devait rester complet.",
       testimony:
-        "Elle a préparé le dossier de Chen, puis elle a quitté le bureau quelques minutes après 16h30.",
+        "Delphine explique qu'elle a reçu plusieurs demandes administratives dans l'après-midi. Elle précise que plusieurs dossiers sont passés sur le comptoir et que le dossier de Chen devait rester complet.",
       reliability: 'stable',
       relatedLocationIds: ['secretariat'],
     },
@@ -128,11 +128,11 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Secrétariat',
       summary: 'Horaires de passage utiles pour établir la chronologie.',
       content:
-        '16h10 : Chen vérifie son dossier. 16h20 : Fahad demande une attestation. 16h35 : Madame Delorme quitte le bureau pour répondre à un appel. 16h50 : Chen revient au secrétariat.',
+        '16h10 : Chen vérifie son dossier. 16h20 : Fahad demande une attestation. 16h35 : Delphine quitte le bureau pour répondre à un appel. 16h50 : Chen revient au secrétariat.',
       initiallyAvailable: true,
       relatedLocationIds: ['secretariat'],
-      relatedCharacterIds: ['chen', 'fahad', 'madame-delorme'],
-      evidenceIds: ['ev-chen-1610', 'ev-fahad-1620', 'ev-delorme-1635'],
+      relatedCharacterIds: ['chen', 'fahad', 'delphine'],
+      evidenceIds: ['ev-chen-1610', 'ev-fahad-1620', 'ev-delphine-1635'],
     },
     {
       id: 'mail-convocation',
@@ -153,10 +153,10 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Secrétariat',
       summary: 'Chen explique quand elle a vu le dossier pour la dernière fois.',
       content:
-        "Chen explique qu'à 16h10, elle a posé la pochette claire sur le bureau. Elle ajoute que, lorsqu'elle est revenue vers 16h50, Madame Delorme cherchait déjà le dossier.",
+        "Chen explique qu'à 16h10, elle a posé la pochette claire sur le bureau. Elle ajoute que, lorsqu'elle est revenue vers 16h50, Delphine cherchait déjà le dossier.",
       initiallyAvailable: true,
       relatedLocationIds: ['secretariat'],
-      relatedCharacterIds: ['chen', 'madame-delorme'],
+      relatedCharacterIds: ['chen', 'delphine'],
       evidenceIds: ['ev-chen-1610'],
     },
     {
@@ -182,7 +182,7 @@ export const dossierDisparuScenario: Scenario = {
         'À vérifier demain matin : dossier Chen ; attestation Fahad ; documents récupérés après 16h30.',
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
-      relatedCharacterIds: ['chen', 'madame-delorme'],
+      relatedCharacterIds: ['chen', 'delphine'],
     },
     {
       id: 'temoignage-fahad',
@@ -191,7 +191,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Un élément ne correspond pas dans la chronologie.',
       content:
-        "Fahad explique qu'il est passé au secrétariat vers 16h30 pour demander une attestation. Il précise que Madame Delorme était occupée et qu'il a attendu un peu dans le couloir. Il affirme ensuite avoir récupéré son papier et être parti tout de suite après.",
+        "Fahad explique qu'il est passé au secrétariat vers 16h30 pour demander une attestation. Il précise que Delphine était occupée et qu'il a attendu un peu dans le couloir. Il affirme ensuite avoir récupéré son papier et être parti tout de suite après.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['fahad'],
@@ -218,7 +218,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Salle informatique',
       summary: 'Nouvelle piste débloquée après la contradiction.',
       content:
-        "Bonjour Madame Delorme,\n\nJe crois qu'il y a eu une confusion avec les documents récupérés cet après-midi. Je ne suis pas certain d'avoir le bon formulaire avec moi. Je repasse demain matin pour vérifier avec vous.\n\nFahad",
+        "Bonjour Delphine,\n\nJe crois qu'il y a eu une confusion avec les documents récupérés cet après-midi. Je ne suis pas certain d'avoir le bon formulaire avec moi. Je repasse demain matin pour vérifier avec vous.\n\nFahad",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'contradiction-fahad',
       relatedLocationIds: ['salle-informatique'],
@@ -240,9 +240,9 @@ export const dossierDisparuScenario: Scenario = {
       documentId: 'planning-secretariat',
     },
     {
-      id: 'ev-delorme-1635',
+      id: 'ev-delphine-1635',
       label: 'Le bureau est interrompu à 16h35',
-      text: 'Madame Delorme quitte le bureau à 16h35.',
+      text: 'Delphine quitte le bureau à 16h35.',
       documentId: 'planning-secretariat',
     },
     {
@@ -400,8 +400,8 @@ export const dossierDisparuScenario: Scenario = {
             label: 'Fahad a forcément volé le dossier de Chen.',
           },
           {
-            id: 'delorme-oublie-attestation',
-            label: 'Madame Delorme a oublié d’imprimer une attestation.',
+            id: 'delphine-oublie-attestation',
+            label: 'Delphine a oublié d’imprimer une attestation.',
           },
         ],
         correctInterpretationOptionId: 'fahad-encore-batiment',

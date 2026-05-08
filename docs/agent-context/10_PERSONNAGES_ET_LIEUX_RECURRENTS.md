@@ -102,3 +102,105 @@ src/data/world/
 
 src/data/scenarios/
   dossierDisparu.ts
+```
+
+## 7. Réserve évolutive
+
+Les personnages et lieux récurrents constituent une réserve d'univers.
+
+Cette réserve sert à proposer des repères narratifs possibles pour les scénarios futurs. Elle ne doit pas être utilisée comme une liste obligatoire à intégrer dans chaque enquête.
+
+Un scénario doit donc distinguer :
+
+- personnage récurrent disponible : personnage présent dans la réserve, mais pas nécessairement mobilisé ;
+- personnage effectivement utilisé dans un scénario : personnage récurrent choisi parce qu'il sert l'enquête, le lieu, le registre de langue ou la progression ludique ;
+- personnage ponctuel créé pour une enquête : personnage propre à un scénario, sans obligation de revenir ensuite.
+
+La même logique s'applique aux lieux :
+
+- lieu récurrent disponible ;
+- lieu effectivement utilisé dans un scénario ;
+- lieu ponctuel créé pour une enquête.
+
+## 8. Règle de non-systématicité
+
+Les agents ne doivent jamais utiliser automatiquement tous les personnages ou tous les lieux de la réserve.
+
+Avant d'intégrer un personnage ou un lieu récurrent dans un scénario, l'agent doit vérifier :
+
+- son utilité narrative ;
+- son utilité pédagogique ;
+- son utilité ludique ;
+- sa cohérence avec la chronologie et les preuves ;
+- le risque d'alourdir inutilement l'enquête.
+
+Si aucun de ces critères n'est satisfait, le personnage ou le lieu doit rester dans la réserve.
+
+## 9. Usage pertinent des informations associées
+
+Les informations associées à un personnage récurrent sont des ressources, pas des contraintes définitives.
+
+Un agent doit :
+
+- sélectionner seulement les informations utiles au scénario ;
+- adapter le niveau de détail au contexte B1/B2 ;
+- éviter de figer définitivement le personnage trop tôt ;
+- éviter de transformer une fiche de réserve en fiche exhaustive dans l'interface joueur ;
+- laisser de la marge pour de futures évolutions.
+
+Un détail biographique, professionnel ou relationnel ne doit être utilisé que s'il aide vraiment l'enquête, la compréhension, l'immersion ou l'objectif FLE/FOU.
+
+## 10. Réserve initiale de personnages
+
+Réserve disponible à ce stade :
+
+- Delphine ;
+- Yaqiu ;
+- Thi-Thai ;
+- François ;
+- Rodolphe ;
+- Heïdi ;
+- Clément ;
+- Marine ;
+- Annie ;
+- Mickaël ;
+- Candice ;
+- Chen ;
+- Xiaotong.
+
+Cette liste pourra évoluer. Elle peut accueillir de nouveaux personnages, fusionner certains rôles ou laisser certains noms inutilisés pendant plusieurs scénarios.
+
+## 11. Réserve initiale de lieux
+
+Réserve disponible à ce stade :
+
+- ISPA Amiens ;
+- accueil ;
+- salles de classe ;
+- salle informatique ;
+- couloir ;
+- administration ;
+- salle des profs ;
+- cafétéria ;
+- cave ;
+- bibliothèque universitaire ;
+- restaurant universitaire ;
+- café ;
+- salle de gym.
+
+Cette liste pourra évoluer selon les besoins des scénarios et de l'identité visuelle du jeu.
+
+## 12. Règle pour les scénarios futurs
+
+Lorsqu'un agent crée ou modifie un scénario, il peut consulter cette réserve, mais il ne doit pas remplacer les personnages existants sans demande explicite.
+
+La présence d'un nom dans la réserve ne signifie pas qu'il doit apparaître dans `Le dossier disparu`.
+
+Exemple validé : Delphine est mobilisée dans `Le dossier disparu` parce que son rôle au secrétariat et en organisation administrative sert directement l'enquête. Cette utilisation ne rend pas les autres personnages de la réserve obligatoires.
+
+Pour chaque utilisation d'un personnage ou lieu récurrent, l'agent doit pouvoir formuler une raison simple :
+
+- pourquoi ce personnage est utile ici ;
+- pourquoi ce lieu est utile ici ;
+- ce que son usage apporte au joueur ;
+- ce qui doit rester implicite ou non utilisé.

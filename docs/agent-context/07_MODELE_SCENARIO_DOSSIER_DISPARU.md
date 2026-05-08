@@ -247,19 +247,21 @@ Fonction linguistique :
 - verbes de parole ;
 - incertitude.
 
-### 10.4 Madame Delorme
+### 10.4 Delphine
 
-Rôle : secrétaire.
+Rôle : secrétariat / organisation administrative.
 
 Profil :
 
-- professionnelle ;
-- affirme avoir laissé le dossier sur le bureau ;
-- a été interrompue avant la fermeture.
+- travaille au secrétariat ;
+- s'occupe de plus en plus de l'organisation administrative, notamment des emplois du temps et des examens ;
+- aime les énigmes et remarque souvent les détails ;
+- ne doit pas être utilisée comme personnage explicatif omniscient.
 
 Fonction narrative :
 
 - donne le cadre administratif ;
+- rend le secrétariat plus incarné qu'un personnage générique ;
 - peut avoir commis une erreur involontaire.
 
 Fonction linguistique :

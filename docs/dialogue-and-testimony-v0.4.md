@@ -58,7 +58,7 @@ Personnages concernes :
 - Chen ;
 - Fahad ;
 - Xiaoyu ;
-- Madame Delorme ;
+- Delphine ;
 - Monsieur Armand.
 
 Documents de temoignage reformules :

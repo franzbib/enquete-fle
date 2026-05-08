@@ -220,3 +220,21 @@ Conséquence : `Character.directSpeech` sert à la fiche personnage ; les docume
 Statut : validé
 À réévaluer : lors d'un futur mode enseignant ou d'un moteur de dialogue plus riche.
 ```
+
+```text
+Date : 2026-05-08
+Décision : Les personnages et lieux récurrents forment une réserve évolutive, non une liste obligatoire.
+Raison : Préparer un univers reconnaissable sans forcer chaque scénario à réutiliser tous les noms, lieux ou détails fournis.
+Conséquence : Un agent doit distinguer personnage disponible, personnage effectivement utilisé et personnage ponctuel. Il doit sélectionner seulement les informations utiles au contexte narratif, pédagogique ou ludique.
+Statut : validé
+À réévaluer : quand la réserve deviendra une structure de données dédiée ou quand plusieurs scénarios partageront les mêmes lieux et personnages.
+```
+
+```text
+Date : 2026-05-08
+Décision : Dans `Le dossier disparu`, Delphine remplace le personnage générique du secrétariat.
+Raison : Delphine est un personnage récurrent pertinent pour ce scénario : son rôle administratif donne plus de présence au secrétariat sans modifier l'enquête.
+Conséquence : L'identifiant de scénario devient `delphine`. Le remplacement ne rend pas l'usage des autres personnages récurrents systématique.
+Statut : validé
+À réévaluer : si un futur scénario donne à Delphine un rôle incompatible avec cette première apparition.
+```
