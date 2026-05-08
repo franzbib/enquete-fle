@@ -244,31 +244,32 @@ Décision attendue après test :
 
 ## 5. Action graphique suivante possible
 
-### Action 19 — Préparer la V0.9.4 : icônes de statuts d’interface
+### V0.9.4 — Icônes de statuts d’interface
 
-Statut : à faire.
+Statut : fait.
 
 Objectif :
 
 Créer ou harmoniser de petites icônes pour les statuts de l’interface.
 
-Priorités possibles :
+Livrables :
 
-- lieu fermé ;
-- lieu ouvert ;
-- document nouveau ;
-- document lu ;
-- objet trouvé ;
-- objet utilisé ;
-- énigme validée ;
-- indice disponible.
+- `src/components/icons/StatusIcons.tsx` avec SVG intégrés ;
+- icônes pour lieux (fermé, ouvert) ;
+- icônes pour documents (nouveau, lu) ;
+- icônes pour objets (trouvé, utilisé) ;
+- icônes pour énigmes (validée, indice) ;
+- mise à jour de la documentation.
 
-Contraintes :
+## 5. Action suivante recommandée
 
-- rester sobre ;
-- ne pas alourdir l’interface ;
-- ne pas remplacer les libellés textuels indispensables ;
-- préserver la lisibilité B1/B2.
+### Action 19 — Nettoyage et polissage final avant V1.0
+
+Statut : à faire.
+
+Objectif :
+
+Vérifier humainement la V0.9.4 et ajuster les derniers détails graphiques avant de figer la V1.0.
 
 ## 6. Action pédagogique suivante possible
 

@@ -342,3 +342,22 @@ ConsÃ©quence :
 Statut : validÃ©e.
 
 Ã€ rÃ©Ã©valuer : avant V0.9.4, si une optimisation d'assets ou une nouvelle passe graphique modifie les fichiers visuels.
+
+## Décision 26 — Système d'icônes de statuts UI (V0.9.4)
+
+Date : 2026-05-08
+
+Décision :
+La V0.9.4 ajoute un système d'icônes d'interface fonctionnelles (cadenas, coche, indice, nouveau document). Les icônes sont implémentées en tant que SVG intégrés (inline SVG React).
+
+Raison :
+Les icônes d'interface doivent être vectorielles, légères, et pouvoir hériter automatiquement des couleurs textuelles (TailwindCSS currentColor). L'utilisation de fichiers PNG pour des statuts d'UI aurait causé des artéfacts visuels, une augmentation des requêtes réseau, et des problèmes de maintenance chromatique.
+
+Conséquence :
+- Le fichier src/components/icons/StatusIcons.tsx a été créé comme source unique de vérité pour les icônes UI.
+- Ces icônes enrichissent l'interface sans remplacer le texte, garantissant la lisibilité.
+- Les futurs ajouts d'icônes d'interface devront suivre ce même modèle.
+
+Statut : validée.
+
+À réévaluer : si le projet nécessite par la suite un design system plus complexe (ex: bibliothèque d'icônes tierce comme lucide-react).

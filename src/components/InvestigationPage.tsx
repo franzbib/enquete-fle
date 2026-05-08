@@ -12,6 +12,7 @@ import { InventoryPanel } from './InventoryPanel';
 import { LocationDetail } from './LocationDetail';
 import { PuzzleDetail } from './PuzzleDetail';
 import { ScenarioList } from './ScenarioList';
+import { IconHintAvailable, IconLocked, IconPuzzleSolved, IconUnlocked } from './icons/StatusIcons';
 
 type Selection =
   | { type: 'location'; id: string }
@@ -262,6 +263,7 @@ export function InvestigationPage({
           documents={visibleDocuments.filter((document) =>
             location.documentIds.includes(document.id),
           )}
+          readDocumentIds={readDocumentIds}
           presentCharacters={scenario.characters.filter((character) =>
             location.presentCharacterIds.includes(character.id),
           )}
@@ -478,7 +480,7 @@ export function InvestigationPage({
                   disabled={!available}
                   title={!available ? 'Documents manquants' : ''}
                 >
-                  {puzzle.title} {solved ? '✓' : ''}
+                  {puzzle.title} {solved && <IconPuzzleSolved className="inline-block h-4 w-4 ml-1 text-green-700" />} {!solved && <IconHintAvailable className="inline-block h-4 w-4 ml-1 text-slate-400" />}
                 </button>
               );
             })}
@@ -504,7 +506,7 @@ export function InvestigationPage({
                     : ''
                 }
               >
-                {finalResolution.title} {finalResolutionSolved ? '✓' : ''}
+                {finalResolution.title} {finalResolutionSolved && <IconPuzzleSolved className="inline-block h-4 w-4 ml-1 text-green-700" />}
               </button>
             ) : null}
           </div>
@@ -515,16 +517,20 @@ export function InvestigationPage({
             <ScenarioList
               title="Lieux"
               selectedId={selectedId}
-              items={scenario.locations.map((location) => ({
-                id: `location:${location.id}`,
-                title: location.name,
-                meta: accessibleLocationIds.includes(location.id)
-                  ? 'Disponible'
-                  : location.kind === 'locked'
-                    ? 'Accès limité : badge requis'
-                    : 'Accès limité',
-                disabled: false,
-              }))}
+              items={scenario.locations.map((location) => {
+                const isAccessible = accessibleLocationIds.includes(location.id);
+                return {
+                  id: `location:${location.id}`,
+                  title: location.name,
+                  meta: isAccessible
+                    ? 'Disponible'
+                    : location.kind === 'locked'
+                      ? 'Accès limité : badge requis'
+                      : 'Accès limité',
+                  icon: isAccessible ? <IconUnlocked className="text-teal-700 h-4 w-4" /> : <IconLocked className="text-slate-400 h-4 w-4" />,
+                  disabled: false,
+                };
+              })}
               onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
             />
             <InventoryPanel

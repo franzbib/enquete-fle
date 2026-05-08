@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { InvestigationDocument, Puzzle } from '../types/scenario';
+import { IconPuzzleSolved } from './icons/StatusIcons';
 
 type PuzzleDetailProps = {
   puzzle: Puzzle;
@@ -44,7 +45,7 @@ export function PuzzleDetail({
           <p className="body-copy mt-2">{puzzle.description}</p>
         </div>
         <span
-          className={`status-pill ${
+          className={`status-pill flex items-center gap-1.5 ${
             isSolved
               ? 'status-pill-valid'
               : isAvailable
@@ -52,6 +53,7 @@ export function PuzzleDetail({
                 : 'status-pill-locked'
           }`}
         >
+          {isSolved && <IconPuzzleSolved className="h-3.5 w-3.5" />}
           {isSolved ? 'Validée' : isAvailable ? 'À résoudre' : 'À débloquer'}
         </span>
       </div>

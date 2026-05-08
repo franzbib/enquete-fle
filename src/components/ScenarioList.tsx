@@ -1,8 +1,11 @@
-type ScenarioListItem = {
+import React from 'react';
+
+export type ScenarioListItem = {
   id: string;
   title: string;
   meta?: string;
   disabled?: boolean;
+  icon?: React.ReactNode;
 };
 
 type ScenarioListProps = {
@@ -39,12 +42,19 @@ export function ScenarioList({
               disabled={item.disabled}
               onClick={() => onSelect(item.id)}
             >
-              <span className="block font-semibold">{item.title}</span>
+              {item.icon && (
+                <div className="mt-0.5 shrink-0 text-slate-500">
+                  {item.icon}
+                </div>
+              )}
+              <div className="flex-1 text-left">
+                <span className="block font-semibold">{item.title}</span>
               {item.meta ? (
                 <span className="mt-1 block text-xs text-slate-600">
                   {item.meta}
                 </span>
               ) : null}
+              </div>
             </button>
           );
         })}

@@ -4,11 +4,13 @@ import type {
   InventoryObject,
   Location,
 } from '../types/scenario';
+import { IconDocumentNew, IconDocumentRead, IconObjectFound } from './icons/StatusIcons';
 
 type LocationDetailProps = {
   location: Location;
   isUnlocked: boolean;
   documents: InvestigationDocument[];
+  readDocumentIds?: string[];
   presentCharacters: Character[];
   objects: InventoryObject[];
   ownedObjectIds: string[];
@@ -23,6 +25,7 @@ export function LocationDetail({
   location,
   isUnlocked,
   documents,
+  readDocumentIds = [],
   presentCharacters,
   objects,
   ownedObjectIds,
@@ -96,17 +99,27 @@ export function LocationDetail({
           <h3 className="font-semibold text-slate-950">Documents liés</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
             {documents.length > 0 ? (
-              documents.map((document) => (
-                <li key={document.id}>
-                  <button
-                    type="button"
-                    onClick={() => onSelectDocument(document.id)}
-                    className="link-button text-left"
-                  >
-                    {document.title}
-                  </button>
-                </li>
-              ))
+              documents.map((document) => {
+                const isRead = readDocumentIds.includes(document.id);
+                return (
+                  <li key={document.id} className="flex items-start gap-2">
+                    <div className="mt-1 shrink-0">
+                      {isRead ? (
+                        <IconDocumentRead className="h-4 w-4 text-slate-400" />
+                      ) : (
+                        <IconDocumentNew className="h-4 w-4 text-amber-500 animate-pulse" />
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onSelectDocument(document.id)}
+                      className={`link-button text-left ${isRead ? 'text-slate-600 font-normal' : 'font-medium'}`}
+                    >
+                      {document.title}
+                    </button>
+                  </li>
+                );
+              })
             ) : (
               <li className="text-slate-500 italic">
                 Aucun document disponible pour l’instant
@@ -166,11 +179,12 @@ export function LocationDetail({
                       </div>
                     </div>
                     <button
-                      className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+                      className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2 flex items-center justify-center gap-2"
                       type="button"
                       disabled={isOwned}
                       onClick={() => onTakeObject(object.id)}
                     >
+                      {isOwned && <IconObjectFound className="h-4 w-4" />}
                       {isOwned ? 'Déjà pris' : 'Prendre'}
                     </button>
                   </div>

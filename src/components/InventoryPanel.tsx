@@ -1,4 +1,5 @@
 import type { InventoryObject, Location } from '../types/scenario';
+import { IconObjectFound, IconObjectUsed } from './icons/StatusIcons';
 
 type InventoryPanelProps = {
   objects: InventoryObject[];
@@ -97,7 +98,8 @@ export function InventoryPanel({
                           </p>
                         </div>
                       </div>
-                      <span className="status-pill status-pill-ready">
+                      <span className={`status-pill ${isUsed ? 'status-pill-ready' : 'status-pill-ready'} flex items-center gap-1.5`}>
+                        {isUsed ? <IconObjectUsed className="h-3.5 w-3.5" /> : <IconObjectFound className="h-3.5 w-3.5" />}
                         {isUsed ? object.usedLabel ?? 'Utilisé' : 'Trouvé'}
                       </span>
                     </div>

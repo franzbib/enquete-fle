@@ -284,6 +284,13 @@ Cette étape respecte l'harmonisation de style attendue (2D semi-illustré, apla
 
 Pour plus de détails techniques sur l'intégration et les prompts génératifs, se référer au document dédié : `docs/portrait-system-v0.9.2.md`.
 
+## Icônes de statuts UI (V0.9.4)
+
+Un système d'icônes d'interface a été intégré pour indiquer visuellement le statut des éléments de jeu (cadenas, coche, document nouveau, indice).
+Ces icônes utilisent un système de **SVG intégrés (inline SVG React)** stocké dans `src/components/icons/StatusIcons.tsx`. Elles tirent parti de TailwindCSS (`currentColor`) pour s'adapter dynamiquement au style de l'interface sans générer d'artéfacts de rendu.
+
+Pour plus de détails, voir `docs/ui-status-icons-v0.9.4.md`.
+
 ## Lieux récurrents (V0.9.3)
 
 Des vignettes temporaires ont été générées en V0.9.3 pour les lieux principaux (Accueil, Secrétariat, Couloir, Salle informatique). Elles respectent un ratio 3:2 et une esthétique sobre et sans personnage. Elles sont stockées dans `public/assets/locations/` avec le suffixe `-temp` pour indiquer qu'elles pourront être remplacées par des versions définitives sans modifier le code.

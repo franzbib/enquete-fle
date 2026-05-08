@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-**V0.9.3 — jeu complet, exploitable pédagogiquement, avec direction graphique, portraits harmonisés, vignettes temporaires de lieux et icônes d’objets.**
+**V0.9.4 — jeu complet, exploitable pédagogiquement, avec direction graphique (portraits, vignettes, icônes) et système d'icônes de statuts d'interface.**
 
 Le dépôt GitHub existe et le prototype est jouable dans le navigateur.
 
@@ -103,7 +103,8 @@ Sont en place :
 - fallback par initiale pour les personnages sans portrait ;
 - portraits agrandis dans `CharacterDetail` ;
 - vignettes temporaires de lieux V0.9.3 ;
-- icônes d’objets V0.9.3.
+- icônes d’objets V0.9.3 ;
+- système d'icônes de statuts UI (inline SVGs) V0.9.4.
 
 Assets principaux :
 
@@ -134,12 +135,10 @@ Le dossier `docs/agent-context/` contient notamment :
 
 Priorités possibles :
 
-1. Audit visuel humain de la V0.9.3.
-2. Mise à jour éventuelle de détails graphiques après test.
-3. V0.9.4 — icônes de statuts d’interface : fermé, lu, nouveau, validé, utilisé, indice disponible.
-4. V0.7.2 — version simplifiée B1 des textes longs.
-5. V0.8 — mode enseignant minimal, plus tard.
-6. V1.0 — stabilisation du premier scénario complet.
+1. Audit visuel humain de la V0.9.4.
+2. V0.7.2 — version simplifiée B1 des textes longs.
+3. V0.8 — mode enseignant minimal, plus tard.
+4. V1.0 — stabilisation du premier scénario complet.
 
 ## Points à surveiller
 
@@ -153,4 +152,4 @@ Priorités possibles :
 
 ## Dernière mise à jour
 
-Mise à jour documentaire après les évolutions graphiques V0.9.2 / V0.9.3 et les micro-corrections d’interface récentes.
+Mise à jour documentaire après l'intégration des icônes de statuts UI (V0.9.4).
