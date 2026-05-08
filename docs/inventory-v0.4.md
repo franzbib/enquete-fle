@@ -18,7 +18,7 @@ Le joueur peut :
 
 - Lieu : secretariat.
 - Type : acces.
-- Action : prendre, puis utiliser depuis l'inventaire.
+- Action : prendre, puis utiliser depuis la salle informatique fermée.
 - Effet : debloque la salle informatique.
 - Statut apres usage : utilise pour acceder a la salle informatique.
 
@@ -50,7 +50,7 @@ Un objet d'ambiance doit etre lisible comme tel. Il peut etre pris, mais l'inter
 
 La salle informatique apparait dans la liste des lieux avec le statut `Acces limite`.
 
-Le joueur doit prendre le badge visiteur au secretariat, puis l'utiliser depuis l'inventaire. Apres cette action, la salle informatique devient disponible.
+Le joueur doit prendre le badge visiteur au secretariat, puis l'utiliser depuis la salle informatique. Apres cette action, la salle informatique devient disponible.
 
 Les documents de la salle informatique restent soumis a la progression documentaire : le badge donne l'acces au lieu, mais l'historique d'impression reste debloque par l'enigme de chronologie.
 

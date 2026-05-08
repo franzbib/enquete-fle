@@ -247,3 +247,25 @@ Conséquence : Chaque énigme peut afficher jusqu'à trois indices, un par un, a
 Statut : validé
 À réévaluer : lors du mode enseignant ou si un futur score doit tenir compte des aides consultées.
 ```
+
+## Décision 16 — Utilisation contextuelle des objets d’accès
+
+Date : 2026-05-08
+
+Décision :
+Les objets d’accès doivent être utilisés dans leur contexte spatial, et non depuis n’importe quel endroit de l’interface. L'inventaire affiche le statut du badge mais ne propose plus de bouton d'utilisation générique si l'objet permet de débloquer un lieu. Le bouton d'utilisation est affiché dans le lieu fermé ciblé.
+
+Raison :
+Éviter l'utilisation abstraite d'un objet (ex. utiliser le badge depuis le couloir pour ouvrir la salle informatique). Transformer l’utilisation du badge en une action contextualisée dans le lieu "Salle informatique" renforce la logique spatiale et narrative du jeu.
+
+Conséquence :
+- La salle informatique est visible dès le départ mais s'affiche comme fermée.
+- Sans le badge, elle indique simplement qu'elle est fermée.
+- Avec le badge, le bouton "Utiliser le badge visiteur" apparaît dans l'écran de la salle.
+- Après utilisation, le contenu du lieu devient accessible et le badge passe au statut "utilisé" dans l'inventaire.
+- L'inventaire ne propose plus de bouton d'utilisation pour les objets débloquant un lieu.
+
+Statut : validée.
+
+À réévaluer :
+Si le jeu introduit des objets à usage multiple ou combiné qui ne dépendent pas d'un contexte spatial strict.

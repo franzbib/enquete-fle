@@ -79,9 +79,8 @@ export function InvestigationPage({
   function handleSelect(type: Selection['type'], id: string) {
     if (type === 'location' && !accessibleLocationIds.includes(id)) {
       setFeedback(
-        'Cette salle est encore en accès limité. Cherchez un objet qui permettrait d’y entrer.',
+        'Ce lieu est fermé. Il vous faut un objet pour y accéder.',
       );
-      return;
     }
 
     setSelection({ type, id } as Selection);
@@ -134,7 +133,7 @@ export function InvestigationPage({
 
     if (object.unlocksLocationIds?.includes('salle-informatique')) {
       setFeedback(
-        'Le badge visiteur permet d’accéder à la salle informatique. Vous pouvez maintenant entrer dans la salle informatique.',
+        'Vous avez utilisé le badge visiteur. La salle informatique est maintenant ouverte.',
       );
       return;
     }
@@ -219,6 +218,7 @@ export function InvestigationPage({
       return (
         <LocationDetail
           location={location}
+          isUnlocked={accessibleLocationIds.includes(location.id)}
           documents={visibleDocuments.filter((document) =>
             location.documentIds.includes(document.id),
           )}
@@ -231,9 +231,11 @@ export function InvestigationPage({
               (object.initiallyVisible ?? true),
           )}
           ownedObjectIds={ownedObjectIds}
+          ownedObjects={inventoryObjects.filter((object) => ownedObjectIds.includes(object.id))}
           onSelectDocument={(id) => handleSelect('document', id)}
           onSelectCharacter={(id) => handleSelect('character', id)}
           onTakeObject={handleTakeObject}
+          onUseObject={handleUseObject}
         />
       );
     }
@@ -443,7 +445,7 @@ export function InvestigationPage({
                   : location.kind === 'locked'
                     ? 'Accès limité : badge requis'
                     : 'Accès limité',
-                disabled: !accessibleLocationIds.includes(location.id),
+                disabled: false,
               }))}
               onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
             />

@@ -53,8 +53,8 @@ export function InventoryPanel({
             );
             const canUse =
               !isUsed &&
-              ((object.unlocksLocationIds?.length ?? 0) > 0 ||
-                (object.unlocksDocumentIds?.length ?? 0) > 0);
+              (object.unlocksLocationIds?.length ?? 0) === 0 &&
+              (object.unlocksDocumentIds?.length ?? 0) > 0;
 
             return (
               <article

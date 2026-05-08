@@ -96,7 +96,7 @@ Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affic
 `relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
 Dans la fiche d'un personnage, seuls les lieux ou le personnage est physiquement rencontre sont affiches. Les liens de type `relatedLocationIds` restent internes et doivent etre deduits par les documents, traces techniques ou temoignages, pas reveles directement par l'interface joueur.
 Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`. Ils peuvent etre pris et consultes, mais n'ont pas forcement d'effet de deblocage.
-Depuis la V0.4, `available: false` peut vraiment limiter un lieu. La salle informatique apparait dans la liste, mais reste en acces limite tant que le badge visiteur n'a pas ete utilise.
+Depuis la V0.4, `available: false` peut vraiment limiter un lieu. La salle informatique apparait dans la liste, mais reste en acces limite tant que le badge visiteur n'a pas ete utilise depuis la vue de ce lieu.
 
 ## Inventaire V0.4
 
@@ -109,7 +109,7 @@ Etat React utilise :
 - `unlockedLocationIds` : lieux ouverts par un objet ;
 - `unlockedDocumentIds` : documents ouverts par une enigme ou un objet.
 
-`InventoryPanel` affiche seulement les objets trouves. Le detail d'un lieu affiche les objets observables dans ce lieu et permet de les prendre.
+`InventoryPanel` affiche seulement les objets trouves. Le detail d'un lieu affiche les objets observables dans ce lieu et permet de les prendre. L'inventaire ne propose plus de bouton d'utilisation générique pour les objets d'accès. Ces objets doivent être utilisés dans leur contexte spatial.
 
 Les objets V0.4 du scenario prototype sont :
 

@@ -346,7 +346,7 @@ export const dossierDisparuScenario: Scenario = {
         correctOrder: ['chen-voit-dossier', 'fahad-passe', 'xiaoyu-voit-pochette'],
       },
       successFeedback:
-        'Chronologie validée. La salle informatique devient une piste prioritaire, mais son accès demande un badge.',
+        "Chronologie validée. Certains éléments indiquent qu’il faut maintenant vérifier les accès aux salles et les traces laissées après le passage au secrétariat.",
       failureFeedback:
         'Cette réponse ne correspond pas aux horaires disponibles. Relisez le planning et le témoignage de Xiaoyu.',
       unlocksDocumentIds: ['historique-impression'],
@@ -383,10 +383,6 @@ export const dossierDisparuScenario: Scenario = {
           {
             documentId: 'historique-impression',
             label: "Historique d'impression",
-          },
-          {
-            documentId: 'brouillon-mail',
-            label: 'Brouillon de mail',
           },
           {
             documentId: 'note-manuscrite',
