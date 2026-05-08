@@ -192,8 +192,10 @@ Une correction locale évidente a été appliquée après la rédaction du rappo
 
 ## Corrections éventuelles
 
-Correction appliquée après le rapport :
+Corrections appliquées après le rapport :
 
 - fichier modifié : `src/data/scenarios/dossierDisparu.ts` ;
 - correction : l'hypothèse `Delphine a volontairement caché le dossier de Chen` devient `Une erreur interne au secrétariat explique à elle seule la disparition du dossier` ;
 - raison : éviter une formulation trop accusatrice contre Delphine tout en conservant une mauvaise hypothèse plausible.
+- correction : `historique-impression` ne dépend plus de l'énigme de chronologie. Il devient consultable dès que la salle informatique est ouverte.
+- raison : Un document situé dans un lieu devient consultable dès que le lieu est accessible, sauf justification narrative explicite.

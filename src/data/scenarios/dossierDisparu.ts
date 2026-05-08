@@ -239,11 +239,10 @@ export const dossierDisparuScenario: Scenario = {
       title: "Historique d'impression",
       documentType: 'technical-log',
       source: 'Salle informatique',
-      summary: "Trace horaire débloquée après la chronologie.",
+      summary: "Trace technique de la salle informatique.",
       content:
         '16h48 — poste 03 — session : Fahad — impression : attestation_scolarite.pdf.',
-      initiallyAvailable: false,
-      unlocksAfterPuzzleId: 'chronologie-initiale',
+      initiallyAvailable: true,
       relatedLocationIds: ['salle-informatique'],
       relatedCharacterIds: ['fahad'],
       evidenceIds: ['ev-impression-1648'],
@@ -386,7 +385,6 @@ export const dossierDisparuScenario: Scenario = {
         "Chronologie validée. Certains éléments indiquent qu’il faut maintenant vérifier les accès aux salles et les traces laissées après le passage au secrétariat.",
       failureFeedback:
         'Cette réponse ne correspond pas aux horaires disponibles. Relisez le planning et le témoignage de Xiaoyu.',
-      unlocksDocumentIds: ['historique-impression'],
     },
     {
       id: 'contradiction-fahad',
