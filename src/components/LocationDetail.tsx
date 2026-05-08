@@ -44,6 +44,13 @@ export function LocationDetail({
         <h2 className="mt-2 text-2xl font-bold text-slate-950">
           {location.name}
         </h2>
+        {location.vignetteUrl && (
+          <img
+            src={location.vignetteUrl}
+            alt={`Vignette temporaire de ${location.name}`}
+            className="mt-4 h-32 w-full rounded-md border border-slate-300 object-cover shadow-sm opacity-90 grayscale"
+          />
+        )}
         <p className="body-copy mt-4">
           {location.id === 'salle-informatique'
             ? 'La salle informatique est fermée. Un badge semble nécessaire pour entrer.'
