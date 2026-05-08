@@ -24,7 +24,7 @@ export function CharacterDetail({
       </p>
       <p className="mt-4 leading-7 text-slate-700">{character.profile}</p>
       <blockquote className="mt-4 rounded-md bg-stone-100 p-4 text-sm leading-6 text-slate-700">
-        {character.testimony}
+        {character.directSpeech}
       </blockquote>
       <div className="mt-6">
         <h3 className="font-semibold text-slate-950">Rencontré dans</h3>

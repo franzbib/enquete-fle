@@ -37,6 +37,7 @@ export type Character = {
   name: string;
   role: string;
   profile: string;
+  directSpeech: string;
   testimony: string;
   reliability: 'unknown' | 'partial' | 'stable' | 'questionable';
   relatedLocationIds: string[];

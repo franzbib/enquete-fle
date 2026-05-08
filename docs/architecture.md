@@ -79,6 +79,13 @@ Pour les lieux, la V0.3.1 distingue desormais :
 Cette distinction evite de laisser croire qu'un meme personnage se trouve simultanement dans plusieurs lieux.
 
 Les temoignages sont rattaches au personnage qui parle ou au lieu ou il est interroge.
+Depuis la V0.4, les fiches personnages et les documents de temoignage ne portent pas le meme type de parole :
+
+- `Character.directSpeech` contient la parole directe affichee dans la fiche personnage ;
+- `Character.testimony` conserve un resume indirect rattache au personnage ;
+- les documents `documentType: 'testimony'` utilisent un discours indirect ou un compte rendu.
+
+Cette distinction renforce l'immersion narrative et introduit discretement un travail FLE/FOU sur le passage du discours direct au discours indirect. Elle ne doit pas apparaitre dans l'interface comme un exercice scolaire.
 Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
 Les traces techniques doivent creer une contradiction credible sans accuser trop directement un personnage : elles peuvent prouver une presence, une session active ou un horaire incoherent, sans prouver a elles seules la manipulation du dossier disparu.
 Un temoignage ne doit pas introduire un indice materiel important si cet indice n'est pas observable, documente ou recuperable ailleurs dans l'enquete. En V0.3.3, la declaration de M. Armand reste donc neutre : elle signale une imprimante deja utilisee, pas une pochette absente des autres pieces.

@@ -60,6 +60,8 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Étudiante concernée par le dossier',
       profile:
         'Sérieuse et inquiète, elle devait envoyer son dossier avant 18h00.',
+      directSpeech:
+        "J'ai vérifié mon dossier à 16h10. Quand je suis revenue vers 16h50, il n'était plus sur le bureau.",
       testimony:
         "Elle dit avoir vérifié son dossier à 16h10, puis être revenue vers 16h50. Le dossier n'était plus sur le bureau.",
       reliability: 'partial',
@@ -71,6 +73,8 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Étudiant passé au secrétariat',
       profile:
         'Pressé et un peu confus, il dit être venu chercher une attestation.',
+      directSpeech:
+        "Je suis passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors j'ai attendu un peu dans le couloir. Ensuite, j'ai récupéré mon papier et je suis parti tout de suite après.",
       testimony:
         "Il dit être passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors il a attendu un peu dans le couloir. Ensuite, il a récupéré son papier et il est parti tout de suite après.",
       reliability: 'questionable',
@@ -82,6 +86,8 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Témoin dans le couloir',
       profile:
         'Elle a vu plusieurs personnes passer mais ne connaît pas le contenu des dossiers.',
+      directSpeech:
+        "J'ai vu Fahad attendre près du secrétariat. Il tenait une pochette ou quelques feuilles, je ne sais plus très bien. Il avait l'air pressé. Je n'ai pas vu exactement ce qu'il a pris.",
       testimony:
         "Elle a vu Fahad attendre près du secrétariat. Il tenait une pochette ou quelques feuilles, elle ne sait plus très bien. Il avait l'air pressé. Elle n'a pas vu exactement ce qu'il a pris.",
       reliability: 'partial',
@@ -93,6 +99,8 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Secrétaire',
       profile:
         'Professionnelle, elle affirme avoir laissé le dossier sur le bureau avant une interruption.',
+      directSpeech:
+        "J'ai préparé le dossier de Chen, puis j'ai quitté le bureau quelques minutes après 16h30 pour répondre à un appel.",
       testimony:
         "Elle a préparé le dossier de Chen, puis elle a quitté le bureau quelques minutes après 16h30.",
       reliability: 'stable',
@@ -104,6 +112,8 @@ export const dossierDisparuScenario: Scenario = {
       role: 'Enseignant',
       profile:
         'Il a utilisé la salle informatique pour préparer un cours.',
+      directSpeech:
+        "Je suis passé rapidement en salle informatique. L'imprimante avait déjà été utilisée, mais je n'ai remarqué personne près du poste 03.",
       testimony:
         "Il est passé rapidement en salle informatique. L'imprimante avait déjà été utilisée, mais il n'a remarqué personne près du poste 03.",
       reliability: 'unknown',
@@ -143,7 +153,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Secrétariat',
       summary: 'Chen explique quand elle a vu le dossier pour la dernière fois.',
       content:
-        "À 16h10, j'ai posé la pochette claire sur le bureau. Quand je suis revenue vers 16h50, Madame Delorme cherchait déjà le dossier.",
+        "Chen explique qu'à 16h10, elle a posé la pochette claire sur le bureau. Elle ajoute que, lorsqu'elle est revenue vers 16h50, Madame Delorme cherchait déjà le dossier.",
       initiallyAvailable: true,
       relatedLocationIds: ['secretariat'],
       relatedCharacterIds: ['chen', 'madame-delorme'],
@@ -156,7 +166,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Xiaoyu décrit un déplacement observé dans le couloir.',
       content:
-        "J'ai vu Fahad attendre près du secrétariat. Il tenait une pochette ou quelques feuilles, je ne sais plus très bien. Il avait l'air pressé. Je n'ai pas vu exactement ce qu'il a pris.",
+        "Xiaoyu rapporte qu'elle a vu Fahad attendre près du secrétariat. Elle précise qu'il tenait une pochette ou quelques feuilles, sans être certaine. Elle indique qu'il avait l'air pressé et qu'elle n'a pas vu exactement ce qu'il a pris.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['xiaoyu', 'fahad'],
@@ -181,7 +191,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Un élément ne correspond pas dans la chronologie.',
       content:
-        "Je suis passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors j'ai attendu un peu dans le couloir. Ensuite, j'ai récupéré mon papier et je suis parti tout de suite après.",
+        "Fahad explique qu'il est passé au secrétariat vers 16h30 pour demander une attestation. Il précise que Madame Delorme était occupée et qu'il a attendu un peu dans le couloir. Il affirme ensuite avoir récupéré son papier et être parti tout de suite après.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['fahad'],

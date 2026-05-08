@@ -211,3 +211,12 @@ Conséquence : Les documents rattachés à la salle informatique ne deviennent c
 Statut : validé
 À réévaluer : si un futur scénario nécessite plusieurs types d'accès ou plusieurs objets de déverrouillage.
 ```
+
+```text
+Date : 2026-05-08
+Décision : Les fiches personnages affichent une parole directe, tandis que les documents de témoignage utilisent un compte rendu indirect.
+Raison : Donner plus de présence aux personnages et intégrer discrètement un objectif FLE/FOU sur le discours rapporté, sans transformer l'enquête en exercice scolaire.
+Conséquence : `Character.directSpeech` sert à la fiche personnage ; les documents `testimony` restent des pièces du dossier formulées au discours indirect.
+Statut : validé
+À réévaluer : lors d'un futur mode enseignant ou d'un moteur de dialogue plus riche.
+```
