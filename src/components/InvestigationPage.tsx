@@ -120,6 +120,12 @@ export function InvestigationPage({
     setSlotSummaries(loadScenarioProgressSlots(scenario, defaultSelection));
   }
 
+  function getInitialOwnedObjectIds() {
+    return scenario.inventoryObjects
+      ?.filter((object) => object.initiallyOwned)
+      .map((object) => object.id) ?? [];
+  }
+
   function createProgressSave(slot: ScenarioProgressSlot): ScenarioProgressSave {
     return {
       version: 1,
@@ -186,6 +192,33 @@ export function InvestigationPage({
     refreshSlotSummaries();
     setSaveLoadMode(null);
     setFeedback(`Progression chargée depuis l'emplacement ${slot}.`);
+  }
+
+  function handleRestartInvestigation() {
+    if (
+      !window.confirm(
+        "Recommencer l'enquête remet la progression actuelle à zéro. Les sauvegardes locales ne seront pas supprimées. Continuer ?",
+      )
+    ) {
+      return;
+    }
+
+    setSelection(defaultSelection);
+    setSolvedPuzzleIds([]);
+    setUnlockedDocumentIds([]);
+    setReadDocumentIds([]);
+    setOwnedObjectIds(getInitialOwnedObjectIds());
+    setUsedObjectIds([]);
+    setDroppedObjectLocations({});
+    setUnlockedLocationIds([]);
+    setRevealedHintCounts({});
+    setFinalResolutionSolved(false);
+    setInventoryVisible(true);
+    setProgressionVisible(true);
+    setMissionVisible(false);
+    setSaveLoadMode(null);
+    refreshSlotSummaries();
+    setFeedback("Enquête recommencée. La progression actuelle est remise à zéro.");
   }
 
   function formatSavedAt(save: ScenarioProgressSave | null) {
@@ -552,29 +585,6 @@ export function InvestigationPage({
             <h2 className="eyebrow m-0">Progression</h2>
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() =>
-                  setSaveLoadMode((currentMode) =>
-                    currentMode === 'save' ? null : 'save',
-                  )
-                }
-                className="secondary-button text-sm"
-                type="button"
-              >
-                Sauvegarder
-              </button>
-              <button
-                onClick={() => {
-                  refreshSlotSummaries();
-                  setSaveLoadMode((currentMode) =>
-                    currentMode === 'load' ? null : 'load',
-                  );
-                }}
-                className="secondary-button text-sm"
-                type="button"
-              >
-                Charger
-              </button>
-              <button
                 onClick={() => setProgressionVisible(!progressionVisible)}
                 className="text-sm font-semibold text-teal-700 hover:underline focus:outline-none"
                 type="button"
@@ -584,42 +594,87 @@ export function InvestigationPage({
             </div>
           </div>
 
-          {saveLoadMode ? (
-            <div className="border-t border-slate-200 p-4">
-              <div className="info-strip text-sm">
-                {saveLoadMode === 'save'
-                  ? "Choisissez un emplacement pour sauvegarder la progression actuelle."
-                  : 'Choisissez une sauvegarde à charger.'}
-              </div>
-              <div className="mt-3 grid gap-3 md:grid-cols-3">
-                {slotSummaries.map(({ slot, save }) => (
-                  <article className="item-card" key={slot}>
-                    <p className="text-sm font-semibold text-slate-950">
-                      Emplacement {slot}
-                    </p>
-                    <p className="mt-1 text-xs leading-5 text-slate-600">
-                      {formatSavedAt(save)}
-                    </p>
-                    <button
-                      className="secondary-button mt-3 w-full text-sm disabled:cursor-not-allowed disabled:opacity-50"
-                      disabled={saveLoadMode === 'load' && !save}
-                      type="button"
-                      onClick={() =>
-                        saveLoadMode === 'save'
-                          ? handleSaveSlot(slot, save)
-                          : handleLoadSlot(save, slot)
-                      }
-                    >
-                      {saveLoadMode === 'save' ? 'Sauvegarder ici' : 'Charger'}
-                    </button>
-                  </article>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
           {progressionVisible && (
             <div className="border-t border-slate-200 p-4">
+              <section className="mb-4 rounded-md border border-slate-200 bg-white/70 p-4">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950">
+                      Sauvegarde locale
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      Enregistrez ou reprenez cette enquête sur ce navigateur.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() =>
+                        setSaveLoadMode((currentMode) =>
+                          currentMode === 'save' ? null : 'save',
+                        )
+                      }
+                      className="secondary-button text-sm"
+                      type="button"
+                    >
+                      Sauvegarder
+                    </button>
+                    <button
+                      onClick={() => {
+                        refreshSlotSummaries();
+                        setSaveLoadMode((currentMode) =>
+                          currentMode === 'load' ? null : 'load',
+                        );
+                      }}
+                      className="secondary-button text-sm"
+                      type="button"
+                    >
+                      Charger
+                    </button>
+                    <button
+                      onClick={handleRestartInvestigation}
+                      className="secondary-button text-sm"
+                      type="button"
+                    >
+                      Recommencer l'enquête
+                    </button>
+                  </div>
+                </div>
+
+                {saveLoadMode ? (
+                  <div className="mt-4">
+                    <div className="info-strip text-sm">
+                      {saveLoadMode === 'save'
+                        ? "Choisissez un emplacement pour sauvegarder la progression actuelle."
+                        : 'Choisissez une sauvegarde à charger.'}
+                    </div>
+                    <div className="mt-3 grid gap-3 md:grid-cols-3">
+                      {slotSummaries.map(({ slot, save }) => (
+                        <article className="item-card" key={slot}>
+                          <p className="text-sm font-semibold text-slate-950">
+                            Emplacement {slot}
+                          </p>
+                          <p className="mt-1 text-xs leading-5 text-slate-600">
+                            {formatSavedAt(save)}
+                          </p>
+                          <button
+                            className="secondary-button mt-3 w-full text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                            disabled={saveLoadMode === 'load' && !save}
+                            type="button"
+                            onClick={() =>
+                              saveLoadMode === 'save'
+                                ? handleSaveSlot(slot, save)
+                                : handleLoadSlot(save, slot)
+                            }
+                          >
+                            {saveLoadMode === 'save' ? 'Sauvegarder ici' : 'Charger'}
+                          </button>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </section>
+
               <div className="grid gap-4 sm:grid-cols-4">
                 <div className="sm:col-span-1">
                   <p className="text-sm font-semibold text-slate-950">Orientation actuelle</p>
