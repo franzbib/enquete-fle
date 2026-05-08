@@ -193,3 +193,21 @@ Statut : validée.
 À réévaluer :
 
 Après les premiers tests utilisateurs, pour ajuster la grille d’audit narratif si certains types d’incohérences reviennent régulièrement.
+
+```text
+Date : 2026-05-08
+Décision : La V0.4 introduit un inventaire minimal en état React local.
+Raison : Rendre les objets utiles sans créer de système RPG, de sauvegarde, de backend ou de combinaison d'objets.
+Conséquence : Le joueur peut prendre des objets dans les lieux, les voir dans `Objets trouvés`, utiliser le badge visiteur pour débloquer la salle informatique et conserver des objets contextuels sans effet majeur.
+Statut : validé
+À réévaluer : lors de l'accusation finale, si certains objets doivent devenir des preuves sélectionnables.
+```
+
+```text
+Date : 2026-05-08
+Décision : La salle informatique devient réellement limitée tant que le badge visiteur n'est pas utilisé.
+Raison : La V0.3.3 documentait ce verrouillage comme une dette volontaire ; la V0.4 peut maintenant l'assumer avec un objet d'accès simple.
+Conséquence : Les documents rattachés à la salle informatique ne deviennent consultables que si le lieu est accessible et si la progression documentaire les a débloqués.
+Statut : validé
+À réévaluer : si un futur scénario nécessite plusieurs types d'accès ou plusieurs objets de déverrouillage.
+```

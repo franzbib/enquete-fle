@@ -7,6 +7,7 @@ import {
 import type { Puzzle, Scenario } from '../types/scenario';
 import { CharacterDetail } from './CharacterDetail';
 import { DocumentDetail } from './DocumentDetail';
+import { InventoryPanel } from './InventoryPanel';
 import { LocationDetail } from './LocationDetail';
 import { PuzzleDetail } from './PuzzleDetail';
 import { ScenarioList } from './ScenarioList';
@@ -36,15 +37,33 @@ export function InvestigationPage({
   const [solvedPuzzleIds, setSolvedPuzzleIds] = useState<string[]>([]);
   const [unlockedDocumentIds, setUnlockedDocumentIds] = useState<string[]>([]);
   const [readDocumentIds, setReadDocumentIds] = useState<string[]>([]);
+  const [ownedObjectIds, setOwnedObjectIds] = useState(
+    () =>
+      scenario.inventoryObjects
+        ?.filter((object) => object.initiallyOwned)
+        .map((object) => object.id) ?? [],
+  );
+  const [usedObjectIds, setUsedObjectIds] = useState<string[]>([]);
+  const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>([]);
   const [feedback, setFeedback] = useState(
     'Consultez les documents disponibles, puis résolvez la chronologie.',
   );
 
   const selectedId = `${selection.type}:${selection.id}`;
   const puzzles = scenario.puzzles ?? [];
+  const inventoryObjects = scenario.inventoryObjects ?? [];
+  const accessibleLocationIds = scenario.locations
+    .filter(
+      (location) =>
+        location.available || unlockedLocationIds.includes(location.id),
+    )
+    .map((location) => location.id);
   const visibleDocuments = scenario.documents.filter(
     (document) =>
-      document.initiallyAvailable || unlockedDocumentIds.includes(document.id),
+      (document.initiallyAvailable || unlockedDocumentIds.includes(document.id)) &&
+      document.relatedLocationIds.some((locationId) =>
+        accessibleLocationIds.includes(locationId),
+      ),
   );
   const visibleDocumentIds = visibleDocuments.map((document) => document.id);
 
@@ -55,6 +74,13 @@ export function InvestigationPage({
   }
 
   function handleSelect(type: Selection['type'], id: string) {
+    if (type === 'location' && !accessibleLocationIds.includes(id)) {
+      setFeedback(
+        'Cette salle est encore en accès limité. Cherchez un objet qui permettrait d’y entrer.',
+      );
+      return;
+    }
+
     setSelection({ type, id } as Selection);
     if (type === 'document' && !readDocumentIds.includes(id)) {
       setReadDocumentIds((prev) => [...prev, id]);
@@ -63,6 +89,54 @@ export function InvestigationPage({
     setTimeout(() => {
       document.getElementById('detail-view')?.scrollIntoView({ behavior: 'smooth' });
     }, 50);
+  }
+
+  function handleTakeObject(objectId: string) {
+    const object = inventoryObjects.find((item) => item.id === objectId);
+
+    if (!object || ownedObjectIds.includes(object.id)) {
+      return;
+    }
+
+    setOwnedObjectIds((currentIds) => [...currentIds, object.id]);
+    setFeedback(`${object.name} ajouté à l’inventaire.`);
+  }
+
+  function handleUseObject(objectId: string) {
+    const object = inventoryObjects.find((item) => item.id === objectId);
+
+    if (!object || usedObjectIds.includes(object.id)) {
+      return;
+    }
+
+    setUsedObjectIds((currentIds) => [...currentIds, object.id]);
+    setUnlockedLocationIds((currentIds) => {
+      const nextIds = new Set(currentIds);
+
+      for (const locationId of object.unlocksLocationIds ?? []) {
+        nextIds.add(locationId);
+      }
+
+      return [...nextIds];
+    });
+    setUnlockedDocumentIds((currentIds) => {
+      const nextIds = new Set(currentIds);
+
+      for (const documentId of object.unlocksDocumentIds ?? []) {
+        nextIds.add(documentId);
+      }
+
+      return [...nextIds];
+    });
+
+    if (object.unlocksLocationIds?.includes('salle-informatique')) {
+      setFeedback(
+        'Le badge visiteur permet d’accéder à la salle informatique. Vous pouvez maintenant entrer dans la salle informatique.',
+      );
+      return;
+    }
+
+    setFeedback(`${object.name} utilisé.`);
   }
 
   function handlePuzzleSubmit(puzzle: Puzzle, answer: string[]) {
@@ -135,8 +209,15 @@ export function InvestigationPage({
           presentCharacters={scenario.characters.filter((character) =>
             location.presentCharacterIds.includes(character.id),
           )}
+          objects={inventoryObjects.filter(
+            (object) =>
+              location.objectIds?.includes(object.id) &&
+              (object.initiallyVisible ?? true),
+          )}
+          ownedObjectIds={ownedObjectIds}
           onSelectDocument={(id) => handleSelect('document', id)}
           onSelectCharacter={(id) => handleSelect('character', id)}
+          onTakeObject={handleTakeObject}
         />
       );
     }
@@ -198,14 +279,23 @@ export function InvestigationPage({
         onSubmit={handlePuzzleSubmit}
       />
     );
-  }, [puzzles, scenario, selection, solvedPuzzleIds, visibleDocumentIds, visibleDocuments]);
+  }, [
+    inventoryObjects,
+    ownedObjectIds,
+    puzzles,
+    scenario,
+    selection,
+    solvedPuzzleIds,
+    visibleDocumentIds,
+    visibleDocuments,
+  ]);
 
   return (
     <main className="min-h-screen bg-stone-100 px-6 py-8 text-slate-900">
       <div className="mx-auto max-w-7xl">
         <header className="border-b border-slate-300 pb-5">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-            Enquête V0.3.3
+            Enquête V0.4
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -236,7 +326,13 @@ export function InvestigationPage({
         </header>
 
         <div
-          key={visibleDocuments.length + readDocumentIds.length + solvedPuzzleIds.length}
+          key={
+            visibleDocuments.length +
+            readDocumentIds.length +
+            solvedPuzzleIds.length +
+            ownedObjectIds.length +
+            usedObjectIds.length
+          }
           className="mt-4 rounded-md border-l-4 border-amber-500 bg-amber-50 p-4 animate-highlight"
         >
           <h2 className="text-sm font-bold text-amber-900">Que faire maintenant ?</h2>
@@ -251,7 +347,7 @@ export function InvestigationPage({
           </p>
         </div>
 
-        <section className="mt-6 grid gap-4 rounded-md border border-slate-300 bg-white p-4 sm:grid-cols-3">
+        <section className="mt-6 grid gap-4 rounded-md border border-slate-300 bg-white p-4 sm:grid-cols-4">
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
               Progression
@@ -270,6 +366,14 @@ export function InvestigationPage({
             </p>
             <p className="mt-2 text-sm text-slate-700">
               {visibleDocuments.length} / {scenario.documents.length}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-slate-950">
+              Objets trouvés
+            </p>
+            <p className="mt-2 text-sm text-slate-700">
+              {ownedObjectIds.length} / {inventoryObjects.length}
             </p>
           </div>
         </section>
@@ -315,9 +419,19 @@ export function InvestigationPage({
               items={scenario.locations.map((location) => ({
                 id: `location:${location.id}`,
                 title: location.name,
-                meta: location.available ? 'Disponible' : 'Verrouillé',
+                meta: accessibleLocationIds.includes(location.id)
+                  ? 'Disponible'
+                  : 'Accès limité',
+                disabled: !accessibleLocationIds.includes(location.id),
               }))}
               onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
+            />
+            <InventoryPanel
+              objects={inventoryObjects}
+              locations={scenario.locations}
+              ownedObjectIds={ownedObjectIds}
+              usedObjectIds={usedObjectIds}
+              onUseObject={handleUseObject}
             />
           </aside>
           <section id="detail-view" key={selectedId} className="scroll-mt-6 animate-fade-in">{detail}</section>

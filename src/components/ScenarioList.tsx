@@ -2,6 +2,7 @@ type ScenarioListItem = {
   id: string;
   title: string;
   meta?: string;
+  disabled?: boolean;
 };
 
 type ScenarioListProps = {
@@ -29,10 +30,13 @@ export function ScenarioList({
               className={`rounded-md border px-3 py-2 text-left text-sm transition-colors duration-200 ${
                 isSelected
                   ? 'border-teal-800 bg-teal-50 text-teal-950'
+                  : item.disabled
+                    ? 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
                   : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50'
               }`}
               key={item.id}
               type="button"
+              disabled={item.disabled}
               onClick={() => onSelect(item.id)}
             >
               <span className="block font-semibold">{item.title}</span>

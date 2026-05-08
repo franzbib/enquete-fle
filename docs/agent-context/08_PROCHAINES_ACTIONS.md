@@ -10,13 +10,13 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.3 stabilisée UX — première boucle d’enquête minimale.
+Version actuelle : V0.4 — inventaire minimal et objets utiles.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
-L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples et débloquer de nouvelles pistes.
+L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -173,9 +173,9 @@ Décision attendue après test :
 
 ## 5. Action technique suivante
 
-### Action 10 — Préparer la V0.4 : inventaire minimal
+### Action 10 — Créer la V0.4 : inventaire minimal
 
-Statut : à faire après validation humaine de la V0.3 UX.
+Statut : fait.
 
 Agent concerné : Codex.
 
@@ -197,6 +197,17 @@ Contenu attendu :
 - logique compatible avec des scénarios futurs ;
 - documentation de l’avancement.
 
+Livrables réalisés :
+
+- panneau `Objets trouvés` ;
+- objets observables dans les lieux ;
+- prise d’objet depuis le détail d’un lieu ;
+- statut `trouvé` / `utilisé` ;
+- badge visiteur qui débloque la salle informatique ;
+- ticket de bus comme preuve faible ;
+- clé USB d’ambiance sans effet de preuve forte ;
+- documentation `docs/inventory-v0.4.md`.
+
 À ne pas faire encore :
 
 - système d’indices complet ;
@@ -207,7 +218,28 @@ Contenu attendu :
 - base de données ;
 - inventaire de type RPG.
 
-## 6. Prompt prévu pour la V0.4
+## 6. Action technique suivante
+
+### Action 11 — Préparer la V0.5 : indices gradués
+
+Statut : à faire.
+
+Agent concerné : Codex.
+
+Objectif :
+
+Créer un système d’indices minimal pour éviter les blocages sur les énigmes principales.
+
+À ne pas faire encore :
+
+- accusation finale ;
+- score complet ;
+- deuxième scénario ;
+- backend ;
+- base de données ;
+- mode enseignant complet.
+
+## 7. Prompt prévu pour la V0.5
 
 ```text
 Agis comme architecte technique du projet `enquete-fle`.
@@ -226,10 +258,10 @@ Lis d’abord tous les documents du dossier `docs/agent-context`, en particulier
 - `10_PERSONNAGES_ET_LIEUX_RECURRENTS.md`
 
 Contexte :
-Le projet est en V0.3 stabilisée UX. Le joueur peut consulter des lieux, personnages et documents, résoudre deux énigmes simples et débloquer de nouvelles pistes. Un audit UX a amélioré la lisibilité du parcours.
+Le projet est en V0.4. Le joueur peut consulter des lieux, personnages et documents, résoudre deux énigmes simples, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
 
 Objectif :
-Créer la V0.4 : inventaire minimal et objets utiles.
+Créer la V0.5 : système d’indices minimal et gradué.
 
 Contraintes :
 - React + Vite + TypeScript
@@ -244,23 +276,13 @@ Contraintes :
 - ne pas coder en dur les personnages, lieux ou visuels dans les composants
 
 À créer ou améliorer :
-1. Un inventaire minimal affichant les objets du scénario.
-2. Des statuts simples pour les objets : non trouvé, trouvé, utilisé.
-3. Une logique locale permettant d’obtenir un objet après une action ou une réussite.
-4. Une logique simple permettant d’utiliser un objet pour débloquer une piste, un document ou un lieu.
-5. Une présentation sobre de l’inventaire dans l’écran d’enquête.
-6. Une documentation claire de la logique d’objets.
-
-Objets à privilégier pour le scénario prototype :
-- badge visiteur ;
-- ticket de bus ;
-- brouillon de mail ou élément équivalent.
-
-Important :
-Les objets doivent servir l’enquête. Ils ne doivent pas être décoratifs.
+1. Trois niveaux d’indices pour chaque énigme principale.
+2. Une interface sobre pour demander un indice.
+3. Un suivi local des indices consultés.
+4. Des feedbacks qui aident sans humilier le joueur.
+5. Une documentation claire de la logique d’indices.
 
 Ne crée pas encore :
-- système d’indices complet ;
 - accusation finale enrichie ;
 - score complet ;
 - deuxième scénario ;
@@ -279,10 +301,10 @@ Mets à jour sobrement :
 2. les fichiers modifiés ;
 3. les choix techniques faits ;
 4. les commandes à lancer ;
-5. ce qui reste à faire pour la V0.5.
+5. ce qui reste à faire pour la V0.6.
 ```
 
-## 7. Actions reportées
+## 8. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
@@ -300,7 +322,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 8. Règle de priorité
+## 9. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -312,7 +334,7 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 6. exploitation enseignante ;
 7. identité graphique.
 
-## 9. Question à poser à chaque reprise
+## 10. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

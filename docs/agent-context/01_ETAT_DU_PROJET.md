@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.3 — Première boucle d’enquête minimale créée.
+V0.4 — Inventaire minimal et objets utiles créés.
 
 Le dépôt GitHub existe.
 
@@ -132,12 +132,14 @@ Les objets devront pouvoir être obtenus :
 - Deux énigmes simples : chronologie et contradiction.
 - Feedback local de progression.
 - Déblocage local de documents après réussite.
+- Inventaire minimal avec objets trouvés et utilisés.
+- Objets observables dans les lieux.
+- Badge visiteur utilisable pour débloquer la salle informatique.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
-- Système d’inventaire fonctionnel.
 - Système d’indices.
 - Accusation finale.
 - Mode enseignant.
@@ -146,20 +148,21 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Passer à la V0.4 : créer un inventaire simple et rendre les objets utiles.
+Passer à la V0.5 : créer un système d’indices simple et gradué.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer un inventaire minimal, sans système d’indices complet, sans accusation finale et sans deuxième scénario.
+Demander à Codex de créer un système d’indices minimal, sans accusation finale et sans deuxième scénario.
 
 ## Dernière action réalisée
 
-Création de la V0.3 technique :
+Création de la V0.4 technique :
 
-- scénario enrichi avec documents courts, objets préparatoires et preuves textuelles ;
-- deux énigmes simples jouables localement ;
-- feedback sobre de réussite ou d’erreur ;
-- déblocage local de documents ;
+- inventaire sobre `Objets trouvés` ;
+- objets observables et récupérables dans les lieux ;
+- badge visiteur utilisé pour accéder à la salle informatique ;
+- ticket de bus comme preuve faible ;
+- clé USB d’ambiance sans accusation contre Fahad ;
 - mise à jour de `docs/architecture.md`.
 
 ## Risques à surveiller

@@ -72,9 +72,16 @@ export type EvidenceText = {
 export type InventoryObject = {
   id: string;
   name: string;
-  objectType: 'access' | 'proof' | 'interaction' | 'linguistic' | 'ambient';
+  objectType: 'access' | 'evidence' | 'ambient' | 'preparatory';
   description: string;
   originLocationId?: string;
+  initiallyVisible?: boolean;
+  initiallyOwned?: boolean;
+  unlocksLocationIds?: string[];
+  unlocksDocumentIds?: string[];
+  isUseful?: boolean;
+  useLabel?: string;
+  usedLabel?: string;
 };
 
 export type Puzzle = {

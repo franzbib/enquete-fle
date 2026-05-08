@@ -7,7 +7,7 @@ export function HomePage({ onStart }: HomePageProps) {
     <main className="min-h-screen bg-stone-100 px-6 py-10 text-slate-900">
       <section className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-4xl flex-col justify-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-          Prototype V0.3.3
+          Prototype V0.4
         </p>
         <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
           enquete-fle

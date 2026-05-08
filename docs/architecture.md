@@ -1,12 +1,12 @@
-# Architecture technique — V0.3
+# Architecture technique — V0.4
 
 ## Objectif
 
-La V0.3 transforme l’affichage statique du scénario en première boucle d’enquête minimale.
+La V0.4 ajoute un inventaire minimal à la première boucle d’enquête.
 
-Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre et débloquer de nouveaux documents.
+Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation, pas d’inventaire complet, pas de système d’indices à trois niveaux, pas d’accusation finale et pas de deuxième scénario.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de système d’indices à trois niveaux, pas d’accusation finale et pas de deuxième scénario.
 
 ## Stack
 
@@ -24,6 +24,7 @@ src/
     CharacterDetail.tsx
     DocumentDetail.tsx
     HomePage.tsx
+    InventoryPanel.tsx
     InvestigationPage.tsx
     LocationDetail.tsx
     PuzzleDetail.tsx
@@ -46,7 +47,7 @@ Le scénario contient désormais :
 - 3 lieux ;
 - 5 personnages ;
 - 8 documents courts ;
-- 2 objets préparatoires ;
+- 3 objets utiles ou contextuels ;
 - 2 énigmes simples ;
 - des éléments de preuve textuels.
 
@@ -68,7 +69,7 @@ Types principaux :
 - `PuzzleAnswer`
 - `Hint`
 
-`InventoryObject` et `Hint` restent préparatoires. Ils ne pilotent pas encore une interface complète.
+`InventoryObject` pilote désormais un inventaire minimal. `Hint` reste préparatoire.
 
 Pour les lieux, la V0.3.1 distingue desormais :
 
@@ -85,10 +86,31 @@ Un temoignage ne doit pas introduire un indice materiel important si cet indice 
 Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
 `relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
 Dans la fiche d'un personnage, seuls les lieux ou le personnage est physiquement rencontre sont affiches. Les liens de type `relatedLocationIds` restent internes et doivent etre deduits par les documents, traces techniques ou temoignages, pas reveles directement par l'interface joueur.
-Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`, sans logique d'inventaire tant que la V0.4 n'est pas lancee.
-La coexistence provisoire de `kind: 'locked'` et `available: true` signale seulement une intention narrative de verrouillage. Le vrai verrouillage par objet d'acces est reporte a la V0.4 avec l'inventaire.
+Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`. Ils peuvent etre pris et consultes, mais n'ont pas forcement d'effet de deblocage.
+Depuis la V0.4, `available: false` peut vraiment limiter un lieu. La salle informatique apparait dans la liste, mais reste en acces limite tant que le badge visiteur n'a pas ete utilise.
 
-## Progression V0.3
+## Inventaire V0.4
+
+La progression d'inventaire reste locale a `InvestigationPage`.
+
+Etat React utilise :
+
+- `ownedObjectIds` : objets pris par le joueur ;
+- `usedObjectIds` : objets deja utilises ;
+- `unlockedLocationIds` : lieux ouverts par un objet ;
+- `unlockedDocumentIds` : documents ouverts par une enigme ou un objet.
+
+`InventoryPanel` affiche seulement les objets trouves. Le detail d'un lieu affiche les objets observables dans ce lieu et permet de les prendre.
+
+Les objets V0.4 du scenario prototype sont :
+
+- `badge-visiteur` : objet d'acces trouve au secretariat, utilise pour ouvrir la salle informatique ;
+- `ticket-bus` : objet de preuve faible trouve dans le couloir, consultable sans effet majeur ;
+- `cle-usb-exercices-b1` : objet d'ambiance trouve en salle informatique, sans lien direct avec la culpabilite de Fahad.
+
+Cette logique n'est pas un inventaire RPG : pas de combinaison, pas de crafting, pas de score, pas d'accusation finale.
+
+## Progression V0.4
 
 La progression est locale à `InvestigationPage`.
 
@@ -141,18 +163,16 @@ Quand le projet autorisera plusieurs enquêtes :
 3. Ajouter le scénario au registre de `src/engine/scenarioLoader.ts`.
 4. Ajouter une sélection de scénario dans l’interface.
 
-La V0.3 ne crée pas de deuxième scénario.
+La V0.4 ne crée pas de deuxième scénario.
 
-## Direction V0.4
+## Direction V0.5
 
-La V0.4 devra introduire un inventaire simple et des objets fonctionnels.
+La V0.5 devra introduire un systeme d'indices simple et progressif.
 
 Objectif recommandé :
 
-- afficher les objets préparatoires ;
-- permettre d’obtenir un objet ;
-- marquer un objet comme trouvé ou utilisé ;
-- utiliser un objet pour débloquer un lieu ou un document ;
-- garder les objets peu nombreux et utiles à la déduction.
+- proposer des indices gradués pour les énigmes principales ;
+- garder les indices sobres et utiles ;
+- éviter tout score punitif ou envahissant.
 
-L’accusation finale et le système d’indices complet restent à traiter plus tard.
+L’accusation finale reste à traiter plus tard.
