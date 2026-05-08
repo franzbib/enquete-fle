@@ -403,3 +403,25 @@ Consequence :
 Statut : validee.
 
 A reevaluer : en V0.10.2 ou V0.11, lors de la mise en place d'une sauvegarde / chargement local de progression pour les enquetes longues.
+
+## Decision 29 — Sauvegarde locale minimale de progression V0.10.2
+
+Date : 2026-05-08
+
+Decision :
+La V0.10.2 sauvegarde automatiquement la progression du joueur dans `localStorage`, avec une cle propre a chaque scenario : `enquete-fle:progress:<scenarioId>`.
+
+Raison :
+Les futures enquetes seront plus longues. Le joueur doit pouvoir recharger ou fermer la page sans perdre les documents lus, objets trouves, lieux deverrouilles, enigmes, indices et resolution finale.
+
+Consequence :
+- `src/engine/progressStorage.ts` devient le module de lecture, validation et ecriture de la progression locale.
+- `InvestigationPage` initialise ses etats depuis la sauvegarde quand elle existe.
+- Les changements de progression sont sauvegardes automatiquement.
+- Les sauvegardes invalides ou incompatibles sont ignorees pour garder le jeu jouable.
+- La sauvegarde reste locale au navigateur et ne contient pas les donnees du scenario, les textes, les assets, les informations personnelles ou les donnees enseignant.
+- Aucun backend, compte utilisateur, suivi enseignant, base de donnees ou synchronisation cloud n'est cree.
+
+Statut : validee.
+
+A reevaluer : apres audit V0.10.2, notamment avant plusieurs enquetes reelles ou avant un eventuel mode enseignant.

@@ -2,21 +2,21 @@
 
 ## Contexte
 
-La progression du joueur est actuellement stockee dans l'etat local React de `InvestigationPage`.
+En V0.10.1, la progression du joueur etait encore stockee uniquement dans l'etat local React de `InvestigationPage`.
 
-Cette solution reste volontairement simple et convient pour une enquete courte comme `Le dossier disparu`. Elle evite un backend, une base de donnees, des comptes utilisateurs ou un suivi enseignant premature.
+Cette solution restait volontairement simple et convenait pour une enquete courte comme `Le dossier disparu`. Elle evitait un backend, une base de donnees, des comptes utilisateurs ou un suivi enseignant premature.
 
 ## Limite actuelle
 
-L'etat local n'est pas persistant. Si le joueur quitte la mission, recharge la page ou change de scenario dans une future version, sa progression peut etre perdue.
+L'etat React local seul n'est pas persistant. Si le joueur quitte la mission, recharge la page ou change de scenario dans une future version, sa progression peut etre perdue.
 
-La micro-correction post-V0.10 permet deja de relire le briefing dans l'enquete avec `Relire la mission`, sans demonter `InvestigationPage`. Elle ne resout pas encore le besoin plus large de sauvegarde / chargement.
+La micro-correction post-V0.10 permet deja de relire le briefing dans l'enquete avec `Relire la mission`, sans demonter `InvestigationPage`. Elle ne resolvait pas encore le besoin plus large de sauvegarde / chargement.
 
 Pour des enquetes plus longues, cette limite deviendra insuffisante.
 
 ## Premiere solution raisonnable
 
-Une future V0.10.2 ou V0.11 pourrait ajouter une sauvegarde locale minimale par scenario avec `localStorage`.
+La V0.10.2 ajoute une premiere sauvegarde locale minimale par scenario avec `localStorage`. La documentation d'implementation est dans `docs/progress-save-load-v0.10.2.md`.
 
 Cle proposee :
 

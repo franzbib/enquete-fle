@@ -1,9 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   findCharacter,
   findDocument,
   findLocation,
 } from '../engine/scenarioLoader';
+import {
+  loadScenarioProgress,
+  saveScenarioProgress,
+  type ScenarioProgressSelection,
+} from '../engine/progressStorage';
 import type { Puzzle, Scenario } from '../types/scenario';
 import { CharacterDetail } from './CharacterDetail';
 import { DocumentDetail } from './DocumentDetail';
@@ -14,12 +19,7 @@ import { PuzzleDetail } from './PuzzleDetail';
 import { ScenarioList } from './ScenarioList';
 import { IconHintAvailable, IconLocked, IconPuzzleSolved, IconUnlocked } from './icons/StatusIcons';
 
-type Selection =
-  | { type: 'location'; id: string }
-  | { type: 'character'; id: string }
-  | { type: 'document'; id: string }
-  | { type: 'puzzle'; id: string }
-  | { type: 'final-resolution'; id: string };
+type Selection = ScenarioProgressSelection;
 
 type InvestigationPageProps = {
   scenario: Scenario;
@@ -31,29 +31,57 @@ export function InvestigationPage({
   onBackHome,
 }: InvestigationPageProps) {
   const firstLocationId = scenario.locations.find((l) => l.id === 'accueil')?.id ?? scenario.locations[0]?.id ?? '';
-  const [selection, setSelection] = useState<Selection>({
+  const defaultSelection: Selection = {
     type: 'location',
     id: firstLocationId,
-  });
-  const [solvedPuzzleIds, setSolvedPuzzleIds] = useState<string[]>([]);
-  const [unlockedDocumentIds, setUnlockedDocumentIds] = useState<string[]>([]);
-  const [readDocumentIds, setReadDocumentIds] = useState<string[]>([]);
+  };
+  const savedProgress = useMemo(
+    () => loadScenarioProgress(scenario, defaultSelection),
+    [scenario, defaultSelection.id],
+  );
+  const [selection, setSelection] = useState<Selection>(
+    () => savedProgress?.selection ?? defaultSelection,
+  );
+  const [solvedPuzzleIds, setSolvedPuzzleIds] = useState<string[]>(
+    () => savedProgress?.solvedPuzzleIds ?? [],
+  );
+  const [unlockedDocumentIds, setUnlockedDocumentIds] = useState<string[]>(
+    () => savedProgress?.unlockedDocumentIds ?? [],
+  );
+  const [readDocumentIds, setReadDocumentIds] = useState<string[]>(
+    () => savedProgress?.readDocumentIds ?? [],
+  );
   const [ownedObjectIds, setOwnedObjectIds] = useState(
     () =>
+      savedProgress?.ownedObjectIds ??
       scenario.inventoryObjects
         ?.filter((object) => object.initiallyOwned)
         .map((object) => object.id) ?? [],
   );
-  const [usedObjectIds, setUsedObjectIds] = useState<string[]>([]);
-  const [droppedObjectLocations, setDroppedObjectLocations] = useState<Record<string, string>>({});
-  const [inventoryVisible, setInventoryVisible] = useState(true);
-  const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>([]);
+  const [usedObjectIds, setUsedObjectIds] = useState<string[]>(
+    () => savedProgress?.usedObjectIds ?? [],
+  );
+  const [droppedObjectLocations, setDroppedObjectLocations] = useState<Record<string, string>>(
+    () => savedProgress?.droppedObjectLocations ?? {},
+  );
+  const [inventoryVisible, setInventoryVisible] = useState(
+    () => savedProgress?.inventoryVisible ?? true,
+  );
+  const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>(
+    () => savedProgress?.unlockedLocationIds ?? [],
+  );
   const [revealedHintCounts, setRevealedHintCounts] = useState<
     Record<string, number>
-  >({});
-  const [finalResolutionSolved, setFinalResolutionSolved] = useState(false);
-  const [progressionVisible, setProgressionVisible] = useState(false);
-  const [missionVisible, setMissionVisible] = useState(false);
+  >(() => savedProgress?.revealedHintCounts ?? {});
+  const [finalResolutionSolved, setFinalResolutionSolved] = useState(
+    () => savedProgress?.finalResolutionSolved ?? false,
+  );
+  const [progressionVisible, setProgressionVisible] = useState(
+    () => savedProgress?.progressionVisible ?? false,
+  );
+  const [missionVisible, setMissionVisible] = useState(
+    () => savedProgress?.missionPanelVisible ?? false,
+  );
   const [feedback, setFeedback] = useState(
     "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
   );
@@ -84,6 +112,42 @@ export function InvestigationPage({
         visibleDocumentIds.includes(documentId),
       )
     : false;
+
+  useEffect(() => {
+    saveScenarioProgress({
+      version: 1,
+      scenarioId: scenario.id,
+      selection,
+      solvedPuzzleIds,
+      unlockedDocumentIds,
+      readDocumentIds,
+      ownedObjectIds,
+      usedObjectIds,
+      droppedObjectLocations,
+      unlockedLocationIds,
+      revealedHintCounts,
+      finalResolutionSolved,
+      inventoryVisible,
+      progressionVisible,
+      missionPanelVisible: missionVisible,
+      updatedAt: new Date().toISOString(),
+    });
+  }, [
+    droppedObjectLocations,
+    finalResolutionSolved,
+    inventoryVisible,
+    missionVisible,
+    ownedObjectIds,
+    progressionVisible,
+    readDocumentIds,
+    revealedHintCounts,
+    scenario.id,
+    selection,
+    solvedPuzzleIds,
+    unlockedDocumentIds,
+    unlockedLocationIds,
+    usedObjectIds,
+  ]);
 
   function isPuzzleAvailable(puzzle: Puzzle) {
     return (puzzle.requiredDocumentIds ?? []).every((documentId) =>
@@ -355,6 +419,7 @@ export function InvestigationPage({
     isFinalResolutionAvailable,
     ownedObjectIds,
     puzzles,
+    readDocumentIds,
     revealedHintCounts,
     scenario,
     selection,

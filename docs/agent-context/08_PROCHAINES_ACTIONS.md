@@ -10,7 +10,7 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-**Version actuelle : V0.10 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes.**
+**Version actuelle : V0.10.2 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde locale minimale.**
 
 Le dépôt GitHub existe :
 
@@ -42,6 +42,7 @@ Le jeu contient actuellement :
 - icônes de statuts UI ;
 - registre central des scénarios ;
 - modèle de scénario pour futures enquêtes.
+- sauvegarde locale minimale de progression par scénario.
 
 ## 3. Actions réalisées
 
@@ -239,15 +240,28 @@ Livrables :
 - modèle `src/data/scenarios/scenarioTemplate.ts` non enregistré ;
 - documentation `docs/multi-scenario-architecture-v0.10.md`.
 
+### V0.10.1 / V0.10.2 — Relecture de mission et sauvegarde locale
+
+Statut : fait.
+
+Livrables :
+
+- bouton `Relire la mission` sans sortie de `InvestigationPage` ;
+- note de cadrage `docs/progress-save-load-notes-v0.10.1.md` ;
+- module `src/engine/progressStorage.ts` ;
+- sauvegarde `localStorage` par scenario ;
+- cle `enquete-fle:progress:<scenarioId>` ;
+- documentation `docs/progress-save-load-v0.10.2.md`.
+
 ## 4. Action immédiate recommandée
 
-### Action 21 — Auditer la préparation multi-enquêtes V0.10
+### Action 21 — Auditer la sauvegarde locale V0.10.2
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier que la préparation multi-enquêtes reste maintenable, que `Le dossier disparu` reste le scénario par défaut, et que le modèle de scénario ne crée pas de deuxième enquête visible.
+Vérifier que la progression est bien sauvegardée et restaurée après rechargement, sans casser la logique locale de l'enquête.
 
 Commande :
 
@@ -258,38 +272,27 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5173
 
 À vérifier :
 
-- le registre contient-il uniquement les scénarios réels ?
-- `scenarioTemplate` reste-t-il non enregistré ?
-- `loadDefaultScenario()` lance-t-il toujours `Le dossier disparu` ?
-- aucun composant ne dépend-il d'un scénario codé en dur ?
-- la documentation suffit-elle pour créer une deuxième enquête proprement ?
+- la cle `enquete-fle:progress:le-dossier-disparu` est-elle créée ?
+- les documents lus restent-ils lus après rechargement ?
+- les objets pris restent-ils dans l'inventaire ?
+- la salle informatique reste-t-elle ouverte après utilisation du badge ?
+- les indices, énigmes et panneaux masquables sont-ils restaurés ?
+- une sauvegarde invalide est-elle ignorée sans bloquer le jeu ?
 
 Décision attendue après audit :
 
-- si le cadre est clair : créer une deuxième enquête prototype en suivant la procédure V0.10 ;
-- si le cadre reste fragile : demander une micro-correction d'architecture ou de documentation avant toute nouvelle enquête.
+- si la sauvegarde est stable : auditer ensuite la préparation multi-enquêtes V0.10 ;
+- si elle reste fragile : créer une V0.10.2.1 de correction.
 
 ## 5. Action suivante recommandée
 
-### Action 22 — V0.10.2 : sauvegarde locale minimale de progression
+### Action 22 — Auditer la préparation multi-enquêtes V0.10
 
 Statut : à faire.
 
 Objectif :
 
-Préparer une sauvegarde / chargement local de progression pour les futures enquêtes longues, sans backend ni comptes utilisateurs.
-
-Note de cadrage :
-
-- l'état actuel reste stocké dans `InvestigationPage` ;
-- cela suffit pour une enquête courte ;
-- une première solution raisonnable serait une sauvegarde `localStorage` par scénario ;
-- la clé proposée est `enquete-fle:progress:<scenarioId>` ;
-- les éléments à prévoir sont : sélection actuelle, documents lus, documents débloqués, objets possédés, objets utilisés, objets reposés et leur lieu, lieux déverrouillés, énigmes résolues, indices révélés, résolution finale validée et éventuellement état des panneaux masquables.
-
-Document de suivi :
-
-- `docs/progress-save-load-notes-v0.10.1.md`.
+Vérifier que la préparation multi-enquêtes reste maintenable, que `Le dossier disparu` reste le scénario par défaut, et que le modèle de scénario ne crée pas de deuxième enquête visible.
 
 ### Action 23 — Préparer une deuxième enquête prototype
 
