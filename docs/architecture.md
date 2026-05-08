@@ -1,4 +1,4 @@
-# Architecture technique — V0.10.2
+# Architecture technique — V0.10.3
 
 ## Objectif
 
@@ -161,9 +161,9 @@ La progression est locale à `InvestigationPage`.
 
 Depuis la correction UX post-V0.10, le briefing peut être relu depuis l'écran d'enquête avec le bouton `Relire la mission`. Ce bouton affiche un panneau local dans `InvestigationPage` au lieu de revenir à l'écran de briefing. La progression locale n'est donc pas perdue quand le joueur relit la mission.
 
-Depuis la V0.10.2, l'etat de progression est aussi sauvegarde localement par scenario dans `localStorage`. Cette sauvegarde reste minimale et locale : elle ne cree ni backend, ni compte utilisateur, ni suivi enseignant.
+Depuis la V0.10.3, l'etat de progression peut etre sauvegarde et charge explicitement par scenario avec trois slots locaux dans `localStorage`. Cette sauvegarde reste minimale et locale : elle ne cree ni backend, ni compte utilisateur, ni suivi enseignant.
 
-La cle de stockage suit le format `enquete-fle:progress:<scenarioId>`. Le module `src/engine/progressStorage.ts` gere la lecture, la validation et l'ecriture de cette sauvegarde. Voir `docs/progress-save-load-v0.10.2.md`.
+La cle de stockage suit le format `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`. Le module `src/engine/progressStorage.ts` gere la lecture, la validation et l'ecriture de ces sauvegardes. Voir `docs/progress-save-load-v0.10.3.md`.
 
 Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulement deux formes de réponse :
 

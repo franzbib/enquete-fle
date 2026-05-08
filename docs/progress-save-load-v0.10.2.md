@@ -1,5 +1,7 @@
 # Sauvegarde locale de progression — V0.10.2
 
+Document historique : la V0.10.3 remplace cette sauvegarde automatique unique par une sauvegarde / chargement explicite avec trois slots locaux par scenario. Voir `docs/progress-save-load-v0.10.3.md`.
+
 ## Resume
 
 La V0.10.2 ajoute une sauvegarde locale minimale de progression par scenario.

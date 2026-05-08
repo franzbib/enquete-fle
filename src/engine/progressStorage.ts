@@ -7,9 +7,12 @@ export type ScenarioProgressSelection =
   | { type: 'puzzle'; id: string }
   | { type: 'final-resolution'; id: string };
 
+export type ScenarioProgressSlot = 1 | 2 | 3;
+
 export type ScenarioProgressSave = {
   version: 1;
   scenarioId: string;
+  slot: ScenarioProgressSlot;
   selection: ScenarioProgressSelection;
   solvedPuzzleIds: string[];
   unlockedDocumentIds: string[];
@@ -23,19 +26,30 @@ export type ScenarioProgressSave = {
   inventoryVisible: boolean;
   progressionVisible: boolean;
   missionPanelVisible: boolean;
-  updatedAt: string;
+  savedAt: string;
 };
+
+export type ScenarioProgressSlotSummary = {
+  slot: ScenarioProgressSlot;
+  save: ScenarioProgressSave | null;
+};
+
+export const SCENARIO_PROGRESS_SLOTS: ScenarioProgressSlot[] = [1, 2, 3];
 
 const PROGRESS_SAVE_VERSION = 1;
 const STORAGE_KEY_PREFIX = 'enquete-fle:progress';
 
-export function getScenarioProgressStorageKey(scenarioId: string) {
-  return `${STORAGE_KEY_PREFIX}:${scenarioId}`;
+export function getScenarioProgressStorageKey(
+  scenarioId: string,
+  slot: ScenarioProgressSlot,
+) {
+  return `${STORAGE_KEY_PREFIX}:${scenarioId}:slot:${slot}`;
 }
 
 export function loadScenarioProgress(
   scenario: Scenario,
   fallbackSelection: ScenarioProgressSelection,
+  slot: ScenarioProgressSlot,
 ): ScenarioProgressSave | null {
   const storage = getLocalStorage();
 
@@ -44,107 +58,132 @@ export function loadScenarioProgress(
   }
 
   try {
-    const rawProgress = storage.getItem(getScenarioProgressStorageKey(scenario.id));
+    const rawProgress = storage.getItem(
+      getScenarioProgressStorageKey(scenario.id, slot),
+    );
 
     if (!rawProgress) {
       return null;
     }
 
-    const parsedProgress: unknown = JSON.parse(rawProgress);
-
-    if (!isRecord(parsedProgress)) {
-      return null;
-    }
-
-    if (
-      parsedProgress.version !== PROGRESS_SAVE_VERSION ||
-      parsedProgress.scenarioId !== scenario.id
-    ) {
-      return null;
-    }
-
-    return {
-      version: PROGRESS_SAVE_VERSION,
-      scenarioId: scenario.id,
-      selection: normalizeSelection(
-        scenario,
-        parsedProgress.selection,
-        fallbackSelection,
-      ),
-      solvedPuzzleIds: filterKnownIds(
-        parsedProgress.solvedPuzzleIds,
-        getPuzzleIds(scenario),
-      ),
-      unlockedDocumentIds: filterKnownIds(
-        parsedProgress.unlockedDocumentIds,
-        getDocumentIds(scenario),
-      ),
-      readDocumentIds: filterKnownIds(
-        parsedProgress.readDocumentIds,
-        getDocumentIds(scenario),
-      ),
-      ownedObjectIds: filterKnownIds(
-        parsedProgress.ownedObjectIds,
-        getObjectIds(scenario),
-      ),
-      usedObjectIds: filterKnownIds(
-        parsedProgress.usedObjectIds,
-        getObjectIds(scenario),
-      ),
-      droppedObjectLocations: filterDroppedObjectLocations(
-        parsedProgress.droppedObjectLocations,
-        getObjectIds(scenario),
-        getLocationIds(scenario),
-      ),
-      unlockedLocationIds: filterKnownIds(
-        parsedProgress.unlockedLocationIds,
-        getLocationIds(scenario),
-      ),
-      revealedHintCounts: filterRevealedHintCounts(
-        parsedProgress.revealedHintCounts,
-        scenario,
-      ),
-      finalResolutionSolved:
-        typeof parsedProgress.finalResolutionSolved === 'boolean'
-          ? parsedProgress.finalResolutionSolved
-          : false,
-      inventoryVisible:
-        typeof parsedProgress.inventoryVisible === 'boolean'
-          ? parsedProgress.inventoryVisible
-          : true,
-      progressionVisible:
-        typeof parsedProgress.progressionVisible === 'boolean'
-          ? parsedProgress.progressionVisible
-          : false,
-      missionPanelVisible:
-        typeof parsedProgress.missionPanelVisible === 'boolean'
-          ? parsedProgress.missionPanelVisible
-          : false,
-      updatedAt:
-        typeof parsedProgress.updatedAt === 'string'
-          ? parsedProgress.updatedAt
-          : new Date().toISOString(),
-    };
+    return parseScenarioProgress(scenario, fallbackSelection, slot, rawProgress);
   } catch {
     return null;
   }
+}
+
+export function loadScenarioProgressSlots(
+  scenario: Scenario,
+  fallbackSelection: ScenarioProgressSelection,
+): ScenarioProgressSlotSummary[] {
+  return SCENARIO_PROGRESS_SLOTS.map((slot) => ({
+    slot,
+    save: loadScenarioProgress(scenario, fallbackSelection, slot),
+  }));
 }
 
 export function saveScenarioProgress(progress: ScenarioProgressSave) {
   const storage = getLocalStorage();
 
   if (!storage) {
-    return;
+    return false;
   }
 
   try {
     storage.setItem(
-      getScenarioProgressStorageKey(progress.scenarioId),
+      getScenarioProgressStorageKey(progress.scenarioId, progress.slot),
       JSON.stringify(progress),
     );
+    return true;
   } catch {
     // localStorage can be unavailable or full; the game must remain playable.
+    return false;
   }
+}
+
+function parseScenarioProgress(
+  scenario: Scenario,
+  fallbackSelection: ScenarioProgressSelection,
+  slot: ScenarioProgressSlot,
+  rawProgress: string,
+): ScenarioProgressSave | null {
+  const parsedProgress: unknown = JSON.parse(rawProgress);
+
+  if (!isRecord(parsedProgress)) {
+    return null;
+  }
+
+  if (
+    parsedProgress.version !== PROGRESS_SAVE_VERSION ||
+    parsedProgress.scenarioId !== scenario.id ||
+    parsedProgress.slot !== slot
+  ) {
+    return null;
+  }
+
+  return {
+    version: PROGRESS_SAVE_VERSION,
+    scenarioId: scenario.id,
+    slot,
+    selection: normalizeSelection(
+      scenario,
+      parsedProgress.selection,
+      fallbackSelection,
+    ),
+    solvedPuzzleIds: filterKnownIds(
+      parsedProgress.solvedPuzzleIds,
+      getPuzzleIds(scenario),
+    ),
+    unlockedDocumentIds: filterKnownIds(
+      parsedProgress.unlockedDocumentIds,
+      getDocumentIds(scenario),
+    ),
+    readDocumentIds: filterKnownIds(
+      parsedProgress.readDocumentIds,
+      getDocumentIds(scenario),
+    ),
+    ownedObjectIds: filterKnownIds(
+      parsedProgress.ownedObjectIds,
+      getObjectIds(scenario),
+    ),
+    usedObjectIds: filterKnownIds(
+      parsedProgress.usedObjectIds,
+      getObjectIds(scenario),
+    ),
+    droppedObjectLocations: filterDroppedObjectLocations(
+      parsedProgress.droppedObjectLocations,
+      getObjectIds(scenario),
+      getLocationIds(scenario),
+    ),
+    unlockedLocationIds: filterKnownIds(
+      parsedProgress.unlockedLocationIds,
+      getLocationIds(scenario),
+    ),
+    revealedHintCounts: filterRevealedHintCounts(
+      parsedProgress.revealedHintCounts,
+      scenario,
+    ),
+    finalResolutionSolved:
+      typeof parsedProgress.finalResolutionSolved === 'boolean'
+        ? parsedProgress.finalResolutionSolved
+        : false,
+    inventoryVisible:
+      typeof parsedProgress.inventoryVisible === 'boolean'
+        ? parsedProgress.inventoryVisible
+        : true,
+    progressionVisible:
+      typeof parsedProgress.progressionVisible === 'boolean'
+        ? parsedProgress.progressionVisible
+        : false,
+    missionPanelVisible:
+      typeof parsedProgress.missionPanelVisible === 'boolean'
+        ? parsedProgress.missionPanelVisible
+        : false,
+    savedAt:
+      typeof parsedProgress.savedAt === 'string'
+        ? parsedProgress.savedAt
+        : new Date().toISOString(),
+  };
 }
 
 function getLocalStorage() {

@@ -16,12 +16,12 @@ Pour des enquetes plus longues, cette limite deviendra insuffisante.
 
 ## Premiere solution raisonnable
 
-La V0.10.2 ajoute une premiere sauvegarde locale minimale par scenario avec `localStorage`. La documentation d'implementation est dans `docs/progress-save-load-v0.10.2.md`.
+La V0.10.2 a ajoute une premiere sauvegarde locale minimale par scenario avec `localStorage`. La V0.10.3 remplace cette sauvegarde automatique unique par une sauvegarde / chargement explicite avec trois slots locaux. La documentation d'implementation active est dans `docs/progress-save-load-v0.10.3.md`.
 
 Cle proposee :
 
 ```text
-enquete-fle:progress:<scenarioId>
+enquete-fle:progress:<scenarioId>:slot:<slotNumber>
 ```
 
 Cette cle permettrait de separer proprement la progression de chaque enquete.

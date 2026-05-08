@@ -10,7 +10,7 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-**Version actuelle : V0.10.2 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde locale minimale.**
+**Version actuelle : V0.10.3 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde / chargement explicite à trois slots.**
 
 Le dépôt GitHub existe :
 
@@ -42,7 +42,7 @@ Le jeu contient actuellement :
 - icônes de statuts UI ;
 - registre central des scénarios ;
 - modèle de scénario pour futures enquêtes.
-- sauvegarde locale minimale de progression par scénario.
+- sauvegarde / chargement explicite de progression par scénario avec trois slots locaux.
 
 ## 3. Actions réalisées
 
@@ -240,7 +240,7 @@ Livrables :
 - modèle `src/data/scenarios/scenarioTemplate.ts` non enregistré ;
 - documentation `docs/multi-scenario-architecture-v0.10.md`.
 
-### V0.10.1 / V0.10.2 — Relecture de mission et sauvegarde locale
+### V0.10.1 / V0.10.2 / V0.10.3 — Relecture de mission et sauvegarde locale
 
 Statut : fait.
 
@@ -249,19 +249,20 @@ Livrables :
 - bouton `Relire la mission` sans sortie de `InvestigationPage` ;
 - note de cadrage `docs/progress-save-load-notes-v0.10.1.md` ;
 - module `src/engine/progressStorage.ts` ;
-- sauvegarde `localStorage` par scenario ;
-- cle `enquete-fle:progress:<scenarioId>` ;
-- documentation `docs/progress-save-load-v0.10.2.md`.
+- V0.10.2 : sauvegarde automatique `localStorage` par scenario ;
+- V0.10.3 : sauvegarde / chargement explicite avec trois slots locaux ;
+- cle active `enquete-fle:progress:<scenarioId>:slot:<slotNumber>` ;
+- documentation `docs/progress-save-load-v0.10.3.md`.
 
 ## 4. Action immédiate recommandée
 
-### Action 21 — Auditer la sauvegarde locale V0.10.2
+### Action 21 — Auditer la sauvegarde explicite V0.10.3
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier que la progression est bien sauvegardée et restaurée après rechargement, sans casser la logique locale de l'enquête.
+Vérifier que la progression est bien sauvegardée et restaurée par action explicite du joueur, sans casser la logique locale de l'enquête.
 
 Commande :
 
@@ -272,17 +273,19 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5173
 
 À vérifier :
 
-- la cle `enquete-fle:progress:le-dossier-disparu` est-elle créée ?
-- les documents lus restent-ils lus après rechargement ?
-- les objets pris restent-ils dans l'inventaire ?
-- la salle informatique reste-t-elle ouverte après utilisation du badge ?
-- les indices, énigmes et panneaux masquables sont-ils restaurés ?
+- les cles `enquete-fle:progress:le-dossier-disparu:slot:1/2/3` sont-elles creees selon le slot choisi ?
+- la sauvegarde demande-t-elle confirmation avant ecrasement d'un slot occupe ?
+- les slots vides sont-ils visibles mais non chargeables ?
+- les documents lus restent-ils lus apres chargement ?
+- les objets pris restent-ils dans l'inventaire apres chargement ?
+- la salle informatique reste-t-elle ouverte apres chargement si le badge a ete utilise ?
+- les indices, enigmes et panneaux masquables sont-ils restaures ?
 - une sauvegarde invalide est-elle ignorée sans bloquer le jeu ?
 
 Décision attendue après audit :
 
 - si la sauvegarde est stable : auditer ensuite la préparation multi-enquêtes V0.10 ;
-- si elle reste fragile : créer une V0.10.2.1 de correction.
+- si elle reste fragile : créer une V0.10.3.1 de correction.
 
 ## 5. Action suivante recommandée
 

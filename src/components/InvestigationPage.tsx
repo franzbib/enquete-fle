@@ -1,13 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   findCharacter,
   findDocument,
   findLocation,
 } from '../engine/scenarioLoader';
 import {
-  loadScenarioProgress,
+  loadScenarioProgressSlots,
   saveScenarioProgress,
+  type ScenarioProgressSave,
   type ScenarioProgressSelection,
+  type ScenarioProgressSlot,
+  type ScenarioProgressSlotSummary,
 } from '../engine/progressStorage';
 import type { Puzzle, Scenario } from '../types/scenario';
 import { CharacterDetail } from './CharacterDetail';
@@ -20,6 +23,7 @@ import { ScenarioList } from './ScenarioList';
 import { IconHintAvailable, IconLocked, IconPuzzleSolved, IconUnlocked } from './icons/StatusIcons';
 
 type Selection = ScenarioProgressSelection;
+type SaveLoadMode = 'save' | 'load' | null;
 
 type InvestigationPageProps = {
   scenario: Scenario;
@@ -35,52 +39,51 @@ export function InvestigationPage({
     type: 'location',
     id: firstLocationId,
   };
-  const savedProgress = useMemo(
-    () => loadScenarioProgress(scenario, defaultSelection),
-    [scenario, defaultSelection.id],
-  );
   const [selection, setSelection] = useState<Selection>(
-    () => savedProgress?.selection ?? defaultSelection,
+    () => defaultSelection,
   );
   const [solvedPuzzleIds, setSolvedPuzzleIds] = useState<string[]>(
-    () => savedProgress?.solvedPuzzleIds ?? [],
+    () => [],
   );
   const [unlockedDocumentIds, setUnlockedDocumentIds] = useState<string[]>(
-    () => savedProgress?.unlockedDocumentIds ?? [],
+    () => [],
   );
   const [readDocumentIds, setReadDocumentIds] = useState<string[]>(
-    () => savedProgress?.readDocumentIds ?? [],
+    () => [],
   );
   const [ownedObjectIds, setOwnedObjectIds] = useState(
     () =>
-      savedProgress?.ownedObjectIds ??
       scenario.inventoryObjects
         ?.filter((object) => object.initiallyOwned)
         .map((object) => object.id) ?? [],
   );
   const [usedObjectIds, setUsedObjectIds] = useState<string[]>(
-    () => savedProgress?.usedObjectIds ?? [],
+    () => [],
   );
   const [droppedObjectLocations, setDroppedObjectLocations] = useState<Record<string, string>>(
-    () => savedProgress?.droppedObjectLocations ?? {},
+    () => ({}),
   );
   const [inventoryVisible, setInventoryVisible] = useState(
-    () => savedProgress?.inventoryVisible ?? true,
+    () => true,
   );
   const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>(
-    () => savedProgress?.unlockedLocationIds ?? [],
+    () => [],
   );
   const [revealedHintCounts, setRevealedHintCounts] = useState<
     Record<string, number>
-  >(() => savedProgress?.revealedHintCounts ?? {});
+  >(() => ({}));
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(
-    () => savedProgress?.finalResolutionSolved ?? false,
+    () => false,
   );
   const [progressionVisible, setProgressionVisible] = useState(
-    () => savedProgress?.progressionVisible ?? false,
+    () => false,
   );
   const [missionVisible, setMissionVisible] = useState(
-    () => savedProgress?.missionPanelVisible ?? false,
+    () => false,
+  );
+  const [saveLoadMode, setSaveLoadMode] = useState<SaveLoadMode>(null);
+  const [slotSummaries, setSlotSummaries] = useState<ScenarioProgressSlotSummary[]>(
+    () => loadScenarioProgressSlots(scenario, defaultSelection),
   );
   const [feedback, setFeedback] = useState(
     "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
@@ -113,10 +116,15 @@ export function InvestigationPage({
       )
     : false;
 
-  useEffect(() => {
-    saveScenarioProgress({
+  function refreshSlotSummaries() {
+    setSlotSummaries(loadScenarioProgressSlots(scenario, defaultSelection));
+  }
+
+  function createProgressSave(slot: ScenarioProgressSlot): ScenarioProgressSave {
+    return {
       version: 1,
       scenarioId: scenario.id,
+      slot,
       selection,
       solvedPuzzleIds,
       unlockedDocumentIds,
@@ -130,24 +138,72 @@ export function InvestigationPage({
       inventoryVisible,
       progressionVisible,
       missionPanelVisible: missionVisible,
-      updatedAt: new Date().toISOString(),
-    });
-  }, [
-    droppedObjectLocations,
-    finalResolutionSolved,
-    inventoryVisible,
-    missionVisible,
-    ownedObjectIds,
-    progressionVisible,
-    readDocumentIds,
-    revealedHintCounts,
-    scenario.id,
-    selection,
-    solvedPuzzleIds,
-    unlockedDocumentIds,
-    unlockedLocationIds,
-    usedObjectIds,
-  ]);
+      savedAt: new Date().toISOString(),
+    };
+  }
+
+  function applyProgressSave(save: ScenarioProgressSave) {
+    setSelection(save.selection);
+    setSolvedPuzzleIds(save.solvedPuzzleIds);
+    setUnlockedDocumentIds(save.unlockedDocumentIds);
+    setReadDocumentIds(save.readDocumentIds);
+    setOwnedObjectIds(save.ownedObjectIds);
+    setUsedObjectIds(save.usedObjectIds);
+    setDroppedObjectLocations(save.droppedObjectLocations);
+    setUnlockedLocationIds(save.unlockedLocationIds);
+    setRevealedHintCounts(save.revealedHintCounts);
+    setFinalResolutionSolved(save.finalResolutionSolved);
+    setInventoryVisible(save.inventoryVisible);
+    setProgressionVisible(save.progressionVisible);
+    setMissionVisible(save.missionPanelVisible);
+  }
+
+  function handleSaveSlot(slot: ScenarioProgressSlot, existingSave: ScenarioProgressSave | null) {
+    if (
+      existingSave &&
+      !window.confirm(`L'emplacement ${slot} contient déjà une sauvegarde. Voulez-vous l'écraser ?`)
+    ) {
+      return;
+    }
+
+    const saved = saveScenarioProgress(createProgressSave(slot));
+    refreshSlotSummaries();
+    setSaveLoadMode(null);
+    setFeedback(
+      saved
+        ? `Progression sauvegardée dans l'emplacement ${slot}.`
+        : "La sauvegarde locale n'est pas disponible dans ce navigateur.",
+    );
+  }
+
+  function handleLoadSlot(save: ScenarioProgressSave | null, slot: ScenarioProgressSlot) {
+    if (!save) {
+      setFeedback(`L'emplacement ${slot} ne contient pas encore de sauvegarde.`);
+      return;
+    }
+
+    applyProgressSave(save);
+    refreshSlotSummaries();
+    setSaveLoadMode(null);
+    setFeedback(`Progression chargée depuis l'emplacement ${slot}.`);
+  }
+
+  function formatSavedAt(save: ScenarioProgressSave | null) {
+    if (!save) {
+      return 'Vide';
+    }
+
+    const savedDate = new Date(save.savedAt);
+
+    if (Number.isNaN(savedDate.getTime())) {
+      return 'Sauvegarde disponible';
+    }
+
+    return `Sauvegarde du ${savedDate.toLocaleString('fr-FR', {
+      dateStyle: 'short',
+      timeStyle: 'short',
+    })}`;
+  }
 
   function isPuzzleAvailable(puzzle: Puzzle) {
     return (puzzle.requiredDocumentIds ?? []).every((documentId) =>
@@ -492,17 +548,76 @@ export function InvestigationPage({
         ) : null}
 
         <section className="progress-card mt-6">
-          <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="eyebrow m-0">Progression</h2>
-            <button
-              onClick={() => setProgressionVisible(!progressionVisible)}
-              className="text-sm font-semibold text-teal-700 hover:underline focus:outline-none"
-              type="button"
-            >
-              {progressionVisible ? 'Masquer la progression' : 'Afficher la progression'}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() =>
+                  setSaveLoadMode((currentMode) =>
+                    currentMode === 'save' ? null : 'save',
+                  )
+                }
+                className="secondary-button text-sm"
+                type="button"
+              >
+                Sauvegarder
+              </button>
+              <button
+                onClick={() => {
+                  refreshSlotSummaries();
+                  setSaveLoadMode((currentMode) =>
+                    currentMode === 'load' ? null : 'load',
+                  );
+                }}
+                className="secondary-button text-sm"
+                type="button"
+              >
+                Charger
+              </button>
+              <button
+                onClick={() => setProgressionVisible(!progressionVisible)}
+                className="text-sm font-semibold text-teal-700 hover:underline focus:outline-none"
+                type="button"
+              >
+                {progressionVisible ? 'Masquer la progression' : 'Afficher la progression'}
+              </button>
+            </div>
           </div>
-          
+
+          {saveLoadMode ? (
+            <div className="border-t border-slate-200 p-4">
+              <div className="info-strip text-sm">
+                {saveLoadMode === 'save'
+                  ? "Choisissez un emplacement pour sauvegarder la progression actuelle."
+                  : 'Choisissez une sauvegarde à charger.'}
+              </div>
+              <div className="mt-3 grid gap-3 md:grid-cols-3">
+                {slotSummaries.map(({ slot, save }) => (
+                  <article className="item-card" key={slot}>
+                    <p className="text-sm font-semibold text-slate-950">
+                      Emplacement {slot}
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-slate-600">
+                      {formatSavedAt(save)}
+                    </p>
+                    <button
+                      className="secondary-button mt-3 w-full text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                      disabled={saveLoadMode === 'load' && !save}
+                      type="button"
+                      onClick={() =>
+                        saveLoadMode === 'save'
+                          ? handleSaveSlot(slot, save)
+                          : handleLoadSlot(save, slot)
+                      }
+                    >
+                      {saveLoadMode === 'save' ? 'Sauvegarder ici' : 'Charger'}
+                    </button>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {progressionVisible && (
             <div className="border-t border-slate-200 p-4">
               <div className="grid gap-4 sm:grid-cols-4">

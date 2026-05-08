@@ -425,3 +425,25 @@ Consequence :
 Statut : validee.
 
 A reevaluer : apres audit V0.10.2, notamment avant plusieurs enquetes reelles ou avant un eventuel mode enseignant.
+
+## Decision 30 — Sauvegarde / chargement explicite avec trois slots V0.10.3
+
+Date : 2026-05-08
+
+Decision :
+La V0.10.3 remplace la sauvegarde automatique unique par une sauvegarde / chargement explicite avec trois slots locaux par scenario.
+
+Raison :
+Francois prefere que le joueur controle clairement le moment ou il sauvegarde et le moment ou il charge une progression. Les trois slots permettent plusieurs essais ou reprises sans melanger les sauvegardes.
+
+Consequence :
+- Le panneau `Progression` propose les boutons `Sauvegarder` et `Charger`.
+- Chaque scenario dispose de trois cles locales : `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`.
+- Un slot occupe demande confirmation avant ecrasement.
+- Un slot vide ne peut pas etre charge.
+- La sauvegarde reste locale au navigateur et ne cree ni backend, ni compte utilisateur, ni suivi enseignant.
+- La V0.10.2 devient une etape historique remplacee par le modele explicite V0.10.3.
+
+Statut : validee.
+
+A reevaluer : apres audit UX, notamment si les apprenants ont besoin d'un libelle plus simple ou d'une suppression de sauvegarde.

@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-**V0.10.2 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde locale minimale de progression.**
+**V0.10.3 — jeu complet, exploitable pédagogiquement, avec préparation multi-enquêtes et sauvegarde / chargement explicite à trois slots.**
 
 Le dépôt GitHub existe et le prototype est jouable dans le navigateur.
 
@@ -71,8 +71,9 @@ La boucle principale est désormais :
 - Métadonnées déductives masquées dans l’interface joueur : les personnages et lieux cités ne sont pas affichés automatiquement dans les documents.
 - Registre central des scénarios pour préparer l'ajout futur d'autres enquêtes.
 - Modèle de scénario non enregistré pour guider les futures créations.
-- Sauvegarde locale minimale de progression par scénario avec `localStorage`.
-- Clé de sauvegarde : `enquete-fle:progress:<scenarioId>`.
+- Sauvegarde / chargement explicite de progression par scénario avec `localStorage`.
+- Trois slots locaux par scénario.
+- Clé de sauvegarde : `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`.
 
 ## État narratif et pédagogique
 
@@ -139,7 +140,7 @@ Le dossier `docs/agent-context/` contient notamment :
 
 Priorités possibles :
 
-1. Audit technique et UX de la sauvegarde locale V0.10.2.
+1. Audit technique et UX de la sauvegarde explicite V0.10.3.
 2. Audit technique et documentaire de la préparation multi-enquêtes V0.10.
 3. Première enquête prototype supplémentaire, seulement après validation du cadre V0.10.
 4. V0.7.2 — version simplifiée B1 des textes longs.
@@ -158,4 +159,4 @@ Priorités possibles :
 
 ## Dernière mise à jour
 
-Mise à jour documentaire après la sauvegarde locale minimale V0.10.2.
+Mise à jour documentaire après la sauvegarde / chargement explicite V0.10.3.
