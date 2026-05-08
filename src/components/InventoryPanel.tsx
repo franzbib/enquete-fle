@@ -80,13 +80,22 @@ export function InventoryPanel({
                     key={object.id}
                   >
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <h3 className="text-sm font-semibold text-slate-950">
-                          {object.name}
-                        </h3>
-                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">
-                          {getObjectTypeLabel(object)}
-                        </p>
+                      <div className="flex items-center gap-3">
+                        {object.iconUrl && (
+                          <img
+                            src={object.iconUrl}
+                            alt=""
+                            className="h-10 w-10 rounded-md border border-slate-200 object-contain p-1 shadow-sm bg-white"
+                          />
+                        )}
+                        <div>
+                          <h3 className="text-sm font-semibold text-slate-950">
+                            {object.name}
+                          </h3>
+                          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">
+                            {getObjectTypeLabel(object)}
+                          </p>
+                        </div>
                       </div>
                       <span className="status-pill status-pill-ready">
                         {isUsed ? object.usedLabel ?? 'Utilisé' : 'Trouvé'}

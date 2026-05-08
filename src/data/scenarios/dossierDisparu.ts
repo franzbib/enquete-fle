@@ -19,6 +19,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'secretariat',
       name: 'Secrétariat',
       kind: 'main',
+      vignetteUrl: '/assets/locations/secretariat-temp.png',
       description:
         "Le bureau où le dossier de Chen devait rester jusqu'à son envoi. On y trouve les premières traces administratives.",
       role: 'Établir les horaires de départ et comprendre l’enjeu du dossier.',
@@ -31,6 +32,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'accueil',
       name: 'Accueil',
       kind: 'optional',
+      vignetteUrl: '/assets/locations/accueil-temp.png',
       description:
         "L'accueil est un lieu de passage. On y demande des renseignements, on confirme une inscription, on téléphone, on cherche parfois une salle ou une photocopie.",
       role: "Donner un peu de vie administrative à l'ISPA sans ajouter de preuve décisive.",
@@ -43,6 +45,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'couloir',
       name: 'Couloir',
       kind: 'transition',
+      vignetteUrl: '/assets/locations/couloir-temp.png',
       description:
         'Un passage entre le secrétariat et la salle informatique. Plusieurs témoins ont vu des allées et venues.',
       role: 'Comparer les déplacements et repérer ce qui ne colle pas dans la chronologie.',
@@ -55,6 +58,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'salle-informatique',
       name: 'Salle informatique',
       kind: 'locked',
+      vignetteUrl: '/assets/locations/salle-informatique-temp.png',
       description:
         "Une salle utilisée pour imprimer des documents administratifs. L'accès est limité au début de l'enquête.",
       role: "Utiliser un badge visiteur pour entrer, puis vérifier si quelqu'un est resté plus longtemps qu'il ne le dit.",
@@ -311,6 +315,7 @@ export const dossierDisparuScenario: Scenario = {
     {
       id: 'badge-visiteur',
       name: 'Badge visiteur',
+      iconUrl: '/assets/objects/badge-visiteur.png',
       objectType: 'access',
       description:
         "Un badge visiteur oublié sur le comptoir du secrétariat. Il permet d'accéder provisoirement à certaines salles réservées au personnel ou aux étudiants autorisés.",
@@ -325,6 +330,7 @@ export const dossierDisparuScenario: Scenario = {
     {
       id: 'ticket-bus',
       name: 'Ticket de bus',
+      iconUrl: '/assets/objects/ticket-bus.png',
       objectType: 'evidence',
       description:
         "Un ticket de bus froissé. L'heure imprimée pourrait aider à vérifier un déplacement, mais il ne suffit pas à lui seul à résoudre l'enquête.",
@@ -336,6 +342,7 @@ export const dossierDisparuScenario: Scenario = {
     {
       id: 'cle-usb-exercices-b1',
       name: 'Clé USB "Exercices B1"',
+      iconUrl: '/assets/objects/cle-usb-exercices-b1.png',
       objectType: 'ambient',
       description:
         "Une clé USB oubliée près d'un ordinateur. Elle contient des fichiers de cours et quelques exercices de grammaire. Rien ne semble directement lié au dossier disparu.",

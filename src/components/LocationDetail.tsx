@@ -72,6 +72,13 @@ export function LocationDetail({
       <h2 className="mt-2 text-2xl font-bold text-slate-950">
         {location.name}
       </h2>
+      {location.vignetteUrl && (
+        <img
+          src={location.vignetteUrl}
+          alt={`Vignette temporaire de ${location.name}`}
+          className="mt-4 h-32 w-full rounded-md object-cover border border-slate-300 shadow-sm opacity-90"
+        />
+      )}
       <p className="body-copy mt-4">{location.description}</p>
       <p className="info-strip mt-4 text-sm leading-6">
         {location.role}
@@ -134,13 +141,22 @@ export function LocationDetail({
                   key={object.id}
                 >
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <p className="text-sm font-semibold text-slate-950">
-                        {object.name}
-                      </p>
-                      <p className="mt-1 text-sm leading-6 text-slate-700">
-                        {object.description}
-                      </p>
+                    <div className="flex items-center gap-3">
+                      {object.iconUrl && (
+                        <img
+                          src={object.iconUrl}
+                          alt=""
+                          className="h-10 w-10 rounded-md border border-slate-200 object-contain p-1 shadow-sm bg-white"
+                        />
+                      )}
+                      <div>
+                        <p className="text-sm font-semibold text-slate-950">
+                          {object.name}
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-slate-700">
+                          {object.description}
+                        </p>
+                      </div>
                     </div>
                     <button
                       className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"

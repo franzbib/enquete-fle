@@ -27,6 +27,7 @@ export type Location = {
   description: string;
   role: string;
   available: boolean;
+  vignetteUrl?: string;
   documentIds: string[];
   presentCharacterIds: string[];
   relatedCharacterIds?: string[];
@@ -77,6 +78,7 @@ export type InventoryObject = {
   name: string;
   objectType: 'access' | 'evidence' | 'ambient' | 'preparatory';
   description: string;
+  iconUrl?: string;
   originLocationId?: string;
   initiallyVisible?: boolean;
   initiallyOwned?: boolean;
@@ -145,6 +147,7 @@ export type FinalResolution = {
   id: string;
   title: string;
   description: string;
+  iconUrl?: string;
   prompt: string;
   requiredPuzzleIds?: string[];
   requiredDocumentIds?: string[];

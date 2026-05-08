@@ -284,21 +284,15 @@ Cette étape respecte l'harmonisation de style attendue (2D semi-illustré, apla
 
 Pour plus de détails techniques sur l'intégration et les prompts génératifs, se référer au document dédié : `docs/portrait-system-v0.9.2.md`.
 
-## Lieux récurrents
+## Lieux récurrents (V0.9.3)
 
-Les futures vignettes de lieux doivent rester sobres :
+Des vignettes temporaires ont été générées en V0.9.3 pour les lieux principaux (Accueil, Secrétariat, Couloir, Salle informatique). Elles respectent un ratio 3:2 et une esthétique sobre et sans personnage. Elles sont stockées dans `public/assets/locations/` avec le suffixe `-temp` pour indiquer qu'elles pourront être remplacées par des versions définitives sans modifier le code.
 
-- accueil ;
-- secrétariat ;
-- salle informatique ;
-- couloir ;
-- bibliothèque universitaire ;
-- salle des profs ;
-- cafétéria.
+Pour plus de détails, voir `docs/location-vignettes-and-object-icons-v0.9.3.md`.
 
-Chaque lieu doit avoir un signe spatial clair : comptoir, dossiers, ordinateurs, affiches, rayonnages, tables, etc.
+## Objets récurrents (V0.9.3)
 
-## Objets récurrents
+Une base stable d'icônes carrées (1:1) a été créée pour les objets observables (Badge visiteur, Ticket de bus, Clé USB). Ces icônes sont intégrées directement dans les listes d'inventaire et les fiches lieux pour accroître la lisibilité.
 
 Les objets doivent être simples et lisibles :
 
