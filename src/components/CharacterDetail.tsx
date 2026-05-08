@@ -19,11 +19,11 @@ export function CharacterDetail({
             <img
               src={character.portraitUrl}
               alt={`Portrait de ${character.name}`}
-              className="h-24 w-24 rounded-md border border-slate-300 object-cover shadow-sm"
+              className="h-28 w-28 sm:h-32 sm:w-32 rounded-md border border-slate-300 object-cover shadow-sm"
             />
           ) : (
-            <div className="flex h-24 w-24 items-center justify-center rounded-md border border-slate-300 bg-stone-100 shadow-sm">
-              <span className="text-2xl font-bold text-slate-400">
+            <div className="flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center rounded-md border border-slate-300 bg-stone-100 shadow-sm">
+              <span className="text-3xl sm:text-4xl font-bold text-slate-400">
                 {character.name.charAt(0)}
               </span>
             </div>
