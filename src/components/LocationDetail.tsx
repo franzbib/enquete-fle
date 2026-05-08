@@ -49,7 +49,11 @@ export function LocationDetail({
                   {document.title}
                 </button>
               </li>
-            )) : <li className="text-slate-500 italic">Aucun document</li>}
+            )) : (
+              <li className="text-slate-500 italic">
+                Aucun document disponible pour l’instant
+              </li>
+            )}
           </ul>
         </div>
         <div>

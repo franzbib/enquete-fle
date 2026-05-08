@@ -421,7 +421,9 @@ export function InvestigationPage({
                 title: location.name,
                 meta: accessibleLocationIds.includes(location.id)
                   ? 'Disponible'
-                  : 'Accès limité',
+                  : location.kind === 'locked'
+                    ? 'Accès limité : badge requis'
+                    : 'Accès limité',
                 disabled: !accessibleLocationIds.includes(location.id),
               }))}
               onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
