@@ -10,438 +10,275 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.9.0 — cadrage graphique initial et première amélioration visuelle légère.
+**Version actuelle : V0.9.3 — jeu complet, exploitable pédagogiquement, avec direction graphique, portraits harmonisés, vignettes temporaires de lieux et icônes d’objets.**
 
-Le dépôt GitHub existe.
-
-Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
-
-L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices progressifs et formuler une résolution finale prudente.
-
-La V0.7 ajoute une documentation pédagogique externe : `docs/teacher-guide-v0.7.md`. La V0.7.1 ajoute une fiche élève imprimable : `docs/student-investigation-sheet-v0.7.1.md`. Ces deux supports ne modifient pas le jeu et ne créent pas encore de mode enseignant intégré.
-
-La V0.9.0 pose une première direction artistique : audit visuel, charte graphique initiale, règles d'harmonisation des personnages récurrents à partir de références hétérogènes, et amélioration légère des surfaces d'interface.
-
-Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
-
-Le projet intègre désormais explicitement l’idée d’un univers récurrent : certains personnages et certains lieux pourront revenir d’un scénario à l’autre, avec une identité narrative et visuelle stable, tout en laissant chaque scénario ajouter ses propres personnages et lieux spécifiques.
-
-## 3. Actions déjà réalisées
-
-### Action 1 — Créer le dépôt GitHub
-
-Statut : fait.
-
-Dépôt :
+Le dépôt GitHub existe :
 
 `https://github.com/franzbib/enquete-fle`
 
-### Action 2 — Créer le dossier documentaire
+Le scénario prototype **Le dossier disparu** est jouable de bout en bout.
 
-Statut : fait.
+Le jeu contient actuellement :
 
-Dossier :
+- exploration par lieux ;
+- départ à l’Accueil ;
+- personnages et documents contextualisés ;
+- inventaire dynamique ;
+- objets observables, objets trouvés, objets reposables ;
+- badge visiteur présenté dans la salle informatique ;
+- salle informatique fermée puis ouverte ;
+- historique d’impression visible dès ouverture de la salle informatique ;
+- énigme de chronologie ;
+- énigme de contradiction ;
+- indices progressifs ;
+- résolution finale prudente ;
+- fin heureuse ;
+- fiche enseignant ;
+- fiche élève imprimable ;
+- direction artistique initiale ;
+- portraits harmonisés ;
+- vignettes temporaires de lieux ;
+- icônes d’objets.
 
-`docs/agent-context/`
+## 3. Actions réalisées
 
-### Action 3 — Créer les documents de contexte agent
-
-Statut : fait.
-
-Fichiers :
-
-- `00_AGENT_CHEF_ORCHESTRE.md`
-- `01_ETAT_DU_PROJET.md`
-- `02_VISION_PROJET.md`
-- `03_CAHIER_DES_CHARGES_GENERAL.md`
-- `04_FEUILLE_DE_ROUTE.md`
-- `05_ESPACE_GRAPHIQUE_PROGRESSIF.md`
-- `06_ROLES_AGENTS.md`
-- `07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
-- `08_PROCHAINES_ACTIONS.md`
-- `09_DECISIONS_LOG.md`
-- `10_PERSONNAGES_ET_LIEUX_RECURRENTS.md`
-
-### Action 4 — Créer le squelette technique V0.1
-
-Statut : fait.
-
-Livrables :
-
-- application React + Vite + TypeScript ;
-- Tailwind CSS configuré ;
-- dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types` ;
-- page d’accueil minimale ;
-- écran de briefing minimal ;
-- document `docs/architecture.md`.
-
-### Action 5 — Créer le moteur minimal de scénario V0.2
+### V0.1 — Squelette technique
 
 Statut : fait.
 
 Livrables :
 
-- types `Scenario`, `Location`, `Character`, `InvestigationDocument`, `InventoryObject`, `Puzzle` et `Hint` ;
-- scénario enrichi “Le dossier disparu” ;
-- loader local simple ;
-- affichage des lieux, personnages et documents ;
+- React + Vite + TypeScript ;
+- Tailwind CSS ;
+- structure `src/components`, `src/engine`, `src/data/scenarios`, `src/types` ;
+- page d’accueil ;
+- briefing ;
+- architecture initiale.
+
+### V0.2 — Moteur minimal de scénario
+
+Statut : fait.
+
+Livrables :
+
+- types de scénario ;
+- chargement local ;
+- lieux, personnages, documents ;
 - navigation accueil / briefing / enquête.
 
-### Action 6 — Créer la première enquête minimale V0.3
+### V0.3 — Première enquête minimale
 
 Statut : fait.
 
 Livrables :
 
-- scénario enrichi avec documents utiles ;
-- deux objets préparatoires ;
-- deux énigmes simples ;
+- deux énigmes ;
 - progression locale ;
-- feedback sobre ;
-- déblocage de documents.
+- feedbacks ;
+- premiers documents débloqués.
 
-### Action 7 — Réaliser un audit UX de la V0.3
+### V0.3.1 / V0.3.3 — Ajustements UX et cohérence narrative
 
 Statut : fait.
-
-Agent concerné : Antigravity.
 
 Livrables :
 
-- rapport `docs/ux-audit-v0.3.md` ;
-- clarification du briefing ;
-- encadré “Votre objectif” ;
-- encadré “Que faire maintenant ?” ;
-- indicateurs `✨ Nouveau` et `✓ Lu` ;
-- micro-animations fonctionnelles et discrètes ;
-- mise à jour du journal des décisions.
+- navigation recentrée sur les lieux ;
+- séparation exploration / déductions ;
+- correction de la contradiction Fahad ;
+- cohérence des documents ;
+- énigme de contradiction par sélection de deux pièces du dossier.
 
-Point reporté :
-
-- possibilité de consulter simultanément un document et une énigme. Ce chantier est important, mais doit être traité plus tard pour éviter une refonte prématurée.
-
-### Action 8 — Créer le document sur les personnages et lieux récurrents
+### V0.4 — Inventaire minimal
 
 Statut : fait.
 
-Fichier :
+Livrables :
 
-`10_PERSONNAGES_ET_LIEUX_RECURRENTS.md`
+- objets observables ;
+- panneau `Objets trouvés` ;
+- badge visiteur ;
+- ticket de bus ;
+- clé USB d’ambiance ;
+- salle informatique verrouillée puis accessible.
 
-Objectif :
+### V0.5 — Indices progressifs
 
-Prévoir un noyau évolutif de personnages et lieux récurrents, traités séparément des scénarios, afin de construire progressivement une identité narrative et visuelle stable.
+Statut : fait.
 
-Conséquence pour la suite :
+Livrables :
 
-Codex devra éviter de coder les personnages, lieux, noms ou visuels en dur dans les composants. Les scénarios devront pouvoir référencer à terme des personnages et lieux récurrents, tout en ajoutant des éléments spécifiques.
+- champ `Puzzle.hints` ;
+- bouton `Voir un indice` ;
+- indices progressifs sans score ni pénalité.
 
-La réserve récurrente ne doit pas être utilisée systématiquement. Avant d'intégrer un personnage ou un lieu de cette réserve, l'agent devra vérifier que sa présence sert réellement le scénario, la progression ludique ou l'objectif FLE/FOU.
+### V0.5.1 / V0.6.2 — Stabilisation de jouabilité
 
-## 4. Action immédiate
+Statut : fait.
 
-### Action 9 — Tester humainement la V0.3 stabilisée UX
+Livrables :
+
+- badge utilisé dans son contexte spatial ;
+- bouton `Présenter le badge` ;
+- brouillon de mail retiré de l’énigme 2 avant sa découverte ;
+- départ à l’Accueil ;
+- historique d’impression disponible dès ouverture de la salle informatique ;
+- métadonnées déductives masquées dans l’interface joueur.
+
+### V0.5.2 — Décor vivant contrôlé
+
+Statut : fait.
+
+Livrables :
+
+- ajout de l’Accueil ;
+- ajout de Thi-Thai ;
+- ajout d’une affiche décorative sur les inscriptions aux examens ;
+- règle : ajouter du monde autour de l’enquête, pas une nouvelle enquête dans l’enquête.
+
+### V0.6 — Résolution finale prudente
+
+Statut : fait.
+
+Livrables :
+
+- hypothèse finale ;
+- sélection de trois pièces justificatives ;
+- feedbacks non accusateurs ;
+- fin heureuse ;
+- dossier de Chen validé.
+
+### V0.7 — Fiche enseignant
+
+Statut : fait.
+
+Livrable :
+
+- `docs/teacher-guide-v0.7.md`.
+
+### V0.7.1 — Fiche élève imprimable
+
+Statut : fait.
+
+Livrable :
+
+- `docs/student-investigation-sheet-v0.7.1.md`.
+
+### V0.9.0 — Cadrage graphique initial
+
+Statut : fait.
+
+Livrables :
+
+- `docs/visual-audit-v0.9.0.md` ;
+- `docs/visual-guidelines-v0.9.0.md` ;
+- direction artistique : carnet d’enquête clair dans un campus vivant ;
+- première passe UI légère.
+
+### V0.9.1 — Progression masquable et guidage intégré
+
+Statut : fait.
+
+Livrables :
+
+- bandeau `Que faire maintenant ?` intégré dans `Progression` ;
+- panneau progression masquable ;
+- progression masquée par défaut.
+
+### V0.9.2 — Portraits harmonisés
+
+Statut : fait.
+
+Livrables :
+
+- type `Character.portraitUrl` ;
+- portraits récurrents dans `public/assets/portraits/` ;
+- intégration dans `CharacterDetail` ;
+- fallback par initiale ;
+- documentation `docs/portrait-system-v0.9.2.md`.
+
+### V0.9.3 — Vignettes de lieux et icônes d’objets
+
+Statut : fait.
+
+Livrables :
+
+- type `Location.vignetteUrl` ;
+- type `InventoryObject.iconUrl` ;
+- vignettes temporaires de lieux dans `public/assets/locations/` ;
+- icônes d’objets dans `public/assets/objects/` ;
+- intégration dans `LocationDetail` et `InventoryPanel` ;
+- documentation `docs/location-vignettes-and-object-icons-v0.9.3.md`.
+
+## 4. Action immédiate recommandée
+
+### Action 18 — Tester visuellement la V0.9.3
 
 Statut : à faire.
 
 Objectif :
 
-Vérifier localement que les améliorations UX de la V0.3 rendent le parcours plus clair avant d’ajouter l’inventaire.
+Vérifier humainement que les nouvelles images enrichissent le jeu sans surcharger l’interface.
 
 Commande :
 
 ```powershell
 cd C:\dev\enquete-fle
-npm.cmd run dev
-```
-
-Puis ouvrir :
-
-```text
-http://localhost:5173/
+npm.cmd run dev -- --host 127.0.0.1 --port 5173
 ```
 
 À vérifier :
 
-- le briefing est-il plus lisible ?
-- l’objectif est-il bien identifié ?
-- l’encadré “Que faire maintenant ?” aide-t-il réellement ?
-- les documents sont-ils bien marqués `✨ Nouveau` puis `✓ Lu` ?
-- les deux énigmes sont-elles compréhensibles ?
-- les retours après réponse sont-ils clairs ?
-- les micro-animations fonctionnelles restent-elles discrètes ?
-- l’interface reste-t-elle sobre et provisoire ?
+- les portraits sont-ils assez grands sans écraser le texte ?
+- les vignettes de lieux sont-elles utiles sans paraître définitives ?
+- les icônes d’objets sont-elles lisibles ?
+- le départ à l’Accueil reste-t-il clair ?
+- l’inventaire reste-t-il lisible ?
+- la salle informatique fermée puis ouverte fonctionne-t-elle toujours ?
+- la résolution finale reste-t-elle claire ?
 
 Décision attendue après test :
 
-- si le parcours est assez clair : passer à la V0.4 ;
-- si le parcours reste confus : demander une dernière micro-correction UX avant l’inventaire.
+- si l’interface paraît équilibrée : passer à V0.9.4 ;
+- si un détail gêne : demander une micro-correction graphique ciblée.
 
-## 5. Action technique suivante
+## 5. Action graphique suivante possible
 
-### Action 10 — Créer la V0.4 : inventaire minimal
-
-Statut : fait.
-
-Agent concerné : Codex.
-
-Objectif :
-
-Créer un inventaire minimal permettant d’afficher les objets, de les obtenir, de les marquer comme trouvés ou utilisés, et d’utiliser un objet pour débloquer une piste, un document ou un lieu.
-
-Attention :
-
-Codex devra tenir compte du document `10_PERSONNAGES_ET_LIEUX_RECURRENTS.md` pour éviter de coder les personnages, lieux ou visuels en dur.
-
-Contenu attendu :
-
-- affichage sobre des objets ;
-- obtention d’un objet ;
-- statut simple `non trouvé` / `trouvé` / `utilisé` ;
-- utilisation d’un objet pour débloquer un document, un lieu ou une piste ;
-- maintien d’un nombre d’objets limité ;
-- logique compatible avec des scénarios futurs ;
-- documentation de l’avancement.
-
-Livrables réalisés :
-
-- panneau `Objets trouvés` ;
-- objets observables dans les lieux ;
-- prise d’objet depuis le détail d’un lieu ;
-- statut `trouvé` / `utilisé` ;
-- badge visiteur qui débloque la salle informatique ;
-- ticket de bus comme preuve faible ;
-- clé USB d’ambiance sans effet de preuve forte ;
-- documentation `docs/inventory-v0.4.md`.
-
-À ne pas faire encore :
-
-- système d’indices complet ;
-- accusation finale enrichie ;
-- deuxième scénario ;
-- identité graphique finale ;
-- backend ;
-- base de données ;
-- inventaire de type RPG.
-
-## 6. Action technique suivante
-
-### Action 11 — Créer la V0.5 : indices gradués
-
-Statut : fait.
-
-Agent concerné : Codex.
-
-Objectif :
-
-Créer un système d’indices minimal pour éviter les blocages sur les énigmes principales.
-
-Livrables réalisés :
-
-- champ `Puzzle.hints` ;
-- trois indices progressifs pour la chronologie ;
-- trois indices progressifs pour la contradiction ;
-- bouton `Voir un indice` dans le détail d'une énigme ;
-- affichage des indices un par un ;
-- état React local `revealedHintCounts` ;
-- absence de score et de pénalité ;
-- documentation `docs/hints-v0.5.md`.
-
-À ne pas faire encore :
-
-- accusation finale ;
-- score complet ;
-- deuxième scénario ;
-- backend ;
-- base de données ;
-- mode enseignant complet.
-
-## 7. Action technique suivante
-
-### Action 12 — Créer la V0.6 : résolution finale prudente
-
-Statut : fait.
-
-Agent concerné : Codex + scénariste-enquête + contrôleur de cohérence narrative.
-
-Objectif :
-
-Créer une résolution finale minimale mais argumentée, qui demande au joueur de sélectionner une hypothèse et des preuves, sans transformer la fin en accusation brutale ou en QCM scolaire.
-
-Livrables réalisés :
-
-- champ `Scenario.finalResolution` ;
-- composant `FinalResolutionDetail` ;
-- bouton `Conclusion de l'enquête` accessible après les deux énigmes ;
-- choix d'une hypothèse finale prudente ;
-- sélection de trois pièces justificatives ;
-- feedbacks non humiliants ;
-- fin heureuse et réparatrice ;
-- documentation `docs/final-resolution-v0.6.md`.
-
-À ne pas faire encore :
-
-- score complet ;
-- mode enseignant complet ;
-- deuxième scénario ;
-- backend ;
-- base de données ;
-- identité graphique finale.
-
-## 8. Prompt archivé pour la V0.5
-
-```text
-Agis comme architecte technique du projet `enquete-fle`.
-
-Dépôt GitHub :
-https://github.com/franzbib/enquete-fle
-
-Dossier local :
-C:\dev\enquete-fle
-
-Lis d’abord tous les documents du dossier `docs/agent-context`, en particulier :
-- `03_CAHIER_DES_CHARGES_GENERAL.md`
-- `04_FEUILLE_DE_ROUTE.md`
-- `07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
-- `09_DECISIONS_LOG.md`
-- `10_PERSONNAGES_ET_LIEUX_RECURRENTS.md`
-
-Contexte :
-Le projet est en V0.4. Le joueur peut consulter des lieux, personnages et documents, résoudre deux énigmes simples, obtenir quelques objets et utiliser le badge visiteur pour accéder à la salle informatique.
-
-Objectif :
-Créer la V0.5 : système d’indices minimal et gradué.
-
-Contraintes :
-- React + Vite + TypeScript
-- Tailwind CSS
-- jeu 2D principalement statique
-- micro-animations fonctionnelles discrètes autorisées si elles aident l’orientation du joueur
-- pas de backend
-- pas de base de données
-- pas de moteur de jeu lourd
-- scénarios séparés du moteur
-- architecture simple, maintenable et progressive
-- ne pas coder en dur les personnages, lieux ou visuels dans les composants
-
-À créer ou améliorer :
-1. Trois niveaux d’indices pour chaque énigme principale.
-2. Une interface sobre pour demander un indice.
-3. Un suivi local des indices consultés.
-4. Des feedbacks qui aident sans humilier le joueur.
-5. Une documentation claire de la logique d’indices.
-
-Ne crée pas encore :
-- accusation finale enrichie ;
-- score complet ;
-- deuxième scénario ;
-- identité graphique finale ;
-- backend ;
-- inventaire complexe.
-
-Mets à jour sobrement :
-- `docs/architecture.md` ;
-- `docs/agent-context/01_ETAT_DU_PROJET.md` ;
-- `docs/agent-context/08_PROCHAINES_ACTIONS.md` ;
-- `docs/agent-context/09_DECISIONS_LOG.md` si une décision technique importante est prise.
-
-À la fin, indique :
-1. les fichiers créés ;
-2. les fichiers modifiés ;
-3. les choix techniques faits ;
-4. les commandes à lancer ;
-5. ce qui reste à faire pour la V0.6.
-```
-
-## 9. Action technique suivante
-
-### Action 13 — Préparer la V0.7 : fiche enseignant et exploitation pédagogique
-
-Statut : fait.
-
-Agent concerné : Codex + didacticien FLE/FOU + contrôleur de cohérence narrative.
-
-Objectif :
-
-Documenter les objectifs pédagogiques implicites de la première enquête et préparer un mode enseignant léger, sans modifier l'interface joueur en exercice scolaire.
-
-Livrables réalisés :
-
-- fiche enseignant `docs/teacher-guide-v0.7.md` ;
-- présentation du scénario et du public visé ;
-- formats de séance possibles ;
-- objectifs FLE/FOU et compétences travaillées ;
-- déroulement conseillé en classe ;
-- aides graduées ;
-- corrigé complet de l'enquête ;
-- points de langue exploitables ;
-- prolongements oraux, écrits, FOU, grammaticaux et interculturels ;
-- limites de la V0.7 et étapes futures.
-
-À ne pas faire encore :
-
-- score complet ;
-- deuxième scénario ;
-- backend ;
-- base de données ;
-- identité graphique finale.
-
-## 10. Action pédagogique suivante
-
-### Action 14 — Préparer la V0.7.1 : fiche élève imprimable
-
-Statut : fait.
-
-Agent concerné : Codex + didacticien FLE/FOU + documentaliste pédagogique.
-
-Objectif :
-
-Créer une fiche élève imprimable qui aide à prendre des notes pendant l'enquête sans donner la solution.
-
-Contenu attendu :
-
-- tableau des lieux visités ;
-- tableau des personnages rencontrés ;
-- espace pour noter les pièces importantes ;
-- frise chronologique à compléter ;
-- zone pour formuler une hypothèse prudente ;
-- rappel de vocabulaire utile ;
-- consignes courtes adaptées à B1/B2.
-
-Livrables réalisés :
-
-- fiche élève `docs/student-investigation-sheet-v0.7.1.md` ;
-- carnet d'enquête imprimable ;
-- espaces de prise de notes sur les lieux, personnages, documents et objets ;
-- distinction explicite entre objet et pièce du dossier ;
-- frise chronologique ouverte ;
-- espace de comparaison pour la contradiction ;
-- zone de formulation d'hypothèses ;
-- canevas d'explication finale prudente ;
-- activité légère discours direct / discours indirect ;
-- vocabulaire utile ;
-- auto-évaluation rapide.
-
-À ne pas faire encore :
-
-- mode enseignant intégré ;
-- suivi étudiant ;
-- score ;
-- nouvelle mécanique ;
-- deuxième scénario ;
-- refonte graphique.
-
-## 11. Action pédagogique suivante
-
-### Action 15 — Préparer la V0.7.2 : version simplifiée B1
+### Action 19 — Préparer la V0.9.4 : icônes de statuts d’interface
 
 Statut : à faire.
 
-Agent concerné : Codex + didacticien FLE/FOU + contrôleur de cohérence narrative.
+Objectif :
+
+Créer ou harmoniser de petites icônes pour les statuts de l’interface.
+
+Priorités possibles :
+
+- lieu fermé ;
+- lieu ouvert ;
+- document nouveau ;
+- document lu ;
+- objet trouvé ;
+- objet utilisé ;
+- énigme validée ;
+- indice disponible.
+
+Contraintes :
+
+- rester sobre ;
+- ne pas alourdir l’interface ;
+- ne pas remplacer les libellés textuels indispensables ;
+- préserver la lisibilité B1/B2.
+
+## 6. Action pédagogique suivante possible
+
+### Action 20 — Préparer la V0.7.2 : version simplifiée B1
+
+Statut : à faire.
 
 Objectif :
 
-Préparer une version plus accessible B1 de certains textes longs, sans appauvrir la logique d'enquête ni modifier les mécaniques.
+Préparer une version plus accessible B1 de certains textes longs, sans appauvrir la logique d’enquête ni modifier les mécaniques.
 
 À vérifier :
 
@@ -449,114 +286,26 @@ Préparer une version plus accessible B1 de certains textes longs, sans appauvri
 - longueur des documents de témoignage ;
 - lisibilité de la conclusion finale ;
 - maintien de la prudence argumentative ;
-- distinction entre simplification linguistique et simplification excessive de l'enquête.
+- distinction entre simplification linguistique et simplification excessive de l’enquête.
 
-À ne pas faire encore :
+## 7. Actions reportées
 
-- nouveau scénario ;
-- refonte UX ;
-- score ;
-- backend ;
-- suivi étudiant ;
-- mode enseignant intégré.
-
-## 12. Action graphique réalisée
-
-### Action 16 — Créer la V0.9.0 : cadrage graphique initial
-
-Statut : fait.
-
-Agent concerné : Codex + directeur artistique UX/UI + garant de cohérence visuelle.
-
-Objectif :
-
-Définir une direction artistique claire et appliquer une première amélioration légère de l'interface, sans refonte totale et sans produire encore les assets finaux.
-
-Livrables réalisés :
-
-- audit visuel `docs/visual-audit-v0.9.0.md` ;
-- charte visuelle initiale `docs/visual-guidelines-v0.9.0.md` ;
-- palette papier / encre / vert administratif / bleu dossier / ambre indice ;
-- règles d'harmonisation pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe ;
-- première couche de classes visuelles dans `src/styles.css` ;
-- application légère sur l'accueil, le briefing, l'enquête, les fiches, documents, objets, énigmes et résolution finale.
-
-À ne pas faire encore :
-
-- portraits finaux ;
-- vignettes définitives de lieux ;
-- icônes définitives ;
-- refonte UX totale ;
-- nouveau scénario ;
-- animation complexe.
-
-## 13. Action graphique suivante
-
-### Action 17 — Préparer la V0.9.1 : planche de portraits harmonisés
-
-Statut : à faire.
-
-Agent concerné : directeur artistique UX/UI + concepteur d'assets 2D + contrôleur de cohérence visuelle.
-
-Objectif :
-
-Produire une première planche de portraits récurrents harmonisés, à partir des références visuelles fournies, sans intégration définitive dans le jeu.
-
-Personnages prioritaires :
-
-- Delphine ;
-- François ;
-- Heïdi ;
-- Marine ;
-- Mathias ;
-- Rodolphe.
-
-À vérifier :
-
-- cohérence de style entre les portraits ;
-- maintien des signes distinctifs ;
-- simplification de la référence plus picturale de Marine ;
-- compatibilité avec la palette V0.9.0 ;
-- lisibilité en petite taille.
-
-## 14. Actions reportées
-
-Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
+Les actions suivantes sont importantes mais ne doivent pas être lancées sans décision explicite :
 
 - consultation parallèle document / énigme ;
-- système d’indices complet ;
 - mode enseignant intégré ;
-- identité graphique définitive ;
-- portraits définitifs ;
-- visuels définitifs des lieux récurrents ;
 - deuxième scénario ;
 - outil d’édition de scénarios ;
 - suivi des résultats étudiants ;
 - backend ;
 - base de données ;
-- sons.
+- sons ;
+- identité graphique définitive des lieux.
 
-## 15. Règle de priorité
-
-Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
-
-1. clarté du parcours ;
-2. logique de progression ;
-3. objets utiles ;
-4. indices ;
-5. résolution finale ;
-6. exploitation enseignante ;
-7. fiche élève ;
-8. version B1 simplifiée ;
-9. mode enseignant minimal ;
-10. cadrage graphique ;
-11. portraits harmonisés ;
-12. identité graphique finale.
-
-## 16. Question à poser à chaque reprise
+## 8. Règle de priorité
 
 À chaque reprise du projet, commencer par demander :
 
 > Quelle est la prochaine action limitée, utile et vérifiable ?
 
-Si une action ne répond pas à cette question, elle doit être reportée.
+Si une action ne répond pas à cette question, elle doit être reportée ou reformulée.
