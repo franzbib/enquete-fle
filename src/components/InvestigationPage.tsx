@@ -53,6 +53,7 @@ export function InvestigationPage({
     Record<string, number>
   >({});
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(false);
+  const [progressionVisible, setProgressionVisible] = useState(false);
   const [feedback, setFeedback] = useState(
     "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
   );
@@ -397,60 +398,58 @@ export function InvestigationPage({
           </div>
         </header>
 
-        <div
-          key={
-            visibleDocuments.length +
-            readDocumentIds.length +
-            solvedPuzzleIds.length +
-            ownedObjectIds.length +
-            usedObjectIds.length +
-            (finalResolutionSolved ? 1 : 0)
-          }
-          className="status-callout mt-4 animate-highlight"
-        >
-          <h2 className="text-sm font-bold text-amber-900">Que faire maintenant ?</h2>
-          <p className="mt-1 text-sm text-amber-800">
-            {visibleDocuments.length === 0
-              ? "Commencez par explorer les Lieux ou interroger les Personnages."
-              : readDocumentIds.length < visibleDocuments.length
-                ? "Vous avez de nouveaux documents. Lisez-les attentivement."
-                : solvedPuzzleIds.length < puzzles.length
-                  ? "Vous avez lu tous les documents. Essayez de résoudre une énigme disponible."
-                  : finalResolution && !finalResolutionSolved
-                    ? "Vous pouvez maintenant formuler une explication finale prudente."
-                    : "Félicitations, l'enquête se termine sur une solution réparatrice."}
-          </p>
-        </div>
-
-        <section className="progress-card mt-6 grid gap-4 sm:grid-cols-4">
-          <div>
-            <h2 className="eyebrow">
-              Progression
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-slate-700">{feedback}</p>
+        <section className="progress-card mt-6">
+          <div className="flex items-center justify-between px-4 py-3">
+            <h2 className="eyebrow m-0">Progression</h2>
+            <button
+              onClick={() => setProgressionVisible(!progressionVisible)}
+              className="text-sm font-semibold text-teal-700 hover:underline focus:outline-none"
+              type="button"
+            >
+              {progressionVisible ? 'Masquer la progression' : 'Afficher la progression'}
+            </button>
           </div>
-          <div>
-            <p className="text-sm font-semibold text-slate-950">Énigmes validées</p>
-            <p className="mt-2 text-sm text-slate-700">
-              {solvedPuzzleIds.length} / {puzzles.length}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-slate-950">
-              Documents disponibles
-            </p>
-            <p className="mt-2 text-sm text-slate-700">
-              {visibleDocuments.length} / {scenario.documents.length}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-slate-950">
-              Objets trouvés
-            </p>
-            <p className="mt-2 text-sm text-slate-700">
-              {ownedObjectIds.length} / {inventoryObjects.length}
-            </p>
-          </div>
+          
+          {progressionVisible && (
+            <div className="border-t border-slate-200 p-4">
+              <div className="grid gap-4 sm:grid-cols-4">
+                <div className="sm:col-span-1">
+                  <p className="text-sm font-semibold text-slate-950">Orientation actuelle</p>
+                  <p className="mt-2 text-sm font-medium text-amber-800 animate-highlight">
+                    {visibleDocuments.length === 0
+                      ? "Commencez par explorer les Lieux ou interroger les Personnages."
+                      : readDocumentIds.length < visibleDocuments.length
+                        ? "Vous avez de nouveaux documents. Lisez-les attentivement."
+                        : solvedPuzzleIds.length < puzzles.length
+                          ? "Vous avez lu tous les documents. Essayez de résoudre une énigme disponible."
+                          : finalResolution && !finalResolutionSolved
+                            ? "Vous pouvez maintenant formuler une explication finale prudente."
+                            : "Félicitations, l'enquête se termine sur une solution réparatrice."}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-950">Dernière action</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">{feedback}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-950">Énigmes validées</p>
+                  <p className="mt-2 text-sm text-slate-700">
+                    {solvedPuzzleIds.length} / {puzzles.length}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-950">
+                    Documents & Objets
+                  </p>
+                  <p className="mt-2 text-sm text-slate-700">
+                    Docs : {visibleDocuments.length} / {scenario.documents.length}
+                    <br />
+                    Objets : {ownedObjectIds.length} / {inventoryObjects.length}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="case-panel mt-6 p-4">
