@@ -46,6 +46,8 @@ export function InvestigationPage({
         .map((object) => object.id) ?? [],
   );
   const [usedObjectIds, setUsedObjectIds] = useState<string[]>([]);
+  const [droppedObjectLocations, setDroppedObjectLocations] = useState<Record<string, string>>({});
+  const [inventoryVisible, setInventoryVisible] = useState(true);
   const [unlockedLocationIds, setUnlockedLocationIds] = useState<string[]>([]);
   const [revealedHintCounts, setRevealedHintCounts] = useState<
     Record<string, number>
@@ -114,6 +116,24 @@ export function InvestigationPage({
 
     setOwnedObjectIds((currentIds) => [...currentIds, object.id]);
     setFeedback(`${object.name} ajouté à l’inventaire.`);
+  }
+
+  function handleDropObject(objectId: string) {
+    const object = inventoryObjects.find((item) => item.id === objectId);
+    if (!object || !ownedObjectIds.includes(object.id) || usedObjectIds.includes(object.id)) {
+      return;
+    }
+
+    setOwnedObjectIds((currentIds) => currentIds.filter((id) => id !== object.id));
+    
+    // Set the object's new location to the currently selected location, 
+    // or fallback to its origin if not in a location view
+    setDroppedObjectLocations((current) => ({
+      ...current,
+      [object.id]: selection.type === 'location' ? selection.id : (object.originLocationId ?? ''),
+    }));
+    
+    setFeedback(`${object.name} reposé.`);
   }
 
   function handleUseObject(objectId: string) {
@@ -246,8 +266,11 @@ export function InvestigationPage({
           )}
           objects={inventoryObjects.filter(
             (object) =>
-              location.objectIds?.includes(object.id) &&
-              (object.initiallyVisible ?? true),
+              !ownedObjectIds.includes(object.id) &&
+              (
+                droppedObjectLocations[object.id] === location.id ||
+                (!droppedObjectLocations[object.id] && location.objectIds?.includes(object.id) && (object.initiallyVisible ?? true))
+              )
           )}
           ownedObjectIds={ownedObjectIds}
           ownedObjects={inventoryObjects.filter((object) => ownedObjectIds.includes(object.id))}
@@ -336,6 +359,7 @@ export function InvestigationPage({
     solvedPuzzleIds,
     visibleDocumentIds,
     visibleDocuments,
+    droppedObjectLocations,
   ]);
 
   return (
@@ -510,6 +534,9 @@ export function InvestigationPage({
               ownedObjectIds={ownedObjectIds}
               usedObjectIds={usedObjectIds}
               onUseObject={handleUseObject}
+              onDropObject={handleDropObject}
+              isVisible={inventoryVisible}
+              onToggle={() => setInventoryVisible(!inventoryVisible)}
             />
           </aside>
           <section id="detail-view" key={selectedId} className="scroll-mt-6 animate-fade-in">{detail}</section>
