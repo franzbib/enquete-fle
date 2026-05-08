@@ -34,34 +34,34 @@ export function PuzzleDetail({
   const hasMoreHints = revealedHintCount < hints.length;
 
   return (
-    <article className="rounded-md border border-slate-300 bg-white p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+    <article className="case-panel case-panel-main case-panel-puzzle">
+      <p className="eyebrow">
         Énigme
       </p>
       <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-2xl font-bold text-slate-950">{puzzle.title}</h2>
-          <p className="mt-2 leading-7 text-slate-700">{puzzle.description}</p>
+          <p className="body-copy mt-2">{puzzle.description}</p>
         </div>
         <span
-          className={`rounded-md px-3 py-1 text-sm font-semibold ${
+          className={`status-pill ${
             isSolved
-              ? 'bg-teal-50 text-teal-900'
+              ? 'status-pill-valid'
               : isAvailable
-                ? 'bg-stone-100 text-slate-700'
-                : 'bg-slate-100 text-slate-500'
+                ? 'status-pill-ready'
+                : 'status-pill-locked'
           }`}
         >
           {isSolved ? 'Validée' : isAvailable ? 'À résoudre' : 'À débloquer'}
         </span>
       </div>
 
-      <p className="mt-5 rounded-md bg-stone-100 p-4 leading-7 text-slate-800">
+      <p className="info-strip mt-5 leading-7 text-slate-800">
         {puzzle.prompt}
       </p>
 
       {hints.length > 0 ? (
-        <section className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-4">
+        <section className="hint-panel mt-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <h3 className="font-semibold text-amber-950">Indices</h3>
@@ -71,7 +71,7 @@ export function PuzzleDetail({
               </p>
             </div>
             <button
-              className="rounded-md border border-amber-700 bg-white px-3 py-2 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:border-amber-200 disabled:bg-amber-100 disabled:text-amber-700"
+              className="secondary-button border-amber-700 text-sm text-amber-950 hover:bg-amber-100 disabled:border-amber-200 disabled:bg-amber-100 disabled:text-amber-700"
               type="button"
               disabled={!isAvailable || isSolved || !hasMoreHints}
               onClick={() => onRequestHint(puzzle)}
@@ -87,7 +87,7 @@ export function PuzzleDetail({
           {visibleHints.length > 0 ? (
             <ol className="mt-3 grid gap-2 text-sm leading-6 text-amber-950">
               {visibleHints.map((hint, index) => (
-                <li key={`${puzzle.id}-hint-${index}`} className="rounded-md bg-white px-3 py-2">
+                <li key={`${puzzle.id}-hint-${index}`} className="choice-card bg-white">
                   <span className="font-semibold">Indice {index + 1} : </span>
                   {hint}
                 </li>
@@ -139,7 +139,7 @@ export function PuzzleDetail({
             </label>
           ))}
           <button
-            className="mt-2 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+            className="primary-button mt-2 text-sm disabled:bg-slate-300 disabled:text-slate-600"
             type="button"
             disabled={!isAvailable || isSolved || orderedAnswer.length < 3}
             onClick={() => onSubmit(puzzle, orderedAnswer)}
@@ -153,7 +153,7 @@ export function PuzzleDetail({
         <div className="mt-5 flex flex-col gap-3">
           {answer.options.map((option) => (
             <label
-              className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+              className="choice-card text-sm"
               key={option.id}
             >
               <input
@@ -169,7 +169,7 @@ export function PuzzleDetail({
             </label>
           ))}
           <button
-            className="mt-2 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+            className="primary-button mt-2 text-sm disabled:bg-slate-300 disabled:text-slate-600"
             type="button"
             disabled={!isAvailable || isSolved || !selectedOptionId}
             onClick={() => onSubmit(puzzle, [selectedOptionId])}
@@ -188,7 +188,7 @@ export function PuzzleDetail({
                 const checked = selectedEvidenceIds.includes(item.documentId);
                 return (
                   <label
-                    className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+                    className="choice-card text-sm"
                     key={item.documentId}
                   >
                     <input
@@ -224,7 +224,7 @@ export function PuzzleDetail({
               })}
             </div>
             <button
-              className="mt-3 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+              className="primary-button mt-3 text-sm disabled:bg-slate-300 disabled:text-slate-600"
               type="button"
               disabled={
                 !isAvailable ||
@@ -253,7 +253,7 @@ export function PuzzleDetail({
           </div>
 
           {localFeedback ? (
-            <p className="rounded-md bg-stone-100 p-3 text-sm leading-6 text-slate-700">
+            <p className="info-strip text-sm leading-6">
               {localFeedback}
             </p>
           ) : null}
@@ -265,7 +265,7 @@ export function PuzzleDetail({
               </p>
               {answer.interpretationOptions.map((option) => (
                 <label
-                  className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+                  className="choice-card text-sm"
                   key={option.id}
                 >
                   <input
@@ -283,7 +283,7 @@ export function PuzzleDetail({
                 </label>
               ))}
               <button
-                className="mt-2 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+                className="primary-button mt-2 text-sm disabled:bg-slate-300 disabled:text-slate-600"
                 type="button"
                 disabled={!isAvailable || isSolved || !interpretationOptionId}
                 onClick={() =>

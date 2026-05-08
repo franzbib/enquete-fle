@@ -363,31 +363,31 @@ export function InvestigationPage({
   ]);
 
   return (
-    <main className="min-h-screen bg-stone-100 px-6 py-8 text-slate-900">
-      <div className="mx-auto max-w-7xl">
-        <header className="border-b border-slate-300 pb-5">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-            Enquête V0.6
+    <main className="app-shell">
+      <div className="page-frame">
+        <header className="page-header">
+          <p className="eyebrow">
+            Enquête
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-slate-950">
+              <h1 className="text-3xl font-extrabold text-slate-950">
                 {scenario.title}
               </h1>
-              <p className="mt-2 text-sm text-slate-700">
+              <p className="body-copy mt-2 text-sm">
                 {scenario.level} · {scenario.duration}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
-                className="rounded-md border border-slate-400 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+                className="secondary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
                 type="button"
                 onClick={onBackBriefing}
               >
                 Briefing
               </button>
               <button
-                className="rounded-md border border-slate-400 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+                className="secondary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
                 type="button"
                 onClick={onBackHome}
               >
@@ -406,7 +406,7 @@ export function InvestigationPage({
             usedObjectIds.length +
             (finalResolutionSolved ? 1 : 0)
           }
-          className="mt-4 rounded-md border-l-4 border-amber-500 bg-amber-50 p-4 animate-highlight"
+          className="status-callout mt-4 animate-highlight"
         >
           <h2 className="text-sm font-bold text-amber-900">Que faire maintenant ?</h2>
           <p className="mt-1 text-sm text-amber-800">
@@ -422,9 +422,9 @@ export function InvestigationPage({
           </p>
         </div>
 
-        <section className="mt-6 grid gap-4 rounded-md border border-slate-300 bg-white p-4 sm:grid-cols-4">
+        <section className="progress-card mt-6 grid gap-4 sm:grid-cols-4">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+            <h2 className="eyebrow">
               Progression
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-700">{feedback}</p>
@@ -453,8 +453,8 @@ export function InvestigationPage({
           </div>
         </section>
 
-        <section className="mt-6 rounded-md border border-slate-300 bg-white p-4">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+        <section className="case-panel mt-6 p-4">
+          <h2 className="eyebrow">
             Tableau d'enquête - Déductions
           </h2>
           <div className="mt-4 flex flex-wrap gap-4">
@@ -467,13 +467,13 @@ export function InvestigationPage({
                   key={puzzle.id}
                   type="button"
                   onClick={() => handleSelect('puzzle', puzzle.id)}
-                  className={`rounded-md border px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+                  className={`secondary-button text-sm transition-colors duration-200 ${
                     isSelected
                       ? 'border-teal-800 bg-teal-50 text-teal-950'
                       : solved
                         ? 'border-green-600 bg-green-50 text-green-900'
                         : available
-                          ? 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'
+                          ? ''
                           : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
                   }`}
                   disabled={!available}
@@ -489,13 +489,13 @@ export function InvestigationPage({
                 onClick={() =>
                   handleSelect('final-resolution', finalResolution.id)
                 }
-                className={`rounded-md border px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+                className={`secondary-button text-sm transition-colors duration-200 ${
                   selectedId === `final-resolution:${finalResolution.id}`
                     ? 'border-teal-800 bg-teal-50 text-teal-950'
                     : finalResolutionSolved
                       ? 'border-green-600 bg-green-50 text-green-900'
                       : isFinalResolutionAvailable
-                        ? 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'
+                        ? ''
                         : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
                 }`}
                 disabled={!isFinalResolutionAvailable}

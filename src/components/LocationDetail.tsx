@@ -37,14 +37,14 @@ export function LocationDetail({
       obj.unlocksLocationIds?.includes(location.id),
     );
     return (
-      <article className="rounded-md border border-slate-300 bg-white p-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+      <article className="case-panel case-panel-main case-panel-location">
+        <p className="eyebrow">
           Lieu fermé
         </p>
         <h2 className="mt-2 text-2xl font-bold text-slate-950">
           {location.name}
         </h2>
-        <p className="mt-4 leading-7 text-slate-700">
+        <p className="body-copy mt-4">
           {location.id === 'salle-informatique'
             ? 'La salle informatique est fermée. Un badge semble nécessaire pour entrer.'
             : `${location.name} est fermé(e). Un objet est nécessaire pour y accéder.`}
@@ -52,7 +52,7 @@ export function LocationDetail({
         {accessObject && (
           <div className="mt-6">
             <button
-              className="rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+              className="primary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
               type="button"
               onClick={() => onUseObject(accessObject.id)}
             >
@@ -65,15 +65,15 @@ export function LocationDetail({
   }
 
   return (
-    <article className="rounded-md border border-slate-300 bg-white p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+    <article className="case-panel case-panel-main case-panel-location">
+      <p className="eyebrow">
         Lieu
       </p>
       <h2 className="mt-2 text-2xl font-bold text-slate-950">
         {location.name}
       </h2>
-      <p className="mt-4 leading-7 text-slate-700">{location.description}</p>
-      <p className="mt-4 rounded-md bg-stone-100 p-3 text-sm leading-6 text-slate-700">
+      <p className="body-copy mt-4">{location.description}</p>
+      <p className="info-strip mt-4 text-sm leading-6">
         {location.role}
       </p>
 
@@ -87,7 +87,7 @@ export function LocationDetail({
                   <button
                     type="button"
                     onClick={() => onSelectDocument(document.id)}
-                    className="text-teal-700 hover:underline text-left"
+                    className="link-button text-left"
                   >
                     {document.title}
                   </button>
@@ -109,7 +109,7 @@ export function LocationDetail({
                   <button
                     type="button"
                     onClick={() => onSelectCharacter(character.id)}
-                    className="text-teal-700 hover:underline text-left"
+                    className="link-button text-left"
                   >
                     {character.name}
                   </button>
@@ -130,7 +130,7 @@ export function LocationDetail({
               const isOwned = ownedObjectIds.includes(object.id);
               return (
                 <article
-                  className="rounded-md border border-slate-200 bg-stone-50 p-3"
+                  className="item-card"
                   key={object.id}
                 >
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -143,7 +143,7 @@ export function LocationDetail({
                       </p>
                     </div>
                     <button
-                      className="rounded-md bg-teal-800 px-3 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+                      className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
                       type="button"
                       disabled={isOwned}
                       onClick={() => onTakeObject(object.id)}

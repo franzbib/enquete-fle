@@ -1,12 +1,12 @@
-# Architecture technique — V0.6
+# Architecture technique — V0.9.0
 
 ## Objectif
 
-La V0.6 ajoute une résolution finale prudente à la première boucle d'enquête. Elle prolonge les apports de la V0.5 (indices progressifs) et de la V0.5.2 (décor vivant contrôlé).
+La V0.9.0 conserve la boucle d'enquête complète construite jusqu'à la V0.6 et ajoute une première couche de cadrage graphique. Elle prolonge les apports de la V0.7 et de la V0.7.1, qui ont documenté l'exploitation pédagogique externe.
 
 Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices gradués en cas de blocage, puis formuler une explication finale.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive et pas de deuxième scénario.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas de deuxième scénario et pas encore d'assets graphiques définitifs.
 
 ## Stack
 
@@ -37,6 +37,7 @@ src/
     scenarioLoader.ts
   types/
     scenario.ts
+  styles.css
 ```
 
 ## Données de scénario
@@ -233,6 +234,31 @@ La bonne hypothèse est une confusion de documents après le passage de Fahad au
 
 Le feedback final insiste sur une solution réparatrice : Delphine reprend le dossier avec Chen, les documents sont vérifiés, l'attestation est réimprimée et le dossier est validé. Fahad n'est pas publiquement accusé.
 
+## Cadrage graphique V0.9.0
+
+La V0.9.0 introduit une première couche de design system dans `src/styles.css`.
+
+Elle ajoute des classes visuelles locales pour :
+
+- structure de page : `app-shell`, `page-frame`, `page-header` ;
+- surfaces : `case-panel`, `side-panel`, `progress-card` ;
+- variantes de fiches : lieu, personnage, document, énigme, résolution finale ;
+- boutons : `primary-button`, `secondary-button`, `link-button` ;
+- états : `status-pill`, `status-callout` ;
+- contenus : `document-paper`, `speech-card`, `info-strip`, `item-card`, `choice-card`, `hint-panel`.
+
+Objectif :
+
+- améliorer la hiérarchie sans refondre l'UX ;
+- distinguer visuellement lieux, documents, personnages, objets, énigmes et résolution finale ;
+- installer une palette cohérente avec l'univers administratif / campus / enquête ;
+- préparer l'intégration future de portraits et vignettes sans produire encore les assets finaux.
+
+Les documents associés sont :
+
+- `docs/visual-audit-v0.9.0.md` ;
+- `docs/visual-guidelines-v0.9.0.md`.
+
 ## Ajouter plus tard un nouveau scénario
 
 Quand le projet autorisera plusieurs enquêtes :
@@ -244,15 +270,8 @@ Quand le projet autorisera plusieurs enquêtes :
 
 La V0.5 ne crée pas de deuxième scénario.
 
-## Direction V0.7
+## Direction V0.9.1
 
-La V0.7 devra préparer l'exploitation pédagogique et le mode enseignant.
+La prochaine étape graphique recommandée est une planche de portraits harmonisés pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe.
 
-Objectif recommandé :
-
-- documenter les objectifs FLE/FOU réellement travaillés ;
-- proposer un corrigé enseignant ;
-- prévoir des pistes d'exploitation en classe ;
-- garder le jeu côté joueur libre de formulations scolaires.
-
-Le score complet, le deuxième scénario, les portraits définitifs et un éventuel éditeur de scénarios restent à traiter plus tard.
+Le score complet, le deuxième scénario, les portraits intégrés définitivement, les vignettes de lieux et un éventuel éditeur de scénarios restent à traiter plus tard.

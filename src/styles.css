@@ -3,8 +3,29 @@
 @tailwind utilities;
 
 :root {
-  color: #18212f;
-  background: #f7f5ef;
+  color: #17212f;
+  background: #f6f1e6;
+  --paper: #f6f1e6;
+  --paper-soft: #fbf6ec;
+  --surface: #fffaf1;
+  --surface-strong: #ffffff;
+  --ink: #17212f;
+  --muted: #5f6b7a;
+  --line: #e5dcc9;
+  --line-strong: #cbbfaa;
+  --teal: #0f766e;
+  --teal-deep: #115e59;
+  --teal-soft: #e6f4f1;
+  --blue: #315a7d;
+  --blue-soft: #eaf1f6;
+  --amber: #b7791f;
+  --amber-soft: #fff3d6;
+  --green: #4f7b42;
+  --green-soft: #edf7e9;
+  --burgundy: #8a3a3a;
+  --burgundy-soft: #f7e8e8;
+  --olive: #687247;
+  --shadow-soft: 0 14px 40px rgba(23, 33, 47, 0.08);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -14,10 +35,285 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(49, 90, 125, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(183, 121, 31, 0.04) 1px, transparent 1px),
+    var(--paper);
+  background-size: 28px 28px;
 }
 
 button {
   font: inherit;
+}
+
+button,
+input,
+select {
+  accent-color: var(--teal);
+}
+
+@layer components {
+  .app-shell {
+    min-height: 100vh;
+    color: var(--ink);
+    padding: 2rem 1.5rem;
+  }
+
+  .page-frame {
+    margin: 0 auto;
+    max-width: 80rem;
+  }
+
+  .page-frame-narrow {
+    margin: 0 auto;
+    max-width: 56rem;
+  }
+
+  .page-header {
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 1.25rem;
+  }
+
+  .eyebrow {
+    color: var(--teal-deep);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .page-title {
+    color: var(--ink);
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: 3.25rem;
+    }
+  }
+
+  .section-title {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .body-copy {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .case-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .case-panel-main {
+    padding: 1.5rem;
+  }
+
+  .case-panel-location {
+    border-top: 4px solid var(--blue);
+  }
+
+  .case-panel-character {
+    border-top: 4px solid var(--olive);
+  }
+
+  .case-panel-document {
+    border-top: 4px solid var(--teal);
+  }
+
+  .case-panel-puzzle {
+    border-top: 4px solid var(--amber);
+  }
+
+  .case-panel-final {
+    border-top: 4px solid var(--green);
+  }
+
+  .side-panel {
+    background: rgba(255, 250, 241, 0.96);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(23, 33, 47, 0.06);
+    padding: 1rem;
+  }
+
+  .nav-item {
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+    width: 100%;
+  }
+
+  .nav-item:hover {
+    background: var(--paper-soft);
+  }
+
+  .nav-item-selected {
+    background: var(--teal-soft);
+    border-color: var(--teal);
+    color: #0a3d39;
+  }
+
+  .nav-item-disabled {
+    background: #f2f1ed;
+    border-color: #e2ded5;
+    color: #8a93a0;
+    cursor: not-allowed;
+  }
+
+  .primary-button,
+  .secondary-button {
+    border-radius: 8px;
+    font-weight: 800;
+    padding: 0.65rem 1rem;
+  }
+
+  .primary-button {
+    background: var(--teal-deep);
+    color: white;
+  }
+
+  .primary-button:hover {
+    background: #0d4f4b;
+  }
+
+  .primary-button:disabled {
+    background: #cbd5e1;
+    color: #64748b;
+    cursor: not-allowed;
+  }
+
+  .secondary-button {
+    background: var(--surface-strong);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+  }
+
+  .secondary-button:hover {
+    background: var(--paper-soft);
+  }
+
+  .link-button {
+    color: var(--teal-deep);
+    font-size: 0.875rem;
+    font-weight: 800;
+  }
+
+  .link-button:hover {
+    text-decoration: underline;
+  }
+
+  .status-callout {
+    background: var(--amber-soft);
+    border-left: 4px solid var(--amber);
+    border-radius: 8px;
+    color: #6f4b12;
+    padding: 1rem;
+  }
+
+  .progress-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(23, 33, 47, 0.05);
+    padding: 1rem;
+  }
+
+  .info-strip {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+    padding: 0.85rem;
+  }
+
+  .speech-card {
+    background: #f8efe2;
+    border-left: 4px solid var(--olive);
+    border-radius: 8px;
+    color: #374151;
+    font-size: 0.925rem;
+    line-height: 1.7;
+    padding: 1rem;
+  }
+
+  .document-paper {
+    background: #fffdf7;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    padding: 1rem;
+  }
+
+  .item-card,
+  .choice-card {
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    padding: 0.85rem;
+  }
+
+  .item-card {
+    background: var(--paper-soft);
+  }
+
+  .choice-card {
+    line-height: 1.6;
+  }
+
+  .status-pill {
+    border-radius: 8px;
+    display: inline-flex;
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .status-pill-ready {
+    background: var(--paper-soft);
+    color: var(--muted);
+  }
+
+  .status-pill-valid {
+    background: var(--green-soft);
+    color: #315b28;
+  }
+
+  .status-pill-locked {
+    background: var(--burgundy-soft);
+    color: var(--burgundy);
+  }
+
+  .hint-panel {
+    background: var(--amber-soft);
+    border: 1px solid #efd18d;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .home-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 4rem);
+  }
 }
 
 @keyframes fadeIn {

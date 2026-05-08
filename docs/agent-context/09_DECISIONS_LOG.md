@@ -356,3 +356,25 @@ Statut : validée.
 
 À réévaluer :
 Après usage en classe, si la fiche guide trop fortement les élèves ou, au contraire, ne les aide pas assez à structurer leurs preuves.
+
+## Décision 21 — Direction artistique progressive V0.9.0
+
+Date : 2026-05-08
+
+Décision :
+La V0.9.0 adopte une direction artistique progressive fondée sur l'idée d'un carnet d'enquête clair dans un campus vivant.
+
+Raison :
+Le jeu est désormais jouable et pédagogiquement exploitable. Il peut commencer à gagner une identité visuelle, mais sans refonte totale, sans surcharge graphique et sans assets définitifs prématurés. Les références personnages doivent servir à définir une méthode d'harmonisation, pas à copier des images ou à intégrer immédiatement tous les portraits finaux.
+
+Conséquence :
+- L'interface reçoit une première couche de style : surfaces papier, encre sombre, vert administratif, bleu dossier, ambre indice et panneaux plus différenciés.
+- `docs/visual-audit-v0.9.0.md` documente les manques et priorités visuelles.
+- `docs/visual-guidelines-v0.9.0.md` définit la charte initiale et les règles d'harmonisation des personnages récurrents.
+- Les futurs portraits de Delphine, François, Heïdi, Marine, Mathias et Rodolphe devront être harmonisés dans un style 2D commun.
+- Le gameplay, les mécaniques et la narration restent inchangés.
+
+Statut : validée.
+
+À réévaluer :
+Après la première planche de portraits V0.9.1 et après test visuel sur écran projeté.

@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.7.1 — Fiche élève imprimable créée comme carnet d'enquête.
+V0.9.0 — Cadrage graphique initial et première amélioration visuelle légère.
 
 Le dépôt GitHub existe.
 
@@ -140,6 +140,7 @@ Les objets devront pouvoir être obtenus :
 - Résolution finale fondée sur une explication prudente et des pièces justificatives.
 - Fiche enseignant V0.7 avec déroulement de classe, corrigé, prolongements FLE/FOU et points de vigilance.
 - Fiche élève V0.7.1 imprimable avec prise de notes, chronologie, contradiction, hypothèses et auto-évaluation.
+- Cadrage graphique V0.9.0 avec audit visuel, charte initiale et première amélioration des surfaces d'interface.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
@@ -152,22 +153,23 @@ Les objets devront pouvoir être obtenus :
 
 ## Priorité actuelle
 
-Préparer la suite pédagogique : version simplifiée B1 V0.7.2 ou premier cadrage du mode enseignant minimal V0.8.
+Préparer la suite graphique : planche de portraits harmonisés V0.9.1 ou vignettes de lieux V0.9.2.
 
 ## Prochaine action recommandée
 
-Demander à Codex de préparer une version B1 simplifiée des textes ou un cadrage du mode enseignant minimal, sans modifier la mécanique du jeu.
+Demander à Codex ou à un agent graphique de préparer une première planche de portraits harmonisés pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe, sans les intégrer encore comme assets définitifs.
 
 ## Dernière action réalisée
 
-Création de la V0.7.1 :
+Création de la V0.9.0 :
 
-- fiche élève `docs/student-investigation-sheet-v0.7.1.md` ;
-- carnet de prise de notes imprimable ;
-- sections lieux, personnages, documents, objets, chronologie, contradiction et hypothèses ;
-- activité légère discours direct / discours indirect ;
-- vocabulaire utile et auto-évaluation rapide ;
-- aucune solution donnée dans la fiche élève.
+- audit visuel `docs/visual-audit-v0.9.0.md` ;
+- charte visuelle `docs/visual-guidelines-v0.9.0.md` ;
+- direction artistique "carnet d'enquête clair dans un campus vivant" ;
+- règles d'harmonisation des références de Delphine, François, Heïdi, Marine, Mathias et Rodolphe ;
+- première couche de styles dans `src/styles.css` ;
+- amélioration légère des panneaux, fiches, documents, objets, énigmes et résolution finale ;
+- aucune modification du gameplay.
 
 ## Risques à surveiller
 

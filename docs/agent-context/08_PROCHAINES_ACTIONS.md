@@ -10,7 +10,7 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.7.1 — fiche élève imprimable créée comme carnet d'enquête.
+Version actuelle : V0.9.0 — cadrage graphique initial et première amélioration visuelle légère.
 
 Le dépôt GitHub existe.
 
@@ -19,6 +19,8 @@ Le dossier documentaire `docs/agent-context/` est constitué pour piloter la sui
 L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices progressifs et formuler une résolution finale prudente.
 
 La V0.7 ajoute une documentation pédagogique externe : `docs/teacher-guide-v0.7.md`. La V0.7.1 ajoute une fiche élève imprimable : `docs/student-investigation-sheet-v0.7.1.md`. Ces deux supports ne modifient pas le jeu et ne créent pas encore de mode enseignant intégré.
+
+La V0.9.0 pose une première direction artistique : audit visuel, charte graphique initiale, règles d'harmonisation des personnages récurrents à partir de références hétérogènes, et amélioration légère des surfaces d'interface.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -458,7 +460,66 @@ Préparer une version plus accessible B1 de certains textes longs, sans appauvri
 - suivi étudiant ;
 - mode enseignant intégré.
 
-## 12. Actions reportées
+## 12. Action graphique réalisée
+
+### Action 16 — Créer la V0.9.0 : cadrage graphique initial
+
+Statut : fait.
+
+Agent concerné : Codex + directeur artistique UX/UI + garant de cohérence visuelle.
+
+Objectif :
+
+Définir une direction artistique claire et appliquer une première amélioration légère de l'interface, sans refonte totale et sans produire encore les assets finaux.
+
+Livrables réalisés :
+
+- audit visuel `docs/visual-audit-v0.9.0.md` ;
+- charte visuelle initiale `docs/visual-guidelines-v0.9.0.md` ;
+- palette papier / encre / vert administratif / bleu dossier / ambre indice ;
+- règles d'harmonisation pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe ;
+- première couche de classes visuelles dans `src/styles.css` ;
+- application légère sur l'accueil, le briefing, l'enquête, les fiches, documents, objets, énigmes et résolution finale.
+
+À ne pas faire encore :
+
+- portraits finaux ;
+- vignettes définitives de lieux ;
+- icônes définitives ;
+- refonte UX totale ;
+- nouveau scénario ;
+- animation complexe.
+
+## 13. Action graphique suivante
+
+### Action 17 — Préparer la V0.9.1 : planche de portraits harmonisés
+
+Statut : à faire.
+
+Agent concerné : directeur artistique UX/UI + concepteur d'assets 2D + contrôleur de cohérence visuelle.
+
+Objectif :
+
+Produire une première planche de portraits récurrents harmonisés, à partir des références visuelles fournies, sans intégration définitive dans le jeu.
+
+Personnages prioritaires :
+
+- Delphine ;
+- François ;
+- Heïdi ;
+- Marine ;
+- Mathias ;
+- Rodolphe.
+
+À vérifier :
+
+- cohérence de style entre les portraits ;
+- maintien des signes distinctifs ;
+- simplification de la référence plus picturale de Marine ;
+- compatibilité avec la palette V0.9.0 ;
+- lisibilité en petite taille.
+
+## 14. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
@@ -475,7 +536,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 13. Règle de priorité
+## 15. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -488,9 +549,11 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 7. fiche élève ;
 8. version B1 simplifiée ;
 9. mode enseignant minimal ;
-10. identité graphique.
+10. cadrage graphique ;
+11. portraits harmonisés ;
+12. identité graphique finale.
 
-## 14. Question à poser à chaque reprise
+## 16. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

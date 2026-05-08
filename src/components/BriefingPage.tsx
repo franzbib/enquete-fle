@@ -15,28 +15,28 @@ export function BriefingPage({
   const briefing = getScenarioBriefing(scenario);
 
   return (
-    <main className="min-h-screen bg-stone-100 px-6 py-10 text-slate-900">
-      <section className="mx-auto max-w-4xl">
-        <div className="border-b border-slate-300 pb-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+    <main className="app-shell">
+      <section className="page-frame-narrow">
+        <div className="page-header">
+          <p className="eyebrow">
             Briefing
           </p>
-          <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">
+          <h1 className="page-title mt-3">
             {scenario.title}
           </h1>
-          <p className="mt-2 text-sm text-slate-700">
+          <p className="body-copy mt-2 text-sm">
             {scenario.level} · {scenario.duration}
           </p>
         </div>
 
-        <div className="mt-8 max-w-3xl rounded-md border border-slate-300 bg-white p-6 shadow-sm">
-          <h2 className="mb-2 text-lg font-bold text-slate-900">Contexte</h2>
-          <p className="text-base leading-7 text-slate-700">{briefing.summary}</p>
-          <p className="mt-2 text-base leading-7 text-slate-700">{briefing.context}</p>
+        <div className="case-panel case-panel-main mt-8 max-w-3xl">
+          <h2 className="section-title mb-2 text-lg">Contexte</h2>
+          <p className="body-copy text-base">{briefing.summary}</p>
+          <p className="body-copy mt-2 text-base">{briefing.context}</p>
 
           <h2 className="mb-2 mt-6 text-lg font-bold text-teal-800">Votre objectif</h2>
-          <div className="rounded-md border border-teal-200 bg-teal-50 p-4">
-            <p className="font-medium leading-7 text-teal-900">
+          <div className="info-strip border-teal-200 bg-teal-50">
+            <p className="font-semibold leading-7 text-teal-950">
               {briefing.mission}
             </p>
           </div>
@@ -44,14 +44,14 @@ export function BriefingPage({
 
         <div className="mt-8 flex flex-wrap gap-3">
           <button
-            className="rounded-md bg-teal-800 px-4 py-2 text-base font-semibold text-white hover:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+            className="primary-button text-base focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
             type="button"
             onClick={onStartInvestigation}
           >
             Ouvrir l'enquête
           </button>
           <button
-            className="rounded-md border border-slate-400 bg-white px-4 py-2 text-base font-semibold text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+            className="secondary-button text-base focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
             type="button"
             onClick={onBackHome}
           >

@@ -12,8 +12,8 @@ export function CharacterDetail({
   onSelectLocation,
 }: CharacterDetailProps) {
   return (
-    <article className="rounded-md border border-slate-300 bg-white p-6">
-      <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
+    <article className="case-panel case-panel-main case-panel-character">
+      <p className="eyebrow">
         Personnage
       </p>
       <h2 className="mt-2 text-2xl font-bold text-slate-950">
@@ -22,8 +22,8 @@ export function CharacterDetail({
       <p className="mt-2 text-sm font-semibold text-slate-600">
         {character.role}
       </p>
-      <p className="mt-4 leading-7 text-slate-700">{character.profile}</p>
-      <blockquote className="mt-4 rounded-md bg-stone-100 p-4 text-sm leading-6 text-slate-700">
+      <p className="body-copy mt-4">{character.profile}</p>
+      <blockquote className="speech-card mt-4">
         {character.directSpeech}
       </blockquote>
       <div className="mt-6">
@@ -31,7 +31,7 @@ export function CharacterDetail({
         <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
           {presentLocations.map((location) => (
             <li key={location.id}>
-              <button type="button" onClick={() => onSelectLocation(location.id)} className="text-teal-700 hover:underline text-left">
+              <button type="button" onClick={() => onSelectLocation(location.id)} className="link-button text-left">
                 {location.name}
               </button>
             </li>
