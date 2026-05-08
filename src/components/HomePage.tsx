@@ -1,5 +1,4 @@
 import type { Scenario } from '../types/scenario';
-import { ScenarioList } from './ScenarioList';
 
 type HomePageProps = {
   scenarios: Scenario[];
@@ -33,18 +32,46 @@ export function HomePage({
         </p>
 
         {scenarios.length > 1 ? (
-          <div className="mt-8 max-w-2xl">
-            <ScenarioList
-              title="Choisir une enquête"
-              selectedId={selectedScenarioId}
-              items={scenarios.map((scenario) => ({
-                id: scenario.id,
-                title: scenario.title,
-                meta: `${scenario.subtitle ?? 'Enquête'} · ${scenario.level} · ${scenario.duration}`,
-              }))}
-              onSelect={onSelectScenario}
-            />
-          </div>
+          <section className="case-panel mt-8 max-w-3xl border-teal-200 bg-teal-50/70">
+            <p className="eyebrow">2 enquêtes disponibles</p>
+            <h2 className="mt-2 text-xl font-bold text-slate-950">
+              Choisir une enquête
+            </h2>
+            <p className="body-copy mt-2 text-sm">
+              Sélectionnez le scénario à lancer, puis cliquez sur Commencer
+              l'enquête.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {scenarios.map((scenario) => {
+                const isSelected = scenario.id === selectedScenarioId;
+
+                return (
+                  <button
+                    className={`choice-card text-left transition-colors ${
+                      isSelected
+                        ? 'border-teal-700 bg-white text-teal-950 shadow-sm'
+                        : 'bg-white/80 hover:border-teal-300 hover:bg-white'
+                    }`}
+                    key={scenario.id}
+                    type="button"
+                    onClick={() => onSelectScenario(scenario.id)}
+                  >
+                    <span className="block text-base font-bold">
+                      {scenario.title}
+                    </span>
+                    <span className="mt-2 block text-sm leading-6 text-slate-700">
+                      {scenario.subtitle ?? 'Enquête'}
+                      <br />
+                      {scenario.level} · {scenario.duration}
+                    </span>
+                    <span className="mt-3 block text-sm font-semibold text-teal-800">
+                      {isSelected ? 'Sélectionnée' : 'Choisir cette enquête'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
         ) : null}
 
         {selectedScenario ? (
