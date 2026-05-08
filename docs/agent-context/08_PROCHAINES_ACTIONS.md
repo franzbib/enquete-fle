@@ -10,13 +10,15 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.6 — résolution finale prudente.
+Version actuelle : V0.7 — fiche enseignant externe pour l'exploitation pédagogique légère.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
 L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices progressifs et formuler une résolution finale prudente.
+
+La V0.7 ajoute une documentation pédagogique externe : `docs/teacher-guide-v0.7.md`. Elle ne modifie pas le jeu et ne crée pas encore de mode enseignant intégré.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -353,13 +355,26 @@ Mets à jour sobrement :
 
 ### Action 13 — Préparer la V0.7 : fiche enseignant et exploitation pédagogique
 
-Statut : à faire.
+Statut : fait.
 
 Agent concerné : Codex + didacticien FLE/FOU + contrôleur de cohérence narrative.
 
 Objectif :
 
 Documenter les objectifs pédagogiques implicites de la première enquête et préparer un mode enseignant léger, sans modifier l'interface joueur en exercice scolaire.
+
+Livrables réalisés :
+
+- fiche enseignant `docs/teacher-guide-v0.7.md` ;
+- présentation du scénario et du public visé ;
+- formats de séance possibles ;
+- objectifs FLE/FOU et compétences travaillées ;
+- déroulement conseillé en classe ;
+- aides graduées ;
+- corrigé complet de l'enquête ;
+- points de langue exploitables ;
+- prolongements oraux, écrits, FOU, grammaticaux et interculturels ;
+- limites de la V0.7 et étapes futures.
 
 À ne pas faire encore :
 
@@ -369,13 +384,45 @@ Documenter les objectifs pédagogiques implicites de la première enquête et pr
 - base de données ;
 - identité graphique finale.
 
-## 10. Actions reportées
+## 10. Action pédagogique suivante
+
+### Action 14 — Préparer la V0.7.1 : fiche élève imprimable
+
+Statut : à faire.
+
+Agent concerné : Codex + didacticien FLE/FOU + documentaliste pédagogique.
+
+Objectif :
+
+Créer une fiche élève imprimable qui aide à prendre des notes pendant l'enquête sans donner la solution.
+
+Contenu attendu :
+
+- tableau des lieux visités ;
+- tableau des personnages rencontrés ;
+- espace pour noter les pièces importantes ;
+- frise chronologique à compléter ;
+- zone pour formuler une hypothèse prudente ;
+- rappel de vocabulaire utile ;
+- consignes courtes adaptées à B1/B2.
+
+À ne pas faire encore :
+
+- mode enseignant intégré ;
+- suivi étudiant ;
+- score ;
+- nouvelle mécanique ;
+- deuxième scénario ;
+- refonte graphique.
+
+## 11. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
 - consultation parallèle document / énigme ;
 - système d’indices complet ;
-- mode enseignant ;
+- mode enseignant intégré ;
+- version simplifiée B1 complète ;
 - identité graphique définitive ;
 - portraits définitifs ;
 - visuels définitifs des lieux récurrents ;
@@ -386,7 +433,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 11. Règle de priorité
+## 12. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -396,9 +443,11 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 4. indices ;
 5. résolution finale ;
 6. exploitation enseignante ;
-7. identité graphique.
+7. fiche élève ;
+8. mode enseignant minimal ;
+9. identité graphique.
 
-## 12. Question à poser à chaque reprise
+## 13. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

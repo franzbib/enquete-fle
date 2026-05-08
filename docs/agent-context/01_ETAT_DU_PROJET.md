@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.6 — Résolution finale prudente créée.
+V0.7 — Fiche enseignant externe créée pour l'exploitation pédagogique légère.
 
 Le dépôt GitHub existe.
 
@@ -108,7 +108,7 @@ Il devra combiner :
 - objets à obtenir ;
 - indices gradués ;
 - énigmes de déduction ;
-- accusation finale argumentée.
+- résolution finale argumentée et prudente.
 
 Les objets devront pouvoir être obtenus :
 
@@ -138,34 +138,38 @@ Les objets devront pouvoir être obtenus :
 - Indices progressifs pour les deux énigmes principales.
 - Décor vivant contrôlé avec l'accueil et Thi-Thai.
 - Résolution finale fondée sur une explication prudente et des pièces justificatives.
+- Fiche enseignant V0.7 avec déroulement de classe, corrigé, prolongements FLE/FOU et points de vigilance.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
 - Mode enseignant.
+- Fiche élève imprimable.
+- Version simplifiée B1.
 - Tests.
 - Déploiement.
 
 ## Priorité actuelle
 
-Préparer la V0.7 : documenter l'exploitation pédagogique et préparer un mode enseignant léger.
+Préparer la suite pédagogique : fiche élève imprimable V0.7.1 ou version simplifiée B1 V0.7.2, avant un éventuel mode enseignant intégré.
 
 ## Prochaine action recommandée
 
-Demander à Codex de préparer une fiche enseignant ou un audit pédagogique de la première enquête, sans ajouter de score complet ni de deuxième scénario.
+Demander à Codex de créer une fiche élève imprimable ou une version B1 simplifiée des textes, sans modifier la mécanique du jeu.
 
 ## Dernière action réalisée
 
-Création de la V0.6 :
+Création de la V0.7 :
 
-- champ `Scenario.finalResolution` ;
-- composant `FinalResolutionDetail` ;
-- choix d'une explication finale ;
-- sélection de trois pièces justificatives ;
-- feedback prudent et réparateur ;
-- fin heureuse sans accusation publique ni sanction ;
-- documentation `docs/final-resolution-v0.6.md`.
+- fiche enseignant `docs/teacher-guide-v0.7.md` ;
+- présentation du scénario pour un usage FLE/FOU ;
+- objectifs pédagogiques et compétences travaillées ;
+- déroulement conseillé en classe ;
+- aides graduées pour l'enseignant ;
+- corrigé complet de l'enquête ;
+- points de langue et prolongements possibles ;
+- limites actuelles et étapes futures.
 
 ## Risques à surveiller
 

@@ -315,3 +315,23 @@ Statut : validée.
 
 À réévaluer :
 Après tests utilisateurs, si la conclusion semble trop facile, trop morale ou encore trop accusatoire.
+
+## Décision 19 — Fiche enseignant externe avant mode intégré
+
+Date : 2026-05-08
+
+Décision :
+La V0.7 prend la forme d'une fiche enseignant externe, et non d'un mode enseignant intégré dans l'interface du jeu.
+
+Raison :
+Le scénario est jouable de bout en bout, mais l'exploitation pédagogique doit d'abord être clarifiée hors interface : objectifs, déroulement de classe, aides graduées, corrigé, prolongements et points de vigilance. Cela permet d'aider l'enseignant sans transformer l'expérience joueur en exercice scolaire.
+
+Conséquence :
+- `docs/teacher-guide-v0.7.md` devient la référence pédagogique de la première enquête.
+- Le jeu, le code et les mécaniques restent inchangés en V0.7.
+- Le futur mode enseignant pourra s'appuyer sur cette fiche, mais il n'est pas encore créé.
+
+Statut : validée.
+
+À réévaluer :
+Lors de la V0.8, si un mode enseignant minimal est intégré dans l'application.
