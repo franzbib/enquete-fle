@@ -10,7 +10,7 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.7 — fiche enseignant externe pour l'exploitation pédagogique légère.
+Version actuelle : V0.7.1 — fiche élève imprimable créée comme carnet d'enquête.
 
 Le dépôt GitHub existe.
 
@@ -18,7 +18,7 @@ Le dossier documentaire `docs/agent-context/` est constitué pour piloter la sui
 
 L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices progressifs et formuler une résolution finale prudente.
 
-La V0.7 ajoute une documentation pédagogique externe : `docs/teacher-guide-v0.7.md`. Elle ne modifie pas le jeu et ne crée pas encore de mode enseignant intégré.
+La V0.7 ajoute une documentation pédagogique externe : `docs/teacher-guide-v0.7.md`. La V0.7.1 ajoute une fiche élève imprimable : `docs/student-investigation-sheet-v0.7.1.md`. Ces deux supports ne modifient pas le jeu et ne créent pas encore de mode enseignant intégré.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -388,7 +388,7 @@ Livrables réalisés :
 
 ### Action 14 — Préparer la V0.7.1 : fiche élève imprimable
 
-Statut : à faire.
+Statut : fait.
 
 Agent concerné : Codex + didacticien FLE/FOU + documentaliste pédagogique.
 
@@ -406,6 +406,20 @@ Contenu attendu :
 - rappel de vocabulaire utile ;
 - consignes courtes adaptées à B1/B2.
 
+Livrables réalisés :
+
+- fiche élève `docs/student-investigation-sheet-v0.7.1.md` ;
+- carnet d'enquête imprimable ;
+- espaces de prise de notes sur les lieux, personnages, documents et objets ;
+- distinction explicite entre objet et pièce du dossier ;
+- frise chronologique ouverte ;
+- espace de comparaison pour la contradiction ;
+- zone de formulation d'hypothèses ;
+- canevas d'explication finale prudente ;
+- activité légère discours direct / discours indirect ;
+- vocabulaire utile ;
+- auto-évaluation rapide.
+
 À ne pas faire encore :
 
 - mode enseignant intégré ;
@@ -415,14 +429,42 @@ Contenu attendu :
 - deuxième scénario ;
 - refonte graphique.
 
-## 11. Actions reportées
+## 11. Action pédagogique suivante
+
+### Action 15 — Préparer la V0.7.2 : version simplifiée B1
+
+Statut : à faire.
+
+Agent concerné : Codex + didacticien FLE/FOU + contrôleur de cohérence narrative.
+
+Objectif :
+
+Préparer une version plus accessible B1 de certains textes longs, sans appauvrir la logique d'enquête ni modifier les mécaniques.
+
+À vérifier :
+
+- longueur des fiches personnages ;
+- longueur des documents de témoignage ;
+- lisibilité de la conclusion finale ;
+- maintien de la prudence argumentative ;
+- distinction entre simplification linguistique et simplification excessive de l'enquête.
+
+À ne pas faire encore :
+
+- nouveau scénario ;
+- refonte UX ;
+- score ;
+- backend ;
+- suivi étudiant ;
+- mode enseignant intégré.
+
+## 12. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
 - consultation parallèle document / énigme ;
 - système d’indices complet ;
 - mode enseignant intégré ;
-- version simplifiée B1 complète ;
 - identité graphique définitive ;
 - portraits définitifs ;
 - visuels définitifs des lieux récurrents ;
@@ -433,7 +475,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 12. Règle de priorité
+## 13. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -444,10 +486,11 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 5. résolution finale ;
 6. exploitation enseignante ;
 7. fiche élève ;
-8. mode enseignant minimal ;
-9. identité graphique.
+8. version B1 simplifiée ;
+9. mode enseignant minimal ;
+10. identité graphique.
 
-## 13. Question à poser à chaque reprise
+## 14. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

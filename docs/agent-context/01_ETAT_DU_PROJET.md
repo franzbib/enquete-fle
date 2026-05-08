@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.7 — Fiche enseignant externe créée pour l'exploitation pédagogique légère.
+V0.7.1 — Fiche élève imprimable créée comme carnet d'enquête.
 
 Le dépôt GitHub existe.
 
@@ -36,7 +36,7 @@ Les compétences linguistiques doivent servir à :
 - interpréter des documents ;
 - utiliser des objets comme preuves ;
 - formuler une hypothèse ;
-- justifier une accusation.
+- justifier une conclusion prudente.
 
 ## Contraintes validées
 
@@ -139,37 +139,35 @@ Les objets devront pouvoir être obtenus :
 - Décor vivant contrôlé avec l'accueil et Thi-Thai.
 - Résolution finale fondée sur une explication prudente et des pièces justificatives.
 - Fiche enseignant V0.7 avec déroulement de classe, corrigé, prolongements FLE/FOU et points de vigilance.
+- Fiche élève V0.7.1 imprimable avec prise de notes, chronologie, contradiction, hypothèses et auto-évaluation.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
 - Mode enseignant.
-- Fiche élève imprimable.
 - Version simplifiée B1.
 - Tests.
 - Déploiement.
 
 ## Priorité actuelle
 
-Préparer la suite pédagogique : fiche élève imprimable V0.7.1 ou version simplifiée B1 V0.7.2, avant un éventuel mode enseignant intégré.
+Préparer la suite pédagogique : version simplifiée B1 V0.7.2 ou premier cadrage du mode enseignant minimal V0.8.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer une fiche élève imprimable ou une version B1 simplifiée des textes, sans modifier la mécanique du jeu.
+Demander à Codex de préparer une version B1 simplifiée des textes ou un cadrage du mode enseignant minimal, sans modifier la mécanique du jeu.
 
 ## Dernière action réalisée
 
-Création de la V0.7 :
+Création de la V0.7.1 :
 
-- fiche enseignant `docs/teacher-guide-v0.7.md` ;
-- présentation du scénario pour un usage FLE/FOU ;
-- objectifs pédagogiques et compétences travaillées ;
-- déroulement conseillé en classe ;
-- aides graduées pour l'enseignant ;
-- corrigé complet de l'enquête ;
-- points de langue et prolongements possibles ;
-- limites actuelles et étapes futures.
+- fiche élève `docs/student-investigation-sheet-v0.7.1.md` ;
+- carnet de prise de notes imprimable ;
+- sections lieux, personnages, documents, objets, chronologie, contradiction et hypothèses ;
+- activité légère discours direct / discours indirect ;
+- vocabulaire utile et auto-évaluation rapide ;
+- aucune solution donnée dans la fiche élève.
 
 ## Risques à surveiller
 

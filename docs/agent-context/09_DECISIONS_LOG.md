@@ -335,3 +335,24 @@ Statut : validée.
 
 À réévaluer :
 Lors de la V0.8, si un mode enseignant minimal est intégré dans l'application.
+
+## Décision 20 — Fiche élève imprimable non résolutive
+
+Date : 2026-05-08
+
+Décision :
+La V0.7.1 ajoute une fiche élève imprimable qui sert de carnet d'enquête, sans donner la solution ni indiquer directement les preuves décisives.
+
+Raison :
+Les apprenants B1+/B2 ont besoin d'un support de prise de notes pour organiser les lieux, personnages, documents, objets, contradictions et hypothèses. Ce support doit aider le raisonnement sans remplacer le jeu ni transformer l'enquête en corrigé distribué aux élèves.
+
+Conséquence :
+- `docs/student-investigation-sheet-v0.7.1.md` devient le support élève externe de la première enquête.
+- La fiche distingue les objets d'inventaire et les pièces du dossier.
+- La fiche prépare la chronologie, la contradiction et l'explication finale sans révéler les bonnes réponses.
+- Le code, l'interface et la mécanique du jeu restent inchangés.
+
+Statut : validée.
+
+À réévaluer :
+Après usage en classe, si la fiche guide trop fortement les élèves ou, au contraire, ne les aide pas assez à structurer leurs preuves.
