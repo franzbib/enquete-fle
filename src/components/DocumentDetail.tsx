@@ -1,24 +1,10 @@
-import type {
-  Character,
-  InvestigationDocument,
-  Location,
-} from '../types/scenario';
+import type { InvestigationDocument } from '../types/scenario';
 
 type DocumentDetailProps = {
   document: InvestigationDocument;
-  locations: Location[];
-  characters: Character[];
-  onSelectLocation: (id: string) => void;
-  onSelectCharacter: (id: string) => void;
 };
 
-export function DocumentDetail({
-  document,
-  locations,
-  characters,
-  onSelectLocation,
-  onSelectCharacter,
-}: DocumentDetailProps) {
+export function DocumentDetail({ document }: DocumentDetailProps) {
   return (
     <article className="rounded-md border border-slate-300 bg-white p-6">
       <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
@@ -33,33 +19,6 @@ export function DocumentDetail({
       <p className="mt-4 leading-7 text-slate-700">{document.summary}</p>
       <div className="mt-4 rounded-md border border-slate-200 bg-stone-50 p-4 text-sm leading-7 text-slate-800">
         {document.content}
-      </div>
-
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div>
-          <h3 className="font-semibold text-slate-950">Lieux cités</h3>
-          <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {locations.map((location) => (
-              <li key={location.id}>
-                <button type="button" onClick={() => onSelectLocation(location.id)} className="text-teal-700 hover:underline text-left">
-                  {location.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-semibold text-slate-950">Personnages cités</h3>
-          <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {characters.map((character) => (
-              <li key={character.id}>
-                <button type="button" onClick={() => onSelectCharacter(character.id)} className="text-teal-700 hover:underline text-left">
-                  {character.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </article>
   );

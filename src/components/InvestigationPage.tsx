@@ -285,17 +285,7 @@ export function InvestigationPage({
       }
 
       return (
-        <DocumentDetail
-          document={document}
-          locations={scenario.locations.filter((location) =>
-            document.relatedLocationIds.includes(location.id),
-          )}
-          characters={scenario.characters.filter((character) =>
-            document.relatedCharacterIds.includes(character.id),
-          )}
-          onSelectLocation={(id) => handleSelect('location', id)}
-          onSelectCharacter={(id) => handleSelect('character', id)}
-        />
+        <DocumentDetail document={document} />
       );
     }
 
