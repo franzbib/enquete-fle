@@ -321,3 +321,24 @@ Conséquence :
 Statut : validée.
 
 À réévaluer : lors de la création des lieux définitifs ou si les images temporaires donnent une impression trop finalisée.
+
+## Décision 25 — Micro-synchronisation V0.9.3.1
+
+Date : 2026-05-08
+
+Décision :
+La V0.9.3.1 est une micro-version de synchronisation documentaire et de métadonnées, sans modification du gameplay.
+
+Raison :
+L'audit V0.9.3 a validé le jeu avec réserves, principalement à cause de documents actifs ou métadonnées encore désynchronisés avec l'état réel du projet.
+
+Conséquence :
+- `package.json` utilise une version cohérente avec l'état V0.9.3.
+- Les documents actifs doivent présenter V0.9.3 comme version actuelle.
+- La fiche élève doit utiliser M. Rodolphe, comme le scénario.
+- Le cadrage vertical `object-top` sur les portraits est conservé car il améliore le cadrage sans modifier la structure de la fiche personnage.
+- L'optimisation du poids des portraits est reportée pour éviter toute dégradation visuelle sans validation.
+
+Statut : validée.
+
+À réévaluer : avant V0.9.4, si une optimisation d'assets ou une nouvelle passe graphique modifie les fichiers visuels.

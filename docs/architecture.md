@@ -1,12 +1,12 @@
-# Architecture technique — V0.9.0
+# Architecture technique — V0.9.3
 
 ## Objectif
 
-La V0.9.0 conserve la boucle d'enquête complète construite jusqu'à la V0.6 et ajoute une première couche de cadrage graphique. Elle prolonge les apports de la V0.7 et de la V0.7.1, qui ont documenté l'exploitation pédagogique externe.
+La V0.9.3 conserve la boucle d'enquête complète construite jusqu'à la V0.6, prolonge les supports pédagogiques V0.7/V0.7.1 et ajoute la première intégration graphique structurée : direction artistique, portraits harmonisés, vignettes temporaires de lieux et icônes d'objets.
 
-Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices gradués en cas de blocage, puis formuler une explication finale.
+Le joueur commence à l'Accueil, consulte les lieux, personnages et documents disponibles, utilise un inventaire dynamique, présente le badge visiteur dans la salle informatique fermée, demande des indices gradués en cas de blocage, résout deux énigmes, puis formule une explication finale prudente.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas de deuxième scénario et pas encore d'assets graphiques définitifs.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas de deuxième scénario et pas encore de système graphique finalisé.
 
 ## Stack
 
@@ -96,7 +96,7 @@ Depuis la V0.4, les fiches personnages et les documents de temoignage ne portent
 Cette distinction renforce l'immersion narrative et introduit discretement un travail FLE/FOU sur le passage du discours direct au discours indirect. Elle ne doit pas apparaitre dans l'interface comme un exercice scolaire.
 Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
 Les traces techniques doivent creer une contradiction credible sans accuser trop directement un personnage : elles peuvent prouver une presence, une session active ou un horaire incoherent, sans prouver a elles seules la manipulation du dossier disparu.
-Un temoignage ne doit pas introduire un indice materiel important si cet indice n'est pas observable, documente ou recuperable ailleurs dans l'enquete. En V0.3.3, la declaration de M. Armand reste donc neutre : elle signale une imprimante deja utilisee, pas une pochette absente des autres pieces.
+Un temoignage ne doit pas introduire un indice materiel important si cet indice n'est pas observable, documente ou recuperable ailleurs dans l'enquete. La declaration du personnage present en salle informatique reste donc neutre : M. Rodolphe signale une imprimante deja utilisee, pas une pochette absente des autres pieces.
 
 Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
 `relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
@@ -234,7 +234,7 @@ La bonne hypothèse est une confusion de documents après le passage de Fahad au
 
 Le feedback final insiste sur une solution réparatrice : Delphine reprend le dossier avec Chen, les documents sont vérifiés, l'attestation est réimprimée et le dossier est validé. Fahad n'est pas publiquement accusé.
 
-## Cadrage graphique V0.9.0
+## Cadrage graphique V0.9.0 à V0.9.3
 
 La V0.9.0 introduit une première couche de design system dans `src/styles.css`.
 
@@ -252,12 +252,16 @@ Objectif :
 - améliorer la hiérarchie sans refondre l'UX ;
 - distinguer visuellement lieux, documents, personnages, objets, énigmes et résolution finale ;
 - installer une palette cohérente avec l'univers administratif / campus / enquête ;
-- préparer l'intégration future de portraits et vignettes sans produire encore les assets finaux.
+- préparer puis accueillir les portraits, vignettes de lieux et icônes d'objets sans figer toute l'identité graphique finale.
 
 Les documents associés sont :
 
 - `docs/visual-audit-v0.9.0.md` ;
-- `docs/visual-guidelines-v0.9.0.md`.
+- `docs/visual-guidelines-v0.9.0.md` ;
+- `docs/portrait-system-v0.9.2.md` ;
+- `docs/location-vignettes-and-object-icons-v0.9.3.md`.
+
+Depuis la V0.9.2, `Character.portraitUrl` permet d'afficher un portrait harmonisé dans `CharacterDetail`. Depuis la V0.9.3, `Location.vignetteUrl` affiche une vignette temporaire de lieu dans `LocationDetail`, et `InventoryObject.iconUrl` affiche une icône d'objet dans `LocationDetail` et `InventoryPanel`.
 
 ## Ajouter plus tard un nouveau scénario
 
@@ -270,8 +274,8 @@ Quand le projet autorisera plusieurs enquêtes :
 
 La V0.5 ne crée pas de deuxième scénario.
 
-## Direction V0.9.1
+## Direction V0.9.4
 
-La prochaine étape graphique recommandée est une planche de portraits harmonisés pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe.
+La prochaine étape graphique recommandée est la préparation d'icônes de statuts d'interface : fermé, lu, nouveau, validé, utilisé et indice disponible.
 
-Le score complet, le deuxième scénario, les portraits intégrés définitivement, les vignettes de lieux et un éventuel éditeur de scénarios restent à traiter plus tard.
+Le score complet, le deuxième scénario, les visuels définitifs de lieux, le mode enseignant intégré et un éventuel éditeur de scénarios restent à traiter plus tard.

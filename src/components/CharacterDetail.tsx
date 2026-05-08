@@ -19,7 +19,7 @@ export function CharacterDetail({
             <img
               src={character.portraitUrl}
               alt={`Portrait de ${character.name}`}
-              className="h-28 w-28 sm:h-32 sm:w-32 rounded-md border border-slate-300 object-cover shadow-sm"
+              className="h-28 w-28 sm:h-32 sm:w-32 rounded-md border border-slate-300 object-cover object-top shadow-sm"
             />
           ) : (
             <div className="flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center rounded-md border border-slate-300 bg-stone-100 shadow-sm">

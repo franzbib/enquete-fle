@@ -334,7 +334,7 @@ Limites :
 - pas de sauvegarde ;
 - pas de suivi étudiant ;
 - pas de second scénario ;
-- pas encore de fiche élève imprimable ;
+- fiche élève imprimable disponible en document externe V0.7.1 ;
 - pas encore de version simplifiée B1.
 
 ## Étapes futures suggérées

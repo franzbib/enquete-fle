@@ -239,7 +239,7 @@ Cette parole est-elle confirmée par un document ?
 
 ............................................................................
 
-### Monsieur Armand
+### M. Rodolphe
 
 Lieu où je l’ai rencontré :
 
