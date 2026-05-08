@@ -271,7 +271,27 @@ Décision attendue après audit :
 
 ## 5. Action suivante recommandée
 
-### Action 22 — Préparer une deuxième enquête prototype
+### Action 22 — V0.10.1 : sauvegarde locale minimale de progression
+
+Statut : à faire.
+
+Objectif :
+
+Préparer une sauvegarde / chargement local de progression pour les futures enquêtes longues, sans backend ni comptes utilisateurs.
+
+Note de cadrage :
+
+- l'état actuel reste stocké dans `InvestigationPage` ;
+- cela suffit pour une enquête courte ;
+- une première solution raisonnable serait une sauvegarde `localStorage` par scénario ;
+- la clé proposée est `enquete-fle:progress:<scenarioId>` ;
+- les éléments à prévoir sont : sélection actuelle, documents lus, documents débloqués, objets possédés, objets utilisés, objets reposés et leur lieu, lieux déverrouillés, énigmes résolues, indices révélés et résolution finale validée.
+
+Document de suivi :
+
+- `docs/progress-save-load-notes-v0.10.1.md`.
+
+### Action 23 — Préparer une deuxième enquête prototype
 
 Statut : à faire.
 
@@ -281,7 +301,7 @@ Créer une deuxième enquête courte en suivant strictement le cadre V0.10, sans
 
 ## 6. Action pédagogique suivante possible
 
-### Action 23 — Préparer la V0.7.2 : version simplifiée B1
+### Action 24 — Préparer la V0.7.2 : version simplifiée B1
 
 Statut : à faire.
 

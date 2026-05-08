@@ -15,7 +15,6 @@ export function App() {
     return (
       <InvestigationPage
         scenario={scenario}
-        onBackBriefing={() => setScreen('briefing')}
         onBackHome={() => setScreen('home')}
       />
     );

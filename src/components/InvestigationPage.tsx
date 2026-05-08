@@ -23,13 +23,11 @@ type Selection =
 
 type InvestigationPageProps = {
   scenario: Scenario;
-  onBackBriefing: () => void;
   onBackHome: () => void;
 };
 
 export function InvestigationPage({
   scenario,
-  onBackBriefing,
   onBackHome,
 }: InvestigationPageProps) {
   const firstLocationId = scenario.locations.find((l) => l.id === 'accueil')?.id ?? scenario.locations[0]?.id ?? '';
@@ -55,6 +53,7 @@ export function InvestigationPage({
   >({});
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(false);
   const [progressionVisible, setProgressionVisible] = useState(false);
+  const [missionVisible, setMissionVisible] = useState(false);
   const [feedback, setFeedback] = useState(
     "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
   );
@@ -385,9 +384,9 @@ export function InvestigationPage({
               <button
                 className="secondary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
                 type="button"
-                onClick={onBackBriefing}
+                onClick={() => setMissionVisible((visible) => !visible)}
               >
-                Briefing
+                {missionVisible ? 'Masquer la mission' : 'Relire la mission'}
               </button>
               <button
                 className="secondary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
@@ -399,6 +398,33 @@ export function InvestigationPage({
             </div>
           </div>
         </header>
+
+        {missionVisible ? (
+          <section className="case-panel case-panel-main mt-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="eyebrow">Mission</p>
+                <h2 className="mt-2 text-xl font-bold text-slate-950">
+                  Relire la mission
+                </h2>
+              </div>
+              <button
+                className="link-button text-sm focus:outline-none"
+                type="button"
+                onClick={() => setMissionVisible(false)}
+              >
+                Fermer
+              </button>
+            </div>
+            <div className="mt-4 grid gap-3">
+              <p className="body-copy text-sm">{scenario.briefing.summary}</p>
+              <p className="body-copy text-sm">{scenario.briefing.context}</p>
+              <p className="info-strip text-sm font-semibold leading-6 text-teal-950">
+                {scenario.briefing.mission}
+              </p>
+            </div>
+          </section>
+        ) : null}
 
         <section className="progress-card mt-6">
           <div className="flex items-center justify-between px-4 py-3">
