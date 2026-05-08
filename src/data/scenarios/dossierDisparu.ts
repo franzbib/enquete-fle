@@ -477,8 +477,9 @@ export const dossierDisparuScenario: Scenario = {
           'Fahad a probablement récupéré ou gardé par erreur certains documents, puis a hésité à signaler la confusion.',
       },
       {
-        id: 'delphine-cache-dossier',
-        label: 'Delphine a volontairement caché le dossier de Chen.',
+        id: 'erreur-secretariat-seule',
+        label:
+          "Une erreur interne au secrétariat explique à elle seule la disparition du dossier.",
       },
       {
         id: 'armand-deplace-dossier',
