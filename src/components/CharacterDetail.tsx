@@ -13,16 +13,35 @@ export function CharacterDetail({
 }: CharacterDetailProps) {
   return (
     <article className="case-panel case-panel-main case-panel-character">
-      <p className="eyebrow">
-        Personnage
-      </p>
-      <h2 className="mt-2 text-2xl font-bold text-slate-950">
-        {character.name}
-      </h2>
-      <p className="mt-2 text-sm font-semibold text-slate-600">
-        {character.role}
-      </p>
-      <p className="body-copy mt-4">{character.profile}</p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div className="flex-shrink-0">
+          {character.portraitUrl ? (
+            <img
+              src={character.portraitUrl}
+              alt={`Portrait de ${character.name}`}
+              className="h-24 w-24 rounded-md border border-slate-300 object-cover shadow-sm"
+            />
+          ) : (
+            <div className="flex h-24 w-24 items-center justify-center rounded-md border border-slate-300 bg-stone-100 shadow-sm">
+              <span className="text-2xl font-bold text-slate-400">
+                {character.name.charAt(0)}
+              </span>
+            </div>
+          )}
+        </div>
+        <div>
+          <p className="eyebrow">
+            Personnage
+          </p>
+          <h2 className="mt-1 text-2xl font-bold text-slate-950">
+            {character.name}
+          </h2>
+          <p className="mt-1 text-sm font-semibold text-slate-600">
+            {character.role}
+          </p>
+        </div>
+      </div>
+      <p className="body-copy mt-6">{character.profile}</p>
       <blockquote className="speech-card mt-4">
         {character.directSpeech}
       </blockquote>

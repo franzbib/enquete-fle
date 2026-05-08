@@ -42,6 +42,7 @@ export type Character = {
   testimony: string;
   reliability: 'unknown' | 'partial' | 'stable' | 'questionable';
   relatedLocationIds: string[];
+  portraitUrl?: string;
 };
 
 export type InvestigationDocument = {

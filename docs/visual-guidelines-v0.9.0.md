@@ -277,18 +277,12 @@ Usage futur :
 
 Rodolphe peut incarner un rapport au savoir, aux archives, à l'analyse ou aux documents. Son portrait doit rester stable et dense, sans devenir intimidant.
 
-## Préparer une bibliothèque cohérente de portraits
+## Bibliothèque cohérente de portraits (V0.9.2)
 
-Pour chaque personnage récurrent, créer plus tard :
+Une première série de portraits pour les personnages récurrents (Delphine, François, Heïdi, Marine, Mathias, Rodolphe) a été générée en version V0.9.2.
+Cette étape respecte l'harmonisation de style attendue (2D semi-illustré, aplats, contours clairs, rendu ni photographique ni pictural).
 
-- portrait neutre ;
-- éventuelle expression secondaire ;
-- mini-vignette carrée ;
-- description textuelle d'accessibilité ;
-- palette personnelle limitée ;
-- liste des signes distinctifs à conserver.
-
-Tous les portraits devront être vérifiés ensemble, sur une même planche, avant intégration définitive.
+Pour plus de détails techniques sur l'intégration et les prompts génératifs, se référer au document dédié : `docs/portrait-system-v0.9.2.md`.
 
 ## Lieux récurrents
 

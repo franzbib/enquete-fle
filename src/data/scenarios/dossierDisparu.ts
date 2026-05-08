@@ -109,6 +109,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'delphine',
       name: 'Delphine',
       role: 'Secrétariat / organisation administrative',
+      portraitUrl: '/assets/portraits/delphine.png',
       profile:
         "Delphine travaille au secrétariat. Elle s'occupe de plus en plus de l'organisation administrative, notamment des emplois du temps et des examens.",
       directSpeech:
