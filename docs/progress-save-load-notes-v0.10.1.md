@@ -16,7 +16,7 @@ Pour des enquetes plus longues, cette limite deviendra insuffisante.
 
 ## Premiere solution raisonnable
 
-Une future V0.10.1 ou V0.11 pourrait ajouter une sauvegarde locale minimale par scenario avec `localStorage`.
+Une future V0.10.2 ou V0.11 pourrait ajouter une sauvegarde locale minimale par scenario avec `localStorage`.
 
 Cle proposee :
 
@@ -39,7 +39,8 @@ Une premiere sauvegarde locale devrait couvrir :
 - lieux deverrouilles ;
 - enigmes resolues ;
 - indices reveles ;
-- resolution finale validee.
+- resolution finale validee ;
+- eventuellement etat des panneaux masquables.
 
 ## Contraintes maintenues
 

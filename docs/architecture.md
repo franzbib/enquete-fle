@@ -160,7 +160,7 @@ La progression est locale à `InvestigationPage`.
 
 Depuis la correction UX post-V0.10, le briefing peut être relu depuis l'écran d'enquête avec le bouton `Relire la mission`. Ce bouton affiche un panneau local dans `InvestigationPage` au lieu de revenir à l'écran de briefing. La progression locale n'est donc pas perdue quand le joueur relit la mission.
 
-Dette technique : l'etat de progression reste local et non persistant. Cette solution convient pour une enquete courte, mais sera insuffisante pour des enquetes longues. Une future V0.10.1 ou V0.11 devra extraire ou serialiser cet etat et pourra ajouter une sauvegarde `localStorage` par scenario, par exemple avec une cle `enquete-fle:progress:<scenarioId>`. Voir `docs/progress-save-load-notes-v0.10.1.md`.
+Dette technique : l'etat de progression reste local et non persistant. Cette solution convient pour une enquete courte, mais sera insuffisante pour des enquetes longues. Une future V0.10.2 ou V0.11 devra extraire ou serialiser cet etat et pourra ajouter une sauvegarde `localStorage` par scenario, par exemple avec une cle `enquete-fle:progress:<scenarioId>`. Voir `docs/progress-save-load-notes-v0.10.1.md`.
 
 Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulement deux formes de réponse :
 

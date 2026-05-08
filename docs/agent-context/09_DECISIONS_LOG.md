@@ -382,3 +382,24 @@ Conséquence :
 Statut : validée.
 
 À réévaluer : lors de la création d'une deuxième enquête réelle ou d'une future interface de sélection de scénario.
+
+## Decision 28 � Relecture de mission sans perte de progression
+
+Date : 2026-05-08
+
+Decision :
+Dans l'ecran d'enquete, le briefing doit pouvoir etre relu avec le bouton `Relire la mission`, sans quitter `InvestigationPage`.
+
+Raison :
+Le retour a l'ecran de briefing demontait probablement `InvestigationPage` et pouvait remettre a zero la progression locale du joueur : documents lus, objets trouves, objets utilises, lieux deverrouilles, enigmes validees, indices reveles et resolution finale.
+
+Consequence :
+- Le bouton `Briefing` est remplace par `Relire la mission`.
+- Le briefing est affiche dans un panneau local de `InvestigationPage` avec `scenario.briefing.summary`, `scenario.briefing.context` et `scenario.briefing.mission`.
+- La progression reste locale pour l'instant et n'est pas persistante.
+- Une future sauvegarde locale par scenario devra etre etudiee, probablement avec une cle `localStorage` de type `enquete-fle:progress:<scenarioId>`.
+- Aucun backend, compte utilisateur, suivi enseignant ou systeme complet de sauvegarde n'est cree a ce stade.
+
+Statut : validee.
+
+A reevaluer : en V0.10.2 ou V0.11, lors de la mise en place d'une sauvegarde / chargement local de progression pour les enquetes longues.

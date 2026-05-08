@@ -271,7 +271,7 @@ Décision attendue après audit :
 
 ## 5. Action suivante recommandée
 
-### Action 22 — V0.10.1 : sauvegarde locale minimale de progression
+### Action 22 — V0.10.2 : sauvegarde locale minimale de progression
 
 Statut : à faire.
 
@@ -285,7 +285,7 @@ Note de cadrage :
 - cela suffit pour une enquête courte ;
 - une première solution raisonnable serait une sauvegarde `localStorage` par scénario ;
 - la clé proposée est `enquete-fle:progress:<scenarioId>` ;
-- les éléments à prévoir sont : sélection actuelle, documents lus, documents débloqués, objets possédés, objets utilisés, objets reposés et leur lieu, lieux déverrouillés, énigmes résolues, indices révélés et résolution finale validée.
+- les éléments à prévoir sont : sélection actuelle, documents lus, documents débloqués, objets possédés, objets utilisés, objets reposés et leur lieu, lieux déverrouillés, énigmes résolues, indices révélés, résolution finale validée et éventuellement état des panneaux masquables.
 
 Document de suivi :
 
