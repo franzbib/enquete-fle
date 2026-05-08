@@ -292,3 +292,26 @@ Statut : validée.
 
 À réévaluer :
 Lors des tests utilisateurs, si des éléments d'ambiance sont interprétés comme des preuves importantes ou rendent l'enquête plus confuse.
+
+## Décision 18 — Résolution finale prudente
+
+Date : 2026-05-08
+
+Décision :
+La V0.6 conclut `Le dossier disparu` par une résolution finale prudente, et non par une accusation violente ou une désignation publique d'un coupable.
+
+Raison :
+Le contexte scolaire et FLE/FOU demande une conclusion réparatrice. L'enquête doit apprendre à formuler une hypothèse, à la soutenir par des pièces du dossier et à distinguer preuve, interprétation et accusation.
+
+Conséquence :
+- Le joueur choisit l'explication la plus plausible.
+- Le joueur sélectionne les pièces qui soutiennent cette explication.
+- La bonne conclusion parle d'une confusion de documents et d'un retard de signalement.
+- Fahad n'est pas présenté comme voleur.
+- Delphine aide Chen à remettre le dossier en ordre.
+- La fin reste heureuse, administrative et non humiliante.
+
+Statut : validée.
+
+À réévaluer :
+Après tests utilisateurs, si la conclusion semble trop facile, trop morale ou encore trop accusatoire.

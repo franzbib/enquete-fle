@@ -439,8 +439,9 @@ export const dossierDisparuScenario: Scenario = {
               'Fahad était probablement encore dans le bâtiment après son passage au secrétariat.',
           },
           {
-            id: 'fahad-a-vole-dossier',
-            label: 'Fahad a forcément volé le dossier de Chen.',
+            id: 'trace-explique-tout',
+            label:
+              'La trace technique suffit à expliquer toute la disparition du dossier.',
           },
           {
             id: 'delphine-oublie-attestation',
@@ -456,4 +457,86 @@ export const dossierDisparuScenario: Scenario = {
       unlocksDocumentIds: ['brouillon-mail'],
     },
   ],
+  finalResolution: {
+    id: 'resolution-dossier-chen',
+    title: "Conclusion de l'enquête",
+    description:
+      "Formulez une explication prudente à partir des pièces réunies. Il ne s'agit pas de désigner quelqu'un, mais de comprendre ce qui s'est probablement passé.",
+    prompt:
+      'Quelle explication correspond le mieux aux éléments de l’enquête ?',
+    requiredPuzzleIds: ['chronologie-initiale', 'contradiction-fahad'],
+    requiredDocumentIds: [
+      'temoignage-fahad',
+      'historique-impression',
+      'brouillon-mail',
+    ],
+    hypotheses: [
+      {
+        id: 'confusion-documents-fahad',
+        label:
+          'Fahad a probablement récupéré ou gardé par erreur certains documents, puis a hésité à signaler la confusion.',
+      },
+      {
+        id: 'delphine-cache-dossier',
+        label: 'Delphine a volontairement caché le dossier de Chen.',
+      },
+      {
+        id: 'armand-deplace-dossier',
+        label: "M. Armand a déplacé le dossier pour utiliser l'imprimante.",
+      },
+      {
+        id: 'dossier-inexistant',
+        label: "Le dossier de Chen n'a jamais existé.",
+      },
+    ],
+    correctHypothesisId: 'confusion-documents-fahad',
+    evidencePrompt:
+      'Sélectionnez les trois pièces qui soutiennent le mieux cette explication.',
+    evidenceItems: [
+      {
+        documentId: 'temoignage-fahad',
+        label: 'Témoignage de Fahad',
+      },
+      {
+        documentId: 'historique-impression',
+        label: "Historique d'impression",
+      },
+      {
+        documentId: 'brouillon-mail',
+        label: 'Brouillon de mail',
+      },
+      {
+        documentId: 'temoignage-xiaoyu',
+        label: 'Témoignage de Xiaoyu',
+      },
+      {
+        documentId: 'note-manuscrite',
+        label: 'Note manuscrite',
+      },
+      {
+        documentId: 'planning-secretariat',
+        label: 'Planning du secrétariat',
+      },
+      {
+        documentId: 'affiche-inscriptions-examens',
+        label: 'Affiche — Inscriptions aux examens',
+      },
+    ],
+    requiredEvidenceIds: [
+      'temoignage-fahad',
+      'historique-impression',
+      'brouillon-mail',
+    ],
+    supportingEvidenceIds: ['temoignage-xiaoyu', 'note-manuscrite'],
+    minSelectedEvidenceCount: 3,
+    maxSelectedEvidenceCount: 3,
+    hypothesisFailureFeedback:
+      "Cette hypothèse va trop loin par rapport aux preuves disponibles. Les documents ne permettent pas d'affirmer cela. Relisez les traces horaires et le brouillon de mail.",
+    evidenceFailureFeedback:
+      "Cette explication est plausible, mais les pièces sélectionnées ne suffisent pas encore. Cherchez les éléments qui relient la déclaration de Fahad, la trace technique et la confusion signalée.",
+    successFeedback:
+      "Votre explication est cohérente. Les éléments réunis ne montrent pas un vol, mais plutôt une confusion de documents. Le témoignage de Fahad, l'historique d'impression et le brouillon de mail indiquent qu'il n'est probablement pas parti tout de suite et qu'il a remarqué une erreur administrative.",
+    finalNarrative:
+      "Grâce à ces éléments, Delphine reprend le dossier avec Chen. Les documents manquants sont vérifiés, l'attestation nécessaire est réimprimée et le dossier de Chen est finalement validé. Fahad n'est pas mis en cause publiquement : il comprend surtout qu'il aurait dû signaler la confusion plus vite. L'affaire se termine sans sanction, avec une règle claire : quand un document ne semble pas être le bon, il faut le dire immédiatement.",
+  },
 };

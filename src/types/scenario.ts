@@ -11,6 +11,7 @@ export type Scenario = {
   evidence: EvidenceText[];
   inventoryObjects?: InventoryObject[];
   puzzles?: Puzzle[];
+  finalResolution?: FinalResolution;
 };
 
 export type ScenarioBriefing = {
@@ -137,6 +138,27 @@ export type CaseFileItem = {
 export type PuzzleEvent = {
   id: string;
   label: string;
+};
+
+export type FinalResolution = {
+  id: string;
+  title: string;
+  description: string;
+  prompt: string;
+  requiredPuzzleIds?: string[];
+  requiredDocumentIds?: string[];
+  hypotheses: PuzzleOption[];
+  correctHypothesisId: string;
+  evidencePrompt: string;
+  evidenceItems: CaseFileItem[];
+  requiredEvidenceIds: string[];
+  supportingEvidenceIds?: string[];
+  minSelectedEvidenceCount: number;
+  maxSelectedEvidenceCount: number;
+  hypothesisFailureFeedback: string;
+  evidenceFailureFeedback: string;
+  successFeedback: string;
+  finalNarrative: string;
 };
 
 export type Hint = {

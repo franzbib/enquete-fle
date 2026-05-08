@@ -2,7 +2,7 @@
 
 ## Version actuelle
 
-V0.5 — Système d'indices progressifs créé.
+V0.6 — Résolution finale prudente créée.
 
 Le dépôt GitHub existe.
 
@@ -136,34 +136,36 @@ Les objets devront pouvoir être obtenus :
 - Objets observables dans les lieux.
 - Badge visiteur utilisable pour débloquer la salle informatique.
 - Indices progressifs pour les deux énigmes principales.
+- Décor vivant contrôlé avec l'accueil et Thi-Thai.
+- Résolution finale fondée sur une explication prudente et des pièces justificatives.
 - Documentation technique `docs/architecture.md`.
 
 ## Ce qui n’est pas encore fait
 
 - Moteur de scénario complet.
-- Accusation finale.
 - Mode enseignant.
 - Tests.
 - Déploiement.
 
 ## Priorité actuelle
 
-Préparer la V0.6 : créer une accusation finale enrichie, sans score complet ni nouveau scénario.
+Préparer la V0.7 : documenter l'exploitation pédagogique et préparer un mode enseignant léger.
 
 ## Prochaine action recommandée
 
-Demander à Codex de créer une accusation finale minimale mais argumentée, fondée sur les pièces du dossier et les preuves déjà disponibles.
+Demander à Codex de préparer une fiche enseignant ou un audit pédagogique de la première enquête, sans ajouter de score complet ni de deuxième scénario.
 
 ## Dernière action réalisée
 
-Création de la V0.5 technique :
+Création de la V0.6 :
 
-- champ `Puzzle.hints` ;
-- bouton `Voir un indice` dans chaque énigme ;
-- affichage progressif de trois indices maximum ;
-- suivi local du nombre d'indices révélés par énigme ;
-- aucune pénalité ni score lié aux indices ;
-- documentation `docs/hints-v0.5.md`.
+- champ `Scenario.finalResolution` ;
+- composant `FinalResolutionDetail` ;
+- choix d'une explication finale ;
+- sélection de trois pièces justificatives ;
+- feedback prudent et réparateur ;
+- fin heureuse sans accusation publique ni sanction ;
+- documentation `docs/final-resolution-v0.6.md`.
 
 ## Risques à surveiller
 

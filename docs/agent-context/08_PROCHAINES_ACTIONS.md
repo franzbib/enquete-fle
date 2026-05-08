@@ -10,13 +10,13 @@ Ce document sert au chef d’orchestre pour reprendre le projet rapidement, iden
 
 ## 2. État actuel
 
-Version actuelle : V0.5 — système d'indices progressifs.
+Version actuelle : V0.6 — résolution finale prudente.
 
 Le dépôt GitHub existe.
 
 Le dossier documentaire `docs/agent-context/` est constitué pour piloter la suite.
 
-L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique et demander des indices progressifs.
+L’application React/Vite/TypeScript existe, avec Tailwind CSS, une page d’accueil, un écran de briefing et un écran d’enquête. Le joueur peut consulter les documents, résoudre deux énigmes simples, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices progressifs et formuler une résolution finale prudente.
 
 Un audit UX de la V0.3 a été réalisé. Des corrections légères ont été ajoutées pour clarifier le briefing, guider le joueur, signaler les documents nouveaux ou lus, et mieux confirmer les interactions.
 
@@ -254,15 +254,26 @@ Livrables réalisés :
 
 ## 7. Action technique suivante
 
-### Action 12 — Préparer la V0.6 : accusation finale enrichie
+### Action 12 — Créer la V0.6 : résolution finale prudente
 
-Statut : à faire.
+Statut : fait.
 
 Agent concerné : Codex + scénariste-enquête + contrôleur de cohérence narrative.
 
 Objectif :
 
-Créer une accusation finale minimale mais argumentée, qui demande au joueur de sélectionner une hypothèse et des preuves, sans transformer la fin en QCM scolaire.
+Créer une résolution finale minimale mais argumentée, qui demande au joueur de sélectionner une hypothèse et des preuves, sans transformer la fin en accusation brutale ou en QCM scolaire.
+
+Livrables réalisés :
+
+- champ `Scenario.finalResolution` ;
+- composant `FinalResolutionDetail` ;
+- bouton `Conclusion de l'enquête` accessible après les deux énigmes ;
+- choix d'une hypothèse finale prudente ;
+- sélection de trois pièces justificatives ;
+- feedbacks non humiliants ;
+- fin heureuse et réparatrice ;
+- documentation `docs/final-resolution-v0.6.md`.
 
 À ne pas faire encore :
 
@@ -338,13 +349,32 @@ Mets à jour sobrement :
 5. ce qui reste à faire pour la V0.6.
 ```
 
-## 9. Actions reportées
+## 9. Action technique suivante
+
+### Action 13 — Préparer la V0.7 : fiche enseignant et exploitation pédagogique
+
+Statut : à faire.
+
+Agent concerné : Codex + didacticien FLE/FOU + contrôleur de cohérence narrative.
+
+Objectif :
+
+Documenter les objectifs pédagogiques implicites de la première enquête et préparer un mode enseignant léger, sans modifier l'interface joueur en exercice scolaire.
+
+À ne pas faire encore :
+
+- score complet ;
+- deuxième scénario ;
+- backend ;
+- base de données ;
+- identité graphique finale.
+
+## 10. Actions reportées
 
 Les actions suivantes sont importantes mais ne doivent pas être lancées maintenant :
 
 - consultation parallèle document / énigme ;
 - système d’indices complet ;
-- accusation finale enrichie ;
 - mode enseignant ;
 - identité graphique définitive ;
 - portraits définitifs ;
@@ -356,7 +386,7 @@ Les actions suivantes sont importantes mais ne doivent pas être lancées mainte
 - base de données ;
 - sons.
 
-## 10. Règle de priorité
+## 11. Règle de priorité
 
 Tant que la première enquête n’est pas jouable de manière claire, la priorité est :
 
@@ -364,11 +394,11 @@ Tant que la première enquête n’est pas jouable de manière claire, la priori
 2. logique de progression ;
 3. objets utiles ;
 4. indices ;
-5. accusation finale ;
+5. résolution finale ;
 6. exploitation enseignante ;
 7. identité graphique.
 
-## 11. Question à poser à chaque reprise
+## 12. Question à poser à chaque reprise
 
 À chaque reprise du projet, commencer par demander :
 

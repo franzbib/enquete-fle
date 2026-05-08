@@ -1,12 +1,12 @@
-# Architecture technique — V0.5.2
+# Architecture technique — V0.6
 
 ## Objectif
 
-La V0.5 ajoute un système d'indices progressifs à la première boucle d'enquête. La V0.5.2 ajoute un décor vivant contrôlé autour de l'enquête principale.
+La V0.6 ajoute une résolution finale prudente à la première boucle d'enquête. Elle prolonge les apports de la V0.5 (indices progressifs) et de la V0.5.2 (décor vivant contrôlé).
 
-Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique et demander des indices gradués en cas de blocage.
+Le joueur peut consulter les lieux, personnages et documents disponibles, sélectionner deux énigmes simples, répondre localement, recevoir un feedback sobre, obtenir quelques objets, utiliser le badge visiteur pour accéder à la salle informatique, demander des indices gradués en cas de blocage, puis formuler une explication finale.
 
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de score lié aux indices, pas d’accusation finale et pas de deuxième scénario.
+Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive et pas de deuxième scénario.
 
 ## Stack
 
@@ -23,6 +23,7 @@ src/
     BriefingPage.tsx
     CharacterDetail.tsx
     DocumentDetail.tsx
+    FinalResolutionDetail.tsx
     HomePage.tsx
     InventoryPanel.tsx
     InvestigationPage.tsx
@@ -49,6 +50,7 @@ Le scénario contient désormais :
 - 9 documents courts ;
 - 3 objets utiles ou contextuels ;
 - 2 énigmes simples ;
+- 1 résolution finale prudente ;
 - 3 indices progressifs par énigme ;
 - des éléments de preuve textuels.
 
@@ -70,6 +72,7 @@ Types principaux :
 - `InventoryObject`
 - `Puzzle`
 - `PuzzleAnswer`
+- `FinalResolution`
 - `Hint`
 
 `InventoryObject` pilote désormais un inventaire minimal. `Hint` reste préparatoire.
@@ -204,6 +207,29 @@ Réussite :
 - feedback “Contradiction repérée” ;
 - déblocage du brouillon de mail non envoyé.
 
+## Résolution finale V0.6
+
+La V0.6 introduit `Scenario.finalResolution`.
+
+La résolution finale n'est pas conçue comme une accusation brutale. Elle demande au joueur :
+
+- de choisir l'explication la plus plausible ;
+- de sélectionner trois pièces du dossier qui la soutiennent ;
+- de valider une conclusion prudente.
+
+Le composant `FinalResolutionDetail` gère cette interaction localement. Il vérifie :
+
+- l'hypothèse choisie ;
+- les pièces justificatives sélectionnées.
+
+La bonne hypothèse est une confusion de documents après le passage de Fahad au secrétariat. Les pièces attendues sont :
+
+- `temoignage-fahad` ;
+- `historique-impression` ;
+- `brouillon-mail`.
+
+Le feedback final insiste sur une solution réparatrice : Delphine reprend le dossier avec Chen, les documents sont vérifiés, l'attestation est réimprimée et le dossier est validé. Fahad n'est pas publiquement accusé.
+
 ## Ajouter plus tard un nouveau scénario
 
 Quand le projet autorisera plusieurs enquêtes :
@@ -215,15 +241,15 @@ Quand le projet autorisera plusieurs enquêtes :
 
 La V0.5 ne crée pas de deuxième scénario.
 
-## Direction V0.6
+## Direction V0.7
 
-La V0.6 devra introduire une accusation finale enrichie.
+La V0.7 devra préparer l'exploitation pédagogique et le mode enseignant.
 
 Objectif recommandé :
 
-- vérifier une hypothèse finale ;
-- demander des preuves pertinentes ;
-- garder une interprétation prudente ;
-- éviter une accusation automatique ou trop scolaire.
+- documenter les objectifs FLE/FOU réellement travaillés ;
+- proposer un corrigé enseignant ;
+- prévoir des pistes d'exploitation en classe ;
+- garder le jeu côté joueur libre de formulations scolaires.
 
-Le mode enseignant, le score complet et le deuxième scénario restent à traiter plus tard.
+Le score complet, le deuxième scénario, les portraits définitifs et un éventuel éditeur de scénarios restent à traiter plus tard.

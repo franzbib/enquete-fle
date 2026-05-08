@@ -7,6 +7,7 @@ import {
 import type { Puzzle, Scenario } from '../types/scenario';
 import { CharacterDetail } from './CharacterDetail';
 import { DocumentDetail } from './DocumentDetail';
+import { FinalResolutionDetail } from './FinalResolutionDetail';
 import { InventoryPanel } from './InventoryPanel';
 import { LocationDetail } from './LocationDetail';
 import { PuzzleDetail } from './PuzzleDetail';
@@ -16,7 +17,8 @@ type Selection =
   | { type: 'location'; id: string }
   | { type: 'character'; id: string }
   | { type: 'document'; id: string }
-  | { type: 'puzzle'; id: string };
+  | { type: 'puzzle'; id: string }
+  | { type: 'final-resolution'; id: string };
 
 type InvestigationPageProps = {
   scenario: Scenario;
@@ -48,12 +50,14 @@ export function InvestigationPage({
   const [revealedHintCounts, setRevealedHintCounts] = useState<
     Record<string, number>
   >({});
+  const [finalResolutionSolved, setFinalResolutionSolved] = useState(false);
   const [feedback, setFeedback] = useState(
     'Consultez les documents disponibles, puis résolvez la chronologie.',
   );
 
   const selectedId = `${selection.type}:${selection.id}`;
   const puzzles = scenario.puzzles ?? [];
+  const finalResolution = scenario.finalResolution;
   const inventoryObjects = scenario.inventoryObjects ?? [];
   const accessibleLocationIds = scenario.locations
     .filter(
@@ -69,6 +73,14 @@ export function InvestigationPage({
       ),
   );
   const visibleDocumentIds = visibleDocuments.map((document) => document.id);
+  const isFinalResolutionAvailable = finalResolution
+    ? (finalResolution.requiredPuzzleIds ?? []).every((puzzleId) =>
+        solvedPuzzleIds.includes(puzzleId),
+      ) &&
+      (finalResolution.requiredDocumentIds ?? []).every((documentId) =>
+        visibleDocumentIds.includes(documentId),
+      )
+    : false;
 
   function isPuzzleAvailable(puzzle: Puzzle) {
     return (puzzle.requiredDocumentIds ?? []).every((documentId) =>
@@ -207,6 +219,13 @@ export function InvestigationPage({
     );
   }
 
+  function handleFinalResolutionComplete() {
+    setFinalResolutionSolved(true);
+    setFeedback(
+      'Explication finale validée. La conclusion reste prudente et permet de réparer la situation.',
+    );
+  }
+
   const detail = useMemo(() => {
     if (selection.type === 'location') {
       const location = findLocation(scenario, selection.id);
@@ -280,6 +299,21 @@ export function InvestigationPage({
       );
     }
 
+    if (selection.type === 'final-resolution') {
+      if (!finalResolution) {
+        return null;
+      }
+
+      return (
+        <FinalResolutionDetail
+          finalResolution={finalResolution}
+          isAvailable={isFinalResolutionAvailable}
+          isSolved={finalResolutionSolved}
+          onComplete={handleFinalResolutionComplete}
+        />
+      );
+    }
+
     const puzzle = puzzles.find((item) => item.id === selection.id);
 
     if (!puzzle) {
@@ -300,7 +334,10 @@ export function InvestigationPage({
       />
     );
   }, [
+    finalResolution,
+    finalResolutionSolved,
     inventoryObjects,
+    isFinalResolutionAvailable,
     ownedObjectIds,
     puzzles,
     revealedHintCounts,
@@ -316,7 +353,7 @@ export function InvestigationPage({
       <div className="mx-auto max-w-7xl">
         <header className="border-b border-slate-300 pb-5">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-            Enquête V0.5
+            Enquête V0.6
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -352,7 +389,8 @@ export function InvestigationPage({
             readDocumentIds.length +
             solvedPuzzleIds.length +
             ownedObjectIds.length +
-            usedObjectIds.length
+            usedObjectIds.length +
+            (finalResolutionSolved ? 1 : 0)
           }
           className="mt-4 rounded-md border-l-4 border-amber-500 bg-amber-50 p-4 animate-highlight"
         >
@@ -364,7 +402,9 @@ export function InvestigationPage({
                 ? "Vous avez de nouveaux documents. Lisez-les attentivement."
                 : solvedPuzzleIds.length < puzzles.length
                   ? "Vous avez lu tous les documents. Essayez de résoudre une énigme disponible."
-                  : "Félicitations, vous avez terminé cette première enquête !"}
+                  : finalResolution && !finalResolutionSolved
+                    ? "Vous pouvez maintenant formuler une explication finale prudente."
+                    : "Félicitations, l'enquête se termine sur une solution réparatrice."}
           </p>
         </div>
 
@@ -429,6 +469,31 @@ export function InvestigationPage({
                 </button>
               );
             })}
+            {finalResolution ? (
+              <button
+                type="button"
+                onClick={() =>
+                  handleSelect('final-resolution', finalResolution.id)
+                }
+                className={`rounded-md border px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
+                  selectedId === `final-resolution:${finalResolution.id}`
+                    ? 'border-teal-800 bg-teal-50 text-teal-950'
+                    : finalResolutionSolved
+                      ? 'border-green-600 bg-green-50 text-green-900'
+                      : isFinalResolutionAvailable
+                        ? 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50'
+                        : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+                }`}
+                disabled={!isFinalResolutionAvailable}
+                title={
+                  !isFinalResolutionAvailable
+                    ? 'Énigmes ou documents manquants'
+                    : ''
+                }
+              >
+                {finalResolution.title} {finalResolutionSolved ? '✓' : ''}
+              </button>
+            ) : null}
           </div>
         </section>
 
