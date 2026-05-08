@@ -2,23 +2,17 @@
 
 ## Version actuelle
 
-V0.9.0 — Cadrage graphique initial et première amélioration visuelle légère.
+**V0.9.3 — jeu complet, exploitable pédagogiquement, avec direction graphique, portraits harmonisés, vignettes temporaires de lieux et icônes d’objets.**
 
-Le dépôt GitHub existe.
+Le dépôt GitHub existe et le prototype est jouable dans le navigateur.
 
-Le dossier `docs/agent-context/` contient désormais les documents fondamentaux nécessaires au pilotage du projet par agents IA.
+Dépôt : `https://github.com/franzbib/enquete-fle`
 
-Le projet technique minimal existe.
-
-## Dépôt
-
-Nom du dépôt : `enquete-fle`
-
-URL du dépôt : `https://github.com/franzbib/enquete-fle`
+Dossier local de référence : `C:\dev\enquete-fle`
 
 ## Vision générale validée
 
-Le projet consiste à créer un jeu d’enquête FLE/FOU en ligne, jouable sur navigateur, en 2D statique, sans animation, destiné à des apprenants de français de niveau B1/B2.
+Le projet consiste à créer un jeu d’enquête FLE/FOU en ligne, jouable sur navigateur, en 2D principalement statique, destiné à des apprenants de français de niveau B1+/B2.
 
 Le jeu doit proposer une enquête documentaire : le joueur explore des lieux, consulte des documents, interroge des personnages, collecte un nombre restreint d’objets, repère des contradictions, formule des hypothèses et résout une affaire.
 
@@ -28,49 +22,100 @@ La langue française doit être un outil de déduction. Les objectifs pédagogiq
 
 Le joueur doit avoir l’impression de mener une enquête, non de remplir une fiche de grammaire.
 
-Les compétences linguistiques doivent servir à :
+Les compétences linguistiques servent à :
 
 - comprendre des témoignages ;
 - reconstituer une chronologie ;
 - comparer des versions contradictoires ;
 - interpréter des documents ;
-- utiliser des objets comme preuves ;
-- formuler une hypothèse ;
-- justifier une conclusion prudente.
+- distinguer objets et pièces du dossier ;
+- formuler une hypothèse prudente ;
+- justifier une conclusion par des preuves.
 
-## Contraintes validées
+## État fonctionnel du jeu
 
-- Jeu en ligne.
-- 2D uniquement.
-- Aucune animation.
-- Interface sobre et lisible.
-- Développement progressif.
-- Architecture simple et maintenable.
-- Pas de backend dans la première version.
-- Pas de moteur de jeu lourd.
-- Graphisme pensé dès le départ, mais identité graphique finale repoussée à une phase ultérieure.
-- Objets peu nombreux, utiles et liés à la logique d’enquête.
-- Première enquête prototype : “Le dossier disparu”.
+Le scénario prototype **Le dossier disparu** est jouable de bout en bout.
 
-## Documents déjà produits hors dépôt
+La boucle principale est désormais :
 
-Les documents suivants existent déjà sous forme de dossier Word ou de notes préparatoires :
+1. accueil ;
+2. briefing ;
+3. exploration par lieux ;
+4. consultation de personnages et documents ;
+5. prise et gestion d’objets ;
+6. utilisation contextualisée du badge pour ouvrir la salle informatique ;
+7. résolution d’une chronologie ;
+8. résolution d’une contradiction ;
+9. indices progressifs ;
+10. résolution finale prudente ;
+11. fin heureuse avec validation du dossier de Chen.
 
-- cahier des charges général ;
-- feuille de route progressive ;
-- prompts Codex / Antigravity ;
-- modèle de scénario “Le dossier disparu” ;
-- document sur l’espace graphique et l’identité visuelle progressive ;
-- analyses de jeux d’enquête courts ;
-- analyses d’escape games pédagogiques existants ;
-- plan d’exploitation agentique du projet ;
-- définition du rôle de l’agent chef d’orchestre.
+## Ce qui est fait techniquement
 
-Ces documents doivent progressivement être intégrés ou résumés dans le dossier :
+- Squelette React / Vite / TypeScript.
+- Tailwind CSS configuré.
+- Structure `/src` organisée en composants, types, moteur minimal et scénarios.
+- Chargement local du scénario `Le dossier disparu`.
+- Navigation accueil / briefing / enquête.
+- Exploration par lieux.
+- Départ de l’enquête à l’Accueil.
+- Lieux contextualisés avec documents, personnages présents et objets observables.
+- Salle informatique visible mais fermée au départ.
+- Badge visiteur à présenter depuis la salle informatique fermée.
+- Historique d’impression visible dès que la salle informatique est ouverte.
+- Inventaire dynamique : objets pris, masquage de l’inventaire, action `Reposer`, objets utilisés non reposables.
+- Deux énigmes principales : chronologie et contradiction.
+- Indices progressifs pour les énigmes.
+- Résolution finale prudente, non accusatrice, fondée sur hypothèse + pièces justificatives.
+- Fin heureuse : Delphine aide Chen à remettre le dossier en ordre.
+- Métadonnées déductives masquées dans l’interface joueur : les personnages et lieux cités ne sont pas affichés automatiquement dans les documents.
 
-`docs/agent-context/`
+## État narratif et pédagogique
 
-## Documents déjà présents dans le dépôt
+Sont validés :
+
+- remplacement de Madame Delorme par Delphine ;
+- distinction entre discours direct dans les fiches personnages et discours indirect dans les documents de témoignage ;
+- ajout d’un décor vivant contrôlé avec l’Accueil et Thi-Thai ;
+- résolution finale par explication prudente plutôt que par accusation ;
+- fiche enseignant externe V0.7 ;
+- fiche élève imprimable V0.7.1.
+
+Documents pédagogiques existants :
+
+- `docs/teacher-guide-v0.7.md` ;
+- `docs/student-investigation-sheet-v0.7.1.md`.
+
+## État graphique
+
+La direction artistique actuelle est :
+
+> Un carnet d’enquête clair dans un campus vivant.
+
+Sont en place :
+
+- audit visuel V0.9.0 ;
+- charte visuelle V0.9.0 ;
+- première passe UI : surfaces papier, encre sombre, vert administratif, bleu dossier, ambre indice ;
+- progression masquable et guidage intégré ;
+- bibliothèque de portraits harmonisés V0.9.2 ;
+- portraits intégrés dans les fiches personnages via `portraitUrl` ;
+- fallback par initiale pour les personnages sans portrait ;
+- portraits agrandis dans `CharacterDetail` ;
+- vignettes temporaires de lieux V0.9.3 ;
+- icônes d’objets V0.9.3.
+
+Assets principaux :
+
+- portraits dans `public/assets/portraits/` ;
+- vignettes temporaires de lieux dans `public/assets/locations/` ;
+- icônes d’objets dans `public/assets/objects/`.
+
+Les vignettes de lieux sont explicitement temporaires et pourront être remplacées plus tard.
+
+## Documents de pilotage présents
+
+Le dossier `docs/agent-context/` contient notamment :
 
 - `00_AGENT_CHEF_ORCHESTRE.md`
 - `01_ETAT_DU_PROJET.md`
@@ -82,101 +127,30 @@ Ces documents doivent progressivement être intégrés ou résumés dans le doss
 - `07_MODELE_SCENARIO_DOSSIER_DISPARU.md`
 - `08_PROCHAINES_ACTIONS.md`
 - `09_DECISIONS_LOG.md`
+- `10_PERSONNAGES_ET_LIEUX_RECURRENTS.md`
+- `11_CONTROLE_COHERENCE_NARRATIVE.md`
 
-## Documents à créer prochainement
+## Ce qui reste à faire
 
-Aucun document fondamental supplémentaire n’est nécessaire avant la création du squelette technique.
+Priorités possibles :
 
-Des documents complémentaires pourront être ajoutés plus tard :
+1. Audit visuel humain de la V0.9.3.
+2. Mise à jour éventuelle de détails graphiques après test.
+3. V0.9.4 — icônes de statuts d’interface : fermé, lu, nouveau, validé, utilisé, indice disponible.
+4. V0.7.2 — version simplifiée B1 des textes longs.
+5. V0.8 — mode enseignant minimal, plus tard.
+6. V1.0 — stabilisation du premier scénario complet.
 
-- documentation d’architecture ;
-- changelog ;
-- liste des problèmes connus ;
-- rapport de tests ;
-- documentation enseignant.
+## Points à surveiller
 
-## Ce qui est validé conceptuellement
+- Ne pas transformer le jeu en quiz grammatical.
+- Ne pas multiplier les fonctionnalités avant stabilisation du premier scénario.
+- Ne pas créer un inventaire trop complexe.
+- Ne pas rendre l’interface trop décorative au détriment de la lisibilité.
+- Ne pas utiliser systématiquement tous les personnages récurrents : ils restent une réserve évolutive.
+- Maintenir la distinction entre preuve, indice, objet et interprétation.
+- Vérifier régulièrement que la documentation de pilotage suit bien l’état réel du code.
 
-Le jeu sera un jeu d’enquête documentaire FLE/FOU, et non un escape game pur.
+## Dernière mise à jour
 
-Il devra combiner :
-
-- lieux explorables ;
-- personnages suspects ;
-- documents d’enquête ;
-- témoignages ;
-- objets à obtenir ;
-- indices gradués ;
-- énigmes de déduction ;
-- résolution finale argumentée et prudente.
-
-Les objets devront pouvoir être obtenus :
-
-- par exploration ;
-- par résolution d’énigme ;
-- par dialogue ;
-- par combinaison d’indices ;
-- par choix stratégique.
-
-## Ce qui est fait techniquement
-
-- Squelette React/Vite/TypeScript.
-- Installation et configuration Tailwind CSS.
-- Structure `/src`.
-- Dossiers `src/components`, `src/engine`, `src/data/scenarios` et `src/types`.
-- Page d’accueil minimale.
-- Écran de briefing minimal pour “Le dossier disparu”.
-- Écran d’enquête minimal.
-- Chargement local du scénario “Le dossier disparu”.
-- Affichage sobre des lieux, personnages et documents.
-- Deux énigmes simples : chronologie et contradiction.
-- Feedback local de progression.
-- Déblocage local de documents après réussite.
-- Inventaire minimal avec objets trouvés et utilisés.
-- Objets observables dans les lieux.
-- Badge visiteur utilisable pour débloquer la salle informatique.
-- Indices progressifs pour les deux énigmes principales.
-- Décor vivant contrôlé avec l'accueil et Thi-Thai.
-- Résolution finale fondée sur une explication prudente et des pièces justificatives.
-- Fiche enseignant V0.7 avec déroulement de classe, corrigé, prolongements FLE/FOU et points de vigilance.
-- Fiche élève V0.7.1 imprimable avec prise de notes, chronologie, contradiction, hypothèses et auto-évaluation.
-- Cadrage graphique V0.9.0 avec audit visuel, charte initiale et première amélioration des surfaces d'interface.
-- Documentation technique `docs/architecture.md`.
-
-## Ce qui n’est pas encore fait
-
-- Moteur de scénario complet.
-- Mode enseignant.
-- Version simplifiée B1.
-- Tests.
-- Déploiement.
-
-## Priorité actuelle
-
-Préparer la suite graphique : planche de portraits harmonisés V0.9.1 ou vignettes de lieux V0.9.2.
-
-## Prochaine action recommandée
-
-Demander à Codex ou à un agent graphique de préparer une première planche de portraits harmonisés pour Delphine, François, Heïdi, Marine, Mathias et Rodolphe, sans les intégrer encore comme assets définitifs.
-
-## Dernière action réalisée
-
-Création de la V0.9.0 :
-
-- audit visuel `docs/visual-audit-v0.9.0.md` ;
-- charte visuelle `docs/visual-guidelines-v0.9.0.md` ;
-- direction artistique "carnet d'enquête clair dans un campus vivant" ;
-- règles d'harmonisation des références de Delphine, François, Heïdi, Marine, Mathias et Rodolphe ;
-- première couche de styles dans `src/styles.css` ;
-- amélioration légère des panneaux, fiches, documents, objets, énigmes et résolution finale ;
-- aucune modification du gameplay.
-
-## Risques à surveiller
-
-- Transformer le jeu en quiz grammatical.
-- Ajouter trop tôt une identité graphique définitive.
-- Ajouter trop de fonctionnalités avant un premier prototype jouable.
-- Créer un inventaire trop complexe.
-- Produire des énigmes arbitraires sans lien narratif.
-- Laisser les agents IA modifier le projet sans documentation.
-- Multiplier les scénarios avant d’avoir stabilisé le premier.
+Mise à jour documentaire après les évolutions graphiques V0.9.2 / V0.9.3 et les micro-corrections d’interface récentes.
