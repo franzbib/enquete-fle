@@ -37,7 +37,7 @@ export function DocumentDetail({
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div>
-          <h3 className="font-semibold text-slate-950">Lieux associés</h3>
+          <h3 className="font-semibold text-slate-950">Lieux cités</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
             {locations.map((location) => (
               <li key={location.id}>
@@ -49,7 +49,7 @@ export function DocumentDetail({
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold text-slate-950">Personnages associés</h3>
+          <h3 className="font-semibold text-slate-950">Personnages cités</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
             {characters.map((character) => (
               <li key={character.id}>

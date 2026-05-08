@@ -18,6 +18,11 @@ export function PuzzleDetail({
 }: PuzzleDetailProps) {
   const [orderedAnswer, setOrderedAnswer] = useState<string[]>([]);
   const [selectedOptionId, setSelectedOptionId] = useState('');
+  const [selectedEvidenceIds, setSelectedEvidenceIds] = useState<string[]>([]);
+  const [evidenceSelectionValidated, setEvidenceSelectionValidated] =
+    useState(false);
+  const [interpretationOptionId, setInterpretationOptionId] = useState('');
+  const [localFeedback, setLocalFeedback] = useState('');
 
   const answer = puzzle.answer;
 
@@ -48,14 +53,16 @@ export function PuzzleDetail({
         {puzzle.prompt}
       </p>
 
-      <div className="mt-5">
-        <h3 className="font-semibold text-slate-950">Documents à comparer</h3>
-        <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-          {requiredDocuments.map((document) => (
-            <li key={document.id}>{document.title}</li>
-          ))}
-        </ul>
-      </div>
+      {answer.kind !== 'case-file-contradiction' ? (
+        <div className="mt-5">
+          <h3 className="font-semibold text-slate-950">Documents à comparer</h3>
+          <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
+            {requiredDocuments.map((document) => (
+              <li key={document.id}>{document.title}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {answer.kind === 'ordered-events' ? (
         <div className="mt-5 grid gap-3">
@@ -119,6 +126,127 @@ export function PuzzleDetail({
           >
             Vérifier la contradiction
           </button>
+        </div>
+      ) : null}
+
+      {answer.kind === 'case-file-contradiction' ? (
+        <div className="mt-5 grid gap-5">
+          <div>
+            <h3 className="font-semibold text-slate-950">Pièces du dossier</h3>
+            <div className="mt-3 grid gap-2">
+              {answer.caseFileItems.map((item) => {
+                const checked = selectedEvidenceIds.includes(item.documentId);
+                return (
+                  <label
+                    className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+                    key={item.documentId}
+                  >
+                    <input
+                      className="mr-2"
+                      disabled={
+                        !isAvailable ||
+                        isSolved ||
+                        evidenceSelectionValidated ||
+                        (!checked &&
+                          selectedEvidenceIds.length >=
+                            answer.correctEvidenceIds.length)
+                      }
+                      type="checkbox"
+                      value={item.documentId}
+                      checked={checked}
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setSelectedEvidenceIds((currentIds) => [
+                            ...currentIds,
+                            item.documentId,
+                          ]);
+                          return;
+                        }
+
+                        setSelectedEvidenceIds((currentIds) =>
+                          currentIds.filter((id) => id !== item.documentId),
+                        );
+                      }}
+                    />
+                    {item.label}
+                  </label>
+                );
+              })}
+            </div>
+            <button
+              className="mt-3 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+              type="button"
+              disabled={
+                !isAvailable ||
+                isSolved ||
+                evidenceSelectionValidated ||
+                selectedEvidenceIds.length !== answer.correctEvidenceIds.length
+              }
+              onClick={() => {
+                const hasCorrectEvidence =
+                  selectedEvidenceIds.length === answer.correctEvidenceIds.length &&
+                  answer.correctEvidenceIds.every((documentId) =>
+                    selectedEvidenceIds.includes(documentId),
+                  );
+
+                if (!hasCorrectEvidence) {
+                  setLocalFeedback(answer.selectionFailureFeedback);
+                  return;
+                }
+
+                setEvidenceSelectionValidated(true);
+                setLocalFeedback(answer.selectionSuccessFeedback);
+              }}
+            >
+              Valider les deux pièces
+            </button>
+          </div>
+
+          {localFeedback ? (
+            <p className="rounded-md bg-stone-100 p-3 text-sm leading-6 text-slate-700">
+              {localFeedback}
+            </p>
+          ) : null}
+
+          {evidenceSelectionValidated ? (
+            <div className="grid gap-3">
+              <p className="font-semibold text-slate-950">
+                {answer.interpretationPrompt}
+              </p>
+              {answer.interpretationOptions.map((option) => (
+                <label
+                  className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800"
+                  key={option.id}
+                >
+                  <input
+                    className="mr-2"
+                    disabled={!isAvailable || isSolved}
+                    type="radio"
+                    name={`${puzzle.id}-interpretation`}
+                    value={option.id}
+                    checked={interpretationOptionId === option.id}
+                    onChange={(event) =>
+                      setInterpretationOptionId(event.target.value)
+                    }
+                  />
+                  {option.label}
+                </label>
+              ))}
+              <button
+                className="mt-2 rounded-md bg-teal-800 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-900 disabled:bg-slate-300 disabled:text-slate-600"
+                type="button"
+                disabled={!isAvailable || isSolved || !interpretationOptionId}
+                onClick={() =>
+                  onSubmit(puzzle, [
+                    ...selectedEvidenceIds,
+                    interpretationOptionId,
+                  ])
+                }
+              >
+                Valider l'interprétation
+              </button>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </article>

@@ -43,7 +43,7 @@ export const dossierDisparuScenario: Scenario = {
       name: 'Salle informatique',
       kind: 'locked',
       description:
-        "Une salle utilisée pour imprimer des documents administratifs. En V0.3, elle devient une piste débloquée par la chronologie.",
+        "Une salle utilisée pour imprimer des documents administratifs. En V0.3.3, elle devient une piste débloquée par la chronologie.",
       role: "Vérifier si quelqu'un est resté plus longtemps qu'il ne le dit.",
       available: true,
       documentIds: ['historique-impression', 'brouillon-mail'],
@@ -71,7 +71,7 @@ export const dossierDisparuScenario: Scenario = {
       profile:
         'Pressé et un peu confus, il dit être venu chercher une attestation.',
       testimony:
-        "Il affirme être seulement passé au secrétariat, puis être parti tout de suite après.",
+        "Il dit être passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors il a attendu un peu dans le couloir. Ensuite, il a récupéré son papier et il est parti tout de suite après.",
       reliability: 'questionable',
       relatedLocationIds: ['couloir', 'salle-informatique'],
     },
@@ -104,7 +104,7 @@ export const dossierDisparuScenario: Scenario = {
       profile:
         'Il a utilisé la salle informatique pour préparer un cours.',
       testimony:
-        "Il dit avoir imprimé ses propres documents, mais il n'a pas vu qui a laissé la pochette près de l'imprimante.",
+        "Il est passé rapidement en salle informatique. L'imprimante avait déjà été utilisée, mais il n'a remarqué personne près du poste 03.",
       reliability: 'unknown',
       relatedLocationIds: ['salle-informatique'],
     },
@@ -180,7 +180,7 @@ export const dossierDisparuScenario: Scenario = {
       source: 'Couloir',
       summary: 'Un élément ne correspond pas dans la chronologie.',
       content:
-        "Je suis seulement passé au secrétariat. Je suis parti tout de suite après.",
+        "Je suis passé au secrétariat vers 16h30 pour demander une attestation. Madame Delorme était occupée, alors j'ai attendu un peu dans le couloir. Ensuite, j'ai récupéré mon papier et je suis parti tout de suite après.",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir'],
       relatedCharacterIds: ['fahad'],
@@ -212,7 +212,7 @@ export const dossierDisparuScenario: Scenario = {
       unlocksAfterPuzzleId: 'contradiction-fahad',
       relatedLocationIds: ['salle-informatique'],
       relatedCharacterIds: ['fahad'],
-      evidenceIds: ['ev-brouillon-aveu'],
+      evidenceIds: ['ev-brouillon-confusion'],
     },
   ],
   evidence: [
@@ -253,7 +253,7 @@ export const dossierDisparuScenario: Scenario = {
       documentId: 'historique-impression',
     },
     {
-      id: 'ev-brouillon-aveu',
+      id: 'ev-brouillon-confusion',
       label: 'Brouillon de mail non envoyé',
       text: "Fahad signale une possible confusion avec des documents récupérés dans l'après-midi.",
       documentId: 'brouillon-mail',
@@ -328,32 +328,65 @@ export const dossierDisparuScenario: Scenario = {
       title: 'Identifier la contradiction',
       puzzleType: 'contradiction',
       description:
-        "Comparez ce que Fahad affirme avec une trace horaire de la salle informatique.",
-      prompt: 'Quelle information contredit le témoignage de Fahad ?',
+        "Comparez deux pièces du dossier, puis interprétez prudemment ce qu'elles montrent.",
+      prompt:
+        'Sélectionnez les deux pièces du dossier qui permettent de repérer une contradiction.',
       requiredDocumentIds: ['temoignage-fahad', 'historique-impression'],
       answer: {
-        kind: 'single-choice',
-        correctOptionId: 'fahad-impression-1648',
-        options: [
+        kind: 'case-file-contradiction',
+        caseFileItems: [
           {
-            id: 'chen-mail-1800',
-            label: "Le mail indique que Chen doit envoyer son dossier avant 18h00.",
+            documentId: 'temoignage-fahad',
+            label: 'Témoignage de Fahad',
           },
           {
-            id: 'fahad-impression-1648',
-            label:
-              "L'historique montre une session Fahad active au poste 03 à 16h48, alors qu'il dit être parti tout de suite après son passage au secrétariat.",
+            documentId: 'temoignage-xiaoyu',
+            label: 'Témoignage de Xiaoyu',
           },
           {
-            id: 'delorme-appel',
-            label: 'Madame Delorme quitte le bureau à cause d’un appel.',
+            documentId: 'planning-secretariat',
+            label: 'Planning du secrétariat',
+          },
+          {
+            documentId: 'historique-impression',
+            label: "Historique d'impression",
+          },
+          {
+            documentId: 'brouillon-mail',
+            label: 'Brouillon de mail',
+          },
+          {
+            documentId: 'note-manuscrite',
+            label: 'Note manuscrite',
           },
         ],
+        correctEvidenceIds: ['temoignage-fahad', 'historique-impression'],
+        selectionSuccessFeedback:
+          "Ces deux pièces peuvent être comparées : elles ne donnent pas exactement la même chronologie.",
+        selectionFailureFeedback:
+          'Ces deux pièces ne suffisent pas à établir une contradiction claire. Relisez les horaires et les déclarations.',
+        interpretationPrompt: 'Que montre cette contradiction ?',
+        interpretationOptions: [
+          {
+            id: 'fahad-encore-batiment',
+            label:
+              'Fahad était probablement encore dans le bâtiment après son passage au secrétariat.',
+          },
+          {
+            id: 'fahad-a-vole-dossier',
+            label: 'Fahad a forcément volé le dossier de Chen.',
+          },
+          {
+            id: 'delorme-oublie-attestation',
+            label: 'Madame Delorme a oublié d’imprimer une attestation.',
+          },
+        ],
+        correctInterpretationOptionId: 'fahad-encore-batiment',
       },
       successFeedback:
-        'Contradiction repérée. Une nouvelle piste est débloquée : le brouillon de mail non envoyé.',
+        "Oui. Contradiction repérée : Fahad affirme être parti tout de suite après son passage au secrétariat, mais l'historique d'impression indique qu'une session à son nom a imprimé un document à 16h48. Cela ne prouve pas qu'il a pris le dossier, mais cela montre que sa chronologie pose problème.",
       failureFeedback:
-        "Cette réponse ne pointe pas la contradiction principale. Comparez le départ immédiat annoncé par Fahad avec l'historique d'impression.",
+        "Cette interprétation va trop loin ou ne correspond pas aux pièces comparées. La trace technique indique surtout que la chronologie de Fahad pose problème.",
       unlocksDocumentIds: ['brouillon-mail'],
     },
   ],

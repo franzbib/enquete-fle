@@ -184,10 +184,31 @@ Corrections locales appliquees apres validation des remarques :
 - la fiche personnage affiche uniquement le lieu ou le personnage est rencontre. Les lieux seulement relies par `relatedLocationIds` restent dans les donnees mais ne sont pas reveles directement au joueur ;
 - le point `kind: 'locked'` avec `available: true` est documente comme dette volontaire a traiter en V0.4 avec l'inventaire et les objets d'acces.
 
+## Suivi V0.3.3 - Enigme de contradiction
+
+L'enigme 2 demande maintenant au joueur de selectionner deux pieces du dossier, puis d'interpreter leur comparaison.
+
+Bonne combinaison :
+
+- `temoignage-fahad` ;
+- `historique-impression`.
+
+Interpretation attendue :
+
+La contradiction montre que Fahad n'est probablement pas parti tout de suite apres son passage au secretariat. Elle ne prouve pas directement qu'il a pris le dossier.
+
+Cette evolution renforce la logique d'enquete sans creer d'inventaire physique, de dossier de preuves complet ni d'accusation finale.
+
+Corrections narratives de consolidation :
+
+- la declaration de Fahad mentionne l'attestation, l'attente dans le couloir et le depart annonce, sans nier explicitement un passage en salle informatique ;
+- le brouillon de mail suggere une confusion de documents sans constituer un aveu ;
+- le temoignage de Xiaoyu reste une observation partielle et ne prouve pas ce que Fahad a pris ;
+- la declaration de M. Armand ne mentionne plus de pochette pres de l'imprimante, afin de ne pas introduire un objet materiel non observable ailleurs ;
+- les traces techniques creent une contradiction de chronologie, pas une accusation directe.
+
 ## Points a valider humainement
 
-- Le brouillon de mail doit-il rester une preuve tres forte, adaptee a un prototype court, ou devenir plus ambigu ?
-- Xiaoyu doit-elle etre un temoin tres fiable ou un temoin utile mais plus incertain ?
-- La note manuscrite doit-elle devenir une vraie preuve, une fausse piste ou un simple contexte ?
-- Monsieur Armand doit-il rester relie a l'historique d'impression, ou faut-il le retirer de cette trace ?
+- Le futur dossier de preuves devra-t-il afficher seulement les pieces consultees ou toutes les pieces connues du scenario ?
+- La note manuscrite doit-elle devenir une vraie preuve, une fausse piste ou un simple contexte lors de l'accusation finale ?
 - La V0.4 doit-elle rendre visibles les objets d'ambiance, ou seulement les objets utiles ?

@@ -80,6 +80,7 @@ Cette distinction evite de laisser croire qu'un meme personnage se trouve simult
 Les temoignages sont rattaches au personnage qui parle ou au lieu ou il est interroge.
 Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
 Les traces techniques doivent creer une contradiction credible sans accuser trop directement un personnage : elles peuvent prouver une presence, une session active ou un horaire incoherent, sans prouver a elles seules la manipulation du dossier disparu.
+Un temoignage ne doit pas introduire un indice materiel important si cet indice n'est pas observable, documente ou recuperable ailleurs dans l'enquete. En V0.3.3, la declaration de M. Armand reste donc neutre : elle signale une imprimante deja utilisee, pas une pochette absente des autres pieces.
 
 Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
 `relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
@@ -102,6 +103,14 @@ Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulem
 
 - ordre de trois événements ;
 - choix d’une contradiction parmi trois propositions.
+
+Depuis la V0.3.3, une énigme peut aussi demander une mise en relation de deux pièces du dossier avec `case-file-contradiction` :
+
+- étape 1 : sélectionner deux documents, témoignages, notes ou traces techniques ;
+- étape 2 : interpréter prudemment ce que leur comparaison montre.
+
+Cette mécanique relève du raisonnement d'enquête et prépare un futur dossier de preuves. Elle ne doit pas être confondue avec l'inventaire physique : elle manipule des pièces consultées, pas des objets à obtenir ou utiliser.
+Les feedbacks doivent rester prudents : une contradiction peut montrer une chronologie problématique sans accuser directement un personnage.
 
 ## Énigmes
 

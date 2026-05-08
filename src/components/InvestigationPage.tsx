@@ -66,13 +66,33 @@ export function InvestigationPage({
   }
 
   function handlePuzzleSubmit(puzzle: Puzzle, answer: string[]) {
-    const expectedAnswer =
-      puzzle.answer.kind === 'ordered-events'
-        ? puzzle.answer.correctOrder
-        : [puzzle.answer.correctOptionId];
-    const isCorrect =
-      answer.length === expectedAnswer.length &&
-      answer.every((answerItem, index) => answerItem === expectedAnswer[index]);
+    let isCorrect = false;
+
+    if (puzzle.answer.kind === 'ordered-events') {
+      const expectedAnswer = puzzle.answer.correctOrder;
+      isCorrect =
+        answer.length === expectedAnswer.length &&
+        answer.every((answerItem, index) => answerItem === expectedAnswer[index]);
+    }
+
+    if (puzzle.answer.kind === 'single-choice') {
+      isCorrect = answer.length === 1 && answer[0] === puzzle.answer.correctOptionId;
+    }
+
+    if (puzzle.answer.kind === 'case-file-contradiction') {
+      const selectedEvidenceIds = answer.slice(0, -1);
+      const selectedInterpretationId = answer.at(-1);
+      const expectedEvidenceIds = puzzle.answer.correctEvidenceIds;
+      const hasCorrectEvidence =
+        selectedEvidenceIds.length === expectedEvidenceIds.length &&
+        expectedEvidenceIds.every((evidenceId) =>
+          selectedEvidenceIds.includes(evidenceId),
+        );
+
+      isCorrect =
+        hasCorrectEvidence &&
+        selectedInterpretationId === puzzle.answer.correctInterpretationOptionId;
+    }
 
     if (!isCorrect) {
       setFeedback(puzzle.failureFeedback);
@@ -185,7 +205,7 @@ export function InvestigationPage({
       <div className="mx-auto max-w-7xl">
         <header className="border-b border-slate-300 pb-5">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-800">
-            Enquête V0.3
+            Enquête V0.3.3
           </p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>

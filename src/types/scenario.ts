@@ -102,12 +102,27 @@ export type PuzzleAnswer =
       kind: 'single-choice';
       options: PuzzleOption[];
       correctOptionId: string;
+    }
+  | {
+      kind: 'case-file-contradiction';
+      caseFileItems: CaseFileItem[];
+      correctEvidenceIds: string[];
+      selectionSuccessFeedback: string;
+      selectionFailureFeedback: string;
+      interpretationPrompt: string;
+      interpretationOptions: PuzzleOption[];
+      correctInterpretationOptionId: string;
     };
 
 export type PuzzleOption = {
   id: string;
   label: string;
   explanation?: string;
+};
+
+export type CaseFileItem = {
+  documentId: string;
+  label: string;
 };
 
 export type PuzzleEvent = {
