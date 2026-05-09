@@ -203,8 +203,7 @@ export const salleFantomeScenario: Scenario = {
         'Le plan affiche les noms visibles dans le batiment. Aucun nom ancien n y figure.',
       content:
         "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
-      initiallyAvailable: false,
-      unlocksAfterPuzzleId: 'lire-convocation-tcf',
+      initiallyAvailable: true,
       relatedLocationIds: ['hall', 'panneau-affichage'],
       relatedCharacterIds: [],
       evidenceIds: ['ev-plan-sans-jaures'],
@@ -374,7 +373,7 @@ export const salleFantomeScenario: Scenario = {
       },
       description:
         'Reperez l information qui rend la convocation problematique.',
-      prompt: 'Quel element de la convocation semble poser probleme ?',
+      prompt: 'Quel element de la convocation devez-vous verifier sur le plan ?',
       requiredDocumentIds: ['convocation-tcf'],
       hints: [
         'Cherchez le lieu de l epreuve.',
