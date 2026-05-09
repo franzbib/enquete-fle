@@ -471,7 +471,30 @@ export function InvestigationPage({
       }
 
       return (
-        <DocumentDetail document={document} />
+        <DocumentDetail
+          document={document}
+          contextualPuzzles={puzzles
+            .filter(
+              (puzzle) =>
+                puzzle.context?.type === 'document' &&
+                puzzle.context.id === document.id,
+            )
+            .map((puzzle) => ({
+              puzzle,
+              requiredDocuments: visibleDocuments.filter((visibleDocument) =>
+                (puzzle.requiredDocumentIds ?? []).includes(visibleDocument.id),
+              ),
+              isSolved: solvedPuzzleIds.includes(puzzle.id),
+              isAvailable: isPuzzleAvailable(puzzle),
+              revealedHintCount: revealedHintCounts[puzzle.id] ?? 0,
+            }))
+            .filter(
+              (contextualPuzzle) =>
+                contextualPuzzle.isAvailable || contextualPuzzle.isSolved,
+            )}
+          onRequestHint={handleRequestHint}
+          onSubmitPuzzle={handlePuzzleSubmit}
+        />
       );
     }
 
@@ -732,8 +755,13 @@ export function InvestigationPage({
               const isSelected = selectedId === `puzzle:${puzzle.id}`;
               const solved = solvedPuzzleIds.includes(puzzle.id);
               const available = isPuzzleAvailable(puzzle);
+              const isContextualized = Boolean(puzzle.context);
 
               if (!available && !solved && !isSelected) {
+                return null;
+              }
+
+              if (isContextualized && available && !solved && !isSelected) {
                 return null;
               }
 

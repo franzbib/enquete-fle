@@ -368,6 +368,10 @@ export const salleFantomeScenario: Scenario = {
       id: 'lire-convocation-tcf',
       title: 'Lire la convocation',
       puzzleType: 'contradiction',
+      context: {
+        type: 'document',
+        id: 'convocation-tcf',
+      },
       description:
         'Reperez l information qui rend la convocation problematique.',
       prompt: 'Quel element de la convocation semble poser probleme ?',
@@ -404,6 +408,10 @@ export const salleFantomeScenario: Scenario = {
       id: 'verifier-plan-actuel',
       title: 'Chercher la salle sur le plan',
       puzzleType: 'contradiction',
+      context: {
+        type: 'document',
+        id: 'plan-actuel-salles',
+      },
       description:
         'Sous le plan du hall, vous comparez le nom indique sur la convocation avec les salles affichees.',
       prompt: 'Que constatez-vous devant le plan ?',

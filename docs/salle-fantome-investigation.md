@@ -63,12 +63,34 @@ Le briefing joueur ne donne plus cette structure a l avance. Il indique seulemen
 
 Les mini-jeux sont pour l instant modelises avec les `Puzzle` existants :
 
-- Lire la convocation : choix simple.
-- Chercher la salle sur le plan : choix simple, reformule comme une interaction devant le plan du hall.
+- Lire la convocation : choix simple, maintenant affiche directement sous le document `convocation-tcf` grace au champ optionnel `context`.
+- Chercher la salle sur le plan : choix simple, maintenant affiche directement sous le document `plan-actuel-salles` grace au champ optionnel `context`.
 - Clarifier la situation avec Heidi : choix multiple integre a la scene dans son bureau, disponible apres les documents `convocation-tcf`, `plan-actuel-salles`, `temoignage-delphine` et `temoignage-ning-yi`.
 - Retrouver le nom actuel de Jaures : choix simple, avec `puzzleType: 'matching'`.
 - Comprendre l erreur de modele : choix simple apres le retour de Thi Thai, debloque le message final.
 - Choisir le message final : resolution finale.
+
+## Enigmes contextualisees
+
+Le type generique `Puzzle` accepte maintenant un champ optionnel :
+
+```ts
+context?: {
+  type: 'location' | 'document' | 'character';
+  id: string;
+};
+```
+
+Ce champ reste optionnel pour preserver les autres enquetes. Dans cette premiere version limitee, seuls deux puzzles de `La salle fantome` l utilisent :
+
+- `lire-convocation-tcf` est rattache au document `convocation-tcf`.
+- `verifier-plan-actuel` est rattache au document `plan-actuel-salles`.
+
+Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, puis ouvrir le plan et constater l absence de Jaures sans passer d abord par le tableau d enquete.
+
+Pour eviter un doublon trop visible, les enigmes contextualisees disponibles et non resolues sont masquees du tableau d enquete. Une fois resolues, elles peuvent y reapparaitre comme deductions validees.
+
+Limite actuelle : Heidi, Marine, Thi Thai et la resolution finale restent dans le fonctionnement existant. Le rattachement des puzzles aux lieux ou personnages sera une etape ulterieure.
 
 ## Emplacements pour mini-jeux futurs
 
@@ -90,6 +112,7 @@ Corrections appliquees :
 - Le temoignage de Ning Yi est debloque apres `verifier-plan-actuel`, afin d eviter qu il devienne le premier indice avant le constat sur le plan.
 - Le tableau d enquete masque les enigmes et la resolution finale tant qu elles ne sont ni disponibles ni deja validees.
 - L objet `emplacement-affichage` a ete retire de l inventaire pour eviter qu un espace du panneau soit traite comme un objet a prendre.
+- Les deux premieres enigmes sont affichees sous leurs documents pour reduire la dependance initiale au tableau d enquete.
 
 Limites conservees volontairement :
 

@@ -93,6 +93,10 @@ export type Puzzle = {
   id: string;
   title: string;
   puzzleType: 'ordering' | 'contradiction' | 'unlock' | 'matching' | 'final-accusation';
+  context?: {
+    type: 'location' | 'document' | 'character';
+    id: string;
+  };
   description: string;
   prompt: string;
   requiredDocumentIds?: string[];
