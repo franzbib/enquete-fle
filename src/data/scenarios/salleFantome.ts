@@ -24,7 +24,7 @@ export const salleFantomeScenario: Scenario = {
         "Le hall concentre les candidats, les affiches et le plan actuel des salles. C est le point de depart de l enquete.",
       role: 'Lire la convocation, consulter le plan et constater que la salle Jaures manque.',
       available: true,
-      documentIds: ['convocation-tcf', 'plan-actuel-salles'],
+      documentIds: ['convocation-tcf', 'plan-actuel-salles', 'temoignage-ning-yi'],
       presentCharacterIds: ['ning-yi'],
       objectIds: [],
     },
@@ -221,6 +221,20 @@ export const salleFantomeScenario: Scenario = {
       evidenceIds: ['ev-oraux-confirmes'],
     },
     {
+      id: 'temoignage-ning-yi',
+      title: 'Echange avec Ning Yi',
+      documentType: 'testimony',
+      source: 'Hall',
+      summary:
+        'Ning Yi confirme qu un autre candidat a recu la meme convocation et rend la situation plus etrange.',
+      content:
+        "Ning Yi a recu lui aussi une convocation indiquant la salle Jaures. Il imagine que la salle apparait seulement aux candidats prets pour le TCF, puis evoque plus serieusement l hypothese d un vieux document utilise par erreur.",
+      initiallyAvailable: true,
+      relatedLocationIds: ['hall'],
+      relatedCharacterIds: ['ning-yi'],
+      evidenceIds: ['ev-ning-yi-meme-convocation'],
+    },
+    {
       id: 'archive-entrainements-tcf',
       title: 'Archive - Organisation des entrainements TCF',
       documentType: 'planning',
@@ -270,7 +284,7 @@ export const salleFantomeScenario: Scenario = {
       content:
         "INFORMATION IMPORTANTE - ORAUX DE TCF\n\nLes convocations qui indiquent la salle Jaures contiennent une ancienne denomination.\n\nLes candidats convoques en salle Jaures doivent se presenter en salle Beffroi.\n\nLes horaires de passage ne changent pas.",
       initiallyAvailable: false,
-      unlocksAfterPuzzleId: 'identifier-beffroi',
+      unlocksAfterPuzzleId: 'comprendre-erreur-thi-thai',
       relatedLocationIds: ['panneau-affichage'],
       relatedCharacterIds: ['thi-thai'],
       evidenceIds: ['ev-message-correct'],
@@ -300,6 +314,12 @@ export const salleFantomeScenario: Scenario = {
       label: 'Les oraux ont bien lieu',
       text: 'Delphine confirme que les oraux de TCF ont bien lieu aujourd hui.',
       documentId: 'temoignage-delphine',
+    },
+    {
+      id: 'ev-ning-yi-meme-convocation',
+      label: 'Ning Yi a la meme convocation',
+      text: 'Ning Yi confirme qu un autre candidat a recu une convocation indiquant la salle Jaures.',
+      documentId: 'temoignage-ning-yi',
     },
     {
       id: 'ev-jaures-ancien-nom',
@@ -434,6 +454,7 @@ export const salleFantomeScenario: Scenario = {
         'convocation-tcf',
         'plan-actuel-salles',
         'temoignage-delphine',
+        'temoignage-ning-yi',
       ],
       hints: [
         'Une bonne formulation compare deux sources.',
@@ -503,8 +524,48 @@ export const salleFantomeScenario: Scenario = {
         'Correspondance trouvee : l oral indique en salle Jaures doit avoir lieu en salle Beffroi. Il reste a comprendre pourquoi l ancien nom est revenu.',
       failureFeedback:
         'Relisez la note interne. Chaque ancien nom correspond a un seul nom actuel.',
-      unlocksDocumentIds: ['message-rectification'],
       unlocksLocationIds: ['salle-beffroi', 'secretariat-thi-thai'],
+    },
+    {
+      id: 'comprendre-erreur-thi-thai',
+      title: 'Comprendre l erreur de modele',
+      puzzleType: 'unlock',
+      description:
+        'Thi Thai explique pourquoi une convocation recente utilise encore un ancien nom de salle.',
+      prompt: 'Quelle est l origine de l erreur dans les convocations ?',
+      requiredDocumentIds: ['temoignage-thi-thai'],
+      hints: [
+        'Relisez l explication de Thi Thai.',
+        'L erreur vient d un modele administratif, pas d une annulation ou d une invention.',
+      ],
+      answer: {
+        kind: 'single-choice',
+        correctOptionId: 'ancien-modele-convocation',
+        options: [
+          {
+            id: 'oraux-annules',
+            label: 'Les oraux de TCF ont ete annules.',
+          },
+          {
+            id: 'ancien-modele-convocation',
+            label:
+              'Thi Thai a utilise trop vite un ancien modele de convocation contenant les anciens noms de salles.',
+          },
+          {
+            id: 'marine-change-noms',
+            label: 'Marine a change le nom des salles le matin meme.',
+          },
+          {
+            id: 'ning-yi-invente',
+            label: 'Ning Yi a invente la salle Jaures.',
+          },
+        ],
+      },
+      successFeedback:
+        'Vous comprenez l origine de l erreur : un ancien modele de convocation contenait encore les anciens noms de salles. Il faut maintenant prevenir les autres candidats clairement.',
+      failureFeedback:
+        'Cette explication ne correspond pas au temoignage de Thi Thai. Cherchez l origine administrative de l erreur.',
+      unlocksDocumentIds: ['message-rectification'],
     },
   ],
   finalResolution: {
@@ -518,6 +579,7 @@ export const salleFantomeScenario: Scenario = {
       'verifier-plan-actuel',
       'formuler-probleme-heidi',
       'identifier-beffroi',
+      'comprendre-erreur-thi-thai',
     ],
     requiredDocumentIds: [
       'note-changement-noms',
