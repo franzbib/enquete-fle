@@ -8,11 +8,11 @@ export const salleFantomeScenario: Scenario = {
   duration: 'Prototype 25 a 45 minutes',
   briefing: {
     summary:
-      "Votre oral de TCF commence a 15h30, mais la salle indiquee sur la convocation n existe pas sur le plan actuel de l ISPA.",
+      "Vous avez recu une convocation dans le cadre de vos etudes a l ISPA.",
     context:
-      "L enquete se deroule a l ISPA, a Amiens. La convocation officielle demande d arriver dix minutes avant l epreuve en salle Jaures. Or le plan affiche seulement les noms actuels des salles.",
+      "L enquete commence a l ISPA, a Amiens. Vous devez vous rendre a une convocation, mais il semble que vous n ayez pas encore tous les elements necessaires.",
     mission:
-      "Lisez la convocation, comparez-la au plan, demandez de l aide et retrouvez la salle avant de manquer votre oral. La priorite est de comprendre l erreur, puis d aider les autres candidats.",
+      "Quelque chose ne va pas... mais quoi ? Observez les documents disponibles, verifiez les informations et essayez de comprendre la situation.",
   },
   locations: [
     {
@@ -24,8 +24,8 @@ export const salleFantomeScenario: Scenario = {
         "Autour du panneau, les candidats verifient leur horaire. Votre convocation indique une salle que vous ne reconnaissez pas.",
       role: 'Un plan des salles est affiche pres de l entree. Plusieurs candidats patientent en silence.',
       available: true,
-      documentIds: ['convocation-tcf', 'plan-actuel-salles', 'temoignage-ning-yi'],
-      presentCharacterIds: ['ning-yi'],
+      documentIds: ['convocation-tcf', 'plan-actuel-salles'],
+      presentCharacterIds: [],
       objectIds: [],
     },
     {
@@ -37,8 +37,8 @@ export const salleFantomeScenario: Scenario = {
         "Le panneau d affichage rassemble les informations du jour : examens, salles, horaires et messages urgents.",
       role: 'Un espace reste libre au milieu des annonces recentes.',
       available: true,
-      documentIds: ['message-rectification'],
-      presentCharacterIds: [],
+      documentIds: ['plan-actuel-salles', 'temoignage-ning-yi', 'message-rectification'],
+      presentCharacterIds: ['ning-yi'],
       objectIds: [],
     },
     {
@@ -130,11 +130,11 @@ export const salleFantomeScenario: Scenario = {
       profile:
         "Ning Yi a recu la meme convocation. Il transforme l erreur administrative en theorie presque poetique.",
       directSpeech:
-        "Toi aussi, tu cherches la salle Jaures ? Justement, moi non plus je ne la trouve pas. Une salle indiquee sur une convocation officielle, mais absente du plan... Ce n est pas normal. Ou alors c est une salle qu on ne trouve que si on est pret pour le TCF. Imagine : l oral commence deja maintenant. Le vrai test, c est de trouver la salle. En France, l administration est parfois plus difficile que la grammaire.",
+        "Toi aussi, tu cherches la salle Jaures ? Je verifie le panneau depuis tout a l heure, et moi non plus je ne la trouve pas. Une salle indiquee sur une convocation officielle, mais absente des informations affichees... Ce n est pas normal. Ou alors c est une salle qu on ne trouve que si on est pret pour le TCF. Imagine : l oral commence deja maintenant. Le vrai test, c est de trouver la salle. En France, l administration est parfois plus difficile que la grammaire.",
       testimony:
-        "Ning Yi confirme qu un autre candidat a recu une convocation indiquant la salle Jaures. Il rend la situation plus etrange en imaginant que l oral commence deja dans le couloir.",
+        "Ning Yi confirme qu un autre candidat a recu une convocation indiquant la salle Jaures. Il rend la situation plus etrange en imaginant que l oral commence deja devant le panneau.",
       reliability: 'partial',
-      relatedLocationIds: ['hall'],
+      relatedLocationIds: ['panneau-affichage'],
     },
     {
       id: 'heidi',
@@ -198,14 +198,14 @@ export const salleFantomeScenario: Scenario = {
       id: 'plan-actuel-salles',
       title: 'Plan actuel des salles',
       documentType: 'note',
-      source: 'Hall',
+      source: 'Hall - panneau des salles',
       summary:
         'Le plan affiche les noms visibles dans le batiment. Aucun nom ancien n y figure.',
       content:
         "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'lire-convocation-tcf',
-      relatedLocationIds: ['hall'],
+      relatedLocationIds: ['hall', 'panneau-affichage'],
       relatedCharacterIds: [],
       evidenceIds: ['ev-plan-sans-jaures'],
     },
@@ -226,14 +226,14 @@ export const salleFantomeScenario: Scenario = {
       id: 'temoignage-ning-yi',
       title: 'Echange avec Ning Yi',
       documentType: 'testimony',
-      source: 'Hall',
+      source: 'Panneau d affichage',
       summary:
         'Ning Yi confirme qu un autre candidat a recu la meme convocation et rend la situation plus etrange.',
       content:
-        "Ning Yi a recu lui aussi une convocation indiquant la salle Jaures. Il imagine que la salle apparait seulement aux candidats prets pour le TCF, comme si l oral commencait deja dans le couloir.",
+        "Ning Yi a recu lui aussi une convocation indiquant la salle Jaures. Pres du panneau, il verifie les informations affichees et imagine que la salle apparait seulement aux candidats prets pour le TCF.",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'verifier-plan-actuel',
-      relatedLocationIds: ['hall'],
+      relatedLocationIds: ['panneau-affichage'],
       relatedCharacterIds: ['ning-yi'],
       evidenceIds: ['ev-ning-yi-meme-convocation'],
     },
@@ -370,7 +370,7 @@ export const salleFantomeScenario: Scenario = {
       puzzleType: 'contradiction',
       description:
         'Reperez l information qui rend la convocation problematique.',
-      prompt: 'Quelle information faut-il verifier en priorite ?',
+      prompt: 'Quel element de la convocation semble poser probleme ?',
       requiredDocumentIds: ['convocation-tcf'],
       hints: [
         'Cherchez le lieu de l epreuve.',

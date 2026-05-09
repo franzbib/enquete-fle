@@ -16,7 +16,7 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 ## Personnages
 
 - Delphine : confirme que les oraux ont bien lieu, mais ne resout pas le probleme.
-- Ning Yi : autre candidat, cree une fausse piste comique et confirme que le probleme touche au moins deux candidats, sans suggerer l hypothese du vieux document. Son temoignage est requis avant l etape avec Heidi.
+- Ning Yi : autre candidat place pres du panneau d affichage. Il cree une fausse piste comique et confirme que le probleme touche au moins deux candidats, sans suggerer l hypothese du vieux document. Son temoignage est requis avant l etape avec Heidi.
 - Heidi : aide a formuler la contradiction entre convocation et plan actuel.
 - Marine : apparait apres l archive de Heidi et donne la correspondance Jaures -> Beffroi.
 - Thi Thai : revient a l acte III, explique l ancien modele et demande la rectification.
@@ -27,7 +27,7 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 2. `tcfConvocationRead` : enigme `lire-convocation-tcf`, reperage de la salle Jaures.
 3. `currentMapChecked` : enigme `verifier-plan-actuel`, constat que Jaures manque sur le plan.
 4. `secretaryVisited` : Delphine confirme les oraux dans `temoignage-delphine`.
-5. `ningYiMet` : document `temoignage-ning-yi`, debloque apres la verification du plan ; Ning Yi confirme que le probleme touche un autre candidat.
+5. `ningYiMet` : document `temoignage-ning-yi`, debloque apres la verification du plan ; pres du panneau, Ning Yi confirme que le probleme touche un autre candidat.
 6. `heidiProblemFormulated` : enigme `formuler-probleme-heidi`.
 7. `oldDocumentObtained` : document `archive-entrainements-tcf`.
 8. `marineMet` : le lieu `couloir-marine` est debloque apres Heidi.
@@ -45,6 +45,8 @@ Progression cible :
 ```text
 Convocation -> Plan -> Delphine -> Ning Yi -> Heidi -> Archive -> Marine -> Beffroi -> Thi Thai -> Comprendre l erreur -> Rectification finale
 ```
+
+Le briefing joueur ne donne plus cette structure a l avance. Il indique seulement qu une convocation semble incomplete ou confuse ; le probleme de la salle Jaures doit etre decouvert par la lecture de la convocation puis par la consultation du plan.
 
 ## Documents
 
@@ -81,23 +83,24 @@ Le hook generique `unlocksLocationIds` ajoute aux enigmes permet deja de debloqu
 Corrections appliquees :
 
 - La convocation est devenue le point d entree dramatique : formulation plus officielle, horaire plus present, rappel du risque de retard.
+- Le briefing de mission a ete rendu moins revelateur : il ne mentionne plus la salle Jaures absente du plan, la comparaison a effectuer, l erreur administrative ou l aide finale aux autres candidats.
 - Les descriptions visibles des lieux ont ete reformulees comme des lieux et non comme des fonctions de gameplay.
 - Ning Yi ne donne plus la piste du vieux document ; il renforce seulement l etrangete et la tension comique.
+- Ning Yi est deplace vers le `panneau-affichage`, afin qu il ne soit plus le premier interlocuteur naturel du hall.
 - Le temoignage de Ning Yi est debloque apres `verifier-plan-actuel`, afin d eviter qu il devienne le premier indice avant le constat sur le plan.
 - Le tableau d enquete masque les enigmes et la resolution finale tant qu elles ne sont ni disponibles ni deja validees.
 - L objet `emplacement-affichage` a ete retire de l inventaire pour eviter qu un espace du panneau soit traite comme un objet a prendre.
 
 Limites conservees volontairement :
 
-- Ning Yi reste liste comme personnage du hall, car le moteur ne gere pas encore la visibilite conditionnelle des personnages sans ajout plus large.
-- Le plan reste un document textuel mis en page ; le vrai plan graphique de l ISPA reste a produire.
+- Le plan reste un document textuel mis en page et accessible depuis le hall apres la convocation ; le vrai plan graphique de l ISPA reste a produire.
 - Les interactions `verifier-plan-actuel`, `clarifier la situation avec Heidi` et `identifier Beffroi` restent techniquement des enigmes du tableau, meme si leurs textes les rattachent davantage aux lieux et dialogues.
 - L affichage final reste une resolution textuelle ; l action au panneau pourra devenir plus tard un mini-jeu de placement, de rapidite ou de course.
 
 Elements a reprendre plus tard :
 
 - Creer une vraie convocation graphique ou un rendu administratif dedie.
-- Produire un plan graphique des salles affiche dans le hall.
+- Produire un plan graphique des salles affiche dans le hall ou pres du panneau, avec Secretariat, Beffroi, Cathedrale, Gambetta et les autres salles actuelles utiles, sans Jaures, Rimbaud ni Choderlos de Laclos.
 - Localiser naturellement les interactions sous le plan, dans le bureau de Heidi et au panneau d affichage.
 - Remplacer l action finale par une interaction au panneau quand le systeme de mini-jeu sera choisi.
 
