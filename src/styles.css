@@ -259,6 +259,7 @@ select {
     font-size: 0.95rem;
     line-height: 1.8;
     padding: 1rem;
+    white-space: pre-line;
   }
 
   .item-card,

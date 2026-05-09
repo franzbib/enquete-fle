@@ -732,6 +732,11 @@ export function InvestigationPage({
               const isSelected = selectedId === `puzzle:${puzzle.id}`;
               const solved = solvedPuzzleIds.includes(puzzle.id);
               const available = isPuzzleAvailable(puzzle);
+
+              if (!available && !solved && !isSelected) {
+                return null;
+              }
+
               return (
                 <button
                   key={puzzle.id}
@@ -753,7 +758,10 @@ export function InvestigationPage({
                 </button>
               );
             })}
-            {finalResolution ? (
+            {finalResolution &&
+            (isFinalResolutionAvailable ||
+              finalResolutionSolved ||
+              selectedId === `final-resolution:${finalResolution.id}`) ? (
               <button
                 type="button"
                 onClick={() =>

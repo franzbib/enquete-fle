@@ -21,8 +21,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'main',
       vignetteUrl: '/assets/locations/accueil-temp.png',
       description:
-        "Le hall concentre les candidats, les affiches et le plan actuel des salles. C est le point de depart de l enquete.",
-      role: 'Lire la convocation, consulter le plan et constater que la salle Jaures manque.',
+        "Autour du panneau, les candidats verifient leur horaire. Votre convocation indique une salle que vous ne reconnaissez pas.",
+      role: 'Un plan des salles est affiche pres de l entree. Plusieurs candidats patientent en silence.',
       available: true,
       documentIds: ['convocation-tcf', 'plan-actuel-salles', 'temoignage-ning-yi'],
       presentCharacterIds: ['ning-yi'],
@@ -34,12 +34,12 @@ export const salleFantomeScenario: Scenario = {
       kind: 'main',
       vignetteUrl: '/assets/locations/accueil-temp.png',
       description:
-        "Le panneau sert a afficher les informations importantes pour les candidats. Il pourra accueillir plus tard un mini-jeu d action ou de rapidite.",
-      role: 'Preparer l action finale : afficher une rectification claire pour les autres candidats.',
+        "Le panneau d affichage rassemble les informations du jour : examens, salles, horaires et messages urgents.",
+      role: 'Un espace reste libre au milieu des annonces recentes.',
       available: true,
       documentIds: ['message-rectification'],
       presentCharacterIds: [],
-      objectIds: ['emplacement-affichage'],
+      objectIds: [],
     },
     {
       id: 'secretariat',
@@ -48,7 +48,7 @@ export const salleFantomeScenario: Scenario = {
       vignetteUrl: '/assets/locations/secretariat-temp.png',
       description:
         "Delphine gere plusieurs demandes a la fois. Thi Thai n est pas encore revenue.",
-      role: 'Confirmer que les oraux de TCF ont bien lieu, sans obtenir directement la solution.',
+      role: 'Des dossiers sont empiles pres du comptoir. Le telephone sonne regulierement.',
       available: true,
       documentIds: ['temoignage-delphine'],
       presentCharacterIds: ['delphine'],
@@ -60,8 +60,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'main',
       vignetteUrl: '/assets/locations/secretariat-temp.png',
       description:
-        "Heidi aide les etudiants a reprendre methode quand une situation administrative devient confuse.",
-      role: 'Formuler clairement la contradiction entre la convocation et le plan actuel.',
+        "Heidi accueille les etudiants dans un bureau calme, a l ecart du bruit du hall.",
+      role: 'Sur son bureau, quelques archives et notes de suivi sont rangees par date.',
       available: true,
       documentIds: ['archive-entrainements-tcf'],
       presentCharacterIds: ['heidi'],
@@ -73,8 +73,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'transition',
       vignetteUrl: '/assets/locations/couloir-temp.png',
       description:
-        "Le couloir devient utile apres l archive de Heidi. Marine y passe avec une note interne sur les nouveaux noms de salles.",
-      role: 'Obtenir la correspondance entre anciens noms et noms actuels.',
+        "Le couloir relie le secretariat, les bureaux et les salles de cours. Marine y passe avec des documents sous le bras.",
+      role: 'Les panneaux de portes portent les noms actuels des salles.',
       available: false,
       documentIds: ['note-changement-noms'],
       presentCharacterIds: ['marine'],
@@ -86,8 +86,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'locked',
       vignetteUrl: '/assets/locations/salle-informatique-temp.png',
       description:
-        "La salle Beffroi est la salle actuelle correspondant a l ancien nom Jaures. Elle n est utile qu une fois la correspondance comprise.",
-      role: 'Confirmer la destination de l oral de TCF.',
+        "La salle Beffroi est preparee pour les passages individuels. Les candidats attendent dans le couloir voisin.",
+      role: 'La porte affiche clairement le nom Beffroi.',
       available: false,
       documentIds: [],
       presentCharacterIds: [],
@@ -99,8 +99,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'locked',
       vignetteUrl: '/assets/locations/secretariat-temp.png',
       description:
-        "Thi Thai revient au secretariat et reconnait l ancien modele de convocation.",
-      role: 'Comprendre l origine de l erreur et lancer la rectification finale.',
+        "Thi Thai revient au secretariat avec un dossier d examen. Elle prend le temps de regarder votre convocation.",
+      role: 'Delphine lui laisse quelques minutes entre deux demandes.',
       available: false,
       documentIds: ['temoignage-thi-thai'],
       presentCharacterIds: ['thi-thai'],
@@ -130,9 +130,9 @@ export const salleFantomeScenario: Scenario = {
       profile:
         "Ning Yi a recu la meme convocation. Il transforme l erreur administrative en theorie presque poetique.",
       directSpeech:
-        "Le vrai oral a peut-etre deja commence. La premiere epreuve, c est de trouver la salle. Ou alors quelqu un a utilise un vieux document, mais mon hypothese est moins poetique.",
+        "Toi aussi, tu cherches la salle Jaures ? Justement, moi non plus je ne la trouve pas. Une salle indiquee sur une convocation officielle, mais absente du plan... Ce n est pas normal. Ou alors c est une salle qu on ne trouve que si on est pret pour le TCF. Imagine : l oral commence deja maintenant. Le vrai test, c est de trouver la salle. En France, l administration est parfois plus difficile que la grammaire.",
       testimony:
-        "Ning Yi confirme qu un autre candidat a recu une convocation indiquant la salle Jaures. Il evoque d abord une fausse piste comique, puis suggere qu un vieux document a peut-etre ete utilise.",
+        "Ning Yi confirme qu un autre candidat a recu une convocation indiquant la salle Jaures. Il rend la situation plus etrange en imaginant que l oral commence deja dans le couloir.",
       reliability: 'partial',
       relatedLocationIds: ['hall'],
     },
@@ -185,9 +185,10 @@ export const salleFantomeScenario: Scenario = {
       title: 'Convocation individuelle - Oral de TCF',
       documentType: 'email',
       source: 'Service des examens',
-      summary: 'La convocation officielle qui declenche l enquete.',
+      summary:
+        'Une convocation officielle pour un oral proche. Le lieu indique attire immediatement votre attention.',
       content:
-        "CONVOCATION INDIVIDUELLE\nOral de TCF\n\nCandidat : candidat\nDate : aujourd hui\nHeure de passage : 15 h 30\nPresence demandee : 10 minutes avant l epreuve\nLieu : salle Jaures\n\nMerci de vous presenter avec une piece d identite.",
+        "ISPA - Service des examens\nCONVOCATION INDIVIDUELLE\nOral de TCF\n\nCandidat : candidat\nDate : aujourd hui\nHeure de passage : 15 h 30\nPresence demandee : 10 minutes avant l epreuve\nLieu : salle Jaures\n\nMerci de vous presenter avec une piece d identite. Tout retard peut entrainer l annulation du passage.",
       initiallyAvailable: true,
       relatedLocationIds: ['hall'],
       relatedCharacterIds: [],
@@ -198,9 +199,10 @@ export const salleFantomeScenario: Scenario = {
       title: 'Plan actuel des salles',
       documentType: 'note',
       source: 'Hall',
-      summary: 'Le plan montre les salles actuelles, mais pas la salle Jaures.',
+      summary:
+        'Le plan affiche les noms visibles dans le batiment. Aucun nom ancien n y figure.',
       content:
-        "Salles visibles sur le plan actuel : Beffroi, Cathedrale, Gambetta, Hortillonnages, Jules Verne, Secretariat, Hall, Couloir, Salle informatique.\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
+        "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'lire-convocation-tcf',
       relatedLocationIds: ['hall'],
@@ -228,8 +230,9 @@ export const salleFantomeScenario: Scenario = {
       summary:
         'Ning Yi confirme qu un autre candidat a recu la meme convocation et rend la situation plus etrange.',
       content:
-        "Ning Yi a recu lui aussi une convocation indiquant la salle Jaures. Il imagine que la salle apparait seulement aux candidats prets pour le TCF, puis evoque plus serieusement l hypothese d un vieux document utilise par erreur.",
-      initiallyAvailable: true,
+        "Ning Yi a recu lui aussi une convocation indiquant la salle Jaures. Il imagine que la salle apparait seulement aux candidats prets pour le TCF, comme si l oral commencait deja dans le couloir.",
+      initiallyAvailable: false,
+      unlocksAfterPuzzleId: 'verifier-plan-actuel',
       relatedLocationIds: ['hall'],
       relatedCharacterIds: ['ning-yi'],
       evidenceIds: ['ev-ning-yi-meme-convocation'],
@@ -251,12 +254,13 @@ export const salleFantomeScenario: Scenario = {
     },
     {
       id: 'note-changement-noms',
-      title: 'Note interne - Changement de denomination des salles',
+      title: 'Note interne - Mise a jour des noms de salles',
       documentType: 'note',
       source: 'Marine',
-      summary: 'La cle de correspondance entre anciens noms et noms actuels.',
+      summary:
+        'Une note de service associe les anciens noms aux noms actuellement affiches.',
       content:
-        "A partir du 1er septembre, les anciens noms de salles seront remplaces par les noms actuellement affiches dans le batiment.\n\nSalle Jaures -> Salle Beffroi\nSalle Rimbaud -> Salle Cathedrale\nSalle Choderlos de Laclos -> Salle Gambetta",
+        "NOTE INTERNE - Service accueil et examens\nObjet : noms affiches sur les portes de salles\n\nA partir du 1er septembre, les anciennes denominations ne doivent plus etre utilisees dans les documents transmis aux candidats.\n\nCorrespondances a verifier avant envoi :\n- Salle Jaures -> Salle Beffroi\n- Salle Rimbaud -> Salle Cathedrale\n- Salle Choderlos de Laclos -> Salle Gambetta",
       initiallyAvailable: true,
       relatedLocationIds: ['couloir-marine'],
       relatedCharacterIds: ['marine'],
@@ -358,19 +362,7 @@ export const salleFantomeScenario: Scenario = {
       documentId: 'message-rectification',
     },
   ],
-  inventoryObjects: [
-    {
-      id: 'emplacement-affichage',
-      name: 'Emplacement libre sur le panneau',
-      objectType: 'preparatory',
-      description:
-        "Un espace visible sur le panneau d affichage. Dans une version future, cette etape pourra devenir une mini-course ou un mini-jeu de placement rapide.",
-      originLocationId: 'panneau-affichage',
-      initiallyVisible: true,
-      initiallyOwned: false,
-      isUseful: false,
-    },
-  ],
+  inventoryObjects: [],
   puzzles: [
     {
       id: 'lire-convocation-tcf',
@@ -413,8 +405,8 @@ export const salleFantomeScenario: Scenario = {
       title: 'Chercher la salle sur le plan',
       puzzleType: 'contradiction',
       description:
-        'Comparez la convocation avec la liste des salles visibles sur le plan actuel.',
-      prompt: 'Que montre le plan actuel ?',
+        'Sous le plan du hall, vous comparez le nom indique sur la convocation avec les salles affichees.',
+      prompt: 'Que constatez-vous devant le plan ?',
       requiredDocumentIds: ['convocation-tcf', 'plan-actuel-salles'],
       hints: [
         'Cherchez Jaures dans la liste des salles actuelles.',
@@ -442,14 +434,15 @@ export const salleFantomeScenario: Scenario = {
         'Le probleme est confirme : la convocation et le plan actuel ne disent pas la meme chose. Avant de demander une aide methodologique, verifiez au secretariat si les oraux ont bien lieu et comparez votre convocation avec celle de Ning Yi.',
       failureFeedback:
         'Le plan ne parle pas d annulation ni de salle informatique. Il faut constater l absence de Jaures.',
+      unlocksDocumentIds: ['temoignage-ning-yi'],
     },
     {
       id: 'formuler-probleme-heidi',
-      title: 'Formuler le probleme avec Heidi',
+      title: 'Clarifier la situation avec Heidi',
       puzzleType: 'contradiction',
       description:
-        'Heidi vous aide a transformer l inquietude en formulation precise.',
-      prompt: 'Quelle phrase resume le mieux le probleme ?',
+        'Dans son bureau, Heidi vous demande de resumer calmement ce qui bloque avant de chercher une archive.',
+      prompt: 'Quelle phrase lui donnez-vous pour expliquer la situation ?',
       requiredDocumentIds: [
         'convocation-tcf',
         'plan-actuel-salles',
@@ -492,10 +485,10 @@ export const salleFantomeScenario: Scenario = {
     },
     {
       id: 'identifier-beffroi',
-      title: 'Associer les anciens et nouveaux noms',
+      title: 'Retrouver le nom actuel de Jaures',
       puzzleType: 'matching',
       description:
-        'Utilisez l archive et la note interne pour retrouver le nom actuel de la salle Jaures.',
+        'Avec l archive de Heidi et la note de Marine, vous verifiez quel nom est affiche aujourd hui sur la porte.',
       prompt: 'Aujourd hui, a quelle salle correspond la salle Jaures ?',
       requiredDocumentIds: ['archive-entrainements-tcf', 'note-changement-noms'],
       hints: [
