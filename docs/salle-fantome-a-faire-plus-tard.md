@@ -54,7 +54,8 @@ Deja fait :
 
 - `lire-convocation-tcf` est rattachee au document `convocation-tcf` ;
 - `verifier-plan-actuel` est rattachee au document `plan-actuel-salles` ;
-- `formuler-probleme-heidi` est rattachee au personnage `heidi`.
+- `formuler-probleme-heidi` est rattachee au personnage `heidi` ;
+- `identifier-beffroi` est rattachee au document `note-changement-noms`.
 
 Ces enigmes apparaissent sous les documents ou personnages concernes et sont masquees du tableau tant qu elles ne sont pas resolues.
 
@@ -62,7 +63,6 @@ Ces enigmes apparaissent sous les documents ou personnages concernes et sont mas
 
 A reprendre plus tard :
 
-- `identifier-beffroi` devrait se jouer a partir de la note de Marine ou dans le couloir avec Marine ;
 - `comprendre-erreur-thi-thai` devrait se jouer au secretariat, dans la scene avec Thi Thai ;
 - la rectification finale devrait se faire au panneau d affichage, non comme simple action abstraite du tableau.
 

@@ -498,6 +498,10 @@ export const salleFantomeScenario: Scenario = {
       id: 'identifier-beffroi',
       title: 'Retrouver le nom actuel de Jaures',
       puzzleType: 'matching',
+      context: {
+        type: 'document',
+        id: 'note-changement-noms',
+      },
       description:
         'Avec l archive de Heidi et la note de Marine, vous verifiez quel nom est affiche aujourd hui sur la porte.',
       prompt: 'Aujourd hui, a quelle salle correspond la salle Jaures ?',
