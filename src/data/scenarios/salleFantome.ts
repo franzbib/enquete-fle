@@ -439,7 +439,7 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Le probleme est confirme : la convocation et le plan actuel ne disent pas la meme chose.',
+        'Le probleme est confirme : la convocation et le plan actuel ne disent pas la meme chose. Avant de demander une aide methodologique, verifiez au secretariat si les oraux ont bien lieu et comparez votre convocation avec celle de Ning Yi.',
       failureFeedback:
         'Le plan ne parle pas d annulation ni de salle informatique. Il faut constater l absence de Jaures.',
     },
