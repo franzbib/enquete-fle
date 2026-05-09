@@ -1,15 +1,30 @@
-import type { Character, Location } from '../types/scenario';
+import type { Character, InvestigationDocument, Location, Puzzle } from '../types/scenario';
+import { PuzzleDetail } from './PuzzleDetail';
 
 type CharacterDetailProps = {
   character: Character;
   presentLocations: Location[];
+  contextualPuzzles?: ContextualPuzzle[];
   onSelectLocation: (id: string) => void;
+  onRequestHint?: (puzzle: Puzzle) => void;
+  onSubmitPuzzle?: (puzzle: Puzzle, answer: string[]) => void;
+};
+
+type ContextualPuzzle = {
+  puzzle: Puzzle;
+  requiredDocuments: InvestigationDocument[];
+  isSolved: boolean;
+  isAvailable: boolean;
+  revealedHintCount: number;
 };
 
 export function CharacterDetail({
   character,
   presentLocations,
+  contextualPuzzles = [],
   onSelectLocation,
+  onRequestHint,
+  onSubmitPuzzle,
 }: CharacterDetailProps) {
   return (
     <article className="case-panel case-panel-main case-panel-character">
@@ -45,6 +60,25 @@ export function CharacterDetail({
       <blockquote className="speech-card mt-4">
         {character.directSpeech}
       </blockquote>
+      {contextualPuzzles.length > 0 && onRequestHint && onSubmitPuzzle ? (
+        <section className="mt-6 border-t border-slate-200 pt-5">
+          <p className="eyebrow">Action possible</p>
+          <div className="mt-3 grid gap-4">
+            {contextualPuzzles.map((contextualPuzzle) => (
+              <PuzzleDetail
+                key={contextualPuzzle.puzzle.id}
+                puzzle={contextualPuzzle.puzzle}
+                requiredDocuments={contextualPuzzle.requiredDocuments}
+                isSolved={contextualPuzzle.isSolved}
+                isAvailable={contextualPuzzle.isAvailable}
+                revealedHintCount={contextualPuzzle.revealedHintCount}
+                onRequestHint={onRequestHint}
+                onSubmit={onSubmitPuzzle}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
       <div className="mt-6">
         <h3 className="font-semibold text-slate-950">Rencontré dans</h3>
         <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">

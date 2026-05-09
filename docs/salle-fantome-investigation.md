@@ -65,7 +65,7 @@ Les mini-jeux sont pour l instant modelises avec les `Puzzle` existants :
 
 - Lire la convocation : choix simple, maintenant affiche directement sous le document `convocation-tcf` grace au champ optionnel `context`.
 - Chercher la salle sur le plan : choix simple, maintenant affiche directement sous le document `plan-actuel-salles` grace au champ optionnel `context`.
-- Clarifier la situation avec Heidi : choix multiple integre a la scene dans son bureau, disponible apres les documents `convocation-tcf`, `plan-actuel-salles`, `temoignage-delphine` et `temoignage-ning-yi`.
+- Clarifier la situation avec Heidi : choix multiple affiche directement sous la fiche de `heidi`, disponible apres les documents `convocation-tcf`, `plan-actuel-salles`, `temoignage-delphine` et `temoignage-ning-yi`.
 - Retrouver le nom actuel de Jaures : choix simple, avec `puzzleType: 'matching'`.
 - Comprendre l erreur de modele : choix simple apres le retour de Thi Thai, debloque le message final.
 - Choisir le message final : resolution finale.
@@ -81,16 +81,17 @@ context?: {
 };
 ```
 
-Ce champ reste optionnel pour preserver les autres enquetes. Dans cette premiere version limitee, seuls deux puzzles de `La salle fantome` l utilisent :
+Ce champ reste optionnel pour preserver les autres enquetes. Dans cette premiere version progressive, trois puzzles de `La salle fantome` l utilisent :
 
 - `lire-convocation-tcf` est rattache au document `convocation-tcf`.
 - `verifier-plan-actuel` est rattache au document `plan-actuel-salles`.
+- `formuler-probleme-heidi` est rattache au personnage `heidi`.
 
-Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, puis ouvrir le plan et constater l absence de Jaures sans passer d abord par le tableau d enquete.
+Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, ouvrir le plan et constater l absence de Jaures, puis clarifier la situation avec Heidi sans passer d abord par le tableau d enquete.
 
 Pour eviter un doublon trop visible, les enigmes contextualisees disponibles et non resolues sont masquees du tableau d enquete. Une fois resolues, elles peuvent y reapparaitre comme deductions validees.
 
-Limite actuelle : Heidi, Marine, Thi Thai et la resolution finale restent dans le fonctionnement existant. Le rattachement des puzzles aux lieux ou personnages sera une etape ulterieure.
+Limite actuelle : Marine, Thi Thai et la resolution finale restent dans le fonctionnement existant. Le rattachement des puzzles aux autres personnages ou lieux sera une etape ulterieure.
 
 ## Emplacements pour mini-jeux futurs
 
@@ -113,18 +114,19 @@ Corrections appliquees :
 - Le tableau d enquete masque les enigmes et la resolution finale tant qu elles ne sont ni disponibles ni deja validees.
 - L objet `emplacement-affichage` a ete retire de l inventaire pour eviter qu un espace du panneau soit traite comme un objet a prendre.
 - Les deux premieres enigmes sont affichees sous leurs documents pour reduire la dependance initiale au tableau d enquete.
+- L etape avec Heidi est affichee sous sa fiche personnage pour poursuivre la progression dans la fenetre principale.
 
 Limites conservees volontairement :
 
 - Le plan reste un document textuel mis en page et accessible depuis le hall apres la convocation ; le vrai plan graphique de l ISPA reste a produire.
-- Les interactions `verifier-plan-actuel`, `clarifier la situation avec Heidi` et `identifier Beffroi` restent techniquement des enigmes du tableau, meme si leurs textes les rattachent davantage aux lieux et dialogues.
+- Les interactions avec Marine, Thi Thai et la rectification finale restent techniquement dans le fonctionnement actuel du tableau d enquete.
 - L affichage final reste une resolution textuelle ; l action au panneau pourra devenir plus tard un mini-jeu de placement, de rapidite ou de course.
 
 Elements a reprendre plus tard :
 
 - Creer une vraie convocation graphique ou un rendu administratif dedie.
 - Produire un plan graphique des salles affiche dans le hall ou pres du panneau, avec Secretariat, Beffroi, Cathedrale, Gambetta et les autres salles actuelles utiles, sans Jaures, Rimbaud ni Choderlos de Laclos.
-- Localiser naturellement les interactions sous le plan, dans le bureau de Heidi et au panneau d affichage.
+- Localiser naturellement les interactions restantes avec Marine, Thi Thai et le panneau d affichage.
 - Remplacer l action finale par une interaction au panneau quand le systeme de mini-jeu sera choisi.
 
 ## Modifier le scenario

@@ -458,7 +458,28 @@ export function InvestigationPage({
           presentLocations={scenario.locations.filter((location) =>
             location.presentCharacterIds.includes(character.id),
           )}
+          contextualPuzzles={puzzles
+            .filter(
+              (puzzle) =>
+                puzzle.context?.type === 'character' &&
+                puzzle.context.id === character.id,
+            )
+            .map((puzzle) => ({
+              puzzle,
+              requiredDocuments: visibleDocuments.filter((visibleDocument) =>
+                (puzzle.requiredDocumentIds ?? []).includes(visibleDocument.id),
+              ),
+              isSolved: solvedPuzzleIds.includes(puzzle.id),
+              isAvailable: isPuzzleAvailable(puzzle),
+              revealedHintCount: revealedHintCounts[puzzle.id] ?? 0,
+            }))
+            .filter(
+              (contextualPuzzle) =>
+                contextualPuzzle.isAvailable || contextualPuzzle.isSolved,
+            )}
           onSelectLocation={(id) => handleSelect('location', id)}
+          onRequestHint={handleRequestHint}
+          onSubmitPuzzle={handlePuzzleSubmit}
         />
       );
     }

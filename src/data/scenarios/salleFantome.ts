@@ -202,7 +202,7 @@ export const salleFantomeScenario: Scenario = {
       summary:
         'Le plan pres de l entree indique les noms actuels des salles.',
       content:
-        "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
+        "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique",
       initiallyAvailable: true,
       relatedLocationIds: ['hall', 'panneau-affichage'],
       relatedCharacterIds: [],
@@ -447,6 +447,10 @@ export const salleFantomeScenario: Scenario = {
       id: 'formuler-probleme-heidi',
       title: 'Clarifier la situation avec Heidi',
       puzzleType: 'contradiction',
+      context: {
+        type: 'character',
+        id: 'heidi',
+      },
       description:
         'Dans son bureau, Heidi vous demande de resumer calmement ce qui bloque avant de chercher une archive.',
       prompt: 'Quelle phrase lui donnez-vous pour expliquer la situation ?',
