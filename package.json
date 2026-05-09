@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "validate:salle-fantome": "node scripts/validate-salle-fantome.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

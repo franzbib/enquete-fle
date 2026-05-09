@@ -33,7 +33,7 @@ export function HomePage({
 
         {scenarios.length > 1 ? (
           <section className="case-panel mt-8 max-w-3xl border-teal-200 bg-teal-50/70">
-            <p className="eyebrow">2 enquêtes disponibles</p>
+            <p className="eyebrow">{scenarios.length} enquêtes disponibles</p>
             <h2 className="mt-2 text-xl font-bold text-slate-950">
               Choisir une enquête
             </h2>

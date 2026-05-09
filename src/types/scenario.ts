@@ -103,6 +103,7 @@ export type Puzzle = {
   successFeedback: string;
   failureFeedback: string;
   unlocksDocumentIds?: string[];
+  unlocksLocationIds?: string[];
 };
 
 export type PuzzleAnswer =

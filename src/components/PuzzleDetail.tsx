@@ -33,6 +33,12 @@ export function PuzzleDetail({
   const hints = puzzle.hints ?? [];
   const visibleHints = hints.slice(0, revealedHintCount);
   const hasMoreHints = revealedHintCount < hints.length;
+  const singleChoiceSubmitLabel =
+    puzzle.puzzleType === 'matching'
+      ? 'Valider l’association'
+      : puzzle.puzzleType === 'contradiction'
+        ? 'Vérifier la réponse'
+        : 'Valider la réponse';
 
   return (
     <article className="case-panel case-panel-main case-panel-puzzle">
@@ -176,7 +182,7 @@ export function PuzzleDetail({
             disabled={!isAvailable || isSolved || !selectedOptionId}
             onClick={() => onSubmit(puzzle, [selectedOptionId])}
           >
-            Vérifier la contradiction
+            {singleChoiceSubmitLabel}
           </button>
         </div>
       ) : null}

@@ -386,13 +386,21 @@ export function InvestigationPage({
 
       return [...nextIds];
     });
+    setUnlockedLocationIds((currentIds) => {
+      const nextIds = new Set(currentIds);
+
+      for (const locationId of puzzle.unlocksLocationIds ?? []) {
+        nextIds.add(locationId);
+      }
+
+      return [...nextIds];
+    });
     setFeedback(
-      puzzle.unlocksDocumentIds?.length
+      puzzle.unlocksDocumentIds?.length || puzzle.unlocksLocationIds?.length
         ? `${puzzle.successFeedback} Nouvelle piste débloquée.`
         : puzzle.successFeedback,
     );
   }
-
   function handleFinalResolutionComplete() {
     setFinalResolutionSolved(true);
     setFeedback(
