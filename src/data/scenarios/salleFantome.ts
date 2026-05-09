@@ -21,8 +21,8 @@ export const salleFantomeScenario: Scenario = {
       kind: 'main',
       vignetteUrl: '/assets/locations/accueil-temp.png',
       description:
-        "Autour du panneau, les candidats verifient leur horaire. Votre convocation indique une salle que vous ne reconnaissez pas.",
-      role: 'Un plan des salles est affiche pres de l entree. Plusieurs candidats patientent en silence.',
+        "Dans le hall, votre convocation en main, vous apercevez le panneau d affichage et le plan des salles pres de l entree.",
+      role: 'Le plan peut etre consulte pour verifier le nom des salles.',
       available: true,
       documentIds: ['convocation-tcf', 'plan-actuel-salles'],
       presentCharacterIds: [],
@@ -196,11 +196,11 @@ export const salleFantomeScenario: Scenario = {
     },
     {
       id: 'plan-actuel-salles',
-      title: 'Plan actuel des salles',
+      title: 'Plan des salles affiche dans le hall',
       documentType: 'note',
       source: 'Hall - panneau des salles',
       summary:
-        'Le plan affiche les noms visibles dans le batiment. Aucun nom ancien n y figure.',
+        'Le plan pres de l entree indique les noms actuels des salles.',
       content:
         "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique\n\nAucune salle Jaures, Rimbaud ou Choderlos de Laclos n apparait sur ce plan.",
       initiallyAvailable: true,
