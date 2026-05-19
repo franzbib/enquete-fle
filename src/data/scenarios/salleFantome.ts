@@ -82,7 +82,10 @@ export const salleFantomeScenario: Scenario = {
       available: false,
       documentIds: [],
       presentCharacterIds: ['marine'],
-      objectIds: ['note-interne-marine'],
+      objectIds: [],
+      presentObjectIdsAfterCharacter: {
+        marine: ['note-interne-marine'],
+      },
     },
     {
       id: 'salle-beffroi',
@@ -496,7 +499,7 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne donnent pas la même information. Il faut maintenant trouver d’où vient cette contradiction.',
+        'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne donnent pas la même information. Elle vous conseille maintenant de regarder le document d’archive dans son bureau.',
       failureFeedback:
         'Cette réponse ne convient pas encore. Reparlez à Heïdi et vérifiez la formulation du problème. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['archive-entrainements-tcf'],

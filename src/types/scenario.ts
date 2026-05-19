@@ -32,6 +32,7 @@ export type Location = {
   documentIds: string[];
   presentCharacterIds: string[];
   presentCharacterIdsAfterPuzzle?: Record<string, string[]>;
+  presentObjectIdsAfterCharacter?: Record<string, string[]>;
   relatedCharacterIds?: string[];
   objectIds?: string[];
 };

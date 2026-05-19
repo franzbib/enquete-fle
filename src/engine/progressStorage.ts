@@ -17,6 +17,7 @@ export type ScenarioProgressSave = {
   solvedPuzzleIds: string[];
   unlockedDocumentIds: string[];
   readDocumentIds: string[];
+  visitedCharacterIds: string[];
   ownedObjectIds: string[];
   usedObjectIds: string[];
   droppedObjectLocations: Record<string, string>;
@@ -141,6 +142,10 @@ function parseScenarioProgress(
     readDocumentIds: filterKnownIds(
       parsedProgress.readDocumentIds,
       getDocumentIds(scenario),
+    ),
+    visitedCharacterIds: filterKnownIds(
+      parsedProgress.visitedCharacterIds,
+      getCharacterIds(scenario),
     ),
     ownedObjectIds: filterKnownIds(
       parsedProgress.ownedObjectIds,

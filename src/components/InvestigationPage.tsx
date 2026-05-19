@@ -51,6 +51,9 @@ export function InvestigationPage({
   const [readDocumentIds, setReadDocumentIds] = useState<string[]>(
     () => [],
   );
+  const [visitedCharacterIds, setVisitedCharacterIds] = useState<string[]>(
+    () => [],
+  );
   const [ownedObjectIds, setOwnedObjectIds] = useState(
     () =>
       scenario.inventoryObjects
@@ -143,6 +146,7 @@ export function InvestigationPage({
       solvedPuzzleIds,
       unlockedDocumentIds,
       readDocumentIds,
+      visitedCharacterIds,
       ownedObjectIds,
       usedObjectIds,
       droppedObjectLocations,
@@ -161,6 +165,7 @@ export function InvestigationPage({
     setSolvedPuzzleIds(save.solvedPuzzleIds);
     setUnlockedDocumentIds(save.unlockedDocumentIds);
     setReadDocumentIds(save.readDocumentIds);
+    setVisitedCharacterIds(save.visitedCharacterIds);
     setOwnedObjectIds(save.ownedObjectIds);
     setUsedObjectIds(save.usedObjectIds);
     setDroppedObjectLocations(save.droppedObjectLocations);
@@ -217,6 +222,7 @@ export function InvestigationPage({
     setSolvedPuzzleIds([]);
     setUnlockedDocumentIds([]);
     setReadDocumentIds([]);
+    setVisitedCharacterIds([]);
     setOwnedObjectIds(getInitialOwnedObjectIds());
     setUsedObjectIds([]);
     setDroppedObjectLocations({});
@@ -278,6 +284,16 @@ export function InvestigationPage({
     return [...location.presentCharacterIds, ...conditionalCharacterIds];
   }
 
+  function getPresentObjectIds(location: Scenario['locations'][number]) {
+    const conditionalObjectIds = Object.entries(
+      location.presentObjectIdsAfterCharacter ?? {},
+    ).flatMap(([characterId, objectIds]) =>
+      visitedCharacterIds.includes(characterId) ? objectIds : [],
+    );
+
+    return [...(location.objectIds ?? []), ...conditionalObjectIds];
+  }
+
   function handleSelect(type: Selection['type'], id: string) {
     const nextSelectedId = `${type}:${id}`;
 
@@ -306,6 +322,9 @@ export function InvestigationPage({
     );
     if (type === 'document' && !readDocumentIds.includes(id)) {
       setReadDocumentIds((prev) => [...prev, id]);
+    }
+    if (type === 'character' && !visitedCharacterIds.includes(id)) {
+      setVisitedCharacterIds((prev) => [...prev, id]);
     }
     setActiveMobileTab('scene');
     // Auto-scroll vers le détail pour plus de fluidité
@@ -506,7 +525,7 @@ export function InvestigationPage({
               !ownedObjectIds.includes(object.id) &&
               (
                 droppedObjectLocations[object.id] === location.id ||
-                (!droppedObjectLocations[object.id] && location.objectIds?.includes(object.id) && (object.initiallyVisible ?? true))
+                (!droppedObjectLocations[object.id] && getPresentObjectIds(location).includes(object.id) && (object.initiallyVisible ?? true))
               )
           )}
           ownedObjectIds={ownedObjectIds}
@@ -663,6 +682,7 @@ export function InvestigationPage({
     puzzles,
     puzzleIdsWaitingForReopen,
     readDocumentIds,
+    visitedCharacterIds,
     revealedHintCounts,
     scenario,
     selection,

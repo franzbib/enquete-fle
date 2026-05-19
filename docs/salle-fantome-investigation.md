@@ -67,7 +67,7 @@ Le briefing joueur ne donne plus cette structure a l avance. Il indique seulemen
 
 ## Objets d inventaire
 
-- `note-interne-marine` : objet obtenu dans `couloir-marine` apres l intervention de Marine. Dans l inventaire, l action `Lire la note` ouvre le document `note-changement-noms`. Ce document porte ensuite l etape `identifier-beffroi`.
+- `note-interne-marine` : objet obtenu dans `couloir-marine` apres avoir consulte Marine. La note n est pas visible avant cette discussion. Dans l inventaire, l action `Lire la note` ouvre le document `note-changement-noms`. Ce document porte ensuite l etape `identifier-beffroi`.
 
 ## Mini-jeux actuels
 
@@ -127,7 +127,7 @@ Corrections appliquees :
 - L objet `emplacement-affichage` a ete retire de l inventaire pour eviter qu un espace du panneau soit traite comme un objet a prendre.
 - Les deux premieres enigmes sont affichees sous leurs documents pour reduire la dependance initiale au tableau d enquete.
 - L etape avec Heidi est affichee sous sa fiche personnage pour poursuivre la progression dans la fenetre principale.
-- L etape `identifier-beffroi` est affichee sous la note interne de Marine, elle-meme ouverte depuis l objet d inventaire `note-interne-marine`.
+- L etape `identifier-beffroi` est affichee sous la note interne de Marine, elle-meme ouverte depuis l objet d inventaire `note-interne-marine`, visible seulement apres consultation de Marine.
 - Le lieu separe `secretariat-thi-thai` a ete supprime : Thi Thai apparait maintenant conditionnellement dans `secretariat` apres `identifier-beffroi`.
 
 Limites conservees volontairement :

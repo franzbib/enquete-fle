@@ -192,6 +192,9 @@ A reexaminer plus tard si les tests montrent que les joueurs :
 Une premiere solution legere existe maintenant avec `presentCharacterIdsAfterPuzzle`.
 Elle permet notamment a Thi Thai d apparaitre dans le `secretariat` apres `identifier-beffroi`, sans creer de lieu separe de retour au secretariat.
 
+Une solution parallele existe pour les objets avec `presentObjectIdsAfterCharacter`.
+Elle permet a la note interne de Marine d apparaitre dans le couloir seulement apres consultation de Marine.
+
 A envisager plus tard si necessaire :
 
 - personnage visible seulement apres lecture d un document ;

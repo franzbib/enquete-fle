@@ -138,8 +138,9 @@ const finalResolution = getFinalResolutionBlock();
 
 assert(couloirMarine.includes('available: false'), 'couloir-marine must be locked initially');
 assert(
-  couloirMarine.includes("objectIds: ['note-interne-marine']"),
-  'couloir-marine must expose the internal note as an object',
+  couloirMarine.includes('objectIds: []') &&
+    couloirMarine.includes("marine: ['note-interne-marine']"),
+  'couloir-marine must expose the internal note only after visiting Marine',
 );
 assert(
   couloirMarine.includes('documentIds: []'),
