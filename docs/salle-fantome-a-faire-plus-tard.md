@@ -63,7 +63,6 @@ Ces enigmes apparaissent sous les documents ou personnages concernes et sont mas
 
 A reprendre plus tard :
 
-- `comprendre-erreur-thi-thai` devrait se jouer au secretariat, dans la scene avec Thi Thai ;
 - la rectification finale devrait se faire au panneau d affichage, non comme simple action abstraite du tableau.
 
 ### 2.3 Tableau d enquete
@@ -190,13 +189,14 @@ A reexaminer plus tard si les tests montrent que les joueurs :
 
 ### 6.2 Personnages conditionnels
 
-Limite actuelle : certains personnages sont presents dans un lieu des que le lieu est accessible. Rendre les personnages conditionnels demanderait une evolution du moteur.
+Une premiere solution legere existe maintenant avec `presentCharacterIdsAfterPuzzle`.
+Elle permet notamment a Thi Thai d apparaitre dans le `secretariat` apres `identifier-beffroi`, sans creer de lieu separe de retour au secretariat.
 
 A envisager plus tard si necessaire :
 
-- apparition conditionnelle d un personnage apres une etape ;
 - personnage visible seulement apres lecture d un document ;
-- meilleure gestion des scenes successives dans un meme lieu.
+- meilleure gestion des scenes successives dans un meme lieu ;
+- conditions plus fines que la simple validation d une enigme.
 
 ### 6.3 Non-regression multi-enquetes
 

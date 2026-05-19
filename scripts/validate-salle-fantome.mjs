@@ -128,7 +128,9 @@ assert(
 );
 
 const couloirMarine = getBlockById('couloir-marine');
-const secretariatThiThai = getBlockById('secretariat-thi-thai');
+const secretariat = getBlockById('secretariat');
+const noteInterneMarine = getBlockById('note-interne-marine');
+const noteChangementNoms = getBlockById('note-changement-noms');
 const formulerProblemeHeidi = getBlockById('formuler-probleme-heidi');
 const identifierBeffroi = getBlockById('identifier-beffroi');
 const comprendreErreurThiThai = getBlockById('comprendre-erreur-thi-thai');
@@ -136,8 +138,29 @@ const finalResolution = getFinalResolutionBlock();
 
 assert(couloirMarine.includes('available: false'), 'couloir-marine must be locked initially');
 assert(
-  secretariatThiThai.includes('available: false'),
-  'secretariat-thi-thai must be locked initially',
+  couloirMarine.includes("objectIds: ['note-interne-marine']"),
+  'couloir-marine must expose the internal note as an object',
+);
+assert(
+  couloirMarine.includes('documentIds: []'),
+  'couloir-marine must not expose note-changement-noms as a linked document',
+);
+assert(
+  noteInterneMarine.includes("unlocksDocumentIds: ['note-changement-noms']") &&
+    noteInterneMarine.includes('opensDocumentOnUse: true'),
+  'note-interne-marine must open note-changement-noms from the inventory',
+);
+assert(
+  noteChangementNoms.includes('initiallyAvailable: false'),
+  'note-changement-noms must be unlocked by the Marine note object',
+);
+assert(
+  !scenarioSource.includes("id: 'secretariat-thi-thai'"),
+  'secretariat-thi-thai location must be merged into secretariat',
+);
+assert(
+  secretariat.includes("'identifier-beffroi': ['thi-thai']"),
+  'secretariat must reveal thi-thai after identifier-beffroi',
 );
 assert(
   formulerProblemeHeidi.includes("unlocksLocationIds: ['couloir-marine']"),
@@ -148,8 +171,8 @@ assert(
   'formuler-probleme-heidi must require temoignage-ning-yi',
 );
 assert(
-  identifierBeffroi.includes("'secretariat-thi-thai'"),
-  'identifier-beffroi must unlock secretariat-thi-thai',
+  identifierBeffroi.includes("'temoignage-thi-thai'"),
+  'identifier-beffroi must unlock temoignage-thi-thai',
 );
 assert(
   !identifierBeffroi.includes("unlocksDocumentIds: ['message-rectification']"),

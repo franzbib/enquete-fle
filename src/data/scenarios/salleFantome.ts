@@ -50,8 +50,11 @@ export const salleFantomeScenario: Scenario = {
         "Delphine gère plusieurs demandes à la fois. Thi Thai n’est pas encore revenue.",
       role: 'Des dossiers sont empilés près du comptoir. Le téléphone sonne régulièrement.',
       available: true,
-      documentIds: ['temoignage-delphine'],
+      documentIds: ['temoignage-delphine', 'temoignage-thi-thai'],
       presentCharacterIds: ['delphine'],
+      presentCharacterIdsAfterPuzzle: {
+        'identifier-beffroi': ['thi-thai'],
+      },
       objectIds: [],
     },
     {
@@ -61,7 +64,7 @@ export const salleFantomeScenario: Scenario = {
       vignetteUrl: '/assets/locations/secretariat-temp.png',
       description:
         "Heïdi accueille les étudiants dans un bureau calme, à l’écart du bruit du hall.",
-      role: 'Sur son bureau, quelques archives et notes de suivi sont rangées par date.',
+      role: 'Heïdi, comme toujours, vous accueille avec le sourire.',
       available: false,
       lockedMessage: "Heïdi n’est pas dans son bureau pour le moment.",
       documentIds: ['archive-entrainements-tcf'],
@@ -75,11 +78,11 @@ export const salleFantomeScenario: Scenario = {
       vignetteUrl: '/assets/locations/couloir-temp.png',
       description:
         "Le couloir relie le secrétariat, les bureaux et les salles de cours. Marine y passe avec des documents sous le bras.",
-      role: 'Les panneaux de portes portent les noms actuels des salles.',
+      role: 'Marine boit un café et vous parle d’une ancienne note interne.',
       available: false,
-      documentIds: ['note-changement-noms'],
+      documentIds: [],
       presentCharacterIds: ['marine'],
-      objectIds: [],
+      objectIds: ['note-interne-marine'],
     },
     {
       id: 'salle-beffroi',
@@ -92,20 +95,6 @@ export const salleFantomeScenario: Scenario = {
       available: false,
       documentIds: [],
       presentCharacterIds: [],
-      objectIds: [],
-    },
-    {
-      id: 'secretariat-thi-thai',
-      name: 'Retour au secrétariat',
-      kind: 'locked',
-      vignetteUrl: '/assets/locations/secretariat-temp.png',
-      description:
-        "Thi Thai revient au secrétariat avec un dossier d’examen. Elle prend le temps de regarder votre convocation.",
-      role: 'Delphine lui laisse quelques minutes entre deux demandes.',
-      available: false,
-      documentIds: ['temoignage-thi-thai'],
-      presentCharacterIds: ['thi-thai'],
-      relatedCharacterIds: ['delphine'],
       objectIds: [],
     },
   ],
@@ -143,7 +132,7 @@ export const salleFantomeScenario: Scenario = {
       role: 'Accompagnement méthodologique',
       portraitUrl: '/assets/portraits/heidi.png',
       profile:
-        "Heïdi est calme, structurante et bienveillante. Elle aide à transformer l’inquiétude en problème clair.",
+        "Heïdi, comme toujours, vous accueille avec le sourire.",
       directSpeech:
         "Ce n’est pas une catastrophe. C’est une contradiction entre deux sources : votre convocation et le plan actuel. Une bonne enquête commence par une bonne formulation du problème.",
       testimony:
@@ -157,7 +146,7 @@ export const salleFantomeScenario: Scenario = {
       role: 'Personne ressource dans le couloir',
       portraitUrl: '/assets/portraits/marine.png',
       profile:
-        "Marine connaît la note interne sur le changement de dénomination des salles. Elle donne une piste décisive, puis relance l’enquête.",
+        "Marine boit un café et vous parle d’une ancienne note interne.",
       directSpeech:
         "Jaurès, ça me dit quelque chose. Je crois qu’il y a eu un changement de noms de salles. La note interne devrait vous aider à retrouver la correspondance exacte. Et ensuite, il faudra encore comprendre pourquoi une convocation récente utilise un ancien nom.",
       testimony:
@@ -171,13 +160,13 @@ export const salleFantomeScenario: Scenario = {
       role: 'Accueil / inscriptions aux examens',
       portraitUrl: '/assets/portraits/thitai.png',
       profile:
-        "Thi Thai revient au troisième acte. Elle reconnaît une erreur réaliste sans être ridiculisée.",
+        "Thi Thai comprend le problème, vous explique et vous demande un service.",
       directSpeech:
         "J’ai utilisé un ancien modèle sans faire attention. J’ai copié-collé trop vite depuis un vieux fichier. Est-ce que vous pouvez afficher une rectification sur le panneau ? Les candidats doivent le voir avant leur passage.",
       testimony:
         "Thi Thai reconnaît qu’elle a utilisé par erreur un ancien modèle de convocation contenant les anciens noms de salles. Elle demande au candidat d’afficher une rectification sur le panneau.",
       reliability: 'stable',
-      relatedLocationIds: ['secretariat-thi-thai'],
+      relatedLocationIds: ['secretariat'],
     },
   ],
   documents: [
@@ -261,7 +250,7 @@ export const salleFantomeScenario: Scenario = {
         'Une note de service associe les anciens noms aux noms actuellement affichés.',
       content:
         "NOTE INTERNE - Service accueil et examens\nObjet : noms affichés sur les portes de salles\n\nÀ partir du 1er septembre, les anciennes dénominations ne doivent plus être utilisées dans les documents transmis aux candidats.\n\nCorrespondances à vérifier avant envoi :\n- Salle Jaurès -> Salle Beffroi\n- Salle Rimbaud -> Salle Cathédrale\n- Salle Choderlos de Laclos -> Salle Gambetta",
-      initiallyAvailable: true,
+      initiallyAvailable: false,
       relatedLocationIds: ['couloir-marine'],
       relatedCharacterIds: ['marine'],
       evidenceIds: ['ev-jaures-beffroi', 'ev-correspondances-salles'],
@@ -274,8 +263,8 @@ export const salleFantomeScenario: Scenario = {
       summary: 'Thi Thai explique l’origine de l’erreur.',
       content:
         "Thi Thai reconnaît qu’elle a utilisé un ancien modèle de convocation sans faire attention. Elle a copié-collé trop vite depuis un vieux fichier contenant encore les anciens noms de salles. Elle confirme que les candidats convoqués en salle Jaurès doivent aller en salle Beffroi.",
-      initiallyAvailable: true,
-      relatedLocationIds: ['secretariat-thi-thai'],
+      initiallyAvailable: false,
+      relatedLocationIds: ['secretariat'],
       relatedCharacterIds: ['thi-thai'],
       evidenceIds: ['ev-ancien-modele', 'ev-confirmation-beffroi'],
     },
@@ -362,7 +351,24 @@ export const salleFantomeScenario: Scenario = {
       documentId: 'message-rectification',
     },
   ],
-  inventoryObjects: [],
+  inventoryObjects: [
+    {
+      id: 'note-interne-marine',
+      name: 'Note interne de Marine',
+      objectType: 'evidence',
+      typeLabel: 'Document obtenu',
+      description:
+        'Marine vous confie une ancienne note interne sur les noms de salles.',
+      originLocationId: 'couloir-marine',
+      initiallyVisible: true,
+      initiallyOwned: false,
+      unlocksDocumentIds: ['note-changement-noms'],
+      opensDocumentOnUse: true,
+      isUseful: true,
+      useLabel: 'Lire la note',
+      usedLabel: 'Note lue',
+    },
+  ],
   puzzles: [
     {
       id: 'lire-convocation-tcf',
@@ -401,7 +407,7 @@ export const salleFantomeScenario: Scenario = {
       successFeedback:
         'Vous avez repéré l’information essentielle : l’oral est indiqué en salle Jaurès. Il faut maintenant vérifier cette salle sur le plan.',
       failureFeedback:
-        'Cela ne semble pas être la bonne réponse. Relisez la convocation, puis réessayez.',
+        'Cela ne semble pas être la bonne réponse. Relisez la convocation. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['plan-actuel-salles'],
     },
     {
@@ -441,7 +447,7 @@ export const salleFantomeScenario: Scenario = {
       successFeedback:
         'Bien vu : la salle Jaurès n’apparaît pas sur le plan actuel. Il y a donc une incohérence à éclaircir.',
       failureFeedback:
-        'Cela ne semble pas être la bonne réponse. Observez de nouveau le plan des salles, puis réessayez.',
+        'Cela ne semble pas être la bonne réponse. Observez de nouveau le plan des salles. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['temoignage-ning-yi'],
       unlocksLocationIds: ['bureau-heidi'],
     },
@@ -492,7 +498,7 @@ export const salleFantomeScenario: Scenario = {
       successFeedback:
         'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne donnent pas la même information. Il faut maintenant trouver d’où vient cette contradiction.',
       failureFeedback:
-        'Cette réponse ne convient pas encore. Reparlez à Heïdi et vérifiez la formulation du problème.',
+        'Cette réponse ne convient pas encore. Reparlez à Heïdi et vérifiez la formulation du problème. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['archive-entrainements-tcf'],
       unlocksLocationIds: ['couloir-marine'],
     },
@@ -505,7 +511,7 @@ export const salleFantomeScenario: Scenario = {
         id: 'note-changement-noms',
       },
       description:
-        'Avec l’archive de Heïdi et la note de Marine, vous vérifiez quel nom est affiché aujourd’hui sur la porte.',
+        'Cette note devrait nous aider à comprendre un peu !',
       prompt: 'Aujourd’hui, à quelle salle correspond la salle Jaurès ?',
       requiredDocumentIds: ['archive-entrainements-tcf', 'note-changement-noms'],
       hints: [
@@ -533,8 +539,9 @@ export const salleFantomeScenario: Scenario = {
       successFeedback:
         'Marine donne une piste décisive : certains noms de salles ont changé. Vous avez établi la correspondance importante : l’ancienne salle Jaurès correspond aujourd’hui à la salle Beffroi.',
       failureFeedback:
-        'Cette correspondance ne semble pas correcte. Reprenez les indices avant de répondre.',
-      unlocksLocationIds: ['salle-beffroi', 'secretariat-thi-thai'],
+        'Cette correspondance ne semble pas correcte. Reprenez les indices. Revenez à cet indice pour essayer de trouver la bonne réponse.',
+      unlocksDocumentIds: ['temoignage-thi-thai'],
+      unlocksLocationIds: ['salle-beffroi'],
     },
     {
       id: 'comprendre-erreur-thi-thai',
@@ -578,7 +585,7 @@ export const salleFantomeScenario: Scenario = {
       successFeedback:
         'L’origine de l’erreur est maintenant claire : une ancienne convocation a servi de modèle. Il faut maintenant prévenir les autres candidats clairement.',
       failureFeedback:
-        'Cela ne semble pas être la bonne réponse. Relisez l’explication de Thi Thai.',
+        'Cela ne semble pas être la bonne réponse. Relisez l’explication de Thi Thai. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['message-rectification'],
     },
   ],
@@ -653,9 +660,9 @@ export const salleFantomeScenario: Scenario = {
     minSelectedEvidenceCount: 3,
     maxSelectedEvidenceCount: 3,
     hypothesisFailureFeedback:
-      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées, puis réessayez.',
+      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées. Revenez à cette étape pour essayer de trouver la bonne réponse.',
     evidenceFailureFeedback:
-      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées, puis réessayez.',
+      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées. Revenez à cette étape pour essayer de trouver la bonne réponse.',
     successFeedback:
       'La rectification est prête : l’information peut être affichée clairement pour les candidats.',
     finalNarrative:

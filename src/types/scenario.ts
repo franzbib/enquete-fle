@@ -31,6 +31,7 @@ export type Location = {
   vignetteUrl?: string;
   documentIds: string[];
   presentCharacterIds: string[];
+  presentCharacterIdsAfterPuzzle?: Record<string, string[]>;
   relatedCharacterIds?: string[];
   objectIds?: string[];
 };
@@ -79,6 +80,7 @@ export type InventoryObject = {
   id: string;
   name: string;
   objectType: 'access' | 'evidence' | 'ambient' | 'preparatory';
+  typeLabel?: string;
   description: string;
   iconUrl?: string;
   originLocationId?: string;
@@ -86,6 +88,7 @@ export type InventoryObject = {
   initiallyOwned?: boolean;
   unlocksLocationIds?: string[];
   unlocksDocumentIds?: string[];
+  opensDocumentOnUse?: boolean;
   isUseful?: boolean;
   useLabel?: string;
   usedLabel?: string;

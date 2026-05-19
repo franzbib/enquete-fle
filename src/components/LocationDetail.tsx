@@ -96,6 +96,26 @@ export function LocationDetail({
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div>
+          <h3 className="font-semibold text-slate-950">Personnages présents</h3>
+          <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
+            {presentCharacters.length > 0 ? (
+              presentCharacters.map((character) => (
+                <li key={character.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelectCharacter(character.id)}
+                    className="link-button text-left"
+                  >
+                    {character.name}
+                  </button>
+                </li>
+              ))
+            ) : (
+              <li className="text-slate-500 italic">Personne</li>
+            )}
+          </ul>
+        </div>
+        <div>
           <h3 className="font-semibold text-slate-950">Documents liés</h3>
           <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
             {documents.length > 0 ? (
@@ -124,26 +144,6 @@ export function LocationDetail({
               <li className="text-slate-500 italic">
                 Aucun document disponible pour l’instant
               </li>
-            )}
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-semibold text-slate-950">Personnages présents</h3>
-          <ul className="mt-2 list-inside list-disc text-sm leading-6 text-slate-700">
-            {presentCharacters.length > 0 ? (
-              presentCharacters.map((character) => (
-                <li key={character.id}>
-                  <button
-                    type="button"
-                    onClick={() => onSelectCharacter(character.id)}
-                    className="link-button text-left"
-                  >
-                    {character.name}
-                  </button>
-                </li>
-              ))
-            ) : (
-              <li className="text-slate-500 italic">Personne</li>
             )}
           </ul>
         </div>

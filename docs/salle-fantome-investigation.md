@@ -18,8 +18,8 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 - Delphine : confirme que les oraux ont bien lieu, mais ne resout pas le probleme.
 - Ning Yi : autre candidat place pres du panneau d affichage. Il cree une fausse piste comique et confirme que le probleme touche au moins deux candidats, sans suggerer l hypothese du vieux document. Son temoignage est requis avant l etape avec Heidi.
 - Heidi : aide a formuler la contradiction entre convocation et plan actuel.
-- Marine : apparait apres l archive de Heidi et donne la correspondance Jaures -> Beffroi.
-- Thi Thai : revient a l acte III, explique l ancien modele et demande la rectification.
+- Marine : apparait apres l archive de Heidi et confie une note interne qui permet de retrouver la correspondance Jaures -> Beffroi.
+- Thi Thai : apparait conditionnellement dans le Secretariat apres `identifier-beffroi`. Son texte actuel est : "Thi Thai comprend le probleme, vous explique et vous demande un service."
 
 ## Etapes jouables
 
@@ -31,9 +31,9 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 6. `heidiProblemFormulated` : enigme `formuler-probleme-heidi`.
 7. `oldDocumentObtained` : document `archive-entrainements-tcf`.
 8. `marineMet` : le lieu `couloir-marine` est debloque apres Heidi.
-9. `nameCorrespondenceObtained` : document `note-changement-noms`.
+9. `nameCorrespondenceObtained` : objet d inventaire `note-interne-marine`, obtenu dans le couloir avec Marine.
 10. `beffroiIdentified` : enigme `identifier-beffroi`.
-11. `thiThaiReturned` : le lieu `secretariat-thi-thai` est debloque.
+11. `thiThaiReturned` : Thi Thai apparait dans le lieu `secretariat` apres validation de `identifier-beffroi`.
 12. `thiThaiErrorUnderstood` : enigme `comprendre-erreur-thi-thai`, le joueur identifie l ancien modele de convocation.
 13. `correctionMessageUnlocked` : document `message-rectification`, debloque seulement apres l etape Thi Thai.
 14. `correctionMessageChosen` : resolution finale `resolution-salle-fantome`.
@@ -43,7 +43,13 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 Progression cible :
 
 ```text
-Convocation -> Plan -> Delphine -> Ning Yi -> Heidi -> Archive -> Marine -> Beffroi -> Thi Thai -> Comprendre l erreur -> Rectification finale
+Convocation -> Plan -> Delphine -> Ning Yi -> Heidi -> Archive -> Marine -> note interne -> Beffroi -> Thi Thai -> Comprendre l erreur -> Rectification finale
+```
+
+Parcours principal simplifie :
+
+```text
+Convocation -> Plan -> Heidi -> Marine -> note interne -> Beffroi -> Thi Thai -> rectification
 ```
 
 Le briefing joueur ne donne plus cette structure a l avance. Il indique seulement qu une convocation semble incomplete ou confuse ; le probleme de la salle Jaures doit etre decouvert par la lecture de la convocation puis par la consultation du plan.
@@ -55,9 +61,13 @@ Le briefing joueur ne donne plus cette structure a l avance. Il indique seulemen
 - `temoignage-delphine` : confirmation des oraux de TCF.
 - `temoignage-ning-yi` : confirmation qu un autre candidat a recu la meme convocation, sans donner la solution.
 - `archive-entrainements-tcf` : ancien document mentionnant Jaures, Rimbaud et Choderlos de Laclos.
-- `note-changement-noms` : note interne plus credible, avec correspondance Jaures -> Beffroi, Rimbaud -> Cathedrale, Choderlos de Laclos -> Gambetta.
+- `note-changement-noms` : note interne plus credible, avec correspondance Jaures -> Beffroi, Rimbaud -> Cathedrale, Choderlos de Laclos -> Gambetta. Elle n apparait plus directement comme document lie dans le couloir : elle est ouverte via l objet d inventaire `note-interne-marine`.
 - `temoignage-thi-thai` : origine de l erreur, ancien modele et copier-coller trop rapide.
 - `message-rectification` : message final a afficher sur le panneau, debloque apres `comprendre-erreur-thi-thai`.
+
+## Objets d inventaire
+
+- `note-interne-marine` : objet obtenu dans `couloir-marine` apres l intervention de Marine. Dans l inventaire, l action `Lire la note` ouvre le document `note-changement-noms`. Ce document porte ensuite l etape `identifier-beffroi`.
 
 ## Mini-jeux actuels
 
@@ -66,8 +76,8 @@ Les mini-jeux sont pour l instant modelises avec les `Puzzle` existants :
 - Lire la convocation : choix simple, maintenant affiche directement sous le document `convocation-tcf` grace au champ optionnel `context`.
 - Chercher la salle sur le plan : choix simple, maintenant affiche directement sous le document `plan-actuel-salles` grace au champ optionnel `context`.
 - Clarifier la situation avec Heidi : choix multiple affiche directement sous la fiche de `heidi`, disponible apres les documents `convocation-tcf`, `plan-actuel-salles`, `temoignage-delphine` et `temoignage-ning-yi`.
-- Retrouver le nom actuel de Jaures : choix simple affiche directement sous le document `note-changement-noms`, avec `puzzleType: 'matching'`.
-- Comprendre l erreur de modele : choix simple apres le retour de Thi Thai, debloque le message final.
+- Retrouver le nom actuel de Jaures : choix simple affiche directement sous le document `note-changement-noms`, ouvert depuis l objet `note-interne-marine`, avec `puzzleType: 'matching'`.
+- Comprendre l erreur de modele : choix simple affiche directement sous la fiche de `thi-thai`, dans le Secretariat, debloque le message final.
 - Choisir le message final : resolution finale.
 
 ## Enigmes contextualisees
@@ -81,18 +91,19 @@ context?: {
 };
 ```
 
-Ce champ reste optionnel pour preserver les autres enquetes. Dans cette premiere version progressive, quatre puzzles de `La salle fantome` l utilisent :
+Ce champ reste optionnel pour preserver les autres enquetes. Dans cette version progressive, cinq puzzles de `La salle fantome` l utilisent :
 
 - `lire-convocation-tcf` est rattache au document `convocation-tcf`.
 - `verifier-plan-actuel` est rattache au document `plan-actuel-salles`.
 - `formuler-probleme-heidi` est rattache au personnage `heidi`.
 - `identifier-beffroi` est rattache au document `note-changement-noms`.
+- `comprendre-erreur-thi-thai` est rattache au personnage `thi-thai`.
 
-Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, ouvrir le plan et constater l absence de Jaures, clarifier la situation avec Heidi, puis exploiter la note de Marine pour identifier Beffroi sans passer d abord par le tableau d enquete.
+Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, ouvrir le plan et constater l absence de Jaures, clarifier la situation avec Heidi, obtenir la note de Marine dans l inventaire, lire cette note pour identifier Beffroi, puis comprendre l erreur avec Thi Thai sans passer d abord par le tableau d enquete.
 
 Pour eviter un doublon trop visible, les enigmes contextualisees disponibles et non resolues sont masquees du tableau d enquete. Une fois resolues, elles peuvent y reapparaitre comme deductions validees.
 
-Limite actuelle : Thi Thai et la resolution finale restent dans le fonctionnement existant. Le rattachement des puzzles aux autres personnages ou lieux sera une etape ulterieure.
+Limite actuelle : la resolution finale reste dans le fonctionnement existant. L action concrete au panneau sera une etape ulterieure.
 
 ## Emplacements pour mini-jeux futurs
 
@@ -116,19 +127,20 @@ Corrections appliquees :
 - L objet `emplacement-affichage` a ete retire de l inventaire pour eviter qu un espace du panneau soit traite comme un objet a prendre.
 - Les deux premieres enigmes sont affichees sous leurs documents pour reduire la dependance initiale au tableau d enquete.
 - L etape avec Heidi est affichee sous sa fiche personnage pour poursuivre la progression dans la fenetre principale.
-- L etape `identifier-beffroi` est affichee sous la note interne de Marine.
+- L etape `identifier-beffroi` est affichee sous la note interne de Marine, elle-meme ouverte depuis l objet d inventaire `note-interne-marine`.
+- Le lieu separe `secretariat-thi-thai` a ete supprime : Thi Thai apparait maintenant conditionnellement dans `secretariat` apres `identifier-beffroi`.
 
 Limites conservees volontairement :
 
 - Le plan reste un document textuel mis en page et accessible depuis le hall apres la convocation ; le vrai plan graphique de l ISPA reste a produire.
-- Les interactions avec Thi Thai et la rectification finale restent techniquement dans le fonctionnement actuel du tableau d enquete.
+- La rectification finale reste techniquement dans le fonctionnement actuel du tableau d enquete.
 - L affichage final reste une resolution textuelle ; l action au panneau pourra devenir plus tard un mini-jeu de placement, de rapidite ou de course.
 
 Elements a reprendre plus tard :
 
 - Creer une vraie convocation graphique ou un rendu administratif dedie.
 - Produire un plan graphique des salles affiche dans le hall ou pres du panneau, avec Secretariat, Beffroi, Cathedrale, Gambetta et les autres salles actuelles utiles, sans Jaures, Rimbaud ni Choderlos de Laclos.
-- Localiser naturellement les interactions restantes avec Thi Thai et le panneau d affichage.
+- Localiser naturellement l action finale avec le panneau d affichage.
 - Remplacer l action finale par une interaction au panneau quand le systeme de mini-jeu sera choisi.
 
 ## Modifier le scenario

@@ -13,6 +13,10 @@ type InventoryPanelProps = {
 };
 
 function getObjectTypeLabel(object: InventoryObject) {
+  if (object.typeLabel) {
+    return object.typeLabel;
+  }
+
   if (object.objectType === 'access') {
     return 'Accès';
   }

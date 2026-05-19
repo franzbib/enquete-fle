@@ -268,6 +268,16 @@ export function InvestigationPage({
     return puzzleIdsWaitingForReopen.includes(puzzle.id);
   }
 
+  function getPresentCharacterIds(location: Scenario['locations'][number]) {
+    const conditionalCharacterIds = Object.entries(
+      location.presentCharacterIdsAfterPuzzle ?? {},
+    ).flatMap(([puzzleId, characterIds]) =>
+      solvedPuzzleIds.includes(puzzleId) ? characterIds : [],
+    );
+
+    return [...location.presentCharacterIds, ...conditionalCharacterIds];
+  }
+
   function handleSelect(type: Selection['type'], id: string) {
     const nextSelectedId = `${type}:${id}`;
 
@@ -359,6 +369,20 @@ export function InvestigationPage({
 
       return [...nextIds];
     });
+
+    const firstUnlockedDocumentId = object.unlocksDocumentIds?.[0];
+
+    if (object.opensDocumentOnUse && firstUnlockedDocumentId) {
+      setSelection({ type: 'document', id: firstUnlockedDocumentId });
+      setReadDocumentIds((currentIds) =>
+        currentIds.includes(firstUnlockedDocumentId)
+          ? currentIds
+          : [...currentIds, firstUnlockedDocumentId],
+      );
+      setActiveMobileTab('scene');
+      setFeedback(`${object.name} consulté.`);
+      return;
+    }
 
     if (object.unlocksLocationIds?.includes('salle-informatique')) {
       setFeedback(
@@ -475,7 +499,7 @@ export function InvestigationPage({
           )}
           readDocumentIds={readDocumentIds}
           presentCharacters={scenario.characters.filter((character) =>
-            location.presentCharacterIds.includes(character.id),
+            getPresentCharacterIds(location).includes(character.id),
           )}
           objects={inventoryObjects.filter(
             (object) =>
@@ -506,7 +530,7 @@ export function InvestigationPage({
         <CharacterDetail
           character={character}
           presentLocations={scenario.locations.filter((location) =>
-            location.presentCharacterIds.includes(character.id),
+            getPresentCharacterIds(location).includes(character.id),
           )}
           contextualPuzzles={puzzles
             .filter(

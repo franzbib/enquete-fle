@@ -72,7 +72,7 @@ export function PuzzleDetail({
         </span>
       </div>
 
-      {!isWaitingForReopen || isSolved ? (
+      {!isWaitingForReopen && !isSolved ? (
         <p className="info-strip mt-5 leading-7 text-slate-800">
           {puzzle.prompt}
         </p>
@@ -90,7 +90,7 @@ export function PuzzleDetail({
         </p>
       ) : null}
 
-      {isWaitingForReopen && !isSolved ? null : (
+      {isWaitingForReopen || isSolved ? null : (
         <>
 
       {hints.length > 0 ? (
