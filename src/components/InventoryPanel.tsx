@@ -61,6 +61,9 @@ export function InventoryPanel({
           {ownedObjects.length === 0 ? (
             <p className="mt-3 text-sm leading-6 text-slate-600">
               Aucun objet pour le moment.
+              <span className="lg:hidden">
+                {' '}Les indices se trouvent surtout dans les documents et les témoignages.
+              </span>
             </p>
           ) : (
             <div className="mt-3 grid gap-3">

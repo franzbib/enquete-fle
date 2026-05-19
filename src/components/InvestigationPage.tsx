@@ -950,11 +950,6 @@ export function InvestigationPage({
                 isVisible={inventoryVisible}
                 onToggle={() => setInventoryVisible(!inventoryVisible)}
               />
-              {ownedObjectIds.length === 0 && (
-                <p className="mt-4 text-sm text-slate-500 italic text-center lg:hidden px-4">
-                  Aucun objet pour le moment. Les indices se trouvent surtout dans les documents et les témoignages.
-                </p>
-              )}
             </div>
           </aside>
           <section id="detail-view" key={selectedId} className={`scroll-mt-6 animate-fade-in ${activeMobileTab === 'scene' ? 'block' : 'hidden'} lg:block`}>{detail}</section>
