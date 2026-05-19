@@ -78,6 +78,10 @@ export function InvestigationPage({
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(
     () => false,
   );
+  const [
+    finalResolutionWaitingForReopen,
+    setFinalResolutionWaitingForReopen,
+  ] = useState(() => false);
   const [progressionVisible, setProgressionVisible] = useState(
     () => false,
   );
@@ -163,6 +167,7 @@ export function InvestigationPage({
     setRevealedHintCounts(save.revealedHintCounts);
     setPuzzleIdsWaitingForReopen([]);
     setFinalResolutionSolved(save.finalResolutionSolved);
+    setFinalResolutionWaitingForReopen(false);
     setInventoryVisible(save.inventoryVisible);
     setProgressionVisible(save.progressionVisible);
     setMissionVisible(save.missionPanelVisible);
@@ -218,6 +223,7 @@ export function InvestigationPage({
     setRevealedHintCounts({});
     setPuzzleIdsWaitingForReopen([]);
     setFinalResolutionSolved(false);
+    setFinalResolutionWaitingForReopen(false);
     setInventoryVisible(true);
     setProgressionVisible(true);
     setMissionVisible(false);
@@ -273,6 +279,9 @@ export function InvestigationPage({
     }
 
     setSelection({ type, id } as Selection);
+    if (type === 'final-resolution' && id === finalResolution?.id) {
+      setFinalResolutionWaitingForReopen(false);
+    }
     setPuzzleIdsWaitingForReopen((currentIds) =>
       currentIds.filter((puzzleId) => {
         const puzzle = puzzles.find((item) => item.id === puzzleId);
@@ -440,6 +449,7 @@ export function InvestigationPage({
     );
   }
   function handleFinalResolutionComplete() {
+    setFinalResolutionWaitingForReopen(false);
     setFinalResolutionSolved(true);
     setFeedback(
       'Explication finale validée. La conclusion reste prudente et permet de réparer la situation.',
@@ -509,13 +519,14 @@ export function InvestigationPage({
               ),
               isSolved: solvedPuzzleIds.includes(puzzle.id),
               isAvailable: isPuzzleAvailable(puzzle),
+              isWaitingForReopen: isPuzzleWaitingForReopen(puzzle),
               revealedHintCount: revealedHintCounts[puzzle.id] ?? 0,
             }))
             .filter(
               (contextualPuzzle) =>
-                (contextualPuzzle.isAvailable || contextualPuzzle.isSolved) &&
-                (contextualPuzzle.isSolved ||
-                  !isPuzzleWaitingForReopen(contextualPuzzle.puzzle)),
+                contextualPuzzle.isAvailable ||
+                contextualPuzzle.isSolved ||
+                contextualPuzzle.isWaitingForReopen,
             )}
           onSelectLocation={(id) => handleSelect('location', id)}
           onRequestHint={handleRequestHint}
@@ -547,13 +558,14 @@ export function InvestigationPage({
               ),
               isSolved: solvedPuzzleIds.includes(puzzle.id),
               isAvailable: isPuzzleAvailable(puzzle),
+              isWaitingForReopen: isPuzzleWaitingForReopen(puzzle),
               revealedHintCount: revealedHintCounts[puzzle.id] ?? 0,
             }))
             .filter(
               (contextualPuzzle) =>
-                (contextualPuzzle.isAvailable || contextualPuzzle.isSolved) &&
-                (contextualPuzzle.isSolved ||
-                  !isPuzzleWaitingForReopen(contextualPuzzle.puzzle)),
+                contextualPuzzle.isAvailable ||
+                contextualPuzzle.isSolved ||
+                contextualPuzzle.isWaitingForReopen,
             )}
           onRequestHint={handleRequestHint}
           onSubmitPuzzle={handlePuzzleSubmit}
@@ -571,6 +583,11 @@ export function InvestigationPage({
           finalResolution={finalResolution}
           isAvailable={isFinalResolutionAvailable}
           isSolved={finalResolutionSolved}
+          waitingForReopen={finalResolutionWaitingForReopen}
+          onIncorrect={(failureFeedback) => {
+            setFinalResolutionWaitingForReopen(true);
+            setFeedback(failureFeedback);
+          }}
           onComplete={handleFinalResolutionComplete}
         />
       );
@@ -604,6 +621,7 @@ export function InvestigationPage({
         )}
         isSolved={solvedPuzzleIds.includes(puzzle.id)}
         isAvailable={isPuzzleAvailable(puzzle)}
+        isWaitingForReopen={isPuzzleWaitingForReopen(puzzle)}
         revealedHintCount={revealedHintCounts[puzzle.id] ?? 0}
         onRequestHint={handleRequestHint}
         onSubmit={handlePuzzleSubmit}
@@ -612,6 +630,7 @@ export function InvestigationPage({
   }, [
     finalResolution,
     finalResolutionSolved,
+    finalResolutionWaitingForReopen,
     inventoryObjects,
     isFinalResolutionAvailable,
     ownedObjectIds,

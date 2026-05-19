@@ -14,6 +14,7 @@ export type ContextualPuzzle = {
   requiredDocuments: InvestigationDocument[];
   isSolved: boolean;
   isAvailable: boolean;
+  isWaitingForReopen: boolean;
   revealedHintCount: number;
 };
 
@@ -53,7 +54,7 @@ export function DocumentDetail({
       </div>
       {contextualPuzzles.length > 0 && onRequestHint && onSubmitPuzzle ? (
         <section className="mt-6 border-t border-slate-200 pt-5">
-          <p className="eyebrow">A verifier</p>
+          <p className="eyebrow">À vérifier</p>
           <div className="mt-3 grid gap-4">
             {contextualPuzzles.map((contextualPuzzle) => (
               <PuzzleDetail
@@ -62,6 +63,7 @@ export function DocumentDetail({
                 requiredDocuments={contextualPuzzle.requiredDocuments}
                 isSolved={contextualPuzzle.isSolved}
                 isAvailable={contextualPuzzle.isAvailable}
+                isWaitingForReopen={contextualPuzzle.isWaitingForReopen}
                 revealedHintCount={contextualPuzzle.revealedHintCount}
                 onRequestHint={onRequestHint}
                 onSubmit={onSubmitPuzzle}

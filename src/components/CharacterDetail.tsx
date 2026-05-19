@@ -15,6 +15,7 @@ type ContextualPuzzle = {
   requiredDocuments: InvestigationDocument[];
   isSolved: boolean;
   isAvailable: boolean;
+  isWaitingForReopen: boolean;
   revealedHintCount: number;
 };
 
@@ -71,6 +72,7 @@ export function CharacterDetail({
                 requiredDocuments={contextualPuzzle.requiredDocuments}
                 isSolved={contextualPuzzle.isSolved}
                 isAvailable={contextualPuzzle.isAvailable}
+                isWaitingForReopen={contextualPuzzle.isWaitingForReopen}
                 revealedHintCount={contextualPuzzle.revealedHintCount}
                 onRequestHint={onRequestHint}
                 onSubmit={onSubmitPuzzle}

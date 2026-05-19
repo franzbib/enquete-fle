@@ -7,6 +7,7 @@ type PuzzleDetailProps = {
   requiredDocuments: InvestigationDocument[];
   isSolved: boolean;
   isAvailable: boolean;
+  isWaitingForReopen?: boolean;
   revealedHintCount: number;
   onRequestHint: (puzzle: Puzzle) => void;
   onSubmit: (puzzle: Puzzle, answer: string[]) => void;
@@ -17,6 +18,7 @@ export function PuzzleDetail({
   requiredDocuments,
   isSolved,
   isAvailable,
+  isWaitingForReopen = false,
   revealedHintCount,
   onRequestHint,
   onSubmit,
@@ -60,19 +62,36 @@ export function PuzzleDetail({
           }`}
         >
           {isSolved && <IconPuzzleSolved className="h-3.5 w-3.5" />}
-          {isSolved ? 'Validée' : isAvailable ? 'À résoudre' : 'À débloquer'}
+          {isSolved
+            ? 'Validée'
+            : isWaitingForReopen
+              ? 'À revoir'
+              : isAvailable
+                ? 'À résoudre'
+                : 'À débloquer'}
         </span>
       </div>
 
-      <p className="info-strip mt-5 leading-7 text-slate-800">
-        {puzzle.prompt}
-      </p>
+      {!isWaitingForReopen || isSolved ? (
+        <p className="info-strip mt-5 leading-7 text-slate-800">
+          {puzzle.prompt}
+        </p>
+      ) : null}
 
       {isSolved ? (
         <p className="info-strip mt-4 border-teal-200 bg-teal-50 leading-7 text-teal-950">
           {puzzle.successFeedback}
         </p>
       ) : null}
+
+      {isWaitingForReopen && !isSolved ? (
+        <p className="info-strip mt-4 text-sm leading-6 text-slate-800">
+          {puzzle.failureFeedback}
+        </p>
+      ) : null}
+
+      {isWaitingForReopen && !isSolved ? null : (
+        <>
 
       {hints.length > 0 ? (
         <section className="hint-panel mt-5">
@@ -313,6 +332,8 @@ export function PuzzleDetail({
           ) : null}
         </div>
       ) : null}
+        </>
+      )}
     </article>
   );
 }

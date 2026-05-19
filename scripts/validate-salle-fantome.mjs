@@ -118,7 +118,8 @@ assert(
   'Missing scenario title: La salle fantôme',
 );
 assert(
-  scenarioSource.includes('Salle Jaures -> Salle Beffroi'),
+  scenarioSource.includes('Salle Jaures -> Salle Beffroi') ||
+    scenarioSource.includes('Salle Jaurès -> Salle Beffroi'),
   'Missing correspondence: Salle Jaures -> Salle Beffroi',
 );
 assert(

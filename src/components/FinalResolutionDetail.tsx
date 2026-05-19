@@ -5,6 +5,8 @@ type FinalResolutionDetailProps = {
   finalResolution: FinalResolution;
   isAvailable: boolean;
   isSolved: boolean;
+  waitingForReopen: boolean;
+  onIncorrect: (feedback: string) => void;
   onComplete: () => void;
 };
 
@@ -12,12 +14,13 @@ export function FinalResolutionDetail({
   finalResolution,
   isAvailable,
   isSolved,
+  waitingForReopen,
+  onIncorrect,
   onComplete,
 }: FinalResolutionDetailProps) {
   const [selectedHypothesisId, setSelectedHypothesisId] = useState('');
   const [selectedEvidenceIds, setSelectedEvidenceIds] = useState<string[]>([]);
   const [localFeedback, setLocalFeedback] = useState('');
-  const [waitingForReopen, setWaitingForReopen] = useState(false);
 
   function toggleEvidence(documentId: string, checked: boolean) {
     setLocalFeedback('');
@@ -34,8 +37,9 @@ export function FinalResolutionDetail({
 
   function handleSubmit() {
     if (selectedHypothesisId !== finalResolution.correctHypothesisId) {
-      setLocalFeedback(finalResolution.hypothesisFailureFeedback);
-      setWaitingForReopen(true);
+      const feedback = finalResolution.hypothesisFailureFeedback;
+      setLocalFeedback(feedback);
+      onIncorrect(feedback);
       return;
     }
 
@@ -44,8 +48,9 @@ export function FinalResolutionDetail({
     );
 
     if (!hasRequiredEvidence) {
-      setLocalFeedback(finalResolution.evidenceFailureFeedback);
-      setWaitingForReopen(true);
+      const feedback = finalResolution.evidenceFailureFeedback;
+      setLocalFeedback(feedback);
+      onIncorrect(feedback);
       return;
     }
 
