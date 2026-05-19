@@ -55,9 +55,9 @@ export function LocationDetail({
           />
         )}
         <p className="body-copy mt-4">
-          {location.id === 'salle-informatique'
+          {location.lockedMessage ?? (location.id === 'salle-informatique'
             ? 'La salle informatique est fermée. Un badge semble nécessaire pour entrer.'
-            : `${location.name} est fermé(e). Un objet est nécessaire pour y accéder.`}
+            : `${location.name} est fermé(e). Un objet est nécessaire pour y accéder.`)}
         </p>
         {accessObject && (
           <div className="mt-6">

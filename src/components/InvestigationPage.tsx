@@ -246,8 +246,10 @@ export function InvestigationPage({
 
   function handleSelect(type: Selection['type'], id: string) {
     if (type === 'location' && !accessibleLocationIds.includes(id)) {
+      const location = findLocation(scenario, id);
       setFeedback(
-        'Ce lieu est fermé. Il vous faut un objet pour y accéder.',
+        location?.lockedMessage ??
+          'Ce lieu est fermé. Il vous faut un objet pour y accéder.',
       );
     }
 

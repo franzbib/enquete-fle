@@ -27,6 +27,7 @@ export type Location = {
   description: string;
   role: string;
   available: boolean;
+  lockedMessage?: string;
   vignetteUrl?: string;
   documentIds: string[];
   presentCharacterIds: string[];

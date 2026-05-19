@@ -62,7 +62,8 @@ export const salleFantomeScenario: Scenario = {
       description:
         "Heidi accueille les etudiants dans un bureau calme, a l ecart du bruit du hall.",
       role: 'Sur son bureau, quelques archives et notes de suivi sont rangees par date.',
-      available: true,
+      available: false,
+      lockedMessage: "Heidi n est pas dans son bureau pour le moment.",
       documentIds: ['archive-entrainements-tcf'],
       presentCharacterIds: ['heidi'],
       objectIds: [],
@@ -442,6 +443,7 @@ export const salleFantomeScenario: Scenario = {
       failureFeedback:
         'Le plan ne parle pas d annulation ni de salle informatique. Il faut constater l absence de Jaures.',
       unlocksDocumentIds: ['temoignage-ning-yi'],
+      unlocksLocationIds: ['bureau-heidi'],
     },
     {
       id: 'formuler-probleme-heidi',
