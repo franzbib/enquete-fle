@@ -68,6 +68,12 @@ export function PuzzleDetail({
         {puzzle.prompt}
       </p>
 
+      {isSolved ? (
+        <p className="info-strip mt-4 border-teal-200 bg-teal-50 leading-7 text-teal-950">
+          {puzzle.successFeedback}
+        </p>
+      ) : null}
+
       {hints.length > 0 ? (
         <section className="hint-panel mt-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

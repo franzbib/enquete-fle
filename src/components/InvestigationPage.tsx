@@ -72,6 +72,9 @@ export function InvestigationPage({
   const [revealedHintCounts, setRevealedHintCounts] = useState<
     Record<string, number>
   >(() => ({}));
+  const [puzzleIdsWaitingForReopen, setPuzzleIdsWaitingForReopen] = useState<
+    string[]
+  >(() => []);
   const [finalResolutionSolved, setFinalResolutionSolved] = useState(
     () => false,
   );
@@ -158,6 +161,7 @@ export function InvestigationPage({
     setDroppedObjectLocations(save.droppedObjectLocations);
     setUnlockedLocationIds(save.unlockedLocationIds);
     setRevealedHintCounts(save.revealedHintCounts);
+    setPuzzleIdsWaitingForReopen([]);
     setFinalResolutionSolved(save.finalResolutionSolved);
     setInventoryVisible(save.inventoryVisible);
     setProgressionVisible(save.progressionVisible);
@@ -212,6 +216,7 @@ export function InvestigationPage({
     setDroppedObjectLocations({});
     setUnlockedLocationIds([]);
     setRevealedHintCounts({});
+    setPuzzleIdsWaitingForReopen([]);
     setFinalResolutionSolved(false);
     setInventoryVisible(true);
     setProgressionVisible(true);
@@ -244,7 +249,21 @@ export function InvestigationPage({
     );
   }
 
+  function getPuzzleReopenSelectionId(puzzle: Puzzle) {
+    if (puzzle.context) {
+      return `${puzzle.context.type}:${puzzle.context.id}`;
+    }
+
+    return `puzzle:${puzzle.id}`;
+  }
+
+  function isPuzzleWaitingForReopen(puzzle: Puzzle) {
+    return puzzleIdsWaitingForReopen.includes(puzzle.id);
+  }
+
   function handleSelect(type: Selection['type'], id: string) {
+    const nextSelectedId = `${type}:${id}`;
+
     if (type === 'location' && !accessibleLocationIds.includes(id)) {
       const location = findLocation(scenario, id);
       setFeedback(
@@ -254,6 +273,17 @@ export function InvestigationPage({
     }
 
     setSelection({ type, id } as Selection);
+    setPuzzleIdsWaitingForReopen((currentIds) =>
+      currentIds.filter((puzzleId) => {
+        const puzzle = puzzles.find((item) => item.id === puzzleId);
+
+        if (!puzzle) {
+          return false;
+        }
+
+        return getPuzzleReopenSelectionId(puzzle) !== nextSelectedId;
+      }),
+    );
     if (type === 'document' && !readDocumentIds.includes(id)) {
       setReadDocumentIds((prev) => [...prev, id]);
     }
@@ -373,9 +403,15 @@ export function InvestigationPage({
 
     if (!isCorrect) {
       setFeedback(puzzle.failureFeedback);
+      setPuzzleIdsWaitingForReopen((currentIds) =>
+        currentIds.includes(puzzle.id) ? currentIds : [...currentIds, puzzle.id],
+      );
       return;
     }
 
+    setPuzzleIdsWaitingForReopen((currentIds) =>
+      currentIds.filter((puzzleId) => puzzleId !== puzzle.id),
+    );
     setSolvedPuzzleIds((currentIds) =>
       currentIds.includes(puzzle.id) ? currentIds : [...currentIds, puzzle.id],
     );
@@ -477,7 +513,9 @@ export function InvestigationPage({
             }))
             .filter(
               (contextualPuzzle) =>
-                contextualPuzzle.isAvailable || contextualPuzzle.isSolved,
+                (contextualPuzzle.isAvailable || contextualPuzzle.isSolved) &&
+                (contextualPuzzle.isSolved ||
+                  !isPuzzleWaitingForReopen(contextualPuzzle.puzzle)),
             )}
           onSelectLocation={(id) => handleSelect('location', id)}
           onRequestHint={handleRequestHint}
@@ -513,7 +551,9 @@ export function InvestigationPage({
             }))
             .filter(
               (contextualPuzzle) =>
-                contextualPuzzle.isAvailable || contextualPuzzle.isSolved,
+                (contextualPuzzle.isAvailable || contextualPuzzle.isSolved) &&
+                (contextualPuzzle.isSolved ||
+                  !isPuzzleWaitingForReopen(contextualPuzzle.puzzle)),
             )}
           onRequestHint={handleRequestHint}
           onSubmitPuzzle={handlePuzzleSubmit}
@@ -542,6 +582,20 @@ export function InvestigationPage({
       return null;
     }
 
+    if (isPuzzleWaitingForReopen(puzzle) && !solvedPuzzleIds.includes(puzzle.id)) {
+      return (
+        <article className="case-panel case-panel-main case-panel-puzzle">
+          <p className="eyebrow">À revoir</p>
+          <h2 className="mt-2 text-2xl font-bold text-slate-950">
+            {puzzle.title}
+          </h2>
+          <p className="info-strip mt-5 leading-7 text-slate-800">
+            {puzzle.failureFeedback}
+          </p>
+        </article>
+      );
+    }
+
     return (
       <PuzzleDetail
         puzzle={puzzle}
@@ -562,6 +616,7 @@ export function InvestigationPage({
     isFinalResolutionAvailable,
     ownedObjectIds,
     puzzles,
+    puzzleIdsWaitingForReopen,
     readDocumentIds,
     revealedHintCounts,
     scenario,

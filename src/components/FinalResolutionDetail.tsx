@@ -17,6 +17,7 @@ export function FinalResolutionDetail({
   const [selectedHypothesisId, setSelectedHypothesisId] = useState('');
   const [selectedEvidenceIds, setSelectedEvidenceIds] = useState<string[]>([]);
   const [localFeedback, setLocalFeedback] = useState('');
+  const [waitingForReopen, setWaitingForReopen] = useState(false);
 
   function toggleEvidence(documentId: string, checked: boolean) {
     setLocalFeedback('');
@@ -34,6 +35,7 @@ export function FinalResolutionDetail({
   function handleSubmit() {
     if (selectedHypothesisId !== finalResolution.correctHypothesisId) {
       setLocalFeedback(finalResolution.hypothesisFailureFeedback);
+      setWaitingForReopen(true);
       return;
     }
 
@@ -43,6 +45,7 @@ export function FinalResolutionDetail({
 
     if (!hasRequiredEvidence) {
       setLocalFeedback(finalResolution.evidenceFailureFeedback);
+      setWaitingForReopen(true);
       return;
     }
 
@@ -98,7 +101,13 @@ export function FinalResolutionDetail({
         </section>
       ) : null}
 
-      {isAvailable && !isSolved ? (
+      {isAvailable && !isSolved && waitingForReopen ? (
+        <p className="info-strip mt-5 text-sm leading-6">
+          {localFeedback}
+        </p>
+      ) : null}
+
+      {isAvailable && !isSolved && !waitingForReopen ? (
         <div className="mt-5 grid gap-6">
           <section>
             <p className="info-strip leading-7 text-slate-800">

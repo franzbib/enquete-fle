@@ -63,7 +63,7 @@ export const salleFantomeScenario: Scenario = {
         "Heidi accueille les etudiants dans un bureau calme, a l ecart du bruit du hall.",
       role: 'Sur son bureau, quelques archives et notes de suivi sont rangees par date.',
       available: false,
-      lockedMessage: "Heidi n est pas dans son bureau pour le moment.",
+      lockedMessage: "Heïdi n’est pas dans son bureau pour le moment.",
       documentIds: ['archive-entrainements-tcf'],
       presentCharacterIds: ['heidi'],
       objectIds: [],
@@ -399,9 +399,9 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Vous avez repere la salle Jaures. Il faut maintenant verifier si elle existe sur le plan actuel.',
+        'Vous avez repéré l’information essentielle : l’oral est indiqué en salle Jaurès. Il faut maintenant vérifier cette salle sur le plan.',
       failureFeedback:
-        'Cette information est utile, mais elle n explique pas encore pourquoi la convocation pose probleme. Relisez la ligne du lieu.',
+        'Cela ne semble pas être la bonne réponse. Relisez la convocation, puis réessayez.',
       unlocksDocumentIds: ['plan-actuel-salles'],
     },
     {
@@ -439,9 +439,9 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Le probleme est confirme : la convocation et le plan actuel ne disent pas la meme chose. Avant de demander une aide methodologique, verifiez au secretariat si les oraux ont bien lieu et comparez votre convocation avec celle de Ning Yi.',
+        'Bien vu : la salle Jaurès n’apparaît pas sur le plan actuel. Il y a donc une incohérence à éclaircir.',
       failureFeedback:
-        'Le plan ne parle pas d annulation ni de salle informatique. Il faut constater l absence de Jaures.',
+        'Cela ne semble pas être la bonne réponse. Observez de nouveau le plan des salles, puis réessayez.',
       unlocksDocumentIds: ['temoignage-ning-yi'],
       unlocksLocationIds: ['bureau-heidi'],
     },
@@ -490,9 +490,9 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Probleme formule. Heidi vous donne une archive : Jaures a bien ete un nom de salle dans une ancienne organisation.',
+        'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne disent pas la même chose. L’archive confirme que le nom Jaurès a bien existé.',
       failureFeedback:
-        'Cette formulation est trop vague ou va trop loin. Comparez simplement la convocation et le plan actuel.',
+        'Cette réponse ne convient pas encore. Reparlez à Heïdi et vérifiez la formulation du problème.',
       unlocksDocumentIds: ['archive-entrainements-tcf'],
       unlocksLocationIds: ['couloir-marine'],
     },
@@ -531,15 +531,19 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Correspondance trouvee : l oral indique en salle Jaures doit avoir lieu en salle Beffroi. Il reste a comprendre pourquoi l ancien nom est revenu.',
+        'Marine donne une piste décisive : certains noms de salles ont changé. Vous avez établi la correspondance importante : l’ancienne salle Jaurès correspond aujourd’hui à la salle Beffroi.',
       failureFeedback:
-        'Relisez la note interne. Chaque ancien nom correspond a un seul nom actuel.',
+        'Cette correspondance ne semble pas correcte. Reprenez les indices avant de répondre.',
       unlocksLocationIds: ['salle-beffroi', 'secretariat-thi-thai'],
     },
     {
       id: 'comprendre-erreur-thi-thai',
       title: 'Comprendre l erreur de modele',
       puzzleType: 'unlock',
+      context: {
+        type: 'character',
+        id: 'thi-thai',
+      },
       description:
         'Thi Thai explique pourquoi une convocation recente utilise encore un ancien nom de salle.',
       prompt: 'Quelle est l origine de l erreur dans les convocations ?',
@@ -572,9 +576,9 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Vous comprenez l origine de l erreur : un ancien modele de convocation contenait encore les anciens noms de salles. Il faut maintenant prevenir les autres candidats clairement.',
+        'L’origine de l’erreur est maintenant claire : une ancienne convocation a servi de modèle. Il faut maintenant prévenir les autres candidats clairement.',
       failureFeedback:
-        'Cette explication ne correspond pas au temoignage de Thi Thai. Cherchez l origine administrative de l erreur.',
+        'Cela ne semble pas être la bonne réponse. Relisez l’explication de Thi Thai.',
       unlocksDocumentIds: ['message-rectification'],
     },
   ],
@@ -649,11 +653,11 @@ export const salleFantomeScenario: Scenario = {
     minSelectedEvidenceCount: 3,
     maxSelectedEvidenceCount: 3,
     hypothesisFailureFeedback:
-      'Ce message risque de paniquer, d accuser ou de ne pas guider les candidats. Il faut corriger clairement sans dramatiser.',
+      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées, puis réessayez.',
     evidenceFailureFeedback:
-      'La rectification doit s appuyer sur la convocation, la correspondance Jaures -> Beffroi et l explication de l ancien modele.',
+      'Cette rectification ne semble pas assez claire. Relisez les informations confirmées, puis réessayez.',
     successFeedback:
-      'Rectification affichee. Le message est clair, utile et reparateur.',
+      'La rectification est prête : l’information peut être affichée clairement pour les candidats.',
     finalNarrative:
       "La salle fantome n etait pas cachee : c etait un ancien nom reste dans un modele administratif. Les candidats lisent la rectification, se dirigent vers la salle Beffroi et gardent leur heure de passage. Vous pouvez maintenant aller a votre oral avec une histoire et un bon argument de comprehension administrative.",
   },
