@@ -239,13 +239,13 @@ export const salleFantomeScenario: Scenario = {
     },
     {
       id: 'archive-entrainements-tcf',
-      title: 'Archive - Organisation des entraînements TCF',
+      title: 'Archive - Organisation des entraînements TCF, septembre 2010',
       documentType: 'planning',
       source: 'Heïdi',
       summary:
         'Ancien document qui prouve que Jaurès était bien un nom utilisé dans une organisation précédente.',
       content:
-        "Les candidats doivent se présenter dix minutes avant leur passage.\n\nExpression orale : salle Jaurès\nPréparation des candidats : salle Rimbaud\nCompréhension écrite : salle Choderlos de Laclos\n\nLes listes d’émargement seront déposées devant chaque salle.",
+        "Document interne - année universitaire 2010-2011\n\nLes candidats doivent se présenter dix minutes avant leur passage.\n\nExpression orale : salle Jaurès\nPréparation des candidats : salle Rimbaud\nCompréhension écrite : salle Choderlos de Laclos\n\nLes listes d’émargement seront déposées devant chaque salle.",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'formuler-probleme-heidi',
       relatedLocationIds: ['bureau-heidi'],
