@@ -490,7 +490,7 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne disent pas la même chose. L’archive confirme que le nom Jaurès a bien existé.',
+        'Heïdi vous aide à formuler le problème : le document officiel et le plan actuel ne donnent pas la même information. Il faut maintenant trouver d’où vient cette contradiction.',
       failureFeedback:
         'Cette réponse ne convient pas encore. Reparlez à Heïdi et vérifiez la formulation du problème.',
       unlocksDocumentIds: ['archive-entrainements-tcf'],
