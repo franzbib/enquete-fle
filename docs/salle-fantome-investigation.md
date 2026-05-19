@@ -69,6 +69,7 @@ Le briefing joueur ne donne plus cette structure a l avance. Il indique seulemen
 
 - `note-interne-marine` : objet obtenu dans `couloir-marine` apres avoir consulte Marine. La note n est pas visible avant cette discussion. Dans l inventaire, l action `Lire la note` ouvre le document `note-changement-noms`. Ce document porte ensuite l etape `identifier-beffroi`.
 - `rectification-a-afficher` : objet obtenu apres l etape `comprendre-erreur-thi-thai`. Thi Thai confie ce message au joueur, qui doit retourner au `panneau-affichage` pour afficher la rectification finale. L objet est marque comme utilise quand la resolution finale est validee.
+- `ordinateur-ia-allume` : objet d ambiance facultatif dans `salle-informatique`. L action `Interroger l ordinateur` affiche aleatoirement une micro-scene IA parmi trois variantes : assistant administratif absurde, conseil d enquete general, generateur de poesie administrative. Cet objet ne debloque rien.
 
 ## Mini-jeux actuels
 
@@ -105,6 +106,18 @@ Objectif : tester une progression plus naturelle dans la fenetre principale. Le 
 Pour eviter un doublon trop visible, les enigmes contextualisees disponibles et non resolues sont masquees du tableau d enquete. Une fois resolues, elles peuvent y reapparaitre comme deductions validees.
 
 La resolution finale reste basee sur `FinalResolutionDetail`, mais elle est maintenant contextualisee dans le lieu `panneau-affichage` et exige l objet `rectification-a-afficher`.
+
+## Salle informatique facultative
+
+La `salle-informatique` est un lieu optionnel d ambiance. Elle contient l objet `ordinateur-ia-allume`.
+
+Chaque interaction avec cet ordinateur tire au hasard :
+
+- une variante IA administrative absurde ;
+- une variante IA methodologique ;
+- une variante IA poetique ou burlesque.
+
+Le tirage choisit aussi une reponse aleatoire dans la variante. Cette micro-scene est rejouable et ne modifie pas la progression principale : aucun lieu, document, objet, personnage, puzzle ou element de resolution n est debloque.
 
 ## Emplacements pour mini-jeux futurs
 

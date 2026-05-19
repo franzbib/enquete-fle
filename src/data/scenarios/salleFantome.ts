@@ -100,6 +100,19 @@ export const salleFantomeScenario: Scenario = {
       presentCharacterIds: [],
       objectIds: [],
     },
+    {
+      id: 'salle-informatique',
+      name: 'Salle informatique',
+      kind: 'optional',
+      vignetteUrl: '/assets/locations/salle-informatique-temp.png',
+      description:
+        "Quelques postes sont allumés. La salle est calme, avec le petit bourdonnement habituel des ordinateurs.",
+      role: 'Un ordinateur affiche une fenêtre de chatbot restée ouverte.',
+      available: true,
+      documentIds: [],
+      presentCharacterIds: [],
+      objectIds: ['ordinateur-ia-allume'],
+    },
   ],
   characters: [
     {
@@ -384,6 +397,62 @@ export const salleFantomeScenario: Scenario = {
       isUseful: true,
       canDrop: false,
       usedLabel: 'Affichée',
+    },
+    {
+      id: 'ordinateur-ia-allume',
+      name: 'Ordinateur resté allumé',
+      objectType: 'ambient',
+      typeLabel: 'Ambiance',
+      description:
+        'Un ordinateur est resté allumé. Une fenêtre de chatbot clignote doucement à l’écran.',
+      originLocationId: 'salle-informatique',
+      initiallyVisible: true,
+      initiallyOwned: false,
+      isUseful: false,
+      useLabel: 'Interroger l’ordinateur',
+      randomInteractionEvents: [
+        {
+          title: 'Assistant administratif automatique',
+          intro:
+            'Un ordinateur affiche : “Assistant administratif expérimental — posez votre question.”',
+          responses: [
+            'La salle demandée existe probablement quelque part. Merci de continuer à chercher avec confiance.',
+            'Erreur détectée : le plan et la convocation ne sont pas identiques. Solution proposée : imprimer un autre plan.',
+            'Pour trouver une salle, veuillez être dans la bonne salle.',
+            'Votre demande est importante. Elle sera traitée après votre oral.',
+            'La réponse administrative la plus probable est : cela dépend.',
+          ],
+          reaction:
+            'Ce n’est pas très utile, mais au moins l’ordinateur semble aussi perdu que vous.',
+        },
+        {
+          title: 'Conseil d’enquête automatique',
+          intro:
+            'Sur un écran, un chatbot propose : “Besoin d’aide pour comprendre une situation confuse ?”',
+          responses: [
+            'Comparez toujours deux sources avant de conclure.',
+            'Un document officiel peut parfois contenir une information dépassée.',
+            'Quand une information manque, vérifiez qui utilise quel document.',
+            'Ne croyez pas la première réponse trop rapide, même si elle semble sûre.',
+            'Notez ce que vous savez, ce que vous ignorez, et ce qui contredit quoi.',
+          ],
+          reaction:
+            'C’est un conseil très général… mais pas complètement inutile.',
+        },
+        {
+          title: 'Générateur de poésie administrative',
+          intro:
+            'Un générateur de texte est ouvert. Quelqu’un a écrit : “Transforme un problème administratif en phrase profonde.”',
+          responses: [
+            'La salle absente habite peut-être dans le tiroir des habitudes.',
+            'Quand le plan se tait, le papier commence à parler.',
+            'Une convocation est une promesse, mais parfois une promesse a changé de nom.',
+            'Le couloir cherche celui qui cherche la porte.',
+            'Dans chaque bâtiment, une salle rêve d’être appelée autrement.',
+          ],
+          reaction: 'C’est joli. Pas très pratique, mais joli.',
+        },
+      ],
     },
   ],
   puzzles: [

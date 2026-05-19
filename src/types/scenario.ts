@@ -94,6 +94,14 @@ export type InventoryObject = {
   canDrop?: boolean;
   useLabel?: string;
   usedLabel?: string;
+  randomInteractionEvents?: RandomInteractionEvent[];
+};
+
+export type RandomInteractionEvent = {
+  title: string;
+  intro: string;
+  responses: string[];
+  reaction: string;
 };
 
 export type Puzzle = {

@@ -131,6 +131,7 @@ const couloirMarine = getBlockById('couloir-marine');
 const secretariat = getBlockById('secretariat');
 const noteInterneMarine = getBlockById('note-interne-marine');
 const rectificationAfficher = getBlockById('rectification-a-afficher');
+const ordinateurIaAllume = getBlockById('ordinateur-ia-allume');
 const noteChangementNoms = getBlockById('note-changement-noms');
 const formulerProblemeHeidi = getBlockById('formuler-probleme-heidi');
 const identifierBeffroi = getBlockById('identifier-beffroi');
@@ -210,6 +211,13 @@ assert(
     finalResolution.includes("requiredObjectIds: ['rectification-a-afficher']") &&
     finalResolution.includes("usesObjectId: 'rectification-a-afficher'"),
   'finalResolution must be tied to displaying the rectification on the notice board',
+);
+assert(
+  ordinateurIaAllume.includes('randomInteractionEvents') &&
+    !ordinateurIaAllume.includes('unlocksDocumentIds') &&
+    !ordinateurIaAllume.includes('unlocksLocationIds') &&
+    !ordinateurIaAllume.includes('unlocksObjectIds'),
+  'ordinateur-ia-allume must be an optional random ambience object with no unlocks',
 );
 
 for (const id of ['delphine', 'ning-yi', 'heidi']) {

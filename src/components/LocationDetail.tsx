@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import type {
   Character,
   InvestigationDocument,
   InventoryObject,
   Location,
+  RandomInteractionEvent,
 } from '../types/scenario';
 import { IconDocumentNew, IconDocumentRead, IconObjectFound } from './icons/StatusIcons';
 
@@ -35,6 +37,30 @@ export function LocationDetail({
   onTakeObject,
   onUseObject,
 }: LocationDetailProps) {
+  const [randomObjectEvents, setRandomObjectEvents] = useState<
+    Record<string, { event: RandomInteractionEvent; response: string }>
+  >({});
+
+  function handleRandomInteraction(object: InventoryObject) {
+    const events = object.randomInteractionEvents ?? [];
+
+    if (events.length === 0) {
+      return;
+    }
+
+    const event = events[Math.floor(Math.random() * events.length)];
+    const response =
+      event.responses[Math.floor(Math.random() * event.responses.length)];
+
+    setRandomObjectEvents((currentEvents) => ({
+      ...currentEvents,
+      [object.id]: {
+        event,
+        response,
+      },
+    }));
+  }
+
   if (!isUnlocked) {
     const accessObject = ownedObjects.find((obj) =>
       obj.unlocksLocationIds?.includes(location.id),
@@ -155,6 +181,10 @@ export function LocationDetail({
           {objects.length > 0 ? (
             objects.map((object) => {
               const isOwned = ownedObjectIds.includes(object.id);
+              const randomEvent = randomObjectEvents[object.id];
+              const hasRandomInteraction =
+                (object.randomInteractionEvents?.length ?? 0) > 0;
+
               return (
                 <article
                   className="item-card"
@@ -178,16 +208,41 @@ export function LocationDetail({
                         </p>
                       </div>
                     </div>
-                    <button
-                      className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2 flex items-center justify-center gap-2"
-                      type="button"
-                      disabled={isOwned}
-                      onClick={() => onTakeObject(object.id)}
-                    >
-                      {isOwned && <IconObjectFound className="h-4 w-4" />}
-                      {isOwned ? 'Déjà pris' : 'Prendre'}
-                    </button>
+                    {hasRandomInteraction ? (
+                      <button
+                        className="primary-button text-sm focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+                        type="button"
+                        onClick={() => handleRandomInteraction(object)}
+                      >
+                        {randomEvent
+                          ? object.useLabel?.replace('Interroger', 'Interroger encore') ??
+                            'Interroger encore'
+                          : object.useLabel ?? 'Interagir'}
+                      </button>
+                    ) : (
+                      <button
+                        className="primary-button text-sm disabled:bg-slate-300 disabled:text-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2 flex items-center justify-center gap-2"
+                        type="button"
+                        disabled={isOwned}
+                        onClick={() => onTakeObject(object.id)}
+                      >
+                        {isOwned && <IconObjectFound className="h-4 w-4" />}
+                        {isOwned ? 'Déjà pris' : 'Prendre'}
+                      </button>
+                    )}
                   </div>
+                  {randomEvent ? (
+                    <div className="info-strip mt-4 text-sm leading-6">
+                      <p className="font-semibold text-slate-950">
+                        {randomEvent.event.title}
+                      </p>
+                      <p className="mt-2">{randomEvent.event.intro}</p>
+                      <p className="mt-2 font-medium text-teal-950">
+                        “{randomEvent.response}”
+                      </p>
+                      <p className="mt-2">{randomEvent.event.reaction}</p>
+                    </div>
+                  ) : null}
                 </article>
               );
             })

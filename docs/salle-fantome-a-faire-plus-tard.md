@@ -148,6 +148,8 @@ A ameliorer :
 
 Ne pas ajouter maintenant. A envisager apres stabilisation narrative.
 
+Une micro-interaction d ambiance existe deja dans `salle-informatique` : l objet `ordinateur-ia-allume` affiche aleatoirement une courte reponse d IA. Elle est facultative, rejouable et sans effet sur la progression principale.
+
 Deux emplacements prioritaires :
 
 ### 5.1 Apres Marine : identifier Beffroi sur le plan
