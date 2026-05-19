@@ -95,6 +95,7 @@ export function InvestigationPage({
   const [feedback, setFeedback] = useState(
     "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
   );
+  const [activeMobileTab, setActiveMobileTab] = useState<'scene' | 'locations' | 'inventory' | 'deductions'>('scene');
 
   const selectedId = `${selection.type}:${selection.id}`;
   const puzzles = scenario.puzzles ?? [];
@@ -296,6 +297,7 @@ export function InvestigationPage({
     if (type === 'document' && !readDocumentIds.includes(id)) {
       setReadDocumentIds((prev) => [...prev, id]);
     }
+    setActiveMobileTab('scene');
     // Auto-scroll vers le détail pour plus de fluidité
     setTimeout(() => {
       document.getElementById('detail-view')?.scrollIntoView({ behavior: 'smooth' });
@@ -647,7 +649,7 @@ export function InvestigationPage({
   ]);
 
   return (
-    <main className="app-shell">
+    <main className="app-shell pb-16 lg:pb-0">
       <div className="page-frame">
         <header className="page-header">
           <p className="eyebrow">
@@ -843,7 +845,7 @@ export function InvestigationPage({
           )}
         </section>
 
-        <section className="case-panel mt-6 p-4">
+        <section className={`case-panel mt-6 p-4 ${activeMobileTab === 'deductions' ? 'block' : 'hidden'} lg:block`}>
           <h2 className="eyebrow">
             Tableau d'enquête - Déductions
           </h2>
@@ -916,39 +918,62 @@ export function InvestigationPage({
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[20rem_1fr]">
           <aside className="flex flex-col gap-4">
-            <ScenarioList
-              title="Lieux"
-              selectedId={selectedId}
-              items={scenario.locations.map((location) => {
-                const isAccessible = accessibleLocationIds.includes(location.id);
-                return {
-                  id: `location:${location.id}`,
-                  title: location.name,
-                  meta: isAccessible
-                    ? 'Disponible'
-                    : location.kind === 'locked'
-                      ? 'Accès limité : badge requis'
-                      : 'Accès limité',
-                  icon: isAccessible ? <IconUnlocked className="text-teal-700 h-4 w-4" /> : <IconLocked className="text-slate-400 h-4 w-4" />,
-                  disabled: false,
-                };
-              })}
-              onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
-            />
-            <InventoryPanel
-              objects={inventoryObjects}
-              locations={scenario.locations}
-              ownedObjectIds={ownedObjectIds}
-              usedObjectIds={usedObjectIds}
-              onUseObject={handleUseObject}
-              onDropObject={handleDropObject}
-              isVisible={inventoryVisible}
-              onToggle={() => setInventoryVisible(!inventoryVisible)}
-            />
+            <div className={`${activeMobileTab === 'locations' ? 'block' : 'hidden'} lg:block`}>
+              <ScenarioList
+                title="Lieux"
+                selectedId={selectedId}
+                items={scenario.locations.map((location) => {
+                  const isAccessible = accessibleLocationIds.includes(location.id);
+                  return {
+                    id: `location:${location.id}`,
+                    title: location.name,
+                    meta: isAccessible
+                      ? 'Disponible'
+                      : location.kind === 'locked'
+                        ? 'Accès limité : badge requis'
+                        : 'Accès limité',
+                    icon: isAccessible ? <IconUnlocked className="text-teal-700 h-4 w-4" /> : <IconLocked className="text-slate-400 h-4 w-4" />,
+                    disabled: false,
+                  };
+                })}
+                onSelect={(id) => handleSelect('location', id.replace('location:', ''))}
+              />
+            </div>
+            <div className={`${activeMobileTab === 'inventory' ? 'block' : 'hidden'} lg:block`}>
+              <InventoryPanel
+                objects={inventoryObjects}
+                locations={scenario.locations}
+                ownedObjectIds={ownedObjectIds}
+                usedObjectIds={usedObjectIds}
+                onUseObject={handleUseObject}
+                onDropObject={handleDropObject}
+                isVisible={inventoryVisible}
+                onToggle={() => setInventoryVisible(!inventoryVisible)}
+              />
+              {ownedObjectIds.length === 0 && (
+                <p className="mt-4 text-sm text-slate-500 italic text-center lg:hidden px-4">
+                  Aucun objet pour le moment. Les indices se trouvent surtout dans les documents et les témoignages.
+                </p>
+              )}
+            </div>
           </aside>
-          <section id="detail-view" key={selectedId} className="scroll-mt-6 animate-fade-in">{detail}</section>
+          <section id="detail-view" key={selectedId} className={`scroll-mt-6 animate-fade-in ${activeMobileTab === 'scene' ? 'block' : 'hidden'} lg:block`}>{detail}</section>
         </div>
       </div>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-14 lg:hidden z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <button type="button" onClick={() => setActiveMobileTab('scene')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'scene' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+          Scène
+        </button>
+        <button type="button" onClick={() => setActiveMobileTab('locations')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'locations' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+          Lieux
+        </button>
+        <button type="button" onClick={() => setActiveMobileTab('inventory')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'inventory' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+          Inventaire
+        </button>
+        <button type="button" onClick={() => setActiveMobileTab('deductions')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'deductions' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+          Déduire
+        </button>
+      </nav>
     </main>
   );
 }
