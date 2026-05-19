@@ -124,6 +124,9 @@ export function InvestigationPage({
       ) &&
       (finalResolution.requiredDocumentIds ?? []).every((documentId) =>
         visibleDocumentIds.includes(documentId),
+      ) &&
+      (finalResolution.requiredObjectIds ?? []).every((objectId) =>
+        ownedObjectIds.includes(objectId),
       )
     : false;
 
@@ -309,6 +312,13 @@ export function InvestigationPage({
     if (type === 'final-resolution' && id === finalResolution?.id) {
       setFinalResolutionWaitingForReopen(false);
     }
+    if (
+      finalResolution?.context &&
+      type === finalResolution.context.type &&
+      id === finalResolution.context.id
+    ) {
+      setFinalResolutionWaitingForReopen(false);
+    }
     setPuzzleIdsWaitingForReopen((currentIds) =>
       currentIds.filter((puzzleId) => {
         const puzzle = puzzles.find((item) => item.id === puzzleId);
@@ -487,8 +497,19 @@ export function InvestigationPage({
 
       return [...nextIds];
     });
+    setOwnedObjectIds((currentIds) => {
+      const nextIds = new Set(currentIds);
+
+      for (const objectId of puzzle.unlocksObjectIds ?? []) {
+        nextIds.add(objectId);
+      }
+
+      return [...nextIds];
+    });
     setFeedback(
-      puzzle.unlocksDocumentIds?.length || puzzle.unlocksLocationIds?.length
+      puzzle.unlocksDocumentIds?.length ||
+        puzzle.unlocksLocationIds?.length ||
+        puzzle.unlocksObjectIds?.length
         ? `${puzzle.successFeedback} Nouvelle piste débloquée.`
         : puzzle.successFeedback,
     );
@@ -496,6 +517,13 @@ export function InvestigationPage({
   function handleFinalResolutionComplete() {
     setFinalResolutionWaitingForReopen(false);
     setFinalResolutionSolved(true);
+    if (finalResolution?.usesObjectId) {
+      setUsedObjectIds((currentIds) =>
+        currentIds.includes(finalResolution.usesObjectId as string)
+          ? currentIds
+          : [...currentIds, finalResolution.usesObjectId as string],
+      );
+    }
     setFeedback(
       'Explication finale validée. La conclusion reste prudente et permet de réparer la situation.',
     );
@@ -509,7 +537,7 @@ export function InvestigationPage({
         return null;
       }
 
-      return (
+      const locationDetail = (
         <LocationDetail
           location={location}
           isUnlocked={accessibleLocationIds.includes(location.id)}
@@ -536,6 +564,33 @@ export function InvestigationPage({
           onUseObject={handleUseObject}
         />
       );
+
+      if (
+        finalResolution?.context?.type === 'location' &&
+        finalResolution.context.id === location.id &&
+        (isFinalResolutionAvailable ||
+          finalResolutionSolved ||
+          finalResolutionWaitingForReopen)
+      ) {
+        return (
+          <div className="grid gap-4">
+            {locationDetail}
+            <FinalResolutionDetail
+              finalResolution={finalResolution}
+              isAvailable={isFinalResolutionAvailable}
+              isSolved={finalResolutionSolved}
+              waitingForReopen={finalResolutionWaitingForReopen}
+              onIncorrect={(failureFeedback) => {
+                setFinalResolutionWaitingForReopen(true);
+                setFeedback(failureFeedback);
+              }}
+              onComplete={handleFinalResolutionComplete}
+            />
+          </div>
+        );
+      }
+
+      return locationDetail;
     }
 
     if (selection.type === 'character') {
@@ -931,6 +986,9 @@ export function InvestigationPage({
             })}
             {finalResolution &&
             (isFinalResolutionAvailable ||
+              finalResolutionSolved ||
+              selectedId === `final-resolution:${finalResolution.id}`) &&
+            (!finalResolution.context ||
               finalResolutionSolved ||
               selectedId === `final-resolution:${finalResolution.id}`) ? (
               <button

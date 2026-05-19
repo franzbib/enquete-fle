@@ -63,7 +63,7 @@ Ces enigmes apparaissent sous les documents ou personnages concernes et sont mas
 
 A reprendre plus tard :
 
-- la rectification finale devrait se faire au panneau d affichage, non comme simple action abstraite du tableau.
+- transformer la rectification finale, deja localisee au panneau d affichage, en micro-interaction plus active.
 
 ### 2.3 Tableau d enquete
 
@@ -163,8 +163,9 @@ Mini-interaction possible :
 ### 5.2 Apres Thi Thai : afficher la rectification
 
 Principe : Thi Thai demande au joueur de prevenir les autres candidats.
+Une premiere version existe : le joueur obtient `rectification-a-afficher`, retourne au `panneau-affichage` et valide la resolution finale dans ce lieu.
 
-Mini-interaction possible :
+Mini-interaction possible plus tard :
 
 - choisir le bon panneau ;
 - placer l affiche au bon endroit ;

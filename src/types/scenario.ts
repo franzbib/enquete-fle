@@ -91,6 +91,7 @@ export type InventoryObject = {
   unlocksDocumentIds?: string[];
   opensDocumentOnUse?: boolean;
   isUseful?: boolean;
+  canDrop?: boolean;
   useLabel?: string;
   usedLabel?: string;
 };
@@ -114,6 +115,7 @@ export type Puzzle = {
   failureFeedback: string;
   unlocksDocumentIds?: string[];
   unlocksLocationIds?: string[];
+  unlocksObjectIds?: string[];
 };
 
 export type PuzzleAnswer =
@@ -159,9 +161,15 @@ export type FinalResolution = {
   title: string;
   description: string;
   iconUrl?: string;
+  context?: {
+    type: 'location';
+    id: string;
+  };
   prompt: string;
   requiredPuzzleIds?: string[];
   requiredDocumentIds?: string[];
+  requiredObjectIds?: string[];
+  usesObjectId?: string;
   hypotheses: PuzzleOption[];
   correctHypothesisId: string;
   evidencePrompt: string;

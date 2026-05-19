@@ -35,21 +35,21 @@ La resolution reste administrative et reparatrice : Thi Thai reconnait avoir uti
 10. `beffroiIdentified` : enigme `identifier-beffroi`.
 11. `thiThaiReturned` : Thi Thai apparait dans le lieu `secretariat` apres validation de `identifier-beffroi`.
 12. `thiThaiErrorUnderstood` : enigme `comprendre-erreur-thi-thai`, le joueur identifie l ancien modele de convocation.
-13. `correctionMessageUnlocked` : document `message-rectification`, debloque seulement apres l etape Thi Thai.
-14. `correctionMessageChosen` : resolution finale `resolution-salle-fantome`.
-15. `correctionDisplayed` : le message clair est valide.
+13. `correctionMessageUnlocked` : document `message-rectification` et objet `rectification-a-afficher`, debloques seulement apres l etape Thi Thai.
+14. `correctionMessageChosen` : resolution finale `resolution-salle-fantome`, affichee dans le lieu `panneau-affichage`.
+15. `correctionDisplayed` : le message clair est affiche sur le panneau.
 16. `investigationSolved` : conclusion positive.
 
 Progression cible :
 
 ```text
-Convocation -> Plan -> Delphine -> Ning Yi -> Heidi -> Archive -> Marine -> note interne -> Beffroi -> Thi Thai -> Comprendre l erreur -> Rectification finale
+Convocation -> Plan -> Delphine -> Ning Yi -> Heidi -> Archive -> Marine -> note interne -> Beffroi -> Thi Thai -> message de rectification -> panneau -> Rectification finale
 ```
 
 Parcours principal simplifie :
 
 ```text
-Convocation -> Plan -> Heidi -> Marine -> note interne -> Beffroi -> Thi Thai -> rectification
+Convocation -> Plan -> Heidi -> Marine -> note interne -> Beffroi -> Thi Thai -> message de rectification -> panneau -> rectification
 ```
 
 Le briefing joueur ne donne plus cette structure a l avance. Il indique seulement qu une convocation semble incomplete ou confuse ; le probleme de la salle Jaures doit etre decouvert par la lecture de la convocation puis par la consultation du plan.
@@ -63,11 +63,12 @@ Le briefing joueur ne donne plus cette structure a l avance. Il indique seulemen
 - `archive-entrainements-tcf` : ancien document mentionnant Jaures, Rimbaud et Choderlos de Laclos.
 - `note-changement-noms` : note interne plus credible, avec correspondance Jaures -> Beffroi, Rimbaud -> Cathedrale, Choderlos de Laclos -> Gambetta. Elle n apparait plus directement comme document lie dans le couloir : elle est ouverte via l objet d inventaire `note-interne-marine`.
 - `temoignage-thi-thai` : origine de l erreur, ancien modele et copier-coller trop rapide.
-- `message-rectification` : message final a afficher sur le panneau, debloque apres `comprendre-erreur-thi-thai`.
+- `message-rectification` : message final a afficher sur le panneau, debloque apres `comprendre-erreur-thi-thai`. Il sert de texte public court : ancienne salle Jaures -> Salle Beffroi.
 
 ## Objets d inventaire
 
 - `note-interne-marine` : objet obtenu dans `couloir-marine` apres avoir consulte Marine. La note n est pas visible avant cette discussion. Dans l inventaire, l action `Lire la note` ouvre le document `note-changement-noms`. Ce document porte ensuite l etape `identifier-beffroi`.
+- `rectification-a-afficher` : objet obtenu apres l etape `comprendre-erreur-thi-thai`. Thi Thai confie ce message au joueur, qui doit retourner au `panneau-affichage` pour afficher la rectification finale. L objet est marque comme utilise quand la resolution finale est validee.
 
 ## Mini-jeux actuels
 
@@ -78,7 +79,7 @@ Les mini-jeux sont pour l instant modelises avec les `Puzzle` existants :
 - Clarifier la situation avec Heidi : choix multiple affiche directement sous la fiche de `heidi`, disponible apres les documents `convocation-tcf`, `plan-actuel-salles`, `temoignage-delphine` et `temoignage-ning-yi`.
 - Retrouver le nom actuel de Jaures : choix simple affiche directement sous le document `note-changement-noms`, ouvert depuis l objet `note-interne-marine`, avec `puzzleType: 'matching'`.
 - Comprendre l erreur de modele : choix simple affiche directement sous la fiche de `thi-thai`, dans le Secretariat, debloque le message final.
-- Choisir le message final : resolution finale.
+- Afficher le message final : resolution finale contextualisee dans le lieu `panneau-affichage`.
 
 ## Enigmes contextualisees
 
@@ -99,17 +100,17 @@ Ce champ reste optionnel pour preserver les autres enquetes. Dans cette version 
 - `identifier-beffroi` est rattache au document `note-changement-noms`.
 - `comprendre-erreur-thi-thai` est rattache au personnage `thi-thai`.
 
-Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, ouvrir le plan et constater l absence de Jaures, clarifier la situation avec Heidi, obtenir la note de Marine dans l inventaire, lire cette note pour identifier Beffroi, puis comprendre l erreur avec Thi Thai sans passer d abord par le tableau d enquete.
+Objectif : tester une progression plus naturelle dans la fenetre principale. Le joueur peut lire la convocation, verifier immediatement le detail inquietant, ouvrir le plan et constater l absence de Jaures, clarifier la situation avec Heidi, obtenir la note de Marine dans l inventaire, lire cette note pour identifier Beffroi, comprendre l erreur avec Thi Thai, puis retourner au panneau d affichage pour afficher la rectification.
 
 Pour eviter un doublon trop visible, les enigmes contextualisees disponibles et non resolues sont masquees du tableau d enquete. Une fois resolues, elles peuvent y reapparaitre comme deductions validees.
 
-Limite actuelle : la resolution finale reste dans le fonctionnement existant. L action concrete au panneau sera une etape ulterieure.
+La resolution finale reste basee sur `FinalResolutionDetail`, mais elle est maintenant contextualisee dans le lieu `panneau-affichage` et exige l objet `rectification-a-afficher`.
 
 ## Emplacements pour mini-jeux futurs
 
-- Apres le retour de Thi Thai : remplacer la validation finale par une mini-course vers le panneau avant 15 h 20.
+- Apres le retour de Thi Thai : remplacer plus tard la validation finale par une mini-course vers le panneau avant 15 h 20.
 - Dans `couloir-marine` : ajouter une recherche visuelle ou un choix de direction avant de rencontrer Marine.
-- Dans `panneau-affichage` : remplacer le bouton de resolution par un mini-jeu de placement ou de clic rapide sur le bon panneau.
+- Dans `panneau-affichage` : remplacer plus tard la resolution textuelle par un mini-jeu de placement ou de clic rapide sur le bon panneau.
 
 Le hook generique `unlocksLocationIds` ajoute aux enigmes permet deja de debloquer un lieu apres une action reussie. Il peut servir aux futures interactions plus dynamiques sans coder de logique specifique a ce scenario dans les composants.
 
@@ -129,25 +130,24 @@ Corrections appliquees :
 - L etape avec Heidi est affichee sous sa fiche personnage pour poursuivre la progression dans la fenetre principale.
 - L etape `identifier-beffroi` est affichee sous la note interne de Marine, elle-meme ouverte depuis l objet d inventaire `note-interne-marine`, visible seulement apres consultation de Marine.
 - Le lieu separe `secretariat-thi-thai` a ete supprime : Thi Thai apparait maintenant conditionnellement dans `secretariat` apres `identifier-beffroi`.
+- La sequence finale est restauree : apres `comprendre-erreur-thi-thai`, le joueur obtient `rectification-a-afficher`, retourne au `panneau-affichage`, puis valide `resolution-salle-fantome` dans ce lieu.
 
 Limites conservees volontairement :
 
 - Le plan reste un document textuel mis en page et accessible depuis le hall apres la convocation ; le vrai plan graphique de l ISPA reste a produire.
-- La rectification finale reste techniquement dans le fonctionnement actuel du tableau d enquete.
-- L affichage final reste une resolution textuelle ; l action au panneau pourra devenir plus tard un mini-jeu de placement, de rapidite ou de course.
+- L affichage final reste une resolution textuelle ; il est localise au panneau, mais pourra devenir plus tard un mini-jeu de placement, de rapidite ou de course.
 
 Elements a reprendre plus tard :
 
 - Creer une vraie convocation graphique ou un rendu administratif dedie.
 - Produire un plan graphique des salles affiche dans le hall ou pres du panneau, avec Secretariat, Beffroi, Cathedrale, Gambetta et les autres salles actuelles utiles, sans Jaures, Rimbaud ni Choderlos de Laclos.
-- Localiser naturellement l action finale avec le panneau d affichage.
-- Remplacer l action finale par une interaction au panneau quand le systeme de mini-jeu sera choisi.
+- Remplacer l action finale textuelle par une interaction au panneau quand le systeme de mini-jeu sera choisi.
 
 ## Modifier le scenario
 
 - Dialogues : modifier les champs `directSpeech`, `testimony` et `profile` dans `characters`.
 - Documents : modifier les objets dans `documents`.
-- Etapes : ajuster `requiredDocumentIds`, `unlocksDocumentIds` et `unlocksLocationIds` dans `puzzles`.
+- Etapes : ajuster `requiredDocumentIds`, `unlocksDocumentIds`, `unlocksLocationIds` et `unlocksObjectIds` dans `puzzles`.
 - Resolution finale : modifier `finalResolution.hypotheses`, `requiredEvidenceIds` et `finalNarrative`.
 
 ## Verification

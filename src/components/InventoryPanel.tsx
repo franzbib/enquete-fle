@@ -80,7 +80,7 @@ export function InventoryPanel({
                   !isUsed &&
                   (object.unlocksLocationIds?.length ?? 0) === 0 &&
                   (object.unlocksDocumentIds?.length ?? 0) > 0;
-                const canDrop = !isUsed;
+                const canDrop = !isUsed && object.canDrop !== false;
 
                 return (
                   <article

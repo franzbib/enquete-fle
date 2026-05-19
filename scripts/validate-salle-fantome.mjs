@@ -130,6 +130,7 @@ assert(
 const couloirMarine = getBlockById('couloir-marine');
 const secretariat = getBlockById('secretariat');
 const noteInterneMarine = getBlockById('note-interne-marine');
+const rectificationAfficher = getBlockById('rectification-a-afficher');
 const noteChangementNoms = getBlockById('note-changement-noms');
 const formulerProblemeHeidi = getBlockById('formuler-probleme-heidi');
 const identifierBeffroi = getBlockById('identifier-beffroi');
@@ -192,8 +193,23 @@ assert(
   'comprendre-erreur-thi-thai must unlock message-rectification',
 );
 assert(
+  comprendreErreurThiThai.includes("unlocksObjectIds: ['rectification-a-afficher']"),
+  'comprendre-erreur-thi-thai must give the rectification object to display',
+);
+assert(
+  rectificationAfficher.includes("typeLabel: 'Message à afficher'") &&
+    rectificationAfficher.includes('canDrop: false'),
+  'rectification-a-afficher must exist as a non-droppable message object',
+);
+assert(
   finalResolution.includes("'comprendre-erreur-thi-thai'"),
   'finalResolution.requiredPuzzleIds must include comprendre-erreur-thi-thai',
+);
+assert(
+  finalResolution.includes("id: 'panneau-affichage'") &&
+    finalResolution.includes("requiredObjectIds: ['rectification-a-afficher']") &&
+    finalResolution.includes("usesObjectId: 'rectification-a-afficher'"),
+  'finalResolution must be tied to displaying the rectification on the notice board',
 );
 
 for (const id of ['delphine', 'ning-yi', 'heidi']) {

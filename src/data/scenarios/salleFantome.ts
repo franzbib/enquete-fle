@@ -278,7 +278,7 @@ export const salleFantomeScenario: Scenario = {
       source: 'Panneau d’affichage',
       summary: 'Message à afficher pour éviter que les autres candidats se trompent.',
       content:
-        "INFORMATION IMPORTANTE - ORAUX DE TCF\n\nLes convocations qui indiquent la salle Jaurès contiennent une ancienne dénomination.\n\nLes candidats convoqués en salle Jaurès doivent se présenter en salle Beffroi.\n\nLes horaires de passage ne changent pas.",
+        "INFORMATION IMPORTANTE - ORAL TCF\n\nLa convocation mentionne l’ancienne salle Jaurès.\nLe nom actuel de cette salle est : Salle Beffroi.\n\nLes candidats convoqués en salle Jaurès doivent se rendre en Salle Beffroi.",
       initiallyAvailable: false,
       unlocksAfterPuzzleId: 'comprendre-erreur-thi-thai',
       relatedLocationIds: ['panneau-affichage'],
@@ -370,6 +370,20 @@ export const salleFantomeScenario: Scenario = {
       isUseful: true,
       useLabel: 'Lire la note',
       usedLabel: 'Note lue',
+    },
+    {
+      id: 'rectification-a-afficher',
+      name: 'Rectification à afficher',
+      objectType: 'preparatory',
+      typeLabel: 'Message à afficher',
+      description:
+        'Thi Thai vous confie un message court à afficher sur le panneau pour les candidats au TCF.',
+      originLocationId: 'secretariat',
+      initiallyVisible: false,
+      initiallyOwned: false,
+      isUseful: true,
+      canDrop: false,
+      usedLabel: 'Affichée',
     },
   ],
   puzzles: [
@@ -586,18 +600,23 @@ export const salleFantomeScenario: Scenario = {
         ],
       },
       successFeedback:
-        'L’origine de l’erreur est maintenant claire : une ancienne convocation a servi de modèle. Il faut maintenant prévenir les autres candidats clairement.',
+        'L’origine de l’erreur est maintenant claire : une ancienne convocation a servi de modèle. Thi Thai vous confie une rectification à afficher sur le panneau.',
       failureFeedback:
         'Cela ne semble pas être la bonne réponse. Relisez l’explication de Thi Thai. Revenez à cet indice pour essayer de trouver la bonne réponse.',
       unlocksDocumentIds: ['message-rectification'],
+      unlocksObjectIds: ['rectification-a-afficher'],
     },
   ],
   finalResolution: {
     id: 'resolution-salle-fantome',
     title: 'Afficher la rectification',
     description:
-      'Thi Thai a expliqué l’erreur. Choisissez le message qui informe clairement les autres candidats sans accuser personne.',
-    prompt: 'Quel message faut-il afficher sur le panneau ?',
+      'Vous êtes devant le panneau d’affichage. Choisissez le message que vous allez afficher pour orienter clairement les candidats.',
+    context: {
+      type: 'location',
+      id: 'panneau-affichage',
+    },
+    prompt: 'Quel message affichez-vous sur le panneau ?',
     requiredPuzzleIds: [
       'lire-convocation-tcf',
       'verifier-plan-actuel',
@@ -610,6 +629,8 @@ export const salleFantomeScenario: Scenario = {
       'temoignage-thi-thai',
       'message-rectification',
     ],
+    requiredObjectIds: ['rectification-a-afficher'],
+    usesObjectId: 'rectification-a-afficher',
     hypotheses: [
       {
         id: 'message-clair-beffroi',
@@ -667,8 +688,8 @@ export const salleFantomeScenario: Scenario = {
     evidenceFailureFeedback:
       'Cette rectification ne semble pas assez claire. Relisez les informations confirmées. Revenez à cette étape pour essayer de trouver la bonne réponse.',
     successFeedback:
-      'La rectification est prête : l’information peut être affichée clairement pour les candidats.',
+      'La rectification est maintenant affichée. Les candidats convoqués en salle Jaurès savent qu’ils doivent se rendre en Salle Beffroi.',
     finalNarrative:
-      "La salle fantôme n’était pas cachée : c’était un ancien nom resté dans un modèle administratif. Les candidats lisent la rectification, se dirigent vers la salle Beffroi et gardent leur heure de passage. Vous pouvez maintenant aller à votre oral avec une histoire et un bon argument de compréhension administrative.",
+      "Vous affichez la rectification sur le panneau. La salle fantôme n’était pas cachée : c’était un ancien nom resté dans un modèle administratif. Les candidats lisent l’information correcte, se dirigent vers la salle Beffroi et gardent leur heure de passage. Vous pouvez maintenant aller à votre oral avec une histoire et un bon argument de compréhension administrative.",
   },
 };
