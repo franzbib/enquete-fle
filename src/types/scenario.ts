@@ -59,6 +59,7 @@ export type InvestigationDocument = {
   source: string;
   summary: string;
   content: string;
+  imageUrl?: string;
   initiallyAvailable: boolean;
   unlocksAfterPuzzleId?: string;
   relatedLocationIds: string[];

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { InvestigationDocument, Puzzle } from '../types/scenario';
 import { PuzzleDetail } from './PuzzleDetail';
 
@@ -22,6 +23,7 @@ export function DocumentDetail({
   onRequestHint,
   onSubmitPuzzle,
 }: DocumentDetailProps) {
+  const [isZoomed, setIsZoomed] = useState(false);
   return (
     <article className="case-panel case-panel-main case-panel-document">
       <p className="eyebrow">
@@ -35,7 +37,19 @@ export function DocumentDetail({
       </p>
       <p className="body-copy mt-4">{document.summary}</p>
       <div className="document-paper mt-4">
-        {document.content}
+        {document.content && <p className="whitespace-pre-wrap">{document.content}</p>}
+        {document.imageUrl && (
+          <div className="mt-4">
+            <p className="text-xs text-slate-500 italic mb-2 text-center">Cliquer sur le plan pour l'agrandir.</p>
+            <img
+              src={document.imageUrl}
+              alt={document.title}
+              onClick={() => setIsZoomed(!isZoomed)}
+              className={`cursor-pointer transition-transform duration-300 ease-in-out origin-top-left ${isZoomed ? 'scale-150 relative z-10 shadow-xl' : 'scale-100 max-w-full h-auto'}`}
+              style={isZoomed ? { maxWidth: '150%' } : {}}
+            />
+          </div>
+        )}
       </div>
       {contextualPuzzles.length > 0 && onRequestHint && onSubmitPuzzle ? (
         <section className="mt-6 border-t border-slate-200 pt-5">

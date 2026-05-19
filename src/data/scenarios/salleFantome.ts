@@ -201,8 +201,8 @@ export const salleFantomeScenario: Scenario = {
       source: 'Hall - panneau des salles',
       summary:
         'Le plan pres de l entree indique les noms actuels des salles.',
-      content:
-        "PLAN ACTUEL DES SALLES\n\nHall : accueil, panneau d affichage, plan des salles\nSecretariat : accueil administratif\nCouloir principal : acces aux salles\n\nSalles indiquees :\n- Salle Beffroi\n- Salle Cathedrale\n- Salle Gambetta\n- Salle Hortillonnages\n- Salle Jules Verne\n- Salle informatique",
+      content: "PLAN ACTUEL DES SALLES",
+      imageUrl: '/assets/documents/plan-ispa-salles.png',
       initiallyAvailable: true,
       relatedLocationIds: ['hall', 'panneau-affichage'],
       relatedCharacterIds: [],
