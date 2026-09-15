@@ -1,21 +1,20 @@
-# Architecture technique — V0.11
+# Architecture technique actuelle
 
 ## Objectif
 
-La V0.11 conserve la boucle d'enquête complète construite jusqu'à la V0.6, prolonge les supports pédagogiques V0.7/V0.7.1, conserve l'intégration graphique V0.9.x et valide l'architecture multi-enquêtes avec une deuxième enquête prototype.
-
-Le joueur commence à l'Accueil, consulte les lieux, personnages et documents disponibles, utilise un inventaire dynamique, présente le badge visiteur dans la salle informatique fermée, demande des indices gradués en cas de blocage, résout deux énigmes, puis formule une explication finale prudente.
-
-Cette version reste volontairement limitée : pas de backend, pas de base de données, pas de moteur de jeu lourd, pas d’animation décorative complexe, pas de combinaison d’objets, pas de score lié aux indices, pas d'accusation punitive, pas de scénario long supplémentaire et pas encore d'éditeur de scénario.
+Le projet est un jeu d’enquête FLE/FOU 2D principalement statique. L’architecture doit rester simple, lisible et suffisante pour plusieurs enquêtes courtes sans devenir un moteur de jeu généraliste.
 
 ## Stack
 
 - React
 - Vite
-- TypeScript
+- TypeScript en mode strict
 - Tailwind CSS
+- `localStorage` pour les sauvegardes explicites
 
-## Structure
+Pas de backend, de base de données, de moteur de jeu lourd ni de compte utilisateur.
+
+## Structure principale
 
 ```text
 src/
@@ -33,295 +32,143 @@ src/
   data/
     scenarios/
       dossierDisparu.ts
-      index.ts
       messageEfface.ts
+      salleFantome.ts
       scenarioTemplate.ts
+      index.ts
   engine/
     progressStorage.ts
     scenarioLoader.ts
   types/
     scenario.ts
   styles.css
+scripts/
+  validate-scenarios.mjs
+  validate-salle-fantome.mjs
+  audit-assets.mjs
 ```
 
-## Données de scénario
+## Registre des scénarios
 
-Les données de scénarios sont dans `src/data/scenarios/`.
+`src/data/scenarios/index.ts` enregistre actuellement :
 
-Deux enquêtes sont désormais enregistrées :
+1. `le-dossier-disparu` ;
+2. `le-message-efface` ;
+3. `salle-fantome`.
 
-- `Le dossier disparu` dans `src/data/scenarios/dossierDisparu.ts` ;
-- `Le message effacé` dans `src/data/scenarios/messageEfface.ts`.
+`le-dossier-disparu` reste le scénario par défaut.
 
-`Le dossier disparu` contient :
+Le fichier `scenarioTemplate.ts` n’est pas enregistré dans le jeu.
 
-- 4 lieux ;
-- 6 personnages ;
-- 9 documents courts ;
-- 3 objets utiles ou contextuels ;
-- 2 énigmes simples ;
-- 1 résolution finale prudente ;
-- 3 indices progressifs par énigme ;
-- des éléments de preuve textuels.
+## Modèle de scénario
 
-Certains documents sont disponibles dès le départ. D’autres sont débloqués après résolution d’une énigme.
+Un scénario peut définir :
+- briefing ;
+- lieux ;
+- personnages ;
+- documents ;
+- éléments de preuve ;
+- objets d’inventaire ;
+- énigmes ;
+- résolution finale.
 
-La V0.5.2 ajoute `accueil`, un lieu secondaire accessible dès le départ, avec Thi-Thai et une affiche administrative. Ces éléments enrichissent l'univers sans modifier la chronologie, les énigmes, les indices, l'inventaire ou l'accès à la salle informatique.
+Les lieux peuvent être disponibles ou verrouillés. Des personnages et objets peuvent apparaître conditionnellement après certaines actions.
 
-`Le message effacé` est une deuxième enquête courte de V0.11. Elle contient 4 lieux, 4 personnages, 7 documents, 2 objets, 2 énigmes et une résolution finale prudente. Elle sert à vérifier que le moteur multi-enquêtes, la sélection de scénario et les sauvegardes locales par scénario fonctionnent avec un contenu différent.
-
-## Registre multi-enquêtes V0.10 / V0.11
-
-La V0.10 ajoute un registre central des scénarios dans `src/data/scenarios/index.ts`. La V0.11 utilise ce registre pour rendre deux enquêtes accessibles.
-
-Ce registre exporte :
-
-- `scenarios` : liste des scénarios disponibles ;
-- `defaultScenarioId` : identifiant du scénario lancé par défaut ;
-- `getScenarioById(id)` : récupération d'un scénario par identifiant ;
-- `getDefaultScenario()` : récupération du scénario par défaut.
-
-En V0.11, les scénarios enregistrés sont :
-
-- `le-dossier-disparu` ;
-- `le-message-efface`.
-
-`le-dossier-disparu` reste le scénario par défaut. Le fichier `src/data/scenarios/scenarioTemplate.ts` fournit un modèle conforme à `Scenario`, mais il n'est pas enregistré dans le jeu.
-
-`HomePage` affiche une sélection minimale de scénario quand plusieurs enquêtes sont disponibles. `App.tsx` conserve le scénario sélectionné dans un état local et transmet l'objet `Scenario` à `BriefingPage` puis `InvestigationPage`.
-
-`src/engine/scenarioLoader.ts` délègue désormais la récupération au registre central et conserve les utilitaires de recherche utilisés par les composants.
-
-La documentation détaillée est dans `docs/multi-scenario-architecture-v0.10.md`.
-
-## Types
-
-Les types sont dans `src/types/scenario.ts`.
-
-Types principaux :
-
-- `Scenario`
-- `Location`
-- `Character`
-- `InvestigationDocument`
-- `EvidenceText`
-- `InventoryObject`
-- `Puzzle`
-- `PuzzleAnswer`
-- `FinalResolution`
-- `Hint`
-
-`InventoryObject` pilote désormais un inventaire minimal. `Hint` reste préparatoire.
-Depuis la V0.5, `Puzzle.hints` contient directement les indices progressifs affichés dans chaque énigme. Cette structure simple évite un moteur d'indices séparé tant que le prototype ne gère qu'un scénario.
-
-Pour les lieux, la V0.3.1 distingue desormais :
-
-- `presentCharacterIds` : personnages physiquement presents et consultables dans ce lieu ;
-- `relatedCharacterIds` : personnages seulement relies au lieu par une preuve, une trace ou un document.
-
-Cette distinction evite de laisser croire qu'un meme personnage se trouve simultanement dans plusieurs lieux.
-
-Les temoignages sont rattaches au personnage qui parle ou au lieu ou il est interroge.
-Depuis la V0.4, les fiches personnages et les documents de temoignage ne portent pas le meme type de parole :
-
-- `Character.directSpeech` contient la parole directe affichee dans la fiche personnage ;
-- `Character.testimony` conserve un resume indirect rattache au personnage ;
-- les documents `documentType: 'testimony'` utilisent un discours indirect ou un compte rendu.
-
-Cette distinction renforce l'immersion narrative et introduit discretement un travail FLE/FOU sur le passage du discours direct au discours indirect. Elle ne doit pas apparaitre dans l'interface comme un exercice scolaire.
-Les lieux techniques, comme la salle informatique, doivent contenir plutot des traces materielles ou numeriques : historique d'impression, brouillon de mail, journal d'activite, trace de connexion ou fichier ouvert.
-Les traces techniques doivent creer une contradiction credible sans accuser trop directement un personnage : elles peuvent prouver une presence, une session active ou un horaire incoherent, sans prouver a elles seules la manipulation du dossier disparu.
-Un temoignage ne doit pas introduire un indice materiel important si cet indice n'est pas observable, documente ou recuperable ailleurs dans l'enquete. La declaration du personnage present en salle informatique reste donc neutre : M. Rodolphe signale une imprimante deja utilisee, pas une pochette absente des autres pieces.
-
-Dans la vue d'un lieu, seuls les personnages de `presentCharacterIds` sont affiches.
-`relatedCharacterIds` reste disponible dans les donnees pour les preuves et evolutions futures, mais ne doit pas creer une rubrique visible qui suggere une presence physique.
-Dans la fiche d'un personnage, seuls les lieux ou le personnage est physiquement rencontre sont affiches. Les liens de type `relatedLocationIds` restent internes et doivent etre deduits par les documents, traces techniques ou temoignages, pas reveles directement par l'interface joueur.
-Les objets d'ambiance peuvent etre declares comme `InventoryObject` de type `ambient` et rattaches a un lieu via `objectIds`. Ils peuvent etre pris et consultes, mais n'ont pas forcement d'effet de deblocage.
-Depuis la V0.4, `available: false` peut vraiment limiter un lieu. La salle informatique apparait dans la liste, mais reste en acces limite tant que le badge visiteur n'a pas ete utilise depuis la vue de ce lieu.
-Un document situé dans un lieu devient consultable dès que le lieu est accessible, sauf justification narrative explicite. Par exemple, l'historique d'impression ne dépend pas d'une énigme, mais devient disponible dès que la salle informatique est ouverte.
-L’interface joueur ne doit pas afficher automatiquement les métadonnées déductives comme les personnages ou lieux cités. Ces liens peuvent rester dans les données internes, mais le joueur doit les déduire à partir du contenu des documents.
-
-## Inventaire V0.4
-
-La progression d'inventaire reste locale a `InvestigationPage`.
-
-Etat React utilise :
-
-- `ownedObjectIds` : objets pris par le joueur ;
-- `usedObjectIds` : objets deja utilises ;
-- `unlockedLocationIds` : lieux ouverts par un objet ;
-- `unlockedDocumentIds` : documents ouverts par une enigme ou un objet.
-
-`InventoryPanel` affiche seulement les objets trouves. Le detail d'un lieu affiche les objets observables dans ce lieu et permet de les prendre. L'inventaire ne propose plus de bouton d'utilisation générique pour les objets d'accès. Ces objets doivent être utilisés dans leur contexte spatial.
-
-Les objets V0.4 du scenario prototype sont :
-
-- `badge-visiteur` : objet d'acces trouve au secretariat, utilise pour ouvrir la salle informatique ;
-- `ticket-bus` : objet de preuve faible trouve dans le couloir, consultable sans effet majeur ;
-- `cle-usb-exercices-b1` : objet d'ambiance trouve en salle informatique, sans lien direct avec la culpabilite de Fahad.
-
-Cette logique n'est pas un inventaire RPG : pas de combinaison, pas de crafting, pas de score, pas d'accusation finale.
-
-## Progression V0.5
-
-La progression est locale à `InvestigationPage`.
-
-État React utilisé :
-
-- énigmes validées ;
-- documents débloqués ;
-- feedback de progression ;
-- nombre d'indices révélés par énigme ;
-- sélection courante.
-
-Depuis la correction UX post-V0.10, le briefing peut être relu depuis l'écran d'enquête avec le bouton `Relire la mission`. Ce bouton affiche un panneau local dans `InvestigationPage` au lieu de revenir à l'écran de briefing. La progression locale n'est donc pas perdue quand le joueur relit la mission.
-
-Depuis la V0.10.3, l'etat de progression peut etre sauvegarde et charge explicitement par scenario avec trois slots locaux dans `localStorage`. Cette sauvegarde reste minimale et locale : elle ne cree ni backend, ni compte utilisateur, ni suivi enseignant.
-
-La cle de stockage suit le format `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`. Le module `src/engine/progressStorage.ts` gere la lecture, la validation et l'ecriture de ces sauvegardes. Voir `docs/progress-save-load-v0.10.3.md`.
-
-Depuis la V0.11, cette séparation par `scenarioId` est utilisée par deux enquêtes réelles. Les clés de sauvegarde de `le-dossier-disparu` et de `le-message-efface` ne doivent pas interférer.
-
-Les énigmes ne constituent pas encore un moteur complet. Elles utilisent seulement deux formes de réponse :
-
-- ordre de trois événements ;
-- choix d’une contradiction parmi trois propositions.
-
-Depuis la V0.3.3, une énigme peut aussi demander une mise en relation de deux pièces du dossier avec `case-file-contradiction` :
-
-- étape 1 : sélectionner deux documents, témoignages, notes ou traces techniques ;
-- étape 2 : interpréter prudemment ce que leur comparaison montre.
-
-Cette mécanique relève du raisonnement d'enquête et prépare un futur dossier de preuves. Elle ne doit pas être confondue avec l'inventaire physique : elle manipule des pièces consultées, pas des objets à obtenir ou utiliser.
-Les feedbacks doivent rester prudents : une contradiction peut montrer une chronologie problématique sans accuser directement un personnage.
-
-## Indices V0.5
-
-Chaque énigme principale peut proposer jusqu'à trois indices dans `Puzzle.hints`.
-
-L'affichage est progressif :
-
-- premier clic : indice 1 ;
-- deuxième clic : indice 2 ;
-- troisième clic : indice 3 ;
-- ensuite : message indiquant que tous les indices sont affichés.
-
-L'état `revealedHintCounts` reste local à `InvestigationPage`. Il n'utilise ni sauvegarde, ni backend, ni score.
-
-Les indices servent à relire et comparer :
-
-- repérer les marqueurs temporels ;
-- revenir aux témoignages ;
-- chercher une trace horaire ;
-- comparer une déclaration et un document technique ;
-- formuler une interprétation prudente.
-
-Ils ne doivent pas donner directement toute la réponse, accuser un personnage ou introduire un fait absent des pièces déjà disponibles.
-
-## Décor vivant V0.5.2
-
-Les scénarios peuvent intégrer des éléments de décor vivant : lieux secondaires, personnages secondaires, documents d'ambiance et touches d'humour. Ces éléments doivent ajouter du monde autour de l'enquête, pas une nouvelle enquête dans l'enquête.
-
-Règles :
-
-- rester facultatifs ;
-- ne pas bloquer la progression ;
-- ne pas ressembler à des preuves fortes ;
-- ne pas créer de fausse piste injuste ;
-- ne pas introduire d'objet matériel important non observable ailleurs ;
-- rester compatibles avec le niveau B1/B2.
-
-Dans `Le dossier disparu`, l'accueil et Thi-Thai jouent ce rôle. L'affiche d'inscription aux examens est un document d'ambiance et ne participe à aucune énigme.
-
+Les documents deviennent visibles lorsqu’ils sont disponibles et rattachés à au moins un lieu accessible.
 
 ## Énigmes
 
-### Énigme 1 — Chronologie
+Le moteur gère actuellement :
+- chronologie ordonnée ;
+- choix simple utilisé pour contradiction, association ou déblocage ;
+- contradiction en deux temps à partir de pièces du dossier.
 
-Le joueur remet trois événements dans l’ordre.
+Une énigme peut exiger :
+- des documents visibles ;
+- des objets possédés.
 
-Réussite :
+Elle peut débloquer :
+- des documents ;
+- des lieux ;
+- des objets.
 
-- feedback “Chronologie validée” ;
-- oriente le joueur vers la vérification des accès et des traces.
+Depuis la consolidation V0.11.1, une chronologie n’est plus limitée à trois événements dans son interface.
 
-### Énigme 2 — Contradiction
+## Contextualisation
 
-Le joueur compare le témoignage de Fahad avec l’historique d’impression.
+Une énigme peut être attachée à un document ou un personnage. Les énigmes contextualisées non résolues ne sont pas exposées comme une liste globale afin de préserver l’impression d’enquête.
 
-Réussite :
+Conséquence importante : tout document indispensable qui ouvre une énigme contextualisée doit rester **reconsultable après sa découverte**.
 
-- feedback “Contradiction repérée” ;
-- déblocage du brouillon de mail non envoyé.
+`La salle fantôme` applique cette règle à la note de Marine : le document reste masqué avant déblocage mais devient ensuite accessible depuis le couloir.
 
-## Résolution finale V0.6
+## Inventaire
 
-La V0.6 introduit `Scenario.finalResolution`.
+L’inventaire reste volontairement minimal.
 
-La résolution finale n'est pas conçue comme une accusation brutale. Elle demande au joueur :
+États principaux :
+- objets possédés ;
+- objets utilisés ;
+- objets reposés et localisation de dépôt ;
+- lieux débloqués ;
+- documents débloqués.
 
-- de choisir l'explication la plus plausible ;
-- de sélectionner trois pièces du dossier qui la soutiennent ;
-- de valider une conclusion prudente.
+Pas de combinaison d’objets ni de crafting.
 
-Le composant `FinalResolutionDetail` gère cette interaction localement. Il vérifie :
+## Sauvegardes
 
-- l'hypothèse choisie ;
-- les pièces justificatives sélectionnées.
+`src/engine/progressStorage.ts` utilise trois slots par scénario.
 
-La bonne hypothèse est une confusion de documents après le passage de Fahad au secrétariat. Les pièces attendues sont :
+Format de clé :
 
-- `temoignage-fahad` ;
-- `historique-impression` ;
-- `brouillon-mail`.
+```text
+enquete-fle:progress:<scenarioId>:slot:<1|2|3>
+```
 
-Le feedback final insiste sur une solution réparatrice : Delphine reprend le dossier avec Chen, les documents sont vérifiés, l'attestation est réimprimée et le dossier est validé. Fahad n'est pas publiquement accusé.
+Au chargement :
+- le scénario et le slot sont vérifiés ;
+- les IDs inconnus sont filtrés ;
+- les sélections invalides reviennent à une valeur sûre ;
+- les nombres d’indices sont bornés.
 
-## Cadrage graphique V0.9.0 à V0.9.3
+L’absence ou la corruption du stockage local ne doit jamais empêcher de jouer.
 
-La V0.9.0 introduit une première couche de design system dans `src/styles.css`.
+## Interface
 
-Elle ajoute des classes visuelles locales pour :
+Sur grand écran :
+- navigation par lieux à gauche ;
+- inventaire latéral ;
+- scène ou document principal ;
+- tableau de déductions séparé.
 
-- structure de page : `app-shell`, `page-frame`, `page-header` ;
-- surfaces : `case-panel`, `side-panel`, `progress-card` ;
-- variantes de fiches : lieu, personnage, document, énigme, résolution finale ;
-- boutons : `primary-button`, `secondary-button`, `link-button` ;
-- états : `status-pill`, `status-callout` ;
-- contenus : `document-paper`, `speech-card`, `info-strip`, `item-card`, `choice-card`, `hint-panel`.
+Sur mobile :
+- onglets fixes `Scène`, `Lieux`, `Inventaire`, `Déduire`.
 
-Objectif :
+Les documents graphiques zoomables doivent utiliser des contrôles accessibles au clavier.
 
-- améliorer la hiérarchie sans refondre l'UX ;
-- distinguer visuellement lieux, documents, personnages, objets, énigmes et résolution finale ;
-- installer une palette cohérente avec l'univers administratif / campus / enquête ;
-- préparer puis accueillir les portraits, vignettes de lieux et icônes d'objets sans figer toute l'identité graphique finale.
+## État central
 
-Les documents associés sont :
+`InvestigationPage.tsx` concentre encore une part importante de l’état et des règles de progression. Cette organisation reste acceptable pour le prototype, mais devra être extraite progressivement vers un hook ou reducer si le nombre de scénarios et de conditions augmente sensiblement.
 
-- `docs/visual-audit-v0.9.0.md` ;
-- `docs/visual-guidelines-v0.9.0.md` ;
-- `docs/portrait-system-v0.9.2.md` ;
-- `docs/location-vignettes-and-object-icons-v0.9.3.md` ;
-- `docs/ui-status-icons-v0.9.4.md`.
+Aucune refonte ne doit être lancée sans tests de non-régression suffisants.
 
-Depuis la V0.9.2, `Character.portraitUrl` permet d'afficher un portrait harmonisé dans `CharacterDetail`. Depuis la V0.9.3, `Location.vignetteUrl` affiche une vignette temporaire de lieu dans `LocationDetail`, et `InventoryObject.iconUrl` affiche une icône d'objet dans `LocationDetail` et `InventoryPanel`. Depuis la V0.9.4, `src/components/icons/StatusIcons.tsx` fournit des icônes SVG inline pour les statuts d'interface.
+## Validation
 
-## Ajouter plus tard une nouvelle enquête
+La commande canonique est :
 
-Pour ajouter une future enquête après V0.11 :
+```bash
+npm run validate
+```
 
-1. Créer un fichier dans `src/data/scenarios/`.
-2. Exporter un objet conforme au type `Scenario`.
-3. Importer le scénario dans `src/data/scenarios/index.ts`.
-4. Ajouter le scénario à la liste `scenarios`.
-5. Vérifier que l'accueil affiche l'enquête dans la sélection minimale.
-6. Vérifier que les sauvegardes utilisent bien `enquete-fle:progress:<scenarioId>:slot:<slotNumber>`.
+Elle vérifie les références de scénarios et les contrats spécifiques de `La salle fantôme`.
 
-La V0.11 confirme cette méthode avec `Le message effacé`.
+La CI exécute ensuite :
 
-## Direction après V0.11
+```bash
+npm ci
+npm run validate
+npm run build
+npm run audit:assets
+```
 
-La prochaine étape recommandée est un audit technique, UX, narratif et pédagogique de la V0.11, avec attention particulière à la sélection de scénario, à la séparation des sauvegardes et à la cohérence de la deuxième enquête.
-
-Le score complet, les visuels définitifs de lieux, le mode enseignant intégré et un éventuel éditeur de scénarios restent à traiter plus tard.
+Toute modification générique du moteur doit préserver les trois scénarios.
