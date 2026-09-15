@@ -17,7 +17,7 @@ Points forts :
 - contradiction déclaration / trace technique ;
 - résolution finale prudente fondée sur des pièces du dossier.
 
-Réserve actuelle : Xiaoyu utilise encore un portrait de Yaqiu dans les données ; ce point doit être corrigé ou le portrait retiré.
+La consolidation V0.11.1 retire la référence erronée au portrait de Yaqiu pour Xiaoyu. En l’absence de portrait spécifique, l’interface utilise désormais son fallback par initiale.
 
 ### 2. Le message effacé
 
@@ -48,7 +48,10 @@ Corrections V0.11.1 :
 - `Puzzle.requiredObjectIds` réellement pris en compte ;
 - chronologies rendues compatibles avec un nombre variable d’événements ;
 - zoom des documents graphiques rendu accessible au clavier ;
+- respect de `prefers-reduced-motion` ;
+- Vite mis à jour vers 7.3.6 avec lockfile reproductible ;
 - validation transversale des scénarios ajoutée ;
+- tests de régression des sauvegardes ajoutés ;
 - CI GitHub ajoutée ;
 - audit automatisé du poids des images ajouté.
 
@@ -62,7 +65,16 @@ npm run build
 npm run audit:assets
 ```
 
-La CI exécute ces contrôles sur les pull requests et sur `main`.
+`npm run validate` vérifie :
+- les références structurantes des trois scénarios ;
+- les invariants narratifs et de progression de `La salle fantôme` ;
+- la séparation des sauvegardes par scénario et par slot ;
+- le filtrage d’identifiants périmés ;
+- le repli sûr d’une sélection invalide ;
+- le bornage des indices ;
+- la résistance à un JSON de sauvegarde corrompu.
+
+La CI exécute ces contrôles sur les pull requests et sur `main`, puis compile l’application et audite le poids des images.
 
 ## Documentation
 
@@ -71,20 +83,19 @@ Documents canoniques :
 - `docs/STATUS.md` ;
 - `docs/DESIGN_PRINCIPLES.md` ;
 - `docs/architecture.md` ;
-- `docs/DECISIONS.md`.
+- `docs/DECISIONS.md` ;
+- `docs/TEACHING.md`.
 
 Les documents de `docs/agent-context/` et les anciens audits restent conservés comme historique et contexte de décision.
 
 ## Chantiers encore ouverts
 
-1. Vérifier la CI sur la pull request de consolidation.
-2. Mettre Vite à jour dans la branche 7.x avec lockfile reproductible.
-3. Retirer ou remplacer le faux portrait Xiaoyu/Yaqiu.
-4. Optimiser les images lourdes, surtout les portraits et le plan graphique.
-5. Ajouter `prefers-reduced-motion` aux animations restantes.
-6. Ajouter progressivement des tests de sauvegarde et des tests de parcours navigateur.
-7. Vérifier le déploiement Vercel lorsque l’accès automatisé est disponible.
-8. Après seulement : décider d’éventuelles évolutions créatives, notamment le degré de QCM dans `La salle fantôme` et le statut futur de `Le message effacé`.
+1. Vérifier une dernière fois la CI sur l’état final de la pull request de consolidation.
+2. Optimiser les images lourdes, surtout les portraits et le plan graphique, sans dégrader leur rendu.
+3. Ajouter des tests de parcours navigateur quand un accès au déploiement ou un environnement de navigateur automatisé est disponible.
+4. Vérifier le déploiement Vercel lorsque l’accès automatisé est disponible ; l’accès connecté actuel renvoie 403 et ne permet pas de conclure sur l’état public du site.
+5. Réparer si utile l’encodage du journal historique `docs/agent-context/09_DECISIONS_LOG.md`; ce fichier n’est plus canonique.
+6. Après seulement : décider d’éventuelles évolutions créatives, notamment le degré de QCM dans `La salle fantôme` et le statut futur de `Le message effacé`.
 
 ## Règle de reprise
 
