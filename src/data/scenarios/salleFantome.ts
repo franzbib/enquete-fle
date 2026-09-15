@@ -80,7 +80,7 @@ export const salleFantomeScenario: Scenario = {
         "Le couloir relie le secrétariat, les bureaux et les salles de cours. Marine y passe avec des documents sous le bras.",
       role: 'Marine boit un café et vous parle d’une ancienne note interne.',
       available: false,
-      documentIds: [],
+      documentIds: ['note-changement-noms'],
       presentCharacterIds: ['marine'],
       objectIds: [],
       presentObjectIdsAfterCharacter: {
@@ -207,7 +207,7 @@ export const salleFantomeScenario: Scenario = {
       source: 'Hall - panneau des salles',
       summary:
         'Le plan près de l’entrée indique les noms actuels des salles.',
-      content: "PLAN ACTUEL DES SALLES",
+      content: 'PLAN ACTUEL DES SALLES',
       imageUrl: '/assets/documents/plan-ispa-salles.png',
       initiallyAvailable: true,
       relatedLocationIds: ['hall', 'panneau-affichage'],
