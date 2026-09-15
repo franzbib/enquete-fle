@@ -74,7 +74,7 @@ export const messageEffaceScenario: Scenario = {
       id: 'marine',
       name: 'Marine',
       role: 'Étudiante concernée par le message',
-      portraitUrl: '/assets/portraits/marine.png',
+      portraitUrl: '/assets/portraits/marine.webp',
       profile:
         "Marine est sûre d'avoir préparé son message, mais elle commence à douter de la dernière étape.",
       directSpeech:
@@ -88,7 +88,7 @@ export const messageEffaceScenario: Scenario = {
       id: 'mathias',
       name: 'Mathias',
       role: 'Étudiant ayant aidé sur le poste informatique',
-      portraitUrl: '/assets/portraits/mathias.png',
+      portraitUrl: '/assets/portraits/mathias.webp',
       profile:
         "Mathias a aidé Marine sur l'ordinateur, sans suivre toute la procédure d'envoi.",
       directSpeech:
@@ -102,7 +102,7 @@ export const messageEffaceScenario: Scenario = {
       id: 'delphine',
       name: 'Delphine',
       role: 'Secrétariat / organisation administrative',
-      portraitUrl: '/assets/portraits/delphine.png',
+      portraitUrl: '/assets/portraits/delphine.webp',
       profile:
         "Delphine vérifie les confirmations administratives et connaît bien les petits problèmes des ordinateurs partagés.",
       directSpeech:
@@ -116,7 +116,7 @@ export const messageEffaceScenario: Scenario = {
       id: 'rodolphe',
       name: 'M. Rodolphe',
       role: 'Enseignant',
-      portraitUrl: '/assets/portraits/rodolphe.png',
+      portraitUrl: '/assets/portraits/rodolphe.webp',
       profile:
         "Il attendait la confirmation de Marine avant de transmettre une information au secrétariat.",
       directSpeech:

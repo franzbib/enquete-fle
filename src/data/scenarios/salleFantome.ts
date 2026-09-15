@@ -119,7 +119,7 @@ export const salleFantomeScenario: Scenario = {
       id: 'delphine',
       name: 'Delphine',
       role: 'Secrétariat / organisation administrative',
-      portraitUrl: '/assets/portraits/delphine.png',
+      portraitUrl: '/assets/portraits/delphine.webp',
       profile:
         "Delphine est polie et débordée. Elle confirme les oraux, mais elle ne peut pas résoudre le problème de salle.",
       directSpeech:
@@ -146,7 +146,7 @@ export const salleFantomeScenario: Scenario = {
       id: 'heidi',
       name: 'Heïdi',
       role: 'Accompagnement méthodologique',
-      portraitUrl: '/assets/portraits/heidi.png',
+      portraitUrl: '/assets/portraits/heidi.webp',
       profile:
         "Heïdi, comme toujours, vous accueille avec le sourire.",
       directSpeech:
@@ -160,7 +160,7 @@ export const salleFantomeScenario: Scenario = {
       id: 'marine',
       name: 'Marine',
       role: 'Personne ressource dans le couloir',
-      portraitUrl: '/assets/portraits/marine.png',
+      portraitUrl: '/assets/portraits/marine.webp',
       profile:
         "Marine boit un café et vous parle d’une ancienne note interne.",
       directSpeech:
@@ -208,7 +208,7 @@ export const salleFantomeScenario: Scenario = {
       summary:
         'Le plan près de l’entrée indique les noms actuels des salles.',
       content: 'PLAN ACTUEL DES SALLES',
-      imageUrl: '/assets/documents/plan-ispa-salles.png',
+      imageUrl: '/assets/documents/plan-ispa-salles.webp',
       initiallyAvailable: true,
       relatedLocationIds: ['hall', 'panneau-affichage'],
       relatedCharacterIds: [],
