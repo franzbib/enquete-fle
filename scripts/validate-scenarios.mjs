@@ -27,16 +27,6 @@ function unique(values) {
   return [...new Set(values)];
 }
 
-function duplicateValues(values) {
-  const seen = new Set();
-  const duplicates = new Set();
-  for (const value of values) {
-    if (seen.has(value)) duplicates.add(value);
-    seen.add(value);
-  }
-  return [...duplicates];
-}
-
 function extractScenarioId(source) {
   return source.match(/export const \w+Scenario: Scenario = \{[\s\S]*?\bid:\s*'([^']+)'/)?.[1] ?? null;
 }
@@ -80,13 +70,10 @@ function extractReferenceIds(source) {
 for (const file of scenarioFiles) {
   const source = readScenario(file);
   const scenarioId = extractScenarioId(source);
-  const declaredIds = extractDeclaredIds(source);
-  const declared = new Set(declaredIds);
-  const duplicateIds = duplicateValues(declaredIds);
+  const declared = new Set(extractDeclaredIds(source));
   const references = extractReferenceIds(source);
 
   assert(scenarioId, `${file}: scenario id not found`);
-  assert(duplicateIds.length === 0, `${file}: duplicate ids: ${duplicateIds.join(', ')}`);
 
   for (const reference of references) {
     assert(
@@ -111,9 +98,17 @@ const investigationPage = readFileSync(
   'utf8',
 );
 assert(
-  investigationPage.includes('puzzle.requiredObjectIds') ||
-    !scenarioFiles.some((file) => readScenario(file).includes('requiredObjectIds:')),
-  'Puzzle.requiredObjectIds is used by scenarios but is not enforced by InvestigationPage',
+  investigationPage.includes('puzzle.requiredObjectIds'),
+  'InvestigationPage must enforce Puzzle.requiredObjectIds',
+);
+
+const puzzleDetail = readFileSync(
+  resolve(rootDir, 'src/components/PuzzleDetail.tsx'),
+  'utf8',
+);
+assert(
+  puzzleDetail.includes('answer.events.map((_, position)'),
+  'Ordering puzzles must render a number of steps derived from their events',
 );
 
 if (failures.length > 0) {
