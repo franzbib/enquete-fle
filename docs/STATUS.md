@@ -53,7 +53,9 @@ Corrections V0.11.1 :
 - validation transversale des scénarios ajoutée ;
 - tests de régression des sauvegardes ajoutés ;
 - CI GitHub ajoutée ;
-- audit automatisé du poids des images ajouté.
+- audit automatisé du poids des images ajouté ;
+- variantes WebP sans perte générées pour les images lourdes réellement utilisées lorsque le fichier obtenu est plus petit, avec mise à jour des références du jeu ;
+- PNG sources conservés dans le dépôt afin de ne pas perdre les originaux graphiques.
 
 ## Tests et validation
 
@@ -91,11 +93,10 @@ Les documents de `docs/agent-context/` et les anciens audits restent conservés 
 ## Chantiers encore ouverts
 
 1. Vérifier une dernière fois la CI sur l’état final de la pull request de consolidation.
-2. Optimiser les images lourdes, surtout les portraits et le plan graphique, sans dégrader leur rendu.
-3. Ajouter des tests de parcours navigateur quand un accès au déploiement ou un environnement de navigateur automatisé est disponible.
-4. Vérifier le déploiement Vercel lorsque l’accès automatisé est disponible ; l’accès connecté actuel renvoie 403 et ne permet pas de conclure sur l’état public du site.
-5. Réparer si utile l’encodage du journal historique `docs/agent-context/09_DECISIONS_LOG.md`; ce fichier n’est plus canonique.
-6. Après seulement : décider d’éventuelles évolutions créatives, notamment le degré de QCM dans `La salle fantôme` et le statut futur de `Le message effacé`.
+2. Ajouter des tests de parcours navigateur quand un accès au déploiement ou un environnement de navigateur automatisé est disponible.
+3. Vérifier le déploiement Vercel lorsque l’accès automatisé est disponible ; l’accès connecté actuel renvoie 403 et ne permet pas de conclure sur l’état public du site.
+4. Réparer si utile l’encodage du journal historique `docs/agent-context/09_DECISIONS_LOG.md`; ce fichier n’est plus canonique.
+5. Après seulement : décider d’éventuelles évolutions créatives, notamment le degré de QCM dans `La salle fantôme` et le statut futur de `Le message effacé`.
 
 ## Règle de reprise
 
