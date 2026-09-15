@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "validate": "node scripts/validate-scenarios.mjs && node scripts/validate-salle-fantome.mjs",
+    "validate": "node scripts/validate-scenarios.mjs && node scripts/validate-salle-fantome.mjs && node scripts/test-progress-storage.mjs",
     "validate:scenarios": "node scripts/validate-scenarios.mjs",
     "validate:salle-fantome": "node scripts/validate-salle-fantome.mjs",
+    "test:storage": "node scripts/test-progress-storage.mjs",
     "audit:assets": "node scripts/audit-assets.mjs",
     "preview": "vite preview"
   },
