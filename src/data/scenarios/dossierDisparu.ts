@@ -100,7 +100,6 @@ export const dossierDisparuScenario: Scenario = {
       id: 'xiaoyu',
       name: 'Xiaoyu',
       role: 'Témoin dans le couloir',
-      portraitUrl: '/assets/portraits/yaqiu.png',
       profile:
         'Elle a vu plusieurs personnes passer mais ne connaît pas le contenu des dossiers.',
       directSpeech:
@@ -114,7 +113,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'delphine',
       name: 'Delphine',
       role: 'Secrétariat / organisation administrative',
-      portraitUrl: '/assets/portraits/delphine.png',
+      portraitUrl: '/assets/portraits/delphine.webp',
       profile:
         "Delphine travaille au secrétariat. Elle s'occupe de plus en plus de l'organisation administrative, notamment des emplois du temps et des examens.",
       directSpeech:
@@ -142,7 +141,7 @@ export const dossierDisparuScenario: Scenario = {
       id: 'rodolphe',
       name: 'M. Rodolphe',
       role: 'Enseignant',
-      portraitUrl: '/assets/portraits/rodolphe.png',
+      portraitUrl: '/assets/portraits/rodolphe.webp',
       profile:
         'Il a utilisé la salle informatique pour préparer un cours.',
       directSpeech:

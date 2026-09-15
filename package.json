@@ -6,20 +6,24 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "validate": "node scripts/validate-scenarios.mjs && node scripts/validate-salle-fantome.mjs && node scripts/test-progress-storage.mjs",
+    "validate:scenarios": "node scripts/validate-scenarios.mjs",
     "validate:salle-fantome": "node scripts/validate-salle-fantome.mjs",
+    "test:storage": "node scripts/test-progress-storage.mjs",
+    "audit:assets": "node scripts/audit-assets.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",
-    "vite": "^7.2.7",
-    "typescript": "^5.9.3",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "typescript": "^5.9.3",
+    "vite": "7.3.6"
   },
   "devDependencies": {
+    "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@types/node": "^24.10.1",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19"

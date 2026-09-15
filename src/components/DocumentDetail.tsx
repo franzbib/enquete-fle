@@ -25,11 +25,10 @@ export function DocumentDetail({
   onSubmitPuzzle,
 }: DocumentDetailProps) {
   const [isZoomed, setIsZoomed] = useState(false);
+
   return (
     <article className="case-panel case-panel-main case-panel-document">
-      <p className="eyebrow">
-        Document
-      </p>
+      <p className="eyebrow">Document</p>
       <h2 className="mt-2 text-2xl font-bold text-slate-950">
         {document.title}
       </h2>
@@ -41,14 +40,27 @@ export function DocumentDetail({
         {document.content && <p className="whitespace-pre-wrap">{document.content}</p>}
         {document.imageUrl && (
           <div className="mt-4">
-            <p className="text-xs text-slate-500 italic mb-2 text-center">Cliquer sur le plan pour l'agrandir.</p>
-            <img
-              src={document.imageUrl}
-              alt={document.title}
-              onClick={() => setIsZoomed(!isZoomed)}
-              className={`cursor-pointer transition-transform duration-300 ease-in-out origin-top-left ${isZoomed ? 'scale-150 relative z-10 shadow-xl' : 'scale-100 max-w-full h-auto'}`}
-              style={isZoomed ? { maxWidth: '150%' } : {}}
-            />
+            <p className="mb-2 text-center text-xs italic text-slate-500">
+              Utilisez le bouton pour {isZoomed ? 'réduire' : 'agrandir'} le document.
+            </p>
+            <button
+              type="button"
+              aria-pressed={isZoomed}
+              aria-label={`${isZoomed ? 'Réduire' : 'Agrandir'} ${document.title}`}
+              className="block w-full rounded-md focus:outline-none focus:ring-2 focus:ring-teal-800 focus:ring-offset-2"
+              onClick={() => setIsZoomed((zoomed) => !zoomed)}
+            >
+              <img
+                src={document.imageUrl}
+                alt={document.title}
+                className={`origin-top-left transition-transform duration-300 ease-in-out ${
+                  isZoomed
+                    ? 'relative z-10 scale-150 shadow-xl'
+                    : 'h-auto max-w-full scale-100'
+                }`}
+                style={isZoomed ? { maxWidth: '150%' } : {}}
+              />
+            </button>
           </div>
         )}
       </div>

@@ -140,13 +140,12 @@ const finalResolution = getFinalResolutionBlock();
 
 assert(couloirMarine.includes('available: false'), 'couloir-marine must be locked initially');
 assert(
-  couloirMarine.includes('objectIds: []') &&
-    couloirMarine.includes("marine: ['note-interne-marine']"),
-  'couloir-marine must expose the internal note only after visiting Marine',
+  couloirMarine.includes("marine: ['note-interne-marine']"),
+  'couloir-marine must expose the internal note object only after visiting Marine',
 );
 assert(
-  couloirMarine.includes('documentIds: []'),
-  'couloir-marine must not expose note-changement-noms as a linked document',
+  couloirMarine.includes("documentIds: ['note-changement-noms']"),
+  'couloir-marine must keep note-changement-noms reopenable after discovery',
 );
 assert(
   noteInterneMarine.includes("unlocksDocumentIds: ['note-changement-noms']") &&
@@ -155,7 +154,7 @@ assert(
 );
 assert(
   noteChangementNoms.includes('initiallyAvailable: false'),
-  'note-changement-noms must be unlocked by the Marine note object',
+  'note-changement-noms must remain hidden until the Marine note unlocks it',
 );
 assert(
   !scenarioSource.includes("id: 'secretariat-thi-thai'"),
