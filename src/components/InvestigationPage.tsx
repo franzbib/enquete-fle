@@ -96,7 +96,7 @@ export function InvestigationPage({
     () => loadScenarioProgressSlots(scenario, defaultSelection),
   );
   const [feedback, setFeedback] = useState(
-    "Commencez par observer les lieux de l’ISPA. L’accueil peut vous aider à vous repérer avant d’aller vérifier les documents administratifs.",
+    'Commencez par observer les lieux, les personnages et les documents disponibles.',
   );
   const [activeMobileTab, setActiveMobileTab] = useState<'scene' | 'locations' | 'inventory' | 'deductions'>('scene');
 
@@ -262,6 +262,8 @@ export function InvestigationPage({
   function isPuzzleAvailable(puzzle: Puzzle) {
     return (puzzle.requiredDocumentIds ?? []).every((documentId) =>
       visibleDocumentIds.includes(documentId),
+    ) && (puzzle.requiredObjectIds ?? []).every((objectId) =>
+      ownedObjectIds.includes(objectId),
     );
   }
 
@@ -337,7 +339,6 @@ export function InvestigationPage({
       setVisitedCharacterIds((prev) => [...prev, id]);
     }
     setActiveMobileTab('scene');
-    // Auto-scroll vers le détail pour plus de fluidité
     setTimeout(() => {
       document.getElementById('detail-view')?.scrollIntoView({ behavior: 'smooth' });
     }, 50);
@@ -361,14 +362,10 @@ export function InvestigationPage({
     }
 
     setOwnedObjectIds((currentIds) => currentIds.filter((id) => id !== object.id));
-    
-    // Set the object's new location to the currently selected location, 
-    // or fallback to its origin if not in a location view
     setDroppedObjectLocations((current) => ({
       ...current,
       [object.id]: selection.type === 'location' ? selection.id : (object.originLocationId ?? ''),
     }));
-    
     setFeedback(`${object.name} reposé.`);
   }
 
@@ -514,6 +511,7 @@ export function InvestigationPage({
         : puzzle.successFeedback,
     );
   }
+
   function handleFinalResolutionComplete() {
     setFinalResolutionWaitingForReopen(false);
     setFinalResolutionSolved(true);
@@ -751,9 +749,7 @@ export function InvestigationPage({
     <main className="app-shell pb-16 lg:pb-0">
       <div className="page-frame">
         <header className="page-header">
-          <p className="eyebrow">
-            Enquête
-          </p>
+          <p className="eyebrow">Enquête</p>
           <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h1 className="text-3xl font-extrabold text-slate-950">
@@ -909,13 +905,13 @@ export function InvestigationPage({
                   <p className="text-sm font-semibold text-slate-950">Orientation actuelle</p>
                   <p className="mt-2 text-sm font-medium text-amber-800 animate-highlight">
                     {visibleDocuments.length === 0
-                      ? "Commencez par explorer les Lieux ou interroger les Personnages."
+                      ? 'Commencez par explorer les lieux ou interroger les personnages.'
                       : readDocumentIds.length < visibleDocuments.length
-                        ? "Vous avez de nouveaux documents. Lisez-les attentivement."
+                        ? 'Vous avez de nouveaux documents. Lisez-les attentivement.'
                         : solvedPuzzleIds.length < puzzles.length
-                          ? "Vous avez lu tous les documents. Essayez de résoudre une énigme disponible."
+                          ? 'Vous avez lu tous les documents. Essayez de résoudre une énigme disponible.'
                           : finalResolution && !finalResolutionSolved
-                            ? "Vous pouvez maintenant formuler une explication finale prudente."
+                            ? 'Vous pouvez maintenant formuler une explication finale prudente.'
                             : "Félicitations, l'enquête se termine sur une solution réparatrice."}
                   </p>
                 </div>
@@ -945,9 +941,7 @@ export function InvestigationPage({
         </section>
 
         <section className={`case-panel mt-6 p-4 ${activeMobileTab === 'deductions' ? 'block' : 'hidden'} lg:block`}>
-          <h2 className="eyebrow">
-            Tableau d'enquête - Déductions
-          </h2>
+          <h2 className="eyebrow">Tableau d'enquête - Déductions</h2>
           <div className="mt-4 flex flex-wrap gap-4">
             {puzzles.map((puzzle) => {
               const isSelected = selectedId === `puzzle:${puzzle.id}`;
@@ -975,12 +969,12 @@ export function InvestigationPage({
                         ? 'border-green-600 bg-green-50 text-green-900'
                         : available
                           ? ''
-                          : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+                          : 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
                   }`}
                   disabled={!available}
-                  title={!available ? 'Documents manquants' : ''}
+                  title={!available ? 'Documents ou objets manquants' : ''}
                 >
-                  {puzzle.title} {solved && <IconPuzzleSolved className="inline-block h-4 w-4 ml-1 text-green-700" />} {!solved && <IconHintAvailable className="inline-block h-4 w-4 ml-1 text-slate-400" />}
+                  {puzzle.title} {solved && <IconPuzzleSolved className="ml-1 inline-block h-4 w-4 text-green-700" />} {!solved && <IconHintAvailable className="ml-1 inline-block h-4 w-4 text-slate-400" />}
                 </button>
               );
             })}
@@ -1003,16 +997,16 @@ export function InvestigationPage({
                       ? 'border-green-600 bg-green-50 text-green-900'
                       : isFinalResolutionAvailable
                         ? ''
-                        : 'border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed'
+                        : 'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400'
                 }`}
                 disabled={!isFinalResolutionAvailable}
                 title={
                   !isFinalResolutionAvailable
-                    ? 'Énigmes ou documents manquants'
+                    ? 'Énigmes, documents ou objets manquants'
                     : ''
                 }
               >
-                {finalResolution.title} {finalResolutionSolved && <IconPuzzleSolved className="inline-block h-4 w-4 ml-1 text-green-700" />}
+                {finalResolution.title} {finalResolutionSolved && <IconPuzzleSolved className="ml-1 inline-block h-4 w-4 text-green-700" />}
               </button>
             ) : null}
           </div>
@@ -1034,7 +1028,7 @@ export function InvestigationPage({
                       : location.kind === 'locked'
                         ? 'Accès limité : badge requis'
                         : 'Accès limité',
-                    icon: isAccessible ? <IconUnlocked className="text-teal-700 h-4 w-4" /> : <IconLocked className="text-slate-400 h-4 w-4" />,
+                    icon: isAccessible ? <IconUnlocked className="h-4 w-4 text-teal-700" /> : <IconLocked className="h-4 w-4 text-slate-400" />,
                     disabled: false,
                   };
                 })}
@@ -1057,17 +1051,17 @@ export function InvestigationPage({
           <section id="detail-view" key={selectedId} className={`scroll-mt-6 animate-fade-in ${activeMobileTab === 'scene' ? 'block' : 'hidden'} lg:block`}>{detail}</section>
         </div>
       </div>
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-14 lg:hidden z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-        <button type="button" onClick={() => setActiveMobileTab('scene')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'scene' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex h-14 items-center justify-around border-t border-slate-200 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)] lg:hidden">
+        <button type="button" onClick={() => setActiveMobileTab('scene')} className={`flex h-full w-full flex-col items-center justify-center border-t-2 text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'scene' ? 'border-teal-700 bg-teal-50/30 text-teal-700' : 'border-transparent text-slate-500 active:bg-slate-50'}`}>
           Scène
         </button>
-        <button type="button" onClick={() => setActiveMobileTab('locations')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'locations' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+        <button type="button" onClick={() => setActiveMobileTab('locations')} className={`flex h-full w-full flex-col items-center justify-center border-t-2 text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'locations' ? 'border-teal-700 bg-teal-50/30 text-teal-700' : 'border-transparent text-slate-500 active:bg-slate-50'}`}>
           Lieux
         </button>
-        <button type="button" onClick={() => setActiveMobileTab('inventory')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'inventory' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+        <button type="button" onClick={() => setActiveMobileTab('inventory')} className={`flex h-full w-full flex-col items-center justify-center border-t-2 text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'inventory' ? 'border-teal-700 bg-teal-50/30 text-teal-700' : 'border-transparent text-slate-500 active:bg-slate-50'}`}>
           Inventaire
         </button>
-        <button type="button" onClick={() => setActiveMobileTab('deductions')} className={`flex flex-col items-center justify-center w-full h-full text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'deductions' ? 'text-teal-700 border-t-2 border-teal-700 bg-teal-50/30' : 'text-slate-500 border-t-2 border-transparent active:bg-slate-50'}`}>
+        <button type="button" onClick={() => setActiveMobileTab('deductions')} className={`flex h-full w-full flex-col items-center justify-center border-t-2 text-[13px] font-semibold tracking-wide transition-colors ${activeMobileTab === 'deductions' ? 'border-teal-700 bg-teal-50/30 text-teal-700' : 'border-transparent text-slate-500 active:bg-slate-50'}`}>
           Déduire
         </button>
       </nav>
