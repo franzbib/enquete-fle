@@ -100,7 +100,6 @@ export const dossierDisparuScenario: Scenario = {
       id: 'xiaoyu',
       name: 'Xiaoyu',
       role: 'Témoin dans le couloir',
-      portraitUrl: '/assets/portraits/yaqiu.png',
       profile:
         'Elle a vu plusieurs personnes passer mais ne connaît pas le contenu des dossiers.',
       directSpeech:
